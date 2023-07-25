@@ -20,7 +20,7 @@ import logoImg from "../../assets/images/logo.svg";
 const Register = props => {
 
   //meta title
-  document.title = "Register | Skote - React Admin & Dashboard Template";
+  document.title = "Register | Bafana - Admin & Dashboard";
 
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ const Register = props => {
                     <Col className="col-7">
                       <div className="text-primary p-4">
                         <h5 className="text-primary">Free Register</h5>
-                        <p>Get your free Skote account now.</p>
+                        <p>Get your free Bafana account now.</p>
                       </div>
                     </Col>
                     <Col className="col-5 align-self-end">

@@ -172,6 +172,35 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
+            <li>
+              <Link to="/registration" >
+                <i className="bx bx-calendar"></i>
+                <span>{props.t("Registration")}</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/#" className="has-arrow ">
+                <i className="bx bx-briefcase-alt-2"></i>
+                <span>{props.t("Projects")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/projects-grid">{props.t("Projects Grid")}</Link>
+                </li>
+                <li>
+                  <Link to="/projects-list">{props.t("Projects List")}</Link>
+                </li>
+                <li>
+                  <Link to="/projects-overview">
+                    {props.t("Project Overview")}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/projects-create">{props.t("Create New")}</Link>
+                </li>
+              </ul>
+            </li>
+
 {/* 
             <li className="menu-title">{props.t("Apps")}</li>
 

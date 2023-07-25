@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import UserList from "../pages/admin/UserList";
 
 // Pages Component
 import Chat from "../pages/Chat/Chat";
@@ -181,6 +182,8 @@ const authProtectedRoutes = [
   { path: "/dashboard-crypto", component: <DashboardCrypto /> },
   { path: "/blog", component: <Blog /> },
   { path: "/dashboard-job", component: <DashboardJob /> },
+  //Registration user
+  { path: "/registration", component: <UserList /> },
 
   //Crypto
   { path: "/crypto-wallet", component: <CryptoWallet /> },

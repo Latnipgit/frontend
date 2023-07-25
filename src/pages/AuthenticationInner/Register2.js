@@ -66,7 +66,7 @@ const Register2 = () => {
                       <div>
                         <h5 className="text-primary">Register account</h5>
                         <p className="text-muted">
-                          Get your free Skote account now.
+                          Get your free Bafana account now.
                         </p>
                       </div>
 

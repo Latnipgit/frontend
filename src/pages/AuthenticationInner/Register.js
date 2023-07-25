@@ -16,7 +16,7 @@ import lightlogo from "../../assets/images/logo-light.svg";
 const Register = () => {
 
   //meta title
-  document.title="Register | Skote - React Admin & Dashboard Template";
+  document.title="Register | Bafana - Admin & Dashboard";
 
   //form validation
   const validation = useFormik({
