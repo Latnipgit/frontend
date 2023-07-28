@@ -8,11 +8,12 @@ import { withTranslation } from "react-i18next";
 import SidebarContent from "./SidebarContent";
 
 import { Link } from "react-router-dom";
-
+import logobafana2 from "../../assets/images/logobafana2.png";
 import logo from "../../assets/images/logo.svg";
 import logoLightPng from "../../assets/images/logo-light.png";
 import logoLightSvg from "../../assets/images/logo-light.svg";
 import logoDark from "../../assets/images/logo-dark.png";
+
 
 const Sidebar = props => {
 
@@ -31,10 +32,10 @@ const Sidebar = props => {
 
           <Link to="/" className="logo logo-light">
             <span className="logo-sm">
-              <img src={logoLightSvg} alt="" height="22" />
+              <img src={logobafana2} alt="" height="90" />
             </span>
             <span className="logo-lg">
-              <img src={logoLightPng} alt="" height="19" />
+              <img src={logobafana2} alt="" height="90" />
             </span>
           </Link>
         </div>

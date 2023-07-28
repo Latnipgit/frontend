@@ -2,6 +2,10 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import UserList from "../pages/admin/UserList";
 
+import MembersList from "../pages/admin/Members/memberlist/MembersList";
+import RegisteredCompanyList from "../pages/admin/Members/RegisteredCompany/RegisteredCompanyList";
+import DiputedBillings from "../pages/admin/DisputedBillings/DiputedBillings";
+import ApprovedTranction from "../pages/admin/ApprovedTransaction/ApprovedTranction";
 // Pages Component
 import Chat from "../pages/Chat/Chat";
 
@@ -182,8 +186,17 @@ const authProtectedRoutes = [
   { path: "/dashboard-crypto", component: <DashboardCrypto /> },
   { path: "/blog", component: <Blog /> },
   { path: "/dashboard-job", component: <DashboardJob /> },
+  //BAfana Startt
   //Registration user
   { path: "/registration", component: <UserList /> },
+  { path: "/members-list", component: <MembersList /> },
+  { path: "/registered-company", component: <RegisteredCompanyList /> },
+  { path: "/disputed-billings", component: <DiputedBillings /> },
+ { path: "/approved-transaction", component: <ApprovedTranction /> },
+ 
+
+
+
 
   //Crypto
   { path: "/crypto-wallet", component: <CryptoWallet /> },

@@ -147,38 +147,61 @@ const SidebarContent = props => {
           <ul className="metismenu list-unstyled" id="side-menu">
             <li className="menu-title">{props.t("Menu")} </li>
             <li>
+            <Link to="/dashboard">
+            <i className="bx bxs-dashboard"></i>
+                    {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+                    {props.t("Dashboard")}
+                  </Link>
+            </li>
+           
+            <li>
               <Link to="/#" className="has-arrow">
                 <i className="bx bx-home-circle"></i>
-                <span>{props.t("Dashboards")}</span>
+                <span>{props.t("Members")}</span>
               </Link>
               <ul className="sub-menu">
-                {/* <li>
-                  <Link to="/dashboard">{props.t("Default")}</Link>
-                </li> */}
-                {/* <li>
-                  <Link to="/dashboard-saas">{props.t("Saas")}</Link>
+               
+                <li>
+                  <Link to="/members-list">
+                  <i className="bx bx-user"></i>
+                    {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+                    {props.t("Members")}
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard-crypto">{props.t("Crypto")}</Link>
-                </li>
-                <li>
-                  <Link to="/blog">{props.t("Blog")}</Link>
-                </li> */}
-                <li>
-                  <Link to="/dashboard">
-                    <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span>
-                    {props.t("Default")}
+                
+                  <Link to="/registered-company">
+                  <i className="bx bx-check-double"></i>
+                    {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+                    {props.t("Company")}
                   </Link>
                 </li>
               </ul>
             </li>
+            
             <li>
-              <Link to="/registration" >
-                <i className="bx bx-calendar"></i>
-                <span>{props.t("Registration")}</span>
+              <Link to="/disputed-billings" >
+              <i className="bx bx-receipt"></i>
+              {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+              {props.t("Disputed Billings")}
               </Link>
             </li>
             <li>
+              <Link to="/approved-transaction" >
+                <i className="bx bx-transfer"></i>
+                {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+                {props.t("Transaction")}
+              </Link>
+            </li>
+            
+            <li>
+              <Link to="/registration" >
+                <i className="bx bx-user-circle"></i>
+                {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+                {props.t("Admin Registration")}
+              </Link>
+            </li>
+            {/* <li>
               <Link to="/#" className="has-arrow ">
                 <i className="bx bx-briefcase-alt-2"></i>
                 <span>{props.t("Projects")}</span>
@@ -199,7 +222,7 @@ const SidebarContent = props => {
                   <Link to="/projects-create">{props.t("Create New")}</Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
 {/* 
             <li className="menu-title">{props.t("Apps")}</li>
