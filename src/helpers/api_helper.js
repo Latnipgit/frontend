@@ -11,7 +11,7 @@ const axiosApi = axios.create({
   baseURL: API_URL,
 });
 
-//axiosApi.defaults.headers.common["Authorization"] = token;
+axiosApi.defaults.headers.common["Authorization"] = token;
 
 axiosApi.interceptors.response.use(
   (response) => response,
@@ -25,9 +25,16 @@ export async function get(url, config = {}) {
 }
 
 export async function post(url, data, config = {}) {
-  return axiosApi
-    .post(url, { ...data }, { ...config })
-    .then((response) => response.data);
+  debugger
+   config = {
+    headers: {
+      'Content-Type': 'application/json',
+      // Add any other headers if needed
+    },
+  };
+    return axiosApi
+        .post(url, { ...data }, { ...config })
+        .then((response) => response.data);
 }
 
 export async function put(url, data, config = {}) {

@@ -1,16 +1,16 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
 // Login Redux States
-import { LOGIN_USER, LOGOUT_USER, SOCIAL_LOGIN } from "./actionTypes";
-import { apiError, loginSuccess, logoutUserSuccess } from "./actions";
+import { LOGIN_USER, LOGOUT_USER, SOCIAL_LOGIN } from "./login/actionTypes";
+import { apiError, loginSuccess, logoutUserSuccess } from "./login/actions";
 
 //Include Both Helper File with needed methods
-import { getFirebaseBackend } from "../../../helpers/firebase_helper";
+import { getFirebaseBackend } from "../../helpers/firebase_helper";
 import {
   postFakeLogin,
   postJwtLogin,
   postSocialLogin,
-} from "../../../helpers/fakebackend_helper";
+} from "../../helpers/fakebackend_helper";
 
 const fireBaseBackend = getFirebaseBackend();
 
@@ -24,6 +24,7 @@ function* loginUser({ payload: { user, history } }) {
       );
       yield put(loginSuccess(response));
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
+      
       const response = yield call(postJwtLogin, {
         email: user.email,
         password: user.password,
@@ -31,8 +32,9 @@ function* loginUser({ payload: { user, history } }) {
       localStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
+      debugger
       const response = yield call(postFakeLogin, {
-        email: user.email,
+        userName: user.email,
         password: user.password,
       });
       localStorage.setItem("authUser", JSON.stringify(response));
