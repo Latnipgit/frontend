@@ -6,7 +6,7 @@ import { Col } from "reactstrap";
 const CarouselPage = () => {
   return (
     <React.Fragment>
-      <Col xl={9}>
+      <Col xl={4}>
         <div className="auth-full-bg pt-lg-5 p-4">
           <div className="w-100">
             <div className="bg-overlay"></div>
@@ -37,10 +37,10 @@ const CarouselPage = () => {
 
                                 <div>
                                   <h4 className="font-size-16 text-primary">
-                                    Abs1981
+                                    Abs2023
                                   </h4>
                                   <p className="font-size-14 mb-0">
-                                    - Skote User
+                                    - Bafana User
                                   </p>
                                 </div>
                               </div>
@@ -58,10 +58,10 @@ const CarouselPage = () => {
 
                                 <div>
                                   <h4 className="font-size-16 text-primary">
-                                    Abs1981
+                                    Abs2023
                                   </h4>
                                   <p className="font-size-14 mb-0">
-                                    - Skote User
+                                    - Bafana User
                                   </p>
                                 </div>
                               </div>

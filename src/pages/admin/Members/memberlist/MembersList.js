@@ -124,38 +124,15 @@ const MembersList = props => {
         accessor: "view",
         Cell: cellProps => {
           return (
-            <UncontrolledDropdown>
-                              <DropdownToggle
-                                href="#"
-                                className="card-drop"
-                                tag="a"
-                              >
-                                <i className="mdi mdi-dots-horizontal font-size-18" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-end">
-                              <DropdownItem
-                                  href="#"
-                                  onClick={toggleViewModal}
-                                >
-                                  <i className="mdi mdi-eye font-size-16 text-primary me-1" />{" "}
-                                  View
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => handleProjectClick(project)}
-                                >
-                                  <i className="mdi mdi-pencil font-size-16 text-success me-1" />{" "}
-                                  Edit Profile
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => onClickDelete(project)}
-                                >
-                                  <i className="mdi mdi-trash-can font-size-16 text-danger me-1" />{" "}
-                                  Activate/Suspend
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
+            <div className="d-flex">
+            <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
+            </div>
+            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-pause font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend" />
+            </div>
+           
+          </div>
           );
         },
       },
@@ -169,16 +146,12 @@ const MembersList = props => {
       <MembersViewModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
-        <Button type="button" color="primary" className="btn-sm btn-rounded float-left-button" onClick={toggleViewModal}>
-          <i className="mdi mdi-eye font-size-16 text-primary me-1" />
-          View Details
-          </Button>
-          <div className="mb-4 h4 card-title"></div>
-          <div className="mb-4 h4 card-title">Member List</div>
+        <div className="mb-4 h4 card-title mt-lg-1">Member List</div>
+          <div className="mb-4 h4 card-title mt-lg-5">Member List</div>
           <TableContainer
             columns={columns}
             data={MemberData}
-            isGlobalFilter={false}
+            isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
           />

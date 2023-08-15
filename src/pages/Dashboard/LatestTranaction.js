@@ -11,6 +11,8 @@ import {
 import { getOrders as onGetOrders } from "store/actions";
 
 import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal";
+import InvoiceModal from "./InvoicePopupModal";
+
 import { latestTransaction } from "../../common/data/dashboard";
 
 import {
@@ -42,7 +44,7 @@ const LatestTranaction = props => {
         },
       },
       {
-        Header: "Order ID",
+        Header: "Invoice No",
         accessor: "orderId",
         filterable: false,
         disableFilters: true,
@@ -51,12 +53,29 @@ const LatestTranaction = props => {
         },
       },
       {
-        Header: "Billing Name",
+        Header: "Buyer Name",
         accessor: "billingName",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
           return <BillingName {...cellProps} />;
+        },
+      },
+      {
+        Header: "Seller Name",
+        accessor: "paymentMethod",
+        disableFilters: true,
+        Cell: cellProps => {
+          return <PaymentMethod {...cellProps} />;
+        },
+      },
+      {
+        Header: "Amount",
+        accessor: "total",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <Total {...cellProps} />;
         },
       },
       {
@@ -68,15 +87,7 @@ const LatestTranaction = props => {
           return <Date {...cellProps} />;
         },
       },
-      {
-        Header: "Total",
-        accessor: "total",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <Total {...cellProps} />;
-        },
-      },
+      
       {
         Header: "Payment Status",
         accessor: "paymentStatus",
@@ -86,14 +97,7 @@ const LatestTranaction = props => {
           return <PaymentStatus {...cellProps} />;
         },
       },
-      {
-        Header: "Payment Method",
-        accessor: "paymentMethod",
-        disableFilters: true,
-        Cell: cellProps => {
-          return <PaymentMethod {...cellProps} />;
-        },
-      },
+    
       {
         Header: "View Details",
         disableFilters: true,
@@ -111,6 +115,28 @@ const LatestTranaction = props => {
           );
         },
       },
+     
+      {
+        Header: "Action",
+        disableFilters: true,
+        accessor: "project",
+        Cell: cellProps => {
+          return (
+            <div className="d-flex">
+            <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-eye font-size-18 text-primary mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
+            </div>
+            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-pencil font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
+            </div>
+            <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-alert-octagon font-size-18 text-warning mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Refer to Senior" />
+            </div>
+          </div>
+          
+          );
+        },
+      },
     ],
     []
   );
@@ -118,14 +144,14 @@ const LatestTranaction = props => {
 
   return (
     <React.Fragment>
-      <EcommerceOrdersModal isOpen={modal1} toggle={toggleViewModal} />
+      <InvoiceModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
           <div className="mb-4 h4 card-title">Latest Transaction</div>
           <TableContainer
             columns={columns}
             data={latestTransaction}
-            isGlobalFilter={false}
+            isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
           />

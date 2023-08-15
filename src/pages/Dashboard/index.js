@@ -45,20 +45,26 @@ import { withTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 
 const Dashboard = props => {
+   debugger
   const [modal, setmodal] = useState(false);
   const [subscribemodal, setSubscribemodal] = useState(false);
 
-  const { chartsData } = useSelector(state => ({
-    chartsData: state.Dashboard.chartsData
-  }));
+  // const { chartsData } = useSelector(state => ({
+  //   chartsData: state.Dashboard.chartsData
+  // }));
 
   const reports = [
-    { title: "Orders", iconClass: "bx-copy-alt", description: "1,235" },
-    { title: "Revenue", iconClass: "bx-archive-in", description: "$35, 723" },
+    { title: "Total Ravenue", iconClass: "bx-copy-alt", description: "$1,235" },
+    { title: "Amount Due", iconClass: "bx-archive-in", description: "$35,723" },
     {
-      title: "Average Price",
+      title: "Amount Recovered",
       iconClass: "bx-purchase-tag-alt",
-      description: "$16.2",
+      description: "$7,894,56.00",
+    },
+    {
+      title: "Total Reviews",
+      iconClass: "bx-purchase-tag-alt",
+      description: "$1,447,8963.74",
     },
   ];
 
@@ -71,19 +77,20 @@ const Dashboard = props => {
   const [periodData, setPeriodData] = useState([]);
   const [periodType, setPeriodType] = useState("yearly");
 
-  useEffect(() => {
-    setPeriodData(chartsData);
-  }, [chartsData]);
+  // useEffect(() => {
+  //   debugger
+  //   setPeriodData(chartsData);
+  // }, [chartsData]);
 
   const onChangeChartPeriod = pType => {
     setPeriodType(pType);
     dispatch(onGetChartsData(pType));
   };
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(onGetChartsData("yearly"));
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(onGetChartsData("yearly"));
+  // }, [dispatch]);
 
   //meta title
   document.title = "Dashboard | Bafana";
@@ -99,15 +106,15 @@ const Dashboard = props => {
           />
 
           <Row>
-            <Col xl="4">
-              <WelcomeComp /> 
-              <MonthlyEarning />
+            <Col xl="12">
+            <WelcomeComp /> 
             </Col>
-            <Col xl="8">
+          </Row>
+          <Row>
+          <Col xl="12">
               <Row>
-                {/* Reports Render */}
                 {reports.map((report, key) => (
-                  <Col md="4" key={"_col_" + key}>
+                  <Col md="3" key={"_col_" + key}>
                     <Card className="mini-stats-wid">
                       <CardBody>
                         <div className="d-flex">
@@ -133,7 +140,7 @@ const Dashboard = props => {
                 ))}
               </Row>
 
-              <Card>
+              {/* <Card>
                 <CardBody>
                   <div className="d-sm-flex flex-wrap">
                     <h4 className="card-title mb-4">Cash flow</h4>
@@ -187,10 +194,10 @@ const Dashboard = props => {
                       </ul>
                     </div>
                   </div>
-                  {/* <div className="clearfix"></div> */}
+                  
                   <StackedColumnChart periodData={periodData} dataColors='["--bs-primary", "--bs-warning", "--bs-success"]' />
                 </CardBody>
-              </Card>
+              </Card> */}
             </Col>
           </Row>
 {/* 

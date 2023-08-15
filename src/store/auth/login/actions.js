@@ -15,6 +15,7 @@ export const loginUser = (user, history) => {
 }
 
 export const loginSuccess = user => {
+   
   return {
     type: LOGIN_SUCCESS,
     payload: user,
@@ -22,6 +23,7 @@ export const loginSuccess = user => {
 }
 
 export const logoutUser = history => {
+   
   return {
     type: LOGOUT_USER,
     payload: { history },

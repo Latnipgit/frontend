@@ -11,36 +11,32 @@ import {
   postJwtLogin,
   postSocialLogin,
 } from "../../helpers/fakebackend_helper";
+import { success } from "toastr";
 
 const fireBaseBackend = getFirebaseBackend();
 
 function* loginUser({ payload: { user, history } }) {
   try {
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      const response = yield call(
-        fireBaseBackend.loginUser,
-        user.email,
-        user.password
-      );
-      yield put(loginSuccess(response));
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-      
+    if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
+       
       const response = yield call(postJwtLogin, {
-        email: user.email,
-        password: user.password,
-      });
-      localStorage.setItem("authUser", JSON.stringify(response));
-      yield put(loginSuccess(response));
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
-      debugger
-      const response = yield call(postFakeLogin, {
         userName: user.email,
         password: user.password,
       });
-      localStorage.setItem("authUser", JSON.stringify(response));
-      yield put(loginSuccess(response));
+      if(response!=undefined && response!=null){
+          
+        if(response.data){
+          window.alert('Login successful!');
+          localStorage.setItem("authUser", JSON.stringify(response.data));
+          yield put(loginSuccess(response.data));
+          history('/dashboard');
+        }else{
+          window.alert(response.data.message);
+        }
+        
+      }  
     }
-    history('/dashboard');
+    
   } catch (error) {
     yield put(apiError(error));
   }

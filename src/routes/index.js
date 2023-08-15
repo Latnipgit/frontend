@@ -360,10 +360,10 @@ const publicRoutes = [
   { path: "/crypto-ico-landing", component: <CryptoIcoLanding /> },
 
   // Authentication Inner
-  { path: "/pages-login", component: <Login1 /> },
+  { path: "/user-login", component: <Login1 /> },
   { path: "/pages-login-2", component: <Login2 /> },
   { path: "/pages-register", component: <Register1 /> },
-  { path: "/pages-register-2", component: <Register2 /> },
+  { path: "/user-register", component: <Register2 /> },
   { path: "/page-recoverpw", component: <Recoverpw /> },
   { path: "/page-recoverpw-2", component: <Recoverpw2 /> },
   { path: "/pages-forgot-pwd", component: <ForgetPwd1 /> },

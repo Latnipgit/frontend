@@ -38,6 +38,7 @@ const UserProfile = () => {
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
   const [idx, setidx] = useState(1);
+  const [AdminRole, setadminRole] = useState("");
 
   const { error, success } = useSelector(state => ({
     error: state.Profile.error,
@@ -46,18 +47,15 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (localStorage.getItem("authUser")) {
+      debugger
       const obj = JSON.parse(localStorage.getItem("authUser"));
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        setname(obj.displayName);
-        setemail(obj.email);
-        setidx(obj.uid);
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
+     if (
         process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
-        setname(obj.username);
-        setemail(obj.email);
-        setidx(obj.uid);
+        setname(obj.name);
+        setemail(obj.userName);
+        setidx(obj.id);
+        setadminRole(obj.adminRole)
       }
       setTimeout(() => {
         dispatch(resetProfileFlag());
@@ -87,7 +85,7 @@ const UserProfile = () => {
       <div className="page-content">
         <Container fluid>
           {/* Render Breadcrumb */}
-          <Breadcrumb title="Skote" breadcrumbItem="Profile" />
+          <Breadcrumb title="Bafana" breadcrumbItem="Profile" />
 
           <Row>
             <Col lg="12">
@@ -107,8 +105,11 @@ const UserProfile = () => {
                     <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
                         <h5>{name}</h5>
-                        <p className="mb-1">{email}</p>
-                        <p className="mb-0">Id no: #{idx}</p>
+                        <p className="mb-1 ml-3">Email Address : {email}</p>
+                        <p className="mb-1 ml-3">Id no : #{idx}</p> 
+                        <p className="mb-1 ml-3">Role : {AdminRole}</p>
+                        
+
                       </div>
                     </div>
                   </div>
@@ -117,7 +118,7 @@ const UserProfile = () => {
             </Col>
           </Row>
 
-          <h4 className="card-title mb-4">Change User Name</h4>
+          {/* <h4 className="card-title mb-4">Change User Name</h4>
 
           <Card>
             <CardBody>
@@ -156,7 +157,7 @@ const UserProfile = () => {
                 </div>
               </Form>
             </CardBody>
-          </Card>
+          </Card> */}
         </Container>
       </div>
     </React.Fragment>
