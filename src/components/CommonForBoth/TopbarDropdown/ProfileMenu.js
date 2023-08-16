@@ -22,16 +22,16 @@ const ProfileMenu = props => {
   const [menu, setMenu] = useState(false);
 
   const [username, setusername] = useState("");
-  function capitalizeWords(str) {
-    return str.replace(/\b\w/g, (match) => match.toUpperCase());
-  }
+  // function capitalizeWords(str) {
+  //   return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  // }
   useEffect(() => {
     if (localStorage.getItem("authUser")) {
       if (process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
              
         const obj = JSON.parse(localStorage.getItem("authUser"));
-        setusername(capitalizeWords(obj.name));
+        setusername(obj.name);
       }
     }
   }, [props.success]);

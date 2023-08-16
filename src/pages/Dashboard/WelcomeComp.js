@@ -8,9 +8,9 @@ import profileImg from "../../assets/images/profile-img.png"
 
 
 const WelcomeComp = props =>{
-  function capitalizeWords(str) {
-    return str.replace(/\b\w/g, (match) => match.toUpperCase());
-  }
+  // function capitalizeWords(str) {
+  //   return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  // }
   const [username, setusername] = useState("");
   const [rol, setrole] = useState("");
   const [emailId, setemailId] = useState("");
@@ -20,9 +20,9 @@ const WelcomeComp = props =>{
       ) {
              
         const obj = JSON.parse(localStorage.getItem("authUser"));
-        setusername(capitalizeWords(obj.name));
-        setrole(capitalizeWords(obj.adminRole));
-        setemailId(capitalizeWords(obj.emailId));
+        setusername(obj.name);
+        setrole(obj.adminRole);
+        setemailId(obj.emailId);
   
       }
     }
