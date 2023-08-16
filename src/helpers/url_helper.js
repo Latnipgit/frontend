@@ -12,6 +12,8 @@ export const SOCIAL_LOGIN = "/social-login";
 export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile";
 export const POST_EDIT_PROFILE = "/post-fake-profile";
 
+//Admin Registration Menus
+export const GET_ADMIN_DATA = "/api/admin/getAllAdmins";
 //PRODUCTS
 export const GET_PRODUCTS = "/products";
 export const GET_PRODUCTS_DETAIL = "/product";

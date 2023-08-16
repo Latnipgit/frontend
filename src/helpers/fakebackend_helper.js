@@ -2,6 +2,8 @@ import axios from "axios";
 import { del, get, post, put } from "./api_helper";
 import * as url from "./url_helper";
 
+//Get all Admin
+export const getAllAdminData = () => get(url.GET_ADMIN_DATA); 
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {
   const user = localStorage.getItem("user");

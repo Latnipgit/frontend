@@ -1,0 +1,3 @@
+export const ADMIN_API_SUCCESS = "ADMIN_API_SUCCESS";
+export const ADMIN_API_FAIL = "ADMIN_API_SUCCESS";
+export const GET_ADMIN_DATA = "GET_ADMIN_DATA";

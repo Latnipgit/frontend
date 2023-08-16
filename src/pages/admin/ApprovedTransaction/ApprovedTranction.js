@@ -39,7 +39,7 @@ import {
 
 import TableContainer from "../../../components/Common/TableContainer";
 import ApprovedTranctionModel from "./ApprovedTranModel";
-
+import Breadcrumbs from "../../../components/Common/Breadcrumb";
 const ApprovedTranction = props => {
 
 
@@ -142,6 +142,7 @@ const ApprovedTranction = props => {
 
   return (
     <React.Fragment>
+      <h4 className="mb-sm-0 font-size-18">Approved Transactions</h4>
       <ApprovedTranctionModel isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>

@@ -45,7 +45,7 @@ import { withTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 
 const Dashboard = props => {
-   debugger
+      
   const [modal, setmodal] = useState(false);
   const [subscribemodal, setSubscribemodal] = useState(false);
 
@@ -78,7 +78,7 @@ const Dashboard = props => {
   const [periodType, setPeriodType] = useState("yearly");
 
   // useEffect(() => {
-  //   debugger
+  //      
   //   setPeriodData(chartsData);
   // }, [chartsData]);
 

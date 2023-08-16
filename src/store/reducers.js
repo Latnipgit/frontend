@@ -9,6 +9,9 @@ import Account from "./auth/register/reducer";
 import ForgetPassword from "./auth/forgetpwd/reducer";
 import Profile from "./auth/profile/reducer";
 
+//Admin Registration
+import AdminList from "./EmployeeList/reducer";
+
 //E-commerce
 import ecommerce from "./e-commerce/reducer";
 
@@ -57,6 +60,7 @@ import DashboardJob from "./dashboard-jobs/reducer";
 const rootReducer = combineReducers({
   // public
   Layout,
+  AdminList,
   Login,
   Account,
   ForgetPassword,

@@ -83,7 +83,7 @@ const fakeBackend = () => {
           resolve([200, validUser[0]]);
         } else {
           reject([
-            "Username and password are invalid. Please enter correct username and password",
+            "  ",
           ]);
         }
       });
@@ -132,7 +132,7 @@ const fakeBackend = () => {
         } else {
           reject([
             400,
-            "Username and password are invalid. Please enter correct username and password",
+            "  ",
           ]);
         }
       });
@@ -233,7 +233,7 @@ const fakeBackend = () => {
         } else {
           reject([
             400,
-            "Username and password are invalid. Please enter correct username and password",
+            "  ",
           ]);
         }
       });

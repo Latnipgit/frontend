@@ -2,16 +2,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
+//import action
+import { getAdminData as ongetAdminData } from "../../store/actions";
 
-import {
-  Button,
-  Card,
-  CardBody,
-} from "reactstrap";
-import { getOrders as onGetOrders } from "store/actions";
-
-import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal";
-import { latestTransaction } from "../../common/data/dashboard";
+import {Button,Card,CardBody,} from "reactstrap";
 import { UserData } from "../../common/data/registration";
 import {
     Badge,
@@ -43,14 +37,28 @@ import {
 
 import TableContainer from "../../components/Common/TableContainer";
 import UserViewModal from "./UserViewModal";
+import { useDispatch ,useSelector } from "react-redux";
 
 const UserList = props => {
 
+  const { adminData } = useSelector(state => ({
+    adminData: state.AdminList.adminData
+  }));
+ 
 
   const [modal1, setModal1] = useState(false);
 
+  // const [adminData1, setAdminData] = useState([]);
   const toggleViewModal = () => setModal1(!modal1);
-
+  const dispatch = useDispatch();
+    // useEffect(() => {
+    // setAdminData(adminData);
+    // }, [adminData]);
+    useEffect(() => {
+    debugger
+    dispatch(ongetAdminData());
+    }, [dispatch]);
+  
   const columns = useMemo(
     () => [
       {
@@ -80,6 +88,15 @@ const UserList = props => {
         },
       },
       {
+        Header: "Email Address",
+        accessor: "EmailAddress",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <EmailAddress {...cellProps} />;
+        },
+      },
+      {
         Header: "Created Date",
         accessor: "Createddate",
         disableFilters: true,
@@ -89,12 +106,12 @@ const UserList = props => {
         },
       },
       {
-        Header: "Email Address",
-        accessor: "EmailAddress",
+        Header: "Updated Date",
+        accessor: "Updateddate",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <EmailAddress {...cellProps} />;
+          return <Date {...cellProps} />;
         },
       },
       {
@@ -106,14 +123,6 @@ const UserList = props => {
           return <Status {...cellProps} />;
         },
       },
-    //   {
-    //     Header: "Payment Method",
-    //     accessor: "paymentMethod",
-    //     disableFilters: true,
-    //     Cell: cellProps => {
-    //       return <PaymentMethod {...cellProps} />;
-    //     },
-    //   },
       {
         Header: "Action",
         disableFilters: true,
@@ -162,19 +171,18 @@ const UserList = props => {
 
   return (
     <React.Fragment>
+       <div className="mb-4 h4 card-title mt-lg-5">..</div>
+          {/* <div className="mb-4 h4 card-title mt-lg-5"> Employee List</div> */}
+      <div className="container">
+      <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18">Employee List</h4>
+      </div>
       <UserViewModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
-        <CardBody>
-        <Button type="button" color="primary" className="btn-sm btn-rounded float-left-button" onClick={toggleViewModal}>
-          <i className="mdi mdi-eye font-size-16 text-primary me-1" />
-          View Details
-          </Button>
-          <div className="mb-4 h4 card-title"></div>
-          <div className="mb-4 h4 card-title">User List</div>
+        <CardBody>   
           <TableContainer
             columns={columns}
             data={UserData}
-            isGlobalFilter={false}
+            isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
           />

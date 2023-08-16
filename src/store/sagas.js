@@ -1,5 +1,7 @@
 import { all, fork } from "redux-saga/effects";
 
+//Admin Registration
+import AdminListSaga from "./EmployeeList/saga";
 //public
 import AccountSaga from "./auth/register/saga";
 import AuthSaga from "./auth/saga";

@@ -18,7 +18,7 @@ const WelcomeComp = props =>{
     if (localStorage.getItem("authUser")) {
       if (process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
-          debugger
+             
         const obj = JSON.parse(localStorage.getItem("authUser"));
         setusername(capitalizeWords(obj.name));
         setrole(capitalizeWords(obj.adminRole));

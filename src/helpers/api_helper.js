@@ -22,7 +22,7 @@ axiosApi.interceptors.response.use(
 export async function get(url, config = {}) {
   return await axiosApi
     .get(url, { ...config })
-    .then((response) => response.data)
+    .then((response) => response)
     .catch((error) => {
       if (error.response) {
         console.log("Server responded with an error:", error.response.status);
