@@ -20,8 +20,14 @@ axiosApi.interceptors.response.use(
 );
 
 export async function get(url, config = {}) {
+       
+  const token = JSON.parse(localStorage.getItem("authUser")).token; // Replace this with your actual access token
+  const headers = {
+    ...config.headers,
+    'x-access-token': token,
+  };
   return await axiosApi
-    .get(url, { ...config })
+    .get(url, { ...config, headers })
     .then((response) => response)
     .catch((error) => {
       if (error.response) {

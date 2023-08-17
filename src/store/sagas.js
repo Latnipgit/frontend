@@ -27,6 +27,7 @@ import dashboardJobSaga from "./dashboard-jobs/saga";
 export default function* rootSaga() {
   yield all([
     //public
+    fork(AdminListSaga),
     fork(AccountSaga),
     fork(AuthSaga),
     fork(ForgetSaga),

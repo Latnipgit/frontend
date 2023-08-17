@@ -54,7 +54,7 @@ const Dashboard = props => {
   // }));
 
   const reports = [
-    { title: "Total Ravenue", iconClass: "bx-copy-alt", description: "₹1,235" },
+    { title: "Total Members", iconClass: "bx-copy-alt", description: "1,235" },
     { title: "Amount Due", iconClass: "bx-archive-in", description: "₹35,723" },
     {
       title: "Amount Recovered",

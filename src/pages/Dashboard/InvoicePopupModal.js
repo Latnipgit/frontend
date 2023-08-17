@@ -75,9 +75,10 @@ const InvoiceModal = props => {
         >
             <div className="modal-content">
             <ModalHeader toggle={toggle}>
-      
+            <div className="modal-header d-flex justify-content-between">
         <div className="modal-header-title me-auto">Invoice Details</div>
         <div className="invoice-number">Invoice Number: #123456</div>
+        </div>
  
     </ModalHeader>
                 <ModalBody>

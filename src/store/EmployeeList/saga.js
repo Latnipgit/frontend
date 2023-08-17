@@ -3,8 +3,9 @@ import { GET_ADMIN_DATA } from "./actionsTypes";
 import { AdminApiSuccess, AdminApiFail } from "./actions";
 import {getAllAdminData} from "../../helpers/fakebackend_helper";
 function* getAllAdminData2() {
+         
     try {
-       debugger
+           
         var response = yield call(getAllAdminData);
         
 
@@ -15,6 +16,7 @@ function* getAllAdminData2() {
 }
 
 export function* watchGetAdminData() {
+         
     yield takeEvery(GET_ADMIN_DATA, getAllAdminData2);
 }
 

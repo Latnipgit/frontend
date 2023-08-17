@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
+import AdminRegistrationModal from '../admin/adminList/AddAdminPopup';
 //import action
 import { getAdminData as ongetAdminData } from "../../store/actions";
 
@@ -41,23 +42,27 @@ import { useDispatch ,useSelector } from "react-redux";
 
 const UserList = props => {
 
+  const [modal1, setModal1] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [admindata, setAdminData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleAdminModal = () => {setIsModalOpen(!isModalOpen);};
+
   const { adminData } = useSelector(state => ({
     adminData: state.AdminList.adminData
   }));
- 
-
-  const [modal1, setModal1] = useState(false);
-
-  // const [adminData1, setAdminData] = useState([]);
-  const toggleViewModal = () => setModal1(!modal1);
+  
+  
   const dispatch = useDispatch();
-    // useEffect(() => {
-    // setAdminData(adminData);
-    // }, [adminData]);
+
     useEffect(() => {
-    debugger
-    dispatch(ongetAdminData());
-    }, [dispatch]);
+        dispatch(ongetAdminData());
+        if(adminData!=undefined && adminData!=null){
+          setAdminData(adminData.data.data.response);
+        }
+          
+    }, []);
   
   const columns = useMemo(
     () => [
@@ -71,7 +76,7 @@ const UserList = props => {
       },
       {
         Header: "User ID",
-        accessor: "UserId",
+        accessor: "id",
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
@@ -80,7 +85,7 @@ const UserList = props => {
       },
       {
         Header: "User Name",
-        accessor: "UserName",
+        accessor: "name",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -89,7 +94,7 @@ const UserList = props => {
       },
       {
         Header: "Email Address",
-        accessor: "EmailAddress",
+        accessor: "emailId",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -98,7 +103,7 @@ const UserList = props => {
       },
       {
         Header: "Created Date",
-        accessor: "Createddate",
+        accessor: "createdAt",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -106,61 +111,38 @@ const UserList = props => {
         },
       },
       {
-        Header: "Updated Date",
-        accessor: "Updateddate",
+        Header: "Role",
+        accessor: "adminRole",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
           return <Date {...cellProps} />;
         },
       },
-      {
-        Header: "Status",
-        accessor: "Status",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <Status {...cellProps} />;
-        },
-      },
+      // {
+      //   Header: "Status",
+      //   accessor: "Status",
+      //   disableFilters: true,
+      //   filterable: false,
+      //   Cell: cellProps => {
+      //     return <Status {...cellProps} />;
+      //   },
+      // },
       {
         Header: "Action",
         disableFilters: true,
         accessor: "view",
         Cell: cellProps => {
+          const project = cellProps.row.original;
           return (
-            <UncontrolledDropdown>
-                              <DropdownToggle
-                                href="#"
-                                className="card-drop"
-                                tag="a"
-                              >
-                                <i className="mdi mdi-dots-horizontal font-size-18" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-end">
-                              <DropdownItem
-                                  href="#"
-                                  onClick={toggleViewModal}
-                                >
-                                  <i className="mdi mdi-eye font-size-16 text-primary me-1" />{" "}
-                                  View
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => handleProjectClick(project)}
-                                >
-                                  <i className="mdi mdi-pencil font-size-16 text-success me-1" />{" "}
-                                  Edit
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => onClickDelete(project)}
-                                >
-                                  <i className="mdi mdi-trash-can font-size-16 text-danger me-1" />{" "}
-                                  Delete
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
+            <div className="d-flex">
+            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+            <i className="mdi mdi-pencil font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" />
+            </div>
+            <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
+            <i className="mdi mdi-trash-can font-size-16 text-danger me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" />
+            </div>
+            </div>
           );
         },
       },
@@ -176,12 +158,21 @@ const UserList = props => {
       <div className="container">
       <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18">Employee List</h4>
       </div>
-      <UserViewModal isOpen={modal1} toggle={toggleViewModal} />
+      {/* <UserViewModal isOpen={modal1} toggle={toggleViewModal} /> */}
+       <AdminRegistrationModal isOpen={isModalOpen} toggle={toggleAdminModal} />
       <Card>
         <CardBody>   
+        <div className="d-flex justify-content-end align-items-center mb-3">
+        <Button type="button" color="primary" className="btn-sm btn-rounded" onClick={toggleAdminModal}>
+        Add Admin
+        </Button>
+
+  {/* Your icons and actions can go here */}
+</div>
+
           <TableContainer
             columns={columns}
-            data={UserData}
+            data={admindata}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
