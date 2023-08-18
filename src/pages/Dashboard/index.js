@@ -54,25 +54,30 @@ const Dashboard = props => {
   // }));
 
   const reports = [
-    { title: "Total Members", iconClass: "bx-copy-alt", description: "1,235" },
-    { title: "Amount Due", iconClass: "bx-archive-in", description: "₹35,723" },
+    { title: "Total Members", iconClass: "bx-group", description: "1,235" },
+    { title: "Amount Due", iconClass: "bx bx-money", description: "₹35,723" },
     {
-      title: "Amount Recovered",
-      iconClass: "bx-purchase-tag-alt",
-      description: "₹7,894,56.00",
+      "title": "Amount Recovered",
+      "iconClass": "bx bx-check",
+      "description": "₹7,894,56.00"
     },
     {
-      title: "Total Reviews",
-      iconClass: "bx-purchase-tag-alt",
-      description: "1,447",
-    },
+      "title": "Total Reviews",
+      "iconClass": "bx bx-star",
+      "description": "1,447"
+    }
+    // {
+    //   title: "Total Reviews",
+    //   iconClass: "bx-purchase-tag-alt",
+    //   description: "1,447",
+    // },
   ];
 
-  useEffect(() => {
-    setTimeout(() => {
-      setSubscribemodal(true);
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSubscribemodal(true);
+  //   }, 2000);
+  // }, []);
 
   const [periodData, setPeriodData] = useState([]);
   const [periodType, setPeriodType] = useState("yearly");

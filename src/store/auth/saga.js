@@ -26,7 +26,6 @@ function* loginUser({ payload: { user, history } }) {
       if(response!=undefined && response!=null){
               
         if(response.data.success){
-          window.alert('Login successful!');
           localStorage.setItem("authUser", JSON.stringify(response.data.response));
           yield put(loginSuccess(response.data.response));
           history('/dashboard');

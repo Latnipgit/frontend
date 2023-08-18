@@ -179,6 +179,7 @@ import Pages500 from "../pages/Utility/pages-500";
 import ContactsGrid from "../pages/Contacts/contacts-grid";
 import ContactsList from "../pages/Contacts/ContactList/contacts-list";
 import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile";
+import LatestTransactionPage from "pages/admin/LatestTransaction/LatestTransactionPage";
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
@@ -193,6 +194,7 @@ const authProtectedRoutes = [
   { path: "/registered-company", component: <RegisteredCompanyList /> },
   { path: "/disputed-billings", component: <DiputedBillings /> },
  { path: "/approved-transaction", component: <ApprovedTranction /> },
+ { path: "/company-history", component: <LatestTransactionPage /> },
  
 
 

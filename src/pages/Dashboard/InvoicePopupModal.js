@@ -14,7 +14,7 @@ import {
     Table,
     Row, Col
 } from "reactstrap"
-
+import { Link } from 'react-router-dom';
 
 
 const InvoiceModal = props => {
@@ -32,7 +32,7 @@ const InvoiceModal = props => {
         { name: 'document.pdf', type: 'application/pdf' },
         { name: 'image.jpg', type: 'image/jpeg' },
         { name: 'document.pdf', type: 'application/pdf' },
-        
+
         // Add more attachments as needed
     ]);
     const renderStarRating = (rating) => {
@@ -74,15 +74,20 @@ const InvoiceModal = props => {
             toggle={toggle}
         >
             <div className="modal-content">
-            <ModalHeader toggle={toggle}>
-            <div className="modal-header d-flex justify-content-between">
-        <div className="modal-header-title me-auto">Invoice Details</div>
-        <div className="invoice-number">Invoice Number: #123456</div>
-        </div>
- 
-    </ModalHeader>
+                <ModalHeader toggle={toggle}>
+                    <div className="modal-header-title me-auto">Invoice Details</div>
+                </ModalHeader>
                 <ModalBody>
                     <Row>
+                        <Col md="12">
+                            <Card className="mb-1">
+                                <CardBody className="buyer-card-body">
+                                    <h2>
+                                        Invoice Number: <span className="text-primary"> #123456</span>
+                                    </h2>
+                                </CardBody>
+                            </Card>
+                        </Col>
                         <Col md="6">
                             <h5>Buyer Information</h5>
                             <Card className="mb-3">
@@ -182,7 +187,7 @@ const InvoiceModal = props => {
                             </div>
                         </CardBody>
                     </Card>
-                    <h5>Buyer Attachments</h5>
+                    <h5>Seller Attachments</h5>
                     <Row>
                         {attachments.map((file, index) => (
                             <Col md="4" key={index}>
@@ -203,16 +208,23 @@ const InvoiceModal = props => {
                             </Col>
                         ))}
                     </Row>
-                    <div className="existing-reviews">
-                        <h5>Seller Rating</h5>
+                    <Row>
+
+                    </Row>
+                    <h5>Seller Rating</h5>
+                    <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center">
                         {existingReviews.map((review, index) => (
                             <div className="review" key={index}>
-                                <div className="review-rating">
-                                    {renderStarRating(review.rating)} {/* Render star icons based on the rating */}
+                                <div className="review-rating d-flex align-items-center">
+                                    {renderStarRating(review.rating)}
+                                    <h5 className="ml-2 mb-1">4.5</h5>
                                 </div>
-                                {/* <p>{review.comment}</p> */}
+                                <p>{review.comment}</p>
                             </div>
                         ))}
+                        <div>
+                        <Link to="/company-history" className="btn btn-primary">Company History</Link>
+                        </div>
                     </div>
                     <h5 className="mt-2">Buyer Transaction History</h5>
                     <Card className="mb-3">
@@ -247,7 +259,7 @@ const InvoiceModal = props => {
                             </div>
                         </CardBody>
                     </Card>
-                    <h5>Seller Attachments</h5>
+                    <h5>Buyer Attachments</h5>
                     <Row>
                         {sellerattachments.map((file, index) => (
                             <Col md="4" key={index}>
