@@ -89,7 +89,7 @@ const InvoiceModal = props => {
                             </Card>
                         </Col>
                         <Col md="6">
-                            <h5>Buyer Information</h5>
+                            <h5>Seller Information</h5>
                             <Card className="mb-3">
                                 <CardBody className="buyer-card-body">
 
@@ -110,7 +110,7 @@ const InvoiceModal = props => {
                             </Card>
                         </Col>
                         <Col md="6">
-                            <h5>Seller Information</h5>
+                            <h5>Buyer Information</h5>
                             <Card className="mb-3">
                                 <CardBody className="seller-card-body">
 
@@ -226,7 +226,7 @@ const InvoiceModal = props => {
                         <Link to="/company-history" className="btn btn-primary">Company History</Link>
                         </div>
                     </div>
-                    <h5 className="mt-2">Buyer Transaction History</h5>
+                    <h5 className="mt-2">Buyer Payment History</h5>
                     <Card className="mb-3">
 
                         <CardBody>

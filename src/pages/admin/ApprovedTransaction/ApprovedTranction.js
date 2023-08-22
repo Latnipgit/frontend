@@ -10,24 +10,25 @@ import {
 } from "reactstrap";
 import { ApprovedTranctionData } from "../../../common/data/approvedTransactions";
 import {
-    Badge,
-    Col,
-    Container,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    Table,
-    UncontrolledDropdown,
-    UncontrolledTooltip,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    Input,
-    FormFeedback,
-    Label,
-  } from "reactstrap";
+  Badge,
+  Col,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  Table,
+  UncontrolledDropdown,
+  UncontrolledTooltip,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  Input,
+  FormFeedback,
+  Label,
+} from "reactstrap";
 import {
   CheckBox,
   SrNo,
@@ -41,11 +42,18 @@ import TableContainer from "../../../components/Common/TableContainer";
 import ApprovedTranctionModel from "./ApprovedTranModel";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
 const ApprovedTranction = props => {
-
-
+  const [showReferModal, setShowReferModal] = useState(false);
+  const [showApproveModal, setShowApproveModal] = useState(false);
+  const [showInProcessModal, setShowInProcessModal] = useState(false);
   const [modal1, setModal1] = useState(false);
+  const handleReferClick = () => { setShowReferModal(true) };
+  const handleConfirmRefer = () => { setShowReferModal(false) };
 
   const toggleViewModal = () => setModal1(!modal1);
+  const handleApproveClick = () => { setShowApproveModal(true) };
+  const handleInProcessClick = () => { setShowInProcessModal(true) };
+  const handleConfirmApprove = () => { setShowApproveModal(false) };
+  const handleConfirmInProcess = () => { setShowInProcessModal(false) };
 
   const columns = useMemo(
     () => [
@@ -100,38 +108,18 @@ const ApprovedTranction = props => {
         accessor: "view",
         Cell: cellProps => {
           return (
-            <UncontrolledDropdown>
-                              <DropdownToggle
-                                href="#"
-                                className="card-drop"
-                                tag="a"
-                              >
-                                <i className="mdi mdi-dots-horizontal font-size-18" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-end">
-                              <DropdownItem
-                                  href="#"
-                                  onClick={toggleViewModal}
-                                >
-                                  <i className="mdi mdi-eye font-size-16 text-primary me-1" />{" "}
-                                  View
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => handleProjectClick(project)}
-                                >
-                                  <i className="mdi mdi-pencil font-size-16 text-success me-1" />{" "}
-                                  Approve
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => onClickDelete(project)}
-                                >
-                                  <i className="mdi mdi-trash-can font-size-16 text-danger me-1" />{" "}
-                                  Decline
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
+            <div className="d-flex">
+              <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-eye font-size-18 text-primary mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View" />
+              </div>
+              <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
+              </div>
+              <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
+              </div>
+            </div>
+
           );
         },
       },
@@ -142,25 +130,53 @@ const ApprovedTranction = props => {
 
   return (
     <React.Fragment>
-      <h4 className="mb-sm-0 font-size-18">Approved Transactions</h4>
+      <div className="overflow-hidden mt-lg-4">..</div>
+
       <ApprovedTranctionModel isOpen={modal1} toggle={toggleViewModal} />
       <Card>
+        <div className="overflow-hidden mt-lg-4">..</div>
+        <h4 className="mb-sm-0 font-size-18">  Approved Transactions</h4>
         <CardBody>
-        <Button type="button" color="primary" className="btn-sm btn-rounded float-left-button" onClick={toggleViewModal}>
-          <i className="mdi mdi-eye font-size-16 text-primary me-1" />
-          View Details
-          </Button>
-          <div className="mb-4 h4 card-title"></div>
-          <div className="mb-4 h4 card-title">Approved Tranction List</div>
           <TableContainer
             columns={columns}
             data={ApprovedTranctionData}
-            isGlobalFilter={false}
+            isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
           />
         </CardBody>
       </Card>
+      <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>
+        <ModalHeader toggle={() => setShowReferModal(false)}>Confirm Refer to Senior</ModalHeader>
+        <ModalBody>
+          Are you sure you want to refer this project to a senior?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowReferModal(false)}>Cancel</Button>
+          <Button color="danger" onClick={handleConfirmRefer}>Refer</Button>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showApproveModal} toggle={() => setShowApproveModal(false)}>
+        <ModalHeader toggle={() => setShowApproveModal(false)}>Confirm Approval</ModalHeader>
+        <ModalBody>
+          Are you sure you want to approve this transaction?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowApproveModal(false)}>Cancel</Button>
+          <Button color="success" onClick={handleConfirmApprove}>Approve</Button>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showInProcessModal} toggle={() => setShowInProcessModal(false)}>
+        <ModalHeader toggle={() => setShowInProcessModal(false)}>Confirm In Process</ModalHeader>
+        <ModalBody>
+          Are you sure you want to mark this as decline ?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowInProcessModal(false)}>Cancel</Button>
+          <Button color="danger" onClick={handleConfirmInProcess}>Decline</Button>
+
+        </ModalFooter>
+      </Modal>
     </React.Fragment>
   );
 };

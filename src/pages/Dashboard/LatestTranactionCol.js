@@ -28,8 +28,37 @@ const BillingName = (cell) => {
     return cell.value ? cell.value : '';
 };
 
-const Date = (cell) => {
-    return cell.value ? cell.value : '';
+const daysSinceReference = (cellValue, referenceDate) => {
+    if (cellValue) {
+        const currentDate = new Date(cellValue);
+        const timeDifference = referenceDate-currentDate;
+        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        return daysDifference;
+    }
+    return '';
+};
+
+const DueSince = (cell) => {
+    debugger
+    //const startDate = new Date('2019-10-07'); // October 7, 2019
+    const today = new Date(); // Current date
+    
+    const daysSince = daysSinceReference(cell.value, today);
+    console.log(daysSince);
+    
+    let badgeClassName = "font-size-11 badge ";
+    if (daysSince > 1 && daysSince < 800) {
+        badgeClassName += "bg-success text-white";
+    } else if (daysSince > 800) {
+        badgeClassName += "bg-warning text-dark";
+    } else {
+        badgeClassName += "bg-danger text-white";
+    }
+    return (
+        <span className={badgeClassName}>
+            {daysSince} days
+        </span>
+    );
 };
 
 const Total = (cell) => {
@@ -39,8 +68,10 @@ const Total = (cell) => {
 const PaymentStatus = (cell) => {
     return (
         <Badge
-          className={"font-size-11 badge-soft-" + 
-          (cell.value === "Paid" ? "success" : "danger" && cell.value === "Refund" ? "warning" : "danger")}          
+          className={"font-size-12 badge-soft-" + 
+          (cell.value === "Paid" ? "success" :
+        cell.value === "Part Paid" ? "warning" :
+        cell.value === "Unpaid" ? "danger" : "danger")}          
         >
           {cell.value}
         </Badge>
@@ -65,7 +96,7 @@ export {
     CheckBox,
     OrderId,
     BillingName,
-    Date,
+    DueSince,
     Total,
     PaymentStatus,
     PaymentMethod

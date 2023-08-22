@@ -1,3 +1,9 @@
+//Get Adminlist
 export const ADMIN_API_SUCCESS = "ADMIN_API_SUCCESS";
 export const ADMIN_API_FAIL = "ADMIN_API_FAIL";
 export const GET_ADMIN_DATA = "GET_ADMIN_DATA";
+//signup Admin
+export const SIGNUP_ADMIN_API_SUCCESS = "SIGNUP_ADMIN_API_SUCCESS";
+export const SIGNUP_ADMIN_API_FAIL = "SIGNUP_ADMIN_API_FAIL";
+export const SIGNUP_ADMIN_DATA = "SIGNUP_ADMIN_DATA";
+

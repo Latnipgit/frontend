@@ -52,6 +52,7 @@ const UserList = props => {
   const { adminData } = useSelector(state => ({
     adminData: state.AdminList.adminData
   }));
+
   
   
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const UserList = props => {
     useEffect(() => {
         dispatch(ongetAdminData());
         if(adminData!=undefined && adminData!=null){
+          debugger
           setAdminData(adminData.data.data.response);
         }
           
@@ -153,21 +155,20 @@ const UserList = props => {
 
   return (
     <React.Fragment>
-       <div className="mb-4 h4 card-title mt-lg-5">..</div>
+       <div className="mb-4 h4 card-title mt-lg-4">..</div>
           {/* <div className="mb-4 h4 card-title mt-lg-5"> Employee List</div> */}
       <div className="container">
-      <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18">Employee List</h4>
+      
       </div>
       {/* <UserViewModal isOpen={modal1} toggle={toggleViewModal} /> */}
        <AdminRegistrationModal isOpen={isModalOpen} toggle={toggleAdminModal} />
       <Card>
         <CardBody>   
+        <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Employee List</h4>
         <div className="d-flex justify-content-end align-items-center mb-3">
         <Button type="button" color="primary" className="btn-sm btn-rounded" onClick={toggleAdminModal}>
         Add Admin
         </Button>
-
-  {/* Your icons and actions can go here */}
 </div>
 
           <TableContainer

@@ -17,6 +17,7 @@ import {
     Table,
     UncontrolledDropdown,
     UncontrolledTooltip,
+    ModalFooter,
     Modal,
     ModalHeader,
     ModalBody,
@@ -38,11 +39,18 @@ import TableContainer from "../../../components/Common/TableContainer";
 import DisputedViewModal from "../DisputedBillings/DisputedViewModal";
 
 const DiputedBillings = props => {
-
-
+  const [showReferModal, setShowReferModal] = useState(false);
+  const [showApproveModal, setShowApproveModal] = useState(false);
+  const [showInProcessModal, setShowInProcessModal] = useState(false);
   const [modal1, setModal1] = useState(false);
+  const handleReferClick = () => { setShowReferModal(true) };
+  const handleConfirmRefer = () => { setShowReferModal(false) };
 
   const toggleViewModal = () => setModal1(!modal1);
+  const handleApproveClick = () => { setShowApproveModal(true) };
+  const handleInProcessClick = () => { setShowInProcessModal(true) };
+  const handleConfirmApprove = () => { setShowApproveModal(false) };
+  const handleConfirmInProcess = () => { setShowInProcessModal(false) };
 
   const columns = useMemo(
     () => [
@@ -107,31 +115,14 @@ const DiputedBillings = props => {
         accessor: "view",
         Cell: cellProps => {
           return (
-            <UncontrolledDropdown>
-                              <DropdownToggle
-                                href="#"
-                                className="card-drop"
-                                tag="a"
-                              >
-                                <i className="mdi mdi-dots-horizontal font-size-18" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-end">
-                              <DropdownItem
-                                  href="#"
-                                  onClick={toggleViewModal}
-                                >
-                                  <i className="mdi mdi-eye font-size-16 text-primary me-1" />{" "}
-                                  Approve
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#"
-                                  onClick={() => handleProjectClick(project)}
-                                >
-                                  <i className="mdi mdi-pencil font-size-16 text-success me-1" />{" "}
-                                  Decline
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
+            <div className="d-flex">
+              <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
+              </div>
+              <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
+              </div>
+            </div>
           );
         },
       },
@@ -154,12 +145,43 @@ const DiputedBillings = props => {
           <TableContainer
             columns={columns}
             data={Disputeddata}
-            isGlobalFilter={false}
+            isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
           />
         </CardBody>
       </Card>
+      <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>
+        <ModalHeader toggle={() => setShowReferModal(false)}>Confirm Refer to Senior</ModalHeader>
+        <ModalBody>
+          Are you sure you want to refer this project to a senior?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowReferModal(false)}>Cancel</Button>
+          <Button color="danger" onClick={handleConfirmRefer}>Refer</Button>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showApproveModal} toggle={() => setShowApproveModal(false)}>
+        <ModalHeader toggle={() => setShowApproveModal(false)}>Confirm Approval</ModalHeader>
+        <ModalBody>
+          Are you sure you want to approve this disputed bill?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowApproveModal(false)}>Cancel</Button>
+          <Button color="success" onClick={handleConfirmApprove}>Approve</Button>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showInProcessModal} toggle={() => setShowInProcessModal(false)}>
+        <ModalHeader toggle={() => setShowInProcessModal(false)}>Confirm In Process</ModalHeader>
+        <ModalBody>
+          Are you sure you want to mark this bill as decline ?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowInProcessModal(false)}>Cancel</Button>
+          <Button color="danger" onClick={handleConfirmInProcess}>Decline</Button>
+
+        </ModalFooter>
+      </Modal>
     </React.Fragment>
   );
 };

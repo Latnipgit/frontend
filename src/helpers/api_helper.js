@@ -39,7 +39,7 @@ export async function get(url, config = {}) {
 }
 
 export async function post(url, data, config = {}) {
-
+debugger
     return axiosApi
         .post(url, { ...data }, { ...config })
         .then((response) =>response).catch((error) => {

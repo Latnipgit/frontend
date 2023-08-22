@@ -172,7 +172,7 @@ const RegisteredCompanyList = props => {
           <TableContainer
             columns={columns}
             data={RegisteredCompanyData}
-            isGlobalFilter={false}
+            isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}
           />

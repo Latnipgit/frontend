@@ -14,6 +14,8 @@ export const POST_EDIT_PROFILE = "/post-fake-profile";
 
 //Admin Registration Menus
 export const GET_ADMIN_DATA = "/api/admin/getAllAdmins";
+//Admin Registration Menus
+export const SIGNUP_ADMIN_DATA = "/api/admin/add";
 //PRODUCTS
 export const GET_PRODUCTS = "/products";
 export const GET_PRODUCTS_DETAIL = "/product";

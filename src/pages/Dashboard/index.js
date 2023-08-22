@@ -73,14 +73,17 @@ const Dashboard = props => {
     // },
   ];
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setSubscribemodal(true);
-  //   }, 2000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setSubscribemodal(true);
+    }, 2000);
+  }, []);
 
   const [periodData, setPeriodData] = useState([]);
   const [periodType, setPeriodType] = useState("yearly");
+  const handleSignUp = () => {
+    setSubscribemodal(false);
+  };
 
   // useEffect(() => {
   //      
@@ -228,7 +231,7 @@ const Dashboard = props => {
       </div>
 
       {/* subscribe ModalHeader */}
-      <Modal
+      {/* <Modal
         isOpen={subscribemodal}
         role="dialog"
         autoFocus={true}
@@ -277,7 +280,50 @@ const Dashboard = props => {
             </div>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
+          <Modal
+  isOpen={subscribemodal}
+  role="dialog"
+  autoFocus={true}
+  centered
+  data-toggle="modal"
+  toggle={() => {
+    setSubscribemodal(!subscribemodal);
+  }}
+>
+  <div>
+    <ModalHeader
+      className="border-bottom-0"
+      toggle={() => {
+        setSubscribemodal(!subscribemodal);
+      }}
+    ></ModalHeader>
+  </div>
+  <div className="modal-body">
+    <div className="text-center mb-4">
+      <div className="avatar-md mx-auto mb-4">
+        <div className="avatar-title bg-light rounded-circle text-primary h1">
+          <i className="mdi mdi-email-open"></i>
+        </div>
+      </div>
+
+      <div className="row justify-content-center">
+        <div className="col-xl-10">
+          <h4 className="text-primary">Confirmation</h4>
+          <p className="text-muted font-size-14 mb-4">
+            By signing up, you agree not to post false information about any party and to take complete responsibility if your posts or reviews lead to defamation of any party.
+          </p>
+
+          <Button color="primary" type="button" onClick={handleSignUp}>
+            Confirm and Sign Up
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</Modal>
+
+
 
       <Modal
         isOpen={modal}

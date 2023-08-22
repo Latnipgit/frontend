@@ -190,7 +190,7 @@ const SidebarContent = props => {
               <Link to="/approved-transaction" >
                 <i className="bx bx-transfer"></i>
                 {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
-                {props.t("Transaction")}
+                {props.t("Approved Transaction")}
               </Link>
             </li>
             
