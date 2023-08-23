@@ -76,7 +76,7 @@ const Dashboard = props => {
   useEffect(() => {
     setTimeout(() => {
       setSubscribemodal(true);
-    }, 2000);
+    }, 500);
   }, []);
 
   const [periodData, setPeriodData] = useState([]);
@@ -315,7 +315,7 @@ const Dashboard = props => {
           </p>
 
           <Button color="primary" type="button" onClick={handleSignUp}>
-            Confirm and Sign Up
+            Confirm
           </Button>
         </div>
       </div>

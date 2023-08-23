@@ -18,6 +18,9 @@ import withRouter from "components/Common/withRouter";
 import user1 from "../../../assets/images/users/avatar-1.jpg";
 
 const ProfileMenu = props => {
+  function capitalizeWords(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  }
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false);
 
@@ -31,7 +34,7 @@ const ProfileMenu = props => {
       ) {
              
         const obj = JSON.parse(localStorage.getItem("authUser"));
-        setusername(obj.name);
+        setusername(capitalizeWords(obj.name));
       }
     }
   }, [props.success]);

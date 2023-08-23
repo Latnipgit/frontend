@@ -31,11 +31,13 @@ import {
 } from "reactstrap";
 import {
   CheckBox,
-  SrNo,
-  Debtor,
-  Creditor,
-  DueAmount,
-  InvoiceNo,
+    OrderId,
+    BillingName,
+    DueSince,
+    Total,
+    PaymentStatus,
+    PaymentMethod,
+    Status
 } from "./ApprovedTransactionCol";
 
 import TableContainer from "../../../components/Common/TableContainer";
@@ -55,71 +57,117 @@ const ApprovedTranction = props => {
   const handleConfirmApprove = () => { setShowApproveModal(false) };
   const handleConfirmInProcess = () => { setShowInProcessModal(false) };
 
+
   const columns = useMemo(
     () => [
       {
-        Header: "Sr No",
-        accessor: "SrNo",
+        Header: "#",
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <SrNo {...cellProps} />;
+          return <input type="checkbox" className="form-check-input" />;
         },
       },
       {
-        Header: "Debtor",
-        accessor: "Debtor",
+        Header: "Invoice No",
+        accessor: "orderId",
+        filterable: false,
+        disableFilters: true,
+        Cell: cellProps => {
+          return <OrderId {...cellProps} />;
+        },
+      },
+      {
+        Header: "Buyer Name",
+        accessor: "billingName",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Debtor {...cellProps} />;
+          return <BillingName {...cellProps} />;
         },
       },
       {
-        Header: "Creditor",
-        accessor: "Creditor",
+        Header: "Seller Name",
+        accessor: "paymentMethod",
+        disableFilters: true,
+        Cell: cellProps => {
+          return <PaymentMethod {...cellProps} />;
+        },
+      },
+      {
+        Header: "Amount",
+        accessor: "total",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Creditor {...cellProps} />;
+          return <Total {...cellProps} />;
         },
       },
       {
-        Header: "Due Amount",
-        accessor: "DueAmount",
+        Header: "Due Since",
+        accessor: "orderdate",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <DueAmount {...cellProps} />;
+          return <DueSince {...cellProps} />;
         },
       },
+      
       {
-        Header: "InvoiceNo",
-        accessor: "InvoiceNo",
+        Header: "Payment Status",
+        accessor: "paymentStatus",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <InvoiceNo {...cellProps} />;
+          return <PaymentStatus {...cellProps} />;
         },
       },
       {
-        Header: "Action",
+        Header: "Status",
+        accessor: "Status",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <Status {...cellProps} />;
+        },
+      },
+    
+      {
+        Header: "View Details",
         disableFilters: true,
         accessor: "view",
         Cell: cellProps => {
           return (
+            <Button
+              type="button"
+              color="primary"
+              className="btn-sm btn-rounded"
+              onClick={toggleViewModal}
+            >
+              View Details
+            </Button>
+          );
+        },
+      },
+     
+      {
+        Header: "Action",
+        disableFilters: true,
+        accessor: "project",
+        Cell: cellProps => {
+          return (
             <div className="d-flex">
-              <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-eye font-size-18 text-primary mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View" />
-              </div>
-              <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
-              </div>
-              <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
-              </div>
+            {/* <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-eye font-size-18 text-primary mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View" />
+            </div> */}
+            <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
             </div>
-
+            <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
+              <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
+            </div>
+          </div>
+          
           );
         },
       },
@@ -134,9 +182,10 @@ const ApprovedTranction = props => {
 
       <ApprovedTranctionModel isOpen={modal1} toggle={toggleViewModal} />
       <Card>
-        <div className="overflow-hidden mt-lg-4">..</div>
-        <h4 className="mb-sm-0 font-size-18">  Approved Transactions</h4>
+        <div className="overflow-hidden mt-lg-2">..</div>
+        {/* <h4 className="mb-sm-0 font-size-18 mr-4">Approved Transactions</h4> */}
         <CardBody>
+        <div className="mb-4 h4 card-title">Approved Transactions</div>
           <TableContainer
             columns={columns}
             data={ApprovedTranctionData}

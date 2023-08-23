@@ -58,7 +58,7 @@ const InvoiceModal = props => {
         return stars;
     };
     const existingReviews = [
-        { rating: 4.5, comment: "Great product!" },
+        { rating: 4.5, comment: "I have been using this product for a while now, and I am incredibly impressed with its features and performance. From the moment I started using it, I could tell that the team behind this product is dedicated to delivering top-notch quality.!" },
         // { rating: 3, comment: "Average quality." },
         // ... other review objects
     ];
@@ -223,10 +223,14 @@ const InvoiceModal = props => {
                             </div>
                         ))}
                         <div>
-                        <Link to="/company-history" className="btn btn-primary">Company History</Link>
                         </div>
                     </div>
-                    <h5 className="mt-2">Buyer Payment History</h5>
+                    <div className="d-flex justify-content-between">
+                        <h5 className="mt-2">Buyer Payment History</h5>
+                        <div className="ml-auto">
+                            <Link to="/company-history" className="btn btn-primary">View Buyer Company history</Link>
+                        </div>
+                    </div>
                     <Card className="mb-3">
 
                         <CardBody>

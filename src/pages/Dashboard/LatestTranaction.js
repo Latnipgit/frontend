@@ -13,7 +13,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  ModalFooter,Dropdown, DropdownToggle, DropdownMenu, DropdownItem ,
   Table,
 } from "reactstrap";
 // import { OverlayTrigger, Tooltip, Modal } from 'react-bootstrap';
@@ -41,14 +41,30 @@ const LatestTranaction = props => {
   const [showInProcessModal, setShowInProcessModal] = useState(false);
   const [modal1, setModal1] = useState(false);
   const handleReferClick = () => {setShowReferModal(true)};
-  const handleConfirmRefer = () => {setShowReferModal(false)};
+  const handleConfirmRefer = () => {
+    if (selectedLevel) {
+      // Handle refer logic here
+      console.log("Referring to senior with level:", selectedLevel);
+      setSelectedLevel(''); // Reset the selected level
+      setShowReferModal(false);
+    }
+  };
+  const handleCancelRefer = () => {
+    setSelectedLevel(''); // Reset the selected level
+    setShowReferModal(false);
+  };
   
   const toggleViewModal = () => setModal1(!modal1);
   const handleApproveClick = () => {setShowApproveModal(true)};
   const handleInProcessClick = () => {setShowInProcessModal(true)};
   const handleConfirmApprove = () => {setShowApproveModal(false)};
   const handleConfirmInProcess = () => {setShowInProcessModal(false)};
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedLevel, setSelectedLevel] = useState('');
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+  const isReferDisabled = selectedLevel === '';
   const columns = useMemo(
     () => [
       {
@@ -164,15 +180,27 @@ const LatestTranaction = props => {
       <InvoiceModal isOpen={modal1} toggle={toggleViewModal} />
       {/* <ConfirmModal isOpen={isModalOpen} toggle={toggleModal} /> */}
       <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>
-                <ModalHeader toggle={() => setShowReferModal(false)}>Confirm Refer to Senior</ModalHeader>
-                <ModalBody>
-                    Are you sure you want to refer this project to a senior?
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="secondary" onClick={() => setShowReferModal(false)}>Cancel</Button>
-                    <Button color="danger" onClick={handleConfirmRefer}>Refer</Button>
-                </ModalFooter>
-            </Modal>
+        <ModalHeader toggle={() => setShowReferModal(false)}>Confirm Asclation</ModalHeader>
+        <ModalBody>
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+            <DropdownToggle caret>
+            {selectedLevel ? selectedLevel : 'Select Level'} <span className="caret"></span>
+
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem onClick={() => setSelectedLevel('L1')}>L1</DropdownItem>
+              <DropdownItem onClick={() => setSelectedLevel('L2')}>L2</DropdownItem>
+              <DropdownItem onClick={() => setSelectedLevel('L3')}>L3</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <p>Asclation: Please select the level you want to refer this transaction to.</p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={handleCancelRefer}>Cancel</Button>
+          <Button color="danger" onClick={handleConfirmRefer} disabled={isReferDisabled}>Refer</Button>
+        </ModalFooter>
+      </Modal>
+
       <Card>
         <CardBody>
           <div className="mb-4 h4 card-title">Latest Transaction</div>
