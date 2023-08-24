@@ -10,7 +10,7 @@ import {
     CardBody,
     ModalBody,
     ModalFooter,
-    ModalHeader,
+    ModalHeader, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
     Table,
     Row, Col
 } from "reactstrap"
@@ -57,6 +57,12 @@ const InvoiceModal = props => {
 
         return stars;
     };
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [selectedLevel, setSelectedLevel] = useState('');
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
+    };
+    const isReferDisabled = selectedLevel === '';
     const existingReviews = [
         { rating: 4.5, comment: "I have been using this product for a while now, and I am incredibly impressed with its features and performance. From the moment I started using it, I could tell that the team behind this product is dedicated to delivering top-notch quality.!" },
         // { rating: 3, comment: "Average quality." },
@@ -213,21 +219,21 @@ const InvoiceModal = props => {
                     </Row>
                     <h5>Seller Rating</h5>
                     <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center">
-  {existingReviews.map((review, index) => (
-    <div className="review" key={index}>
-      <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
-        {renderStarRating(review.rating)}
-        <h5
-          className="ml-2 mb-1"
-          style={{ color: 'goldenrod', fontSize: '18px' }} // Inline CSS
-        >
-          {review.rating}
-        </h5>
-      </div>
-      <p>{review.comment}</p>
-    </div>
-  ))}
-</div>
+                        {existingReviews.map((review, index) => (
+                            <div className="review" key={index}>
+                                <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
+                                    {renderStarRating(review.rating)}
+                                    <h5
+                                        className="ml-2 mb-1"
+                                        style={{ color: 'goldenrod', fontSize: '18px' }} // Inline CSS
+                                    >
+                                        {review.rating}
+                                    </h5>
+                                </div>
+                                <p>{review.comment}</p>
+                            </div>
+                        ))}
+                    </div>
 
 
 
@@ -294,31 +300,28 @@ const InvoiceModal = props => {
                             </Col>
                         ))}
                     </Row>
-                    <h5>Actions</h5>
-                    <Card className="mb-3">
-  <CardBody
-    className="attachment-card-body d-flex justify-content-between"
-    style={{ background: 'rgba(0, 0, 0, 0.05)' }}
-  >
-    
+                    <Row>
+                        <Col md="4"><h5>Action</h5></Col>
+                        <Col md="4">
+                            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} className="mr-2">
+                                <DropdownToggle caret>
+                                    {selectedLevel ? selectedLevel : 'Select Level of invoice'}
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem onClick={() => setSelectedLevel('Approved')}>Approved</DropdownItem>
+                                    <DropdownItem onClick={() => setSelectedLevel('Rejected')}>Rejected</DropdownItem>
+                                    <DropdownItem onClick={() => setSelectedLevel('L1')}>L1</DropdownItem>
+                                    <DropdownItem onClick={() => setSelectedLevel('L2')}>L2</DropdownItem>
+                                    <DropdownItem onClick={() => setSelectedLevel('L3')}>L3</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </Col>
 
-    <div className="d-flex justify-content-between">
-  <div className="attachment-actions d-flex flex-column align-items-center">
-    <select className="form-control mb-2">
-      <option value="L1">L1</option>
-      <option value="L2">L2</option>
-      <option value="Approved">Approved</option>
-      <option value="Rejected">Rejected</option>
-    </select>
-  </div>
-  <div className="ml-auto">
-    <Button to="/company-history" className="btn btn-primary">Submit</Button>
-  </div>
-</div>
- 
+                        <Col md="4"><Link type="button" className="btn btn-primary">Submit</Link>
+                        </Col>
 
-  </CardBody>
-</Card>
+                    </Row>
+
 
                 </ModalBody>
                 <ModalFooter>
