@@ -72,11 +72,16 @@ const Dashboard = props => {
     //   description: "1,447",
     // },
   ];
-
+  const isPopupOpen = JSON.parse(localStorage.getItem("IspopupOpen"));
   useEffect(() => {
-    setTimeout(() => {
-      setSubscribemodal(true);
-    }, 500);
+debugger
+  if (isPopupOpen) {
+      setTimeout(() => {
+       
+        setSubscribemodal(true);
+        localStorage.setItem("IspopupOpen", JSON.stringify(false));
+      }, 500);  
+    }
   }, []);
 
   const [periodData, setPeriodData] = useState([]);

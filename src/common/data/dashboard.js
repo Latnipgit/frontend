@@ -51,7 +51,8 @@ const latestTransaction = [
         total: "₹392",
         paymentStatus: "Paid",
         methodIcon: "fab fa-cc-paypal",
-        paymentMethod: "Paypal",
+        Status: "L1",
+
     },
     {
         orderId: "#SK2544",
@@ -60,7 +61,7 @@ const latestTransaction = [
         total: "₹404",
         paymentStatus: "Part Paid",
         methodIcon: "fab fa-cc-visa",
-        paymentMethod: "Visa",
+        Status: "L2",
     },
     {
         orderId: "#SK2543",
@@ -69,7 +70,7 @@ const latestTransaction = [
         total: "₹412",
         paymentStatus: "Unpaid",
         methodIcon: "fab fa-cc-mastercard",
-        paymentMethod: "Mastercard",
+        Status: "Approved",
     },
     {
         orderId: "#SK2542",
@@ -78,7 +79,7 @@ const latestTransaction = [
         total: "₹384",
         paymentStatus: "Paid",
         methodIcon: "fab fa-cc-paypal",
-        paymentMethod: "Paypal",
+        Status: "Rejected",
     },
     {
         orderId: "#SK2541",
@@ -87,7 +88,7 @@ const latestTransaction = [
         total: "₹380",
         paymentStatus: "Unpaid",
         methodIcon: "fab fa-cc-visa",
-        paymentMethod: "Visa",
+        Status: "L3",
     },
     {
         orderId: "#SK2540",
@@ -96,7 +97,7 @@ const latestTransaction = [
         total: "₹400",
         paymentStatus: "Paid",
         methodIcon: "fab fa-cc-mastercard",
-        paymentMethod: "Mastercard",
+        Status: "Rejected",
     },
 ];
 

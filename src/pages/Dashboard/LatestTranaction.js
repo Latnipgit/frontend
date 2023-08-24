@@ -31,6 +31,7 @@ import {
   Total,
   PaymentStatus,
   PaymentMethod,
+  Status
 } from "./LatestTranactionCol";
 
 import TableContainer from "../../components/Common/TableContainer";
@@ -127,6 +128,15 @@ const LatestTranaction = props => {
         filterable: false,
         Cell: cellProps => {
           return <PaymentStatus {...cellProps} />;
+        },
+      },
+      {
+        Header: "Status",
+        accessor: "Status",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <Status {...cellProps} />;
         },
       },
     

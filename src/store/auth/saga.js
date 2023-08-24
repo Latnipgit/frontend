@@ -27,6 +27,7 @@ function* loginUser({ payload: { user, history } }) {
               
         if(response.data.success){
           localStorage.setItem("authUser", JSON.stringify(response.data.response));
+          localStorage.setItem("IspopupOpen", JSON.stringify(true));
           yield put(loginSuccess(response.data.response));
           history('/dashboard');
         }else{

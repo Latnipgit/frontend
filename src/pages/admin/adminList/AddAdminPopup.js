@@ -7,6 +7,7 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile:"",
     password: "",
   });
   const [apiStatus, setApiStatus] = useState('idle'); 
@@ -102,6 +103,16 @@ const handleSubmit = () => {
               <Label for="mobile">Mobile Number</Label>
               <Input type="text" name="mobile" id="mobile" value={formData.mobile} onChange={handleChange} />
             </FormGroup>
+            <FormGroup>
+        <Label for="password">Password</Label>
+        <Input
+          type="password"
+          name="password"
+          id="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>

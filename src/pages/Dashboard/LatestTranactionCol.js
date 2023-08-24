@@ -77,6 +77,21 @@ const PaymentStatus = (cell) => {
         </Badge>
     )
 };
+
+const Status = (cell) => {
+    return (
+        <Badge
+          className={"font-size-12 badge-soft-" + 
+          (cell.value === "Approved" ? "success" :
+        cell.value === "L1" ? "success" :
+        cell.value === "L2" ? "success" :
+        cell.value === "L3" ? "success" :
+        cell.value === "Rejeted" ? "danger" : "danger")}          
+        >
+          {cell.value}
+        </Badge>
+    )
+};
 const PaymentMethod = (cell) => {
     return (
         <span>
@@ -99,5 +114,6 @@ export {
     DueSince,
     Total,
     PaymentStatus,
-    PaymentMethod
+    PaymentMethod,
+    Status
 };

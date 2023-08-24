@@ -213,18 +213,28 @@ const InvoiceModal = props => {
                     </Row>
                     <h5>Seller Rating</h5>
                     <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center">
-                        {existingReviews.map((review, index) => (
-                            <div className="review" key={index}>
-                                <div className="review-rating d-flex align-items-center">
-                                    {renderStarRating(review.rating)}
-                                    <h5 className="ml-2 mb-1">4.5</h5>
-                                </div>
-                                <p>{review.comment}</p>
-                            </div>
-                        ))}
-                        <div>
-                        </div>
-                    </div>
+  {existingReviews.map((review, index) => (
+    <div className="review" key={index}>
+      <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
+        {renderStarRating(review.rating)}
+        <h5
+          className="ml-2 mb-1"
+          style={{ color: 'goldenrod', fontSize: '18px' }} // Inline CSS
+        >
+          {review.rating}
+        </h5>
+      </div>
+      <p>{review.comment}</p>
+    </div>
+  ))}
+</div>
+
+
+
+
+
+
+
                     <div className="d-flex justify-content-between">
                         <h5 className="mt-2">Buyer Payment History</h5>
                         <div className="ml-auto">
@@ -284,6 +294,32 @@ const InvoiceModal = props => {
                             </Col>
                         ))}
                     </Row>
+                    <h5>Actions</h5>
+                    <Card className="mb-3">
+  <CardBody
+    className="attachment-card-body d-flex justify-content-between"
+    style={{ background: 'rgba(0, 0, 0, 0.05)' }}
+  >
+    
+
+    <div className="d-flex justify-content-between">
+  <div className="attachment-actions d-flex flex-column align-items-center">
+    <select className="form-control mb-2">
+      <option value="L1">L1</option>
+      <option value="L2">L2</option>
+      <option value="Approved">Approved</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+  </div>
+  <div className="ml-auto">
+    <Button to="/company-history" className="btn btn-primary">Submit</Button>
+  </div>
+</div>
+ 
+
+  </CardBody>
+</Card>
+
                 </ModalBody>
                 <ModalFooter>
                     <Button type="button" color="secondary" onClick={toggle}>
