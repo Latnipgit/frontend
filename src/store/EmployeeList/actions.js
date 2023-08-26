@@ -19,7 +19,7 @@ export const getAdminData = () => ({
 
 //Admin SignUP
 export const adminregister = user => {
-    debugger
+          
     return {
       type: SIGNUP_ADMIN_DATA,
       payload: { user },

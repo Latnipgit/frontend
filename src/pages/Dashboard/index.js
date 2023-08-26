@@ -74,7 +74,7 @@ const Dashboard = props => {
   ];
   const isPopupOpen = JSON.parse(localStorage.getItem("IspopupOpen"));
   useEffect(() => {
-debugger
+      
   if (isPopupOpen) {
       setTimeout(() => {
        

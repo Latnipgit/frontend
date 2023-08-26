@@ -12,7 +12,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 // action
-import { userForgetPassword } from "../../store/actions";
+import { userForgetPassword, userForgetPasswordWithToken } from "../../store/actions";
 
 // import images
 import profile from "../../assets/images/profile-img.png";
@@ -24,19 +24,28 @@ const ForgetPasswordPage = props => {
   document.title = "Forget Password | Bafana - Admin & Dashboard ";
 
   const dispatch = useDispatch();
-
   const validation = useFormik({
-    // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
 
     initialValues: {
       email: '',
+      token: '',
+      password: ''
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
+      token: Yup.string().required("Please Enter Your authentication token"),
+      password: Yup.string().required("Please Enter Your New Password"),
     }),
     onSubmit: (values) => {
-      dispatch(userForgetPassword(values, props.history));
+      if (forgetSuccessMsg) {
+        dispatch(userForgetPasswordWithToken(values, props.history));
+        setTimeout(() => {
+          history('/login');
+        }, 3000); 
+      } else {
+        dispatch(userForgetPassword(values, props.history));
+      }
     }
   });
 
@@ -115,6 +124,7 @@ const ForgetPasswordPage = props => {
                           onChange={validation.handleChange}
                           onBlur={validation.handleBlur}
                           value={validation.values.email || ""}
+                          disabled={forgetSuccessMsg ? true : false}
                           invalid={
                             validation.touched.email && validation.errors.email ? true : false
                           }
@@ -123,13 +133,53 @@ const ForgetPasswordPage = props => {
                           <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
                         ) : null}
                       </div>
+                      {forgetSuccessMsg ? (
+                        <>
+                          <div className="mb-3">
+                            <Label className="form-label">Authentication Token</Label>
+                            <Input
+                              name="token"
+                              className="form-control"
+                              placeholder="Enter token"
+                              type="text"
+                              onChange={validation.handleChange}
+                              onBlur={validation.handleBlur}
+                              value={validation.values.token || ""}
+                              invalid={validation.touched.token && validation.errors.token ? true : false}
+                            />
+                            {validation.touched.token && validation.errors.token ? (
+                              <FormFeedback type="invalid">{validation.errors.token}</FormFeedback>
+                            ) : null}
+                          </div>
+                          <div className="mb-3">
+                            <Label className="form-label">New Password</Label>
+                            <Input
+                              name="password"
+                              className="form-control"
+                              placeholder="Enter new  password"
+                              type="password"
+                              onChange={validation.handleChange}
+                              onBlur={validation.handleBlur}
+                              value={validation.values.password || ""}
+                              invalid={validation.touched.password && validation.errors.password ? true : false}
+                            />
+                            {validation.touched.password && validation.errors.password ? (
+                              <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                            ) : null}
+                          </div>
+                        </>
+                      ) : null}
+
                       <Row className="mb-3">
                         <Col className="text-end">
-                          <button
+                          {/* <button
                             className="btn btn-primary w-md "
                             type="submit"
                           >
                             Reset
+                          </button> */}
+                          <button className="btn btn-primary w-md" type="submit">
+                            {forgetSuccessMsg ? "Update" : "Reset"}
                           </button>
                         </Col>
                       </Row>

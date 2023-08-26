@@ -33,7 +33,7 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
 
 
 const handleSubmit = () => {
-    debugger
+          
     const { name, email, mobile } = formData;
   
     if (!handleMobileValidation(mobile)) {

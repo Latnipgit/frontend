@@ -96,6 +96,13 @@ const postJwtLogin = data => post(url.POST_FAKE_JWT_LOGIN, data);
 
 // postForgetPwd
 const postJwtForgetPwd = data => post(url.POST_FAKE_JWT_PASSWORD_FORGET, data);
+//post forget password with token
+const postJwtForgetPwdWithToken = (data) => {
+  const urlWithToken = `${url.FORGET_PASSWORD_WITH_TOKEN}/${data.token}`;
+  const postData = { password:data.password };
+  return post(urlWithToken, postData);
+};
+// const postJwtForgetPwdWithToken = data => post(url.FORGET_PASSWORD_WITH_TOKEN, data);
 
 // postSocialLogin
 export const postSocialLogin = data => post(url.SOCIAL_LOGIN, data);
@@ -312,6 +319,7 @@ export {
   postJwtRegister,
   postJwtLogin,
   postJwtForgetPwd,
+  postJwtForgetPwdWithToken,
   postJwtProfile,
   getProductComents,
   onLikeComment,

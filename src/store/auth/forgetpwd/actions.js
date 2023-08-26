@@ -2,15 +2,23 @@ import {
   FORGET_PASSWORD,
   FORGET_PASSWORD_SUCCESS,
   FORGET_PASSWORD_ERROR,
+  FORGET_PASSWORD_WITH_TOKEN
 } from "./actionTypes"
 
 export const userForgetPassword = (user, history) => {
+        
   return {
     type: FORGET_PASSWORD,
     payload: { user, history },
   }
 }
-
+export const userForgetPasswordWithToken = (user, history) => {
+        
+  return {
+    type: FORGET_PASSWORD_WITH_TOKEN,
+    payload: { user, history },
+  }
+}
 export const userForgetPasswordSuccess = message => {
   return {
     type: FORGET_PASSWORD_SUCCESS,

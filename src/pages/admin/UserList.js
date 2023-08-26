@@ -60,7 +60,7 @@ const UserList = props => {
     useEffect(() => {
         dispatch(ongetAdminData());
         if(adminData!=undefined && adminData!=null){
-          debugger
+                
           setAdminData(adminData.data.data.response);
         }
           

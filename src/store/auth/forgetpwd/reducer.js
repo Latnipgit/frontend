@@ -2,6 +2,8 @@ import {
   FORGET_PASSWORD,
   FORGET_PASSWORD_SUCCESS,
   FORGET_PASSWORD_ERROR,
+  FORGET_PASSWORD_WITH_TOKEN
+
 } from "./actionTypes"
 
 const initialState = {
@@ -18,6 +20,13 @@ const forgetPassword = (state = initialState, action) => {
         forgetError: null,
       }
       break
+      case FORGET_PASSWORD_WITH_TOKEN:
+        state = {
+          ...state,
+          forgetSuccessMsg: null,
+          forgetError: null,
+        }
+        break
     case FORGET_PASSWORD_SUCCESS:
       state = {
         ...state,

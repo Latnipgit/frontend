@@ -69,7 +69,7 @@ const ApprovedTranction = props => {
         },
       },
       {
-        Header: "Invoice No",
+        Header: "Reference No.",
         accessor: "orderId",
         filterable: false,
         disableFilters: true,

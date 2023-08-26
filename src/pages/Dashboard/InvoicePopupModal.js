@@ -88,9 +88,9 @@ const InvoiceModal = props => {
                         <Col md="12">
                             <Card className="mb-1">
                                 <CardBody className="buyer-card-body">
-                                    <h2>
-                                        Invoice Number: <span className="text-primary"> #123456</span>
-                                    </h2>
+                                    <h4>
+                                        Reference No.  : <span className="text-primary"> #123456</span>
+                                    </h4>
                                 </CardBody>
                             </Card>
                         </Col>

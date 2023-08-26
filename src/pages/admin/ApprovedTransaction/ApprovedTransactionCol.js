@@ -39,7 +39,7 @@ const daysSinceReference = (cellValue, referenceDate) => {
 };
 
 const DueSince = (cell) => {
-    debugger
+          
     //const startDate = new Date('2019-10-07'); // October 7, 2019
     const today = new Date(); // Current date
     
