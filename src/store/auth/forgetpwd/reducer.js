@@ -12,7 +12,9 @@ const initialState = {
 }
 
 const forgetPassword = (state = initialState, action) => {
+         
   switch (action.type) {
+    
     case FORGET_PASSWORD:
       state = {
         ...state,

@@ -10,6 +10,7 @@ const INIT_STATE = {
 
 
   const AdminList = (state = INIT_STATE, action) => {
+    debugger
     switch (action.type) {
       case GET_ADMIN_DATA:
         return {

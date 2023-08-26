@@ -11,6 +11,7 @@ function* getAllAdminData2() {
     }
 }
 function* signupAdminData(action) {
+  debugger
     try {
               
       const response = yield call(registerAdminData, action.payload.user); 

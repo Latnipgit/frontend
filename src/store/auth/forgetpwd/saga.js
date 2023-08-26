@@ -36,13 +36,13 @@ function* forgetUser({ payload: { user, history } }) {
 }
 function* forgetUserWithToken({ payload: { user, history } }) {
   try {
-    debugger
+           
      if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
       const response = yield call(postJwtForgetPwdWithToken, {
         password: user.password,
         token:user.token
       })
-      debugger
+             
       if (response) {
         yield put(
           userForgetPasswordSuccess(

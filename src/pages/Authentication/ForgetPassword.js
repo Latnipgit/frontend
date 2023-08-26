@@ -34,10 +34,11 @@ const ForgetPasswordPage = props => {
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
-      token: Yup.string().required("Please Enter Your authentication token"),
+      token: Yup.string().required("Please Enter Your Authentication Token"),
       password: Yup.string().required("Please Enter Your New Password"),
     }),
     onSubmit: (values) => {
+             
       if (forgetSuccessMsg) {
         dispatch(userForgetPasswordWithToken(values, props.history));
         setTimeout(() => {
@@ -195,8 +196,8 @@ const ForgetPasswordPage = props => {
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Skote. Crafted with{" "}
-                  <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                  © {new Date().getFullYear()} Bafana. Crafted with{" "}
+                  <i className="mdi mdi-heart text-danger" /> by Latnip IT Solution
                 </p>
               </div>
             </Col>
