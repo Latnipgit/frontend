@@ -198,7 +198,7 @@ const SidebarContent = props => {
               <Link to="/registration" >
                 <i className="bx bx-user-circle"></i>
                 {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
-                {props.t("Admin Registration")}
+                {props.t("Employee Registration")}
               </Link>
             </li>
             {/* <li>

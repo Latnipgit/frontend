@@ -150,27 +150,27 @@ const ApprovedTranction = props => {
         },
       },
      
-      {
-        Header: "Action",
-        disableFilters: true,
-        accessor: "project",
-        Cell: cellProps => {
-          return (
-            <div className="d-flex">
-            {/* <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-eye font-size-18 text-primary mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View" />
-            </div> */}
-            <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
-            </div>
-            <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
-            </div>
-          </div>
+      // {
+      //   Header: "Action",
+      //   disableFilters: true,
+      //   accessor: "project",
+      //   Cell: cellProps => {
+      //     return (
+      //       <div className="d-flex">
+      //       {/* <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-eye font-size-18 text-primary mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View" />
+      //       </div> */}
+      //       <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
+      //       </div>
+      //       <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
+      //       </div>
+      //     </div>
           
-          );
-        },
-      },
+      //     );
+      //   },
+      // },
     ],
     []
   );
@@ -191,7 +191,7 @@ const ApprovedTranction = props => {
             data={ApprovedTranctionData}
             isGlobalFilter={true}
             isAddOptions={false}
-            customPageSize={6}
+            customPageSize={20}
           />
         </CardBody>
       </Card>

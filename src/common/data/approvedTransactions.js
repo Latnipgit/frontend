@@ -74,7 +74,7 @@ const ApprovedTranctionData = [
         paymentStatus: "Part Paid",
         methodIcon: "fab fa-cc-visa",
         paymentMethod: "TCS",
-        Status:"Rejected"
+        Status:"Approved"
     },
     {
         orderId: "#SK2543",
@@ -104,7 +104,505 @@ const ApprovedTranctionData = [
         paymentStatus: "Unpaid",
         methodIcon: "fab fa-cc-visa",
         paymentMethod: "Krishna Shopee",
-        Status:"Rejected"
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
+    },    {
+        orderId: "#SK2589",
+        billingName: "Latnip IT",
+        orderdate: "04 Oct, 2022",
+        total: "₹392",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Aquarious Tech",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2544",
+        billingName: "HCL",
+        orderdate: "04 Sep, 2022",
+        total: "₹404",
+        paymentStatus: "Part Paid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "TCS",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2543",
+        billingName: "Infosys",
+        orderdate: "05 Oct, 2021",
+        total: "₹412",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-mastercard",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2542",
+        billingName: "Accenture",
+        orderdate: "06 Oct, 2020",
+        total: "₹384",
+        paymentStatus: "Paid",
+        methodIcon: "fab fa-cc-paypal",
+        paymentMethod: "Cognizent",
+        Status:"Approved"
+    },
+    {
+        orderId: "#SK2541",
+        billingName: "JIYA Selection",
+        orderdate: "07 Oct, 2021",
+        total: "₹380",
+        paymentStatus: "Unpaid",
+        methodIcon: "fab fa-cc-visa",
+        paymentMethod: "Krishna Shopee",
+        Status:"Approved"
     },
 
 ];

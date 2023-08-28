@@ -42,7 +42,7 @@ function GlobalFilter({
           id="search-bar-0"
           type="text"
           className="form-control"
-          placeholder={`search here...`}
+          placeholder={`Search here...`}
           value={value || ""}
         />
       </label>

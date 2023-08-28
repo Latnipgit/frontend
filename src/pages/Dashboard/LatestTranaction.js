@@ -192,7 +192,7 @@ const LatestTranaction = props => {
       <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>
         <ModalHeader toggle={() => setShowReferModal(false)}>Confirm Asclation</ModalHeader>
         <ModalBody>
-          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+          {/* <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
             <DropdownToggle caret>
             {selectedLevel ? selectedLevel : 'Select Level'} <span className="caret"></span>
 
@@ -202,7 +202,7 @@ const LatestTranaction = props => {
               <DropdownItem onClick={() => setSelectedLevel('L2')}>L2</DropdownItem>
               <DropdownItem onClick={() => setSelectedLevel('L3')}>L3</DropdownItem>
             </DropdownMenu>
-          </Dropdown>
+          </Dropdown> */}
           <p>Asclation: Please select the level you want to refer this transaction to.</p>
         </ModalBody>
         <ModalFooter>
@@ -219,7 +219,7 @@ const LatestTranaction = props => {
             data={latestTransaction}
             isGlobalFilter={true}
             isAddOptions={false}
-            customPageSize={6}
+            customPageSize={20}
           />
         </CardBody>
       </Card>

@@ -58,13 +58,19 @@ const InvoiceModal = props => {
         return stars;
     };
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedLevel, setSelectedLevel] = useState('');
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedLevel, setSelectedLevel] = useState(null);
+
+    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+    const toggleModal = () => setModalOpen(!modalOpen);
+
+    const handleLevelSelection = (level) => {
+        setSelectedLevel(level);
+        toggleModal();
     };
     const isReferDisabled = selectedLevel === '';
     const existingReviews = [
-        { rating: 4.5, comment: "I have been using this product for a while now, and I am incredibly impressed with its features and performance. From the moment I started using it, I could tell that the team behind this product is dedicated to delivering top-notch quality.!" },
+        { rating: 3.5, comment: "I have been using this product for a while now, and I am incredibly impressed with its features and performance. From the moment I started using it, I could tell that the team behind this product is dedicated to delivering top-notch quality.!" },
         // { rating: 3, comment: "Average quality." },
         // ... other review objects
     ];
@@ -94,8 +100,8 @@ const InvoiceModal = props => {
                                 </CardBody>
                             </Card>
                         </Col>
-                        <Col md="6">
-                            <h5>Seller Information</h5>
+                        <Col md="6" className="mt-4">
+                            <h4>Seller Information</h4>
                             <Card className="mb-3">
                                 <CardBody className="buyer-card-body">
 
@@ -115,8 +121,8 @@ const InvoiceModal = props => {
                                 </CardBody>
                             </Card>
                         </Col>
-                        <Col md="6">
-                            <h5>Buyer Information</h5>
+                        <Col md="6" className="mt-4">
+                            <h4>Buyer Information</h4>
                             <Card className="mb-3">
                                 <CardBody className="seller-card-body">
 
@@ -137,8 +143,8 @@ const InvoiceModal = props => {
                             </Card>
                         </Col>
                     </Row>
-                    <h5>Invoice Items</h5>
-                    <Card className="mb-3">
+                    <h4 className="mt-4">Invoice Items</h4>
+                    <Card className="mb-3 mt-4">
                         <CardBody className="invoice-items-card-body">
 
                             <div className="table-responsive">
@@ -193,8 +199,8 @@ const InvoiceModal = props => {
                             </div>
                         </CardBody>
                     </Card>
-                    <h5>Seller Attachments</h5>
-                    <Row>
+                    <h4 className="mt-4">Seller Attachments</h4>
+                    <Row className="mt-4">
                         {attachments.map((file, index) => (
                             <Col md="4" key={index}>
                                 <Card className="mb-3">
@@ -217,20 +223,28 @@ const InvoiceModal = props => {
                     <Row>
 
                     </Row>
-                    <h5>Seller Rating</h5>
-                    <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center">
+                    <h4 className="mt-4">Seller Rating</h4>
+                    <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center mt-4">
                         {existingReviews.map((review, index) => (
                             <div className="review" key={index}>
                                 <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
                                     {renderStarRating(review.rating)}
                                     <h5
-                                        className="ml-2 mb-1"
+                                        className="ml-2 mb-1 mt-2 mx-2"
                                         style={{ color: 'goldenrod', fontSize: '18px' }} // Inline CSS
                                     >
                                         {review.rating}
                                     </h5>
                                 </div>
-                                <p>{review.comment}</p>
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col">
+                                            <p className="text-justify">
+                                                {review.comment}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -241,13 +255,13 @@ const InvoiceModal = props => {
 
 
 
-                    <div className="d-flex justify-content-between">
-                        <h5 className="mt-2">Buyer Payment History</h5>
-                        <div className="ml-auto">
+                    <div className="d-flex justify-content-between mt-4">
+                        <h4 className="mt-2">Buyer Payment History</h4>
+                        <div className="mr-auto mt-2">
                             <Link to="/company-history" className="btn btn-primary">View Buyer Company history</Link>
                         </div>
                     </div>
-                    <Card className="mb-3">
+                    <Card className="mb-3 mt-4">
 
                         <CardBody>
                             <div className="table-responsive">
@@ -279,8 +293,8 @@ const InvoiceModal = props => {
                             </div>
                         </CardBody>
                     </Card>
-                    <h5>Buyer Attachments</h5>
-                    <Row>
+                    <h4 className="mt-4">Buyer Attachments</h4>
+                    <Row className="mt-4">
                         {sellerattachments.map((file, index) => (
                             <Col md="4" key={index}>
                                 <Card className="mb-3">
@@ -300,24 +314,24 @@ const InvoiceModal = props => {
                             </Col>
                         ))}
                     </Row>
-                    <Row>
-                        <Col md="4"><h5>Action</h5></Col>
-                        <Col md="4">
-                            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} className="mr-2">
-                                <DropdownToggle caret>
-                                    {selectedLevel ? selectedLevel : 'Select Level of invoice'}
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem onClick={() => setSelectedLevel('Approved')}>Approved</DropdownItem>
-                                    <DropdownItem onClick={() => setSelectedLevel('Rejected')}>Rejected</DropdownItem>
-                                    <DropdownItem onClick={() => setSelectedLevel('L1')}>L1</DropdownItem>
-                                    <DropdownItem onClick={() => setSelectedLevel('L2')}>L2</DropdownItem>
-                                    <DropdownItem onClick={() => setSelectedLevel('L3')}>L3</DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
+                    <Row className="mt-4">
+                        <Col md="4" className="mt-3" ><h3>Action</h3></Col>
+                        <Col md="4" className="mt-3" >
+                            <div className="col-sm-auto">
+                                <label className="visually-hidden" htmlFor="autoSizingSelect">Preference</label>
+                                <select defaultValue="0" className="form-select">
+                                    <option value="0">Select from here...</option>
+                                    <option value="1">Approved</option>
+                                    <option value="2">Rejected</option>
+                                    <option value="3">L1-Support</option>
+                                    <option value="4">L2-Support</option>
+                                    <option value="3">L3-Support</option>
+                                </select>
+                            </div>
                         </Col>
-
-                        <Col md="4"><Link type="button" className="btn btn-primary">Submit</Link>
+                        <Col md="2">
+                        </Col>
+                        <Col md="2" className="mt-3" ><Link type="button" className="btn btn-primary">Submit</Link>
                         </Col>
 
                     </Row>

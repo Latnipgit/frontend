@@ -13,107 +13,74 @@ import {
 const MembersViewModal = props => {
   const { isOpen, toggle } = props
   return (
-    <Modal
-      isOpen={isOpen}
-      role="dialog"
-      autoFocus={true}
-      centered={true}
-      className="exampleModal"
-      tabIndex="-1"
-      toggle={toggle}
-    >
-      <div className="modal-content">
-        <ModalHeader toggle={toggle}>User Details</ModalHeader>
-        <ModalBody>
+<Modal
+  isOpen={isOpen}
+  role="dialog"
+  autoFocus={true}
+  centered={true}
+  className="exampleModal"
+  tabIndex="-1"
+  toggle={toggle}
+>
+  <div className="modal-content">
+    <ModalHeader toggle={toggle}>Member Details</ModalHeader>
+    <ModalBody>
+      <div className="row">
+        <div className="col-md-6">
           <p className="mb-2">
-            User id: <span className="text-primary">#SK2540</span>
+            <strong>Customer Name:</strong> Neal Matthews
           </p>
-          <p className="mb-4">
-            User Name: <span className="text-primary">Neal Matthews</span>
+        </div>
+        <div className="col-md-6">
+          <p className="mb-2">
+            <strong>Company Name:</strong> ABC Corp
           </p>
-          <p className="mb-4">
-            Email Address: <span className="text-primary">NealMatthews@gmail.com</span>
-          </p>
-          <p className="mb-4">
-            Status: <span className={"font-size-11 badge-soft-" + 
-          ("Active" === "Active" ? "success" : "danger")}>Active</span>
-          </p>
-          <p className="mb-4">
-            Contact No: <span className="text-primary">(+291)-2652652651</span>
-          </p>
-          {/* <div className="table-responsive">
-            <Table className="table align-middle table-nowrap">
-              <thead>
-                <tr>
-                  <th scope="col">Product</th>
-                  <th scope="col">Product Name</th>
-                  <th scope="col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">
-                    <div>
-                      <img src={img7} alt="" className="avatar-sm"/>
-                    </div>
-                  </th>
-                  <td>
-                    <div>
-                      <h5 className="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                      <p className="text-muted mb-0">$ 225 x 1</p>
-                    </div>
-                  </td>
-                  <td>$ 255</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div>
-                      <img src={img4} alt="" className="avatar-sm"/>
-                    </div>
-                  </th>
-                  <td>
-                    <div>
-                      <h5 className="text-truncate font-size-14">Hoodie (Blue)</h5>
-                      <p className="text-muted mb-0">$ 145 x 1</p>
-                    </div>
-                  </td>
-                  <td>$ 145</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <h6 className="m-0 text-right">Sub Total:</h6>
-                  </td>
-                  <td>
-                    $ 400
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <h6 className="m-0 text-right">Shipping:</h6>
-                  </td>
-                  <td>
-                    Free
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <h6 className="m-0 text-right">Total:</h6>
-                  </td>
-                  <td>
-                    $ 400
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </div> */}
-        </ModalBody>
-        <ModalFooter>
-          <Button type="button" color="secondary" onClick={toggle}>
-            Close
-          </Button>
-        </ModalFooter>
+        </div>
       </div>
-    </Modal>
+      <div className="row">
+        <div className="col-md-6">
+          <p className="mb-2">
+            <strong>Email Address:</strong> NealMatthews@gmail.com
+          </p>
+        </div>
+        <div className="col-md-6">
+          <p className="mb-2">
+            <strong>Phone Number:</strong> (+291)-2652652651
+          </p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <p className="mb-2">
+            <strong>Joined On:</strong> 2023-08-28
+          </p>
+        </div>
+        <div className="col-md-6">
+          <p className="mb-2">
+            <strong>Status:</strong>{' '}
+            <span className={`badge ${"Active" === "Active" ? "bg-success text-white" : "bg-danger text-white"}`} style={{ fontSize: "14px", borderRadius: "8px", padding: "5px 10px" }}>
+            Active
+</span>
+          </p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <p className="mb-0">
+            <strong>GST Number:</strong> GST123456789
+          </p>
+        </div>
+      </div>
+    </ModalBody>
+    <ModalFooter>
+      <Button type="button" color="secondary" onClick={toggle}>
+        Close
+      </Button>
+    </ModalFooter>
+  </div>
+</Modal>
+
+
   )
 }
 

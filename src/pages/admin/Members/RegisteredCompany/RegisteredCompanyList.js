@@ -174,7 +174,7 @@ const RegisteredCompanyList = props => {
             data={RegisteredCompanyData}
             isGlobalFilter={true}
             isAddOptions={false}
-            customPageSize={6}
+            customPageSize={20}
           />
         </CardBody>
       </Card>

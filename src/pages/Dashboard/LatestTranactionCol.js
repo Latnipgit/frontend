@@ -54,9 +54,20 @@ const DueSince = (cell) => {
     } else {
         badgeClassName += "bg-danger text-white";
     }
+    const formattedDate = new Date(cell.value).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+
+    const divStyle = {
+        padding: '3px' // Adjust the padding value as needed
+    };
+
     return (
         <span className={badgeClassName}>
-            {daysSince} days
+            <div style={divStyle}>({daysSince} days)</div>
+            <div style={divStyle}>{formattedDate}</div>
         </span>
     );
 };
@@ -66,16 +77,17 @@ const Total = (cell) => {
 };
 
 const PaymentStatus = (cell) => {
-    return (
-        <Badge
-          className={"font-size-12 badge-soft-" + 
-          (cell.value === "Paid" ? "success" :
-        cell.value === "Part Paid" ? "warning" :
-        cell.value === "Unpaid" ? "danger" : "danger")}          
-        >
-          {cell.value}
-        </Badge>
-    )
+    
+    return (<Badge
+    className={"font-size-12 badge-soft-" + 
+    (cell.value === "Paid" ? "success" :
+  cell.value === "Part Paid" ? "success" :
+  cell.value === "Un-Paid" ? "danger" :
+  cell.value === "Paid" ? "success" :
+  cell.value === "Un-Paid" ? "danger" : "danger")}          
+  >
+    {cell.value}
+  </Badge>)
 };
 
 const Status = (cell) => {

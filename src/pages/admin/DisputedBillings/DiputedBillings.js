@@ -33,6 +33,7 @@ import {
     Creditor,
     DueAmount,
     InvoiceNo,
+    Status
 } from "./disputedCol";
 
 import TableContainer from "../../../components/Common/TableContainer";
@@ -110,17 +111,28 @@ const DiputedBillings = props => {
         },
       },
       {
+        Header: "Status",
+        accessor: "Status",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <Status {...cellProps} />;
+        },
+      },
+    
+      {
         Header: "Action",
         disableFilters: true,
         accessor: "view",
         Cell: cellProps => {
           return (
             <div className="d-flex">
+              
               <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
                 <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
               </div>
               <div className="d-flex flex-column align-items-center" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
+                <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Reject" />
               </div>
             </div>
           );
@@ -141,13 +153,13 @@ const DiputedBillings = props => {
           View Details
           </Button>
           <div className="mb-4 h4 card-title"></div>
-          <div className="mb-4 h4 card-title">Disputed List</div>
+          <div className="mb-4 h4 card-title">Disputed Billing</div>
           <TableContainer
             columns={columns}
             data={Disputeddata}
             isGlobalFilter={true}
             isAddOptions={false}
-            customPageSize={6}
+            customPageSize={20}
           />
         </CardBody>
       </Card>

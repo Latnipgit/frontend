@@ -164,10 +164,10 @@ const UserList = props => {
        <AdminRegistrationModal isOpen={isModalOpen} toggle={toggleAdminModal} />
       <Card>
         <CardBody>   
-        <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Employee List</h4>
+        <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Employee Registration</h4>
         <div className="d-flex justify-content-end align-items-center mb-3">
         <Button type="button" color="primary" className="btn-sm btn-rounded" onClick={toggleAdminModal}>
-        Add Admin
+        Employee Admin
         </Button>
 </div>
 
@@ -176,7 +176,7 @@ const UserList = props => {
             data={admindata}
             isGlobalFilter={true}
             isAddOptions={false}
-            customPageSize={6}
+            customPageSize={20}
           />
         </CardBody>
       </Card>

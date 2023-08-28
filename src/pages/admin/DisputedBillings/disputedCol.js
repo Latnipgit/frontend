@@ -1,7 +1,9 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from "moment";
 import { Badge } from 'reactstrap';
+import InvoiceModal from "../../Dashboard/InvoicePopupModal";
+
 
 
 
@@ -34,24 +36,36 @@ const InvoiceNo = (cell) => {
 
     const invoiceNumber = cell.value || '';
 
-    // Function to handle the click event on the icon
-    const handleIconClick = () => {
-        // Add your functionality here when the icon is clicked
-        console.log('Icon clicked!');
-        // For example, you could open a modal, trigger an action, etc.
+    const [modal1, setModal1] = useState(false);
+
+    const toggleViewModal = () => {
+      setModal1(!modal1);
     };
+  
 
     return (
+        
         <div>
-            <span>{invoiceNumber}</span>{" "}
-            <i className="mdi mdi-eye font-size-16 text-primary me-1" onClick={handleIconClick} />{" "}
-        </div>
+        <span>{invoiceNumber}</span>{" "}
+        <i className="mdi mdi-eye font-size-16 text-primary me-1" onClick={toggleViewModal} />{" "}
+        <InvoiceModal isOpen={modal1} toggle={toggleViewModal} />
+      </div>
     );
 };
 const DueAmount = (cell) => {
     return cell.value ? cell.value : '';
 };
-
+const Status = (cell) => {
+    return (
+        <Badge
+          className={"font-size-12 badge-soft-" + 
+          (cell.value === "Approved" ? "success" :
+        cell.value === "Rejeted" ? "danger" : "danger")}          
+        >
+          {cell.value}
+        </Badge>
+    )
+};
 export {
     CheckBox,
     SrNo,
@@ -59,4 +73,5 @@ export {
     Creditor,
     DueAmount,
     InvoiceNo,
+    Status,
 };

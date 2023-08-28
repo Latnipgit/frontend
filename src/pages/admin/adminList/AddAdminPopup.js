@@ -7,10 +7,10 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    mobile:"",
+    mobile: "",
     password: "",
   });
-  const [apiStatus, setApiStatus] = useState('idle'); 
+  const [apiStatus, setApiStatus] = useState('idle');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const handleMobileValidation = (mobile) => {
@@ -18,7 +18,7 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
     if (numericMobile.length !== 10) {
       return false;
     }
-   return true;
+    return true;
   };
 
   const handleEmailValidation = (email) => {
@@ -32,27 +32,27 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
   };
 
 
-const handleSubmit = () => {
-          
+  const handleSubmit = () => {
+
     const { name, email, mobile } = formData;
-  
+
     if (!handleMobileValidation(mobile)) {
       window.alert('Please enter a valid mobile number.');
-      return; 
+      return;
     }
-  
+
     if (!handleEmailValidation(email)) {
       window.alert('Please enter a valid email address.');
-      return; 
+      return;
     }
     dispatch(Onadminregister(formData));
-  
+
     // try {
     //   setLoading(true);
     //   setApiStatus('loading');
-  
+
     //   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbkRldGFpbHMiOnsiaWQiOiI2NGQxNGE5NDhhNzRhYjc5YjVjZTYyNDYiLCJlbWFpbElkIjoicm9oYW5zaGFybWE5OTYwMzRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkZzZEL2RJWFl3MnNxNkFpTUsuRXdadUVuV05raWxxS2JhZmpyeDlEM2F1a1Rlcms4ekZ3a1MifSwiaWF0IjoxNjkyNDU5NDIxLCJleHAiOjE2OTI0NjY2MjF9.mhNVsxkxxTYadbYOjz5fek-O1cegQn83Cbsi_C3gQF8'; // Replace with your actual access token
-  
+
     //   const response = await fetch('https://bafana-backend.azurewebsites.net/api/admin/add', {
     //     method: 'POST',
     //     body: JSON.stringify({ name, email }),
@@ -61,7 +61,7 @@ const handleSubmit = () => {
     //       'x-token-access': token, // Adding the x-token-access header
     //     },
     //   });
-  
+
     //   if (response.ok) {
     //     setApiStatus('success');
     //     toggle();
@@ -76,7 +76,7 @@ const handleSubmit = () => {
     //   setLoading(false);
     // }
 
-  
+
     console.log("Registering admin:", formData);
     // Close the modal
     toggle();
@@ -104,15 +104,27 @@ const handleSubmit = () => {
               <Input type="text" name="mobile" id="mobile" value={formData.mobile} onChange={handleChange} />
             </FormGroup>
             <FormGroup>
-        <Label for="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-      </FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="role">Role</Label>
+              <div className="col-sm-auto">
+
+                <select defaultValue="0" className="form-select">
+                  <option value="0">Select from here...</option>
+                  <option value="1">L1-Support</option>
+                  <option value="2">L2-Support</option>
+                  <option value="3">L3-Support</option>
+                </select>
+              </div>
+            </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
@@ -130,8 +142,8 @@ const handleSubmit = () => {
 
 
 AdminRegistrationModal.propTypes = {
-    toggle: PropTypes.func,
-    isOpen: PropTypes.bool,
-  };
-  
+  toggle: PropTypes.func,
+  isOpen: PropTypes.bool,
+};
+
 export default AdminRegistrationModal;
