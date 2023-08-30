@@ -353,7 +353,7 @@ const publicRoutes = [
   { path: "/logout", component: <Logout /> },
   { path: "/login", component: <Login /> },
   { path: "/forgot-password", component: <ForgetPwd /> },
-  { path: "/password-reset/:token", component: <ForgetPwdLink /> },
+  { path: "/password-reset/:userID/:token", component: <ForgetPwdLink /> },
   { path: "/register", component: <Register /> },
 
   { path: "/pages-maintenance", component: <PagesMaintenance /> },

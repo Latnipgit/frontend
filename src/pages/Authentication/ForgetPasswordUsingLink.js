@@ -22,9 +22,12 @@ import logo from "../../assets/images/logo.svg";
 const ForgetPasswordPageLink = props => {
   //var tokenFromURL=''; 
   const navigate = useNavigate();
+  debugger
     const url = new URL(window.location.href);
-    var tokenFromURL  = url.pathname.split('/')[2]; // Assuming the token is at the third position
-    console.log('Token:', tokenFromURL );
+    var tokenFromURL  = url.pathname.split('/')[2];
+    var tokenFromURL2  = url.pathname.split('/')[3];
+    var FinalURL= tokenFromURL+'/'+tokenFromURL2// Assuming the token is at the third position
+    console.log('Token:', FinalURL );
 
   //meta title
   document.title = "Forget Password | Bafana - Admin & Dashboard ";
@@ -34,7 +37,7 @@ const ForgetPasswordPageLink = props => {
 
     initialValues: {
       password: '',
-      token:tokenFromURL
+      token:FinalURL
     },
     validationSchema: Yup.object().shape({
       // other fields...

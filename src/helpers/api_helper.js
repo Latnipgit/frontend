@@ -19,9 +19,9 @@ axiosApi.interceptors.response.use(
   (error) => Promise.reject(error)
 );
 
-const token = JSON.parse(localStorage.getItem("authUser")).token; // Replace this with your actual access token
 
 export async function get(url, config = {}) {
+const token = JSON.parse(localStorage.getItem("authUser")).token; 
   const headers = {
     ...config.headers,
     'x-access-token': token,
@@ -40,7 +40,8 @@ export async function get(url, config = {}) {
 }
 
 export async function post(url, data, config = {}) {
-    if(url!='/api/admin/login'){
+    if(url!='/api/admin/login' && url!='/api/admin/password-reset'){
+      const token = JSON.parse(localStorage.getItem("authUser")).token;
       const headers = {
         ...config.headers,
         'x-access-token': token,
