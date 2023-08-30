@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
+import { useParams ,useNavigate   } from 'react-router-dom';
+import React ,{useEffect}from "react";
 import { Row, Col, Alert, Card, CardBody, Container, FormFeedback, Input, Label, Form } from "reactstrap";
 
 //redux
@@ -12,31 +13,44 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 // action
-import { userForgetPassword } from "../../store/actions";
+import { userForgetPassword, userForgetPasswordWithToken } from "../../store/actions";
 
 // import images
 import profile from "../../assets/images/profile-img.png";
 import logo from "../../assets/images/logo.svg";
 
-const ForgetPasswordPage = props => {
+const ForgetPasswordPageLink = props => {
+  //var tokenFromURL=''; 
+  const navigate = useNavigate();
+    const url = new URL(window.location.href);
+    var tokenFromURL  = url.pathname.split('/')[2]; // Assuming the token is at the third position
+    console.log('Token:', tokenFromURL );
 
   //meta title
-  document.title = "Forget Password | Bafana - User & Dashboard ";
-
+  document.title = "Forget Password | Bafana - Admin & Dashboard ";
   const dispatch = useDispatch();
-
   const validation = useFormik({
-    // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
 
     initialValues: {
-      email: '',
+      password: '',
+      token:tokenFromURL
     },
-    validationSchema: Yup.object({
-      email: Yup.string().required("Please Enter Your Email"),
+    validationSchema: Yup.object().shape({
+      // other fields...
+      password: Yup.string()
+        .min(6, 'Password must be at least 6 characters')
+        .required('Password is required'),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Confirm Password is required'),
     }),
     onSubmit: (values) => {
-      dispatch(userForgetPassword(values, props.history));
+                    
+        dispatch(userForgetPasswordWithToken(values, props.history));
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000); 
     }
   });
 
@@ -105,7 +119,7 @@ const ForgetPasswordPage = props => {
                         return false;
                       }}
                     >
-                      <div className="mb-3">
+                      {/* <div className="mb-3">
                         <Label className="form-label">Email</Label>
                         <Input
                           name="email"
@@ -115,6 +129,7 @@ const ForgetPasswordPage = props => {
                           onChange={validation.handleChange}
                           onBlur={validation.handleBlur}
                           value={validation.values.email || ""}
+                          disabled={forgetSuccessMsg ? true : false}
                           invalid={
                             validation.touched.email && validation.errors.email ? true : false
                           }
@@ -122,14 +137,71 @@ const ForgetPasswordPage = props => {
                         {validation.touched.email && validation.errors.email ? (
                           <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
                         ) : null}
-                      </div>
+                      </div> */}
+                      {/* {forgetSuccessMsg ? (
+                        <> */}
+                          {/* <div className="mb-3">
+                            <Label className="form-label">Authentication Token</Label>
+                            <Input
+                              name="token"
+                              className="form-control"
+                              placeholder="Enter token"
+                              type="text"
+                              onChange={validation.handleChange}
+                              onBlur={validation.handleBlur}
+                              value={validation.values.token || ""}
+                              invalid={validation.touched.token && validation.errors.token ? true : false}
+                            />
+                            {validation.touched.token && validation.errors.token ? (
+                              <FormFeedback type="invalid">{validation.errors.token}</FormFeedback>
+                            ) : null}
+                          </div> */}
+                          <div className="mb-3">
+                            <Label className="form-label">New Password</Label>
+                            <Input
+                              name="password"
+                              className="form-control"
+                              placeholder="Enter new  password"
+                              type="password"
+                              onChange={validation.handleChange}
+                              onBlur={validation.handleBlur}
+                              value={validation.values.password || ""}
+                              invalid={validation.touched.password && validation.errors.password ? true : false}
+                            />
+                            {validation.touched.password && validation.errors.password ? (
+                              <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                            ) : null}
+                          </div>
+                          <div className="mb-3">
+  <Label className="form-label">Confirm New Password</Label>
+  <Input
+    name="confirmPassword"
+    className="form-control"
+    placeholder="Confirm new password"
+    type="password"
+    onChange={validation.handleChange}
+    onBlur={validation.handleBlur}
+    value={validation.values.confirmPassword || ""}
+    invalid={validation.touched.confirmPassword && validation.errors.confirmPassword ? true : false}
+  />
+  {validation.touched.confirmPassword && validation.errors.confirmPassword ? (
+    <FormFeedback type="invalid">{validation.errors.confirmPassword}</FormFeedback>
+  ) : null}
+</div>
+
+                        {/* </>
+                      ) : null} */}
+
                       <Row className="mb-3">
                         <Col className="text-end">
-                          <button
+                          {/* <button
                             className="btn btn-primary w-md "
                             type="submit"
                           >
                             Reset
+                          </button> */}
+                          <button className="btn btn-primary w-md" type="submit">
+                            {forgetSuccessMsg ? "Update" : "Reset"}
                           </button>
                         </Col>
                       </Row>
@@ -145,8 +217,8 @@ const ForgetPasswordPage = props => {
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Skote. Crafted with{" "}
-                  <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                  © {new Date().getFullYear()} Bafana. Crafted with{" "}
+                  <i className="mdi mdi-heart text-danger" /> by Latnip IT Solution
                 </p>
               </div>
             </Col>
@@ -157,8 +229,9 @@ const ForgetPasswordPage = props => {
   );
 };
 
-ForgetPasswordPage.propTypes = {
+
+
+export default withRouter(ForgetPasswordPageLink);
+ForgetPasswordPageLink.propTypes = {
   history: PropTypes.object,
 };
-
-export default withRouter(ForgetPasswordPage);

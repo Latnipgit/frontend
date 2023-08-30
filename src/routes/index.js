@@ -53,8 +53,8 @@ import InvoiceDetail from "../pages/Invoices/invoices-detail";
 import Login from "../pages/Authentication/Login";
 import Logout from "../pages/Authentication/Logout";
 import Register from "../pages/Authentication/Register";
+import ForgetPwdLink from "../pages/Authentication/ForgetPasswordUsingLink";
 import ForgetPwd from "../pages/Authentication/ForgetPassword";
-
 //  // Inner Authentication
 import Login1 from "../pages/AuthenticationInner/Login";
 import Login2 from "../pages/AuthenticationInner/Login2";
@@ -353,6 +353,7 @@ const publicRoutes = [
   { path: "/logout", component: <Logout /> },
   { path: "/login", component: <Login /> },
   { path: "/forgot-password", component: <ForgetPwd /> },
+  { path: "/password-reset/:token", component: <ForgetPwdLink /> },
   { path: "/register", component: <Register /> },
 
   { path: "/pages-maintenance", component: <PagesMaintenance /> },
