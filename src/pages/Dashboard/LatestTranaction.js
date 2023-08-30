@@ -158,28 +158,28 @@ const LatestTranaction = props => {
         },
       },
      
-      {
-        Header: "Action",
-        disableFilters: true,
-        accessor: "project",
-        Cell: cellProps => {
-          return (
-            <div className="d-flex">
-            <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
-            </div>
-            <div className="d-flex flex-column align-items-center me-3" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-progress-clock font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
-            </div>
+      // {
+      //   Header: "Action",
+      //   disableFilters: true,
+      //   accessor: "project",
+      //   Cell: cellProps => {
+      //     return (
+      //       <div className="d-flex">
+      //       <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
+      //       </div>
+      //       <div className="d-flex flex-column align-items-center me-3" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-progress-clock font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
+      //       </div>
         
-                <div className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }}>
-                    <i className="mdi mdi-account-supervisor font-size-18 text-warning mb-1" onClick={handleReferClick} />
-                </div>
-          </div>
+      //           <div className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }}>
+      //               <i className="mdi mdi-account-supervisor font-size-18 text-warning mb-1" onClick={handleReferClick} />
+      //           </div>
+      //     </div>
           
-          );
-        },
-      },
+      //     );
+      //   },
+      // },
     ],
     []
   );

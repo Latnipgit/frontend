@@ -5,7 +5,7 @@ import { isEmpty } from "lodash";
 import { getOrders as onGetOrders } from "store/actions";
 import InvoiceModal from "../../Dashboard/InvoicePopupModal";
 import { Link } from 'react-router-dom';
-import { latestTransaction } from "../../../common/data/dashboard";
+import { latestTransactionData } from "../../../common/data/dashboard";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg"
 import profileImg from "../../../assets/images/profile-img.png"
 import {
@@ -25,7 +25,7 @@ import {
 import {
   OrderId,
   BillingName,
-  Date,
+  DueSince,
   Total,
   PaymentStatus,
   PaymentMethod,
@@ -84,7 +84,7 @@ const LatestTranactionPage = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Date {...cellProps} />;
+          return <DueSince {...cellProps} />;
         },
       },
       {
@@ -122,27 +122,27 @@ const LatestTranactionPage = props => {
         },
       },
      
-      {
-        Header: "Action",
-        disableFilters: true,
-        accessor: "project",
-        Cell: cellProps => {
-          return (
-            <div className="d-flex">
-            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
-            </div>
-            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-progress-clock font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
-            </div>
-            <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-account-supervisor font-size-18 text-warning mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Refer to Senior" />
-            </div>
-          </div>
+      // {
+      //   Header: "Action",
+      //   disableFilters: true,
+      //   accessor: "project",
+      //   Cell: cellProps => {
+      //     return (
+      //       <div className="d-flex">
+      //       <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
+      //       </div>
+      //       <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-progress-clock font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
+      //       </div>
+      //       <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
+      //         <i className="mdi mdi-account-supervisor font-size-18 text-warning mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Refer to Senior" />
+      //       </div>
+      //     </div>
           
-          );
-        },
-      },
+      //     );
+      //   },
+      // },
     ],
     []
   );
@@ -179,7 +179,7 @@ const LatestTranactionPage = props => {
                   className="img-thumbnail rounded-circle"
                 />
               </div> */}
-              <h5 className="font-size-15 text-truncate mt-2">Company Name</h5>
+              <h2 className="font-size-15 text-truncate mt-2">Buyer Company Name</h2>
               <p className="text-muted mb-0 text-truncate">Latnip IT Solution</p>
             </Col>
 
@@ -226,7 +226,7 @@ const LatestTranactionPage = props => {
           <div className="mb-4 h4 card-title">Company History</div>
           <TableContainer
             columns={columns}
-            data={latestTransaction}
+            data={latestTransactionData}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={6}

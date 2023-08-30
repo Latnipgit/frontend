@@ -73,7 +73,7 @@ const DiputedBillings = props => {
         },
       },
       {
-        Header: "Debtor",
+        Header: "Buyer",
         accessor: "Debtor",
         disableFilters: true,
         filterable: false,
@@ -82,7 +82,7 @@ const DiputedBillings = props => {
         },
       },
       {
-        Header: "Creditor",
+        Header: "Seller",
         accessor: "Creditor",
         disableFilters: true,
         filterable: false,

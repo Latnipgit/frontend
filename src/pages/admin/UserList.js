@@ -167,7 +167,7 @@ const UserList = props => {
         <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Employee Registration</h4>
         <div className="d-flex justify-content-end align-items-center mb-3">
         <Button type="button" color="primary" className="btn-sm btn-rounded" onClick={toggleAdminModal}>
-        Employee Admin
+         Employee Registration
         </Button>
 </div>
 

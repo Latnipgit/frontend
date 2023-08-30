@@ -258,7 +258,7 @@ const InvoiceModal = props => {
                     <div className="d-flex justify-content-between mt-4">
                         <h4 className="mt-2">Buyer Payment History</h4>
                         <div className="mr-auto mt-2">
-                            <Link to="/company-history" className="btn btn-primary">View Buyer Company history</Link>
+                            <Link to="/company-history" className="btn btn-primary">View Buyer history</Link>
                         </div>
                     </div>
                     <Card className="mb-3 mt-4">
