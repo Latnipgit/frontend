@@ -17,7 +17,7 @@ import {
 import { Link } from 'react-router-dom';
 
 
-const InvoiceModal = props => {
+const InvoicePopupWithouthAction = props => {
     const { isOpen, toggle } = props
     const [attachments, setAttachments] = useState([
         { name: 'document.pdf', type: 'application/pdf' },
@@ -94,7 +94,8 @@ const InvoiceModal = props => {
                         <Col md="12">
                             <Card className="mb-1">
                                 <CardBody className="buyer-card-body">
-                                <div className="container">
+        
+                                    <div className="container">
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <h4>
@@ -109,6 +110,12 @@ const InvoiceModal = props => {
                                         </div>
                                     </div>
                                    
+
+
+
+
+
+
                                 </CardBody>
                             </Card>
                         </Col>
@@ -267,12 +274,12 @@ const InvoiceModal = props => {
 
 
 
-                    <div className="d-flex justify-content-between mt-4">
+                    {/* <div className="d-flex justify-content-between mt-4">
                         <h4 className="mt-2">Buyer Payment History</h4>
                         <div className="mr-auto mt-2">
                             <Link to="/company-history" className="btn btn-primary">View Buyer history</Link>
                         </div>
-                    </div>
+                    </div> */}
                     <Card className="mb-3 mt-4">
 
                         <CardBody>
@@ -326,7 +333,7 @@ const InvoiceModal = props => {
                             </Col>
                         ))}
                     </Row>
-                    <Row className="mt-4">
+                    {/* <Row className="mt-4">
                         <Col md="4" className="mt-3" ><h3>Action</h3></Col>
                         <Col md="4" className="mt-3" >
                             <div className="col-sm-auto">
@@ -346,7 +353,7 @@ const InvoiceModal = props => {
                         <Col md="2" className="mt-3" ><Link type="button" className="btn btn-primary">Submit</Link>
                         </Col>
 
-                    </Row>
+                    </Row> */}
 
 
                 </ModalBody>
@@ -360,9 +367,9 @@ const InvoiceModal = props => {
     )
 }
 
-InvoiceModal.propTypes = {
+InvoicePopupWithouthAction.propTypes = {
     toggle: PropTypes.func,
     isOpen: PropTypes.bool,
 }
 
-export default InvoiceModal
+export default InvoicePopupWithouthAction

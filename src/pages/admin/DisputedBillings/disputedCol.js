@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as moment from "moment";
 import { Badge } from 'reactstrap';
 import InvoiceModal from "../../Dashboard/InvoicePopupModal";
-
+import InvoicePopupWithouthAction from "../../admin/InvoicePopupWithouthAction";
 
 
 
@@ -48,7 +48,7 @@ const InvoiceNo = (cell) => {
         <div>
         <span>{invoiceNumber}</span>{" "}
         <i className="mdi mdi-eye font-size-16 text-primary me-1" onClick={toggleViewModal} />{" "}
-        <InvoiceModal isOpen={modal1} toggle={toggleViewModal} />
+        <InvoicePopupWithouthAction isOpen={modal1} toggle={toggleViewModal} />
       </div>
     );
 };
