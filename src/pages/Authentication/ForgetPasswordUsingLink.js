@@ -22,7 +22,7 @@ import logo from "../../assets/images/logo.svg";
 const ForgetPasswordPageLink = props => {
   //var tokenFromURL=''; 
   const navigate = useNavigate();
-  debugger
+  
     const url = new URL(window.location.href);
     var tokenFromURL  = url.pathname.split('/')[2];
     var tokenFromURL2  = url.pathname.split('/')[3];

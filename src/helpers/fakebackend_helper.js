@@ -4,6 +4,8 @@ import * as url from "./url_helper";
 
 //Get all Admin
 export const getAllAdminData = () => get(url.GET_ADMIN_DATA); 
+//Get all member data
+export const getAllMemberData = () => get(url.GET_MEMBER_DATA); 
 //Admin Signup 
 export const registerAdminData = () => post(url.SIGNUP_ADMIN_DATA,data); 
 // Gets the logged in user data from local session

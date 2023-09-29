@@ -8,6 +8,9 @@ export * from "./auth/profile/actions";
 //Adminn Registration Menus
 export * from "./EmployeeList/actions";
 
+//Adminn Member list Menus
+export * from "./member-list/actions";
+
 //Ecommerce
 export * from "./e-commerce/actions";
 

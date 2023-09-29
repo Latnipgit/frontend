@@ -2,6 +2,9 @@ import { all, fork } from "redux-saga/effects";
 
 //Admin Registration
 import AdminListSaga from "./EmployeeList/saga";
+//Admin Member list saga
+import MemberListSaga from "./EmployeeList/saga";
+
 //public
 import AccountSaga from "./auth/register/saga";
 import AuthSaga from "./auth/saga";
@@ -28,6 +31,7 @@ export default function* rootSaga() {
   yield all([
     //public
     fork(AdminListSaga),
+    fork(MemberListSaga),
     fork(AccountSaga),
     fork(AuthSaga),
     fork(ForgetSaga),

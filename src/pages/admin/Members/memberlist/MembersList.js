@@ -4,25 +4,9 @@ import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
 import {Button,Card,CardBody,} from "reactstrap";
 import { MemberData } from "../../../../common/data/members";
-import {
-    Badge,
-    Col,
-    Container,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    Table,
-    UncontrolledDropdown,
-    UncontrolledTooltip,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    Input,
-    FormFeedback,
-    Label,
-  } from "reactstrap";
+import { getMemberData as ongetMemberData} from "../../../../store/actions";
+import { useDispatch ,useSelector } from "react-redux";
+
 import {
   SrNo,
   CustomerName,
@@ -39,10 +23,30 @@ import MembersViewModal from "./MembersViewModal.js";
 
 const MembersList = props => {
 
-
+  const [memberdata, setMemberData] = useState([]);
   const [modal1, setModal1] = useState(false);
 
   const toggleViewModal = () => setModal1(!modal1);
+
+
+
+  const { memberData } = useSelector(state => ({
+    memberData: state.AdminList.memberData
+  }));
+
+  
+  
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(ongetMemberData());
+        if(memberData!=undefined && memberData!=null){
+                debugger
+          setMemberData(memberData.data.data.response);
+        }
+          
+    }, []);
+    
 
   const columns = useMemo(
     () => [
@@ -153,7 +157,7 @@ const MembersList = props => {
           <div className="mb-4 h4 card-title mt-lg-5">Member List</div>
           <TableContainer
             columns={columns}
-            data={MemberData}
+            data={memberdata}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}

@@ -11,6 +11,8 @@ import Profile from "./auth/profile/reducer";
 
 //Admin Registration
 import AdminList from "./EmployeeList/reducer";
+//Admin Member List
+import MemberList from "./member-list/reducer";
 
 //E-commerce
 import ecommerce from "./e-commerce/reducer";
@@ -61,6 +63,7 @@ const rootReducer = combineReducers({
   // public
   Layout,
   AdminList,
+  MemberList,
   Login,
   Account,
   ForgetPassword,

@@ -12,7 +12,6 @@ const initialState = {
 }
 
 const forgetPassword = (state = initialState, action) => {
-         debugger
   switch (action.type) {
     
     case FORGET_PASSWORD:

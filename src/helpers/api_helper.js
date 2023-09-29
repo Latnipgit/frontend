@@ -21,6 +21,7 @@ axiosApi.interceptors.response.use(
 
 
 export async function get(url, config = {}) {
+  debugger
 const token = JSON.parse(localStorage.getItem("authUser")).token; 
   const headers = {
     ...config.headers,
