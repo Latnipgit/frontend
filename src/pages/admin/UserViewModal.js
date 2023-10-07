@@ -8,6 +8,7 @@ import {
   ModalHeader,
   Table,
 } from "reactstrap"
+import "../../pages/admin/Common.scss"
 
 
 const UserViewModal = props => {

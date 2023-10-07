@@ -14,7 +14,7 @@ function* getAllAdminData2() {
 function* signupAdminData(action) {
           
     try {
-              
+      debugger
       const response = yield call(registerAdminData, action.payload.user); 
       yield put(adminSignupUserSuccessful(SIGNUP_ADMIN_DATA, response));
     } catch (error) {
@@ -26,9 +26,7 @@ export function* watchGetAdminData() {
     yield takeEvery(SIGNUP_ADMIN_DATA, signupAdminData);
     yield takeEvery(GET_ADMIN_DATA, getAllAdminData2);
 }
-// export function* watchSignupAdminData() {
-//     yield takeEvery(SIGNUP_ADMIN_DATA, signupAdminData);
-//   }
+
 function* AdminListSaga() {
     yield all([fork(watchGetAdminData)]);
 }
