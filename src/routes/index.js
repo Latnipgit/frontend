@@ -15,6 +15,9 @@ import FileManager from "../pages/FileManager/index";
 // Profile
 import UserProfile from "../pages/Authentication/user-profile";
 
+// setting page for reset password
+ import Settings from "pages/Dashboard-Blog/Settings";
+
 // Pages Calendar
 import Calendar from "../pages/Calendar/index";
 
@@ -219,6 +222,10 @@ const authProtectedRoutes = [
 
   // //profile
   { path: "/profile", component: <UserProfile /> },
+
+  /// Password Reset setting page Settings
+  { path: "/Settings", component: <Settings /> },
+
 
   //Ecommerce
   { path: "/ecommerce-product-detail/:id", component: <EcommerceProductDetail /> },

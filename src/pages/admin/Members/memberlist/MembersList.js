@@ -6,6 +6,7 @@ import {Button,Card,CardBody,} from "reactstrap";
 import { MemberData } from "../../../../common/data/members";
 import { getMemberData as ongetMemberData} from "../../../../store/actions";
 import { useDispatch ,useSelector } from "react-redux";
+// import _ from 'underscore'
 
 import {
   SrNo,
@@ -20,34 +21,37 @@ import {
 
 import TableContainer from "../../../../components/Common/TableContainer";
 import MembersViewModal from "./MembersViewModal.js";
+import index from "pages/Dashboard-Blog";
 
 const MembersList = props => {
 
-  const [memberdata, setMemberData] = useState([]);
+  const [memberdata, setMemberData] = useState(undefined);
+  const [isChange, setisChange] = useState(false);
   const [modal1, setModal1] = useState(false);
 
   const toggleViewModal = () => setModal1(!modal1);
 
 
 
-  const { memberData } = useSelector(state => ({
-    memberData: state.AdminList.memberData
-  }));
-
-  
+  const memberData  = useSelector(state => 
+    ([
+     state.MemberList.memberData
+    ]))
+ 
   
   const dispatch = useDispatch();
 
     useEffect(() => {
+      if(isChange == false){
         dispatch(ongetMemberData());
+        setisChange(true)
+      
         if(memberData!=undefined && memberData!=null){
-                debugger
-          setMemberData(memberData.data.data.response);
+          setMemberData(memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[]);
         }
-          
-    }, []);
-    
-
+      } 
+    }, [memberdata]);
+    console.log("MEMBERDATA hs", memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[])
   const columns = useMemo(
     () => [
       {
@@ -58,18 +62,18 @@ const MembersList = props => {
           return <input type="checkbox" className="form-check-input" />;
         },
       },
-      {
-        Header: "Sr No",
-        accessor: "SrNo",
-        filterable: false,
-        disableFilters: true,
-        Cell: cellProps => {
-          return <SrNo {...cellProps} />;
-        },
-      },
+      // {
+      //   Header: "Sr No",
+      //   accessor: "SrNo",
+      //   filterable: false,
+      //   disableFilters: true,
+      //   Cell: cellProps => {
+      //     return   <SrNo {...cellProps} />; 
+      //   },
+      // },
       {
         Header: "Customer Name",
-        accessor: "CustomerName",
+        accessor: "name",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -78,7 +82,7 @@ const MembersList = props => {
       },
       {
         Header: "Company Name",
-        accessor: "CompanyName",
+        accessor: "userName",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -87,7 +91,7 @@ const MembersList = props => {
       },
       {
         Header: "Email Address",
-        accessor: "EmailID",
+        accessor: "emailId",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -105,7 +109,7 @@ const MembersList = props => {
       },
       {
         Header: "Joined On",
-        accessor: "JoinedOn",
+        accessor: "createdAt",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -157,7 +161,7 @@ const MembersList = props => {
           <div className="mb-4 h4 card-title mt-lg-5">Member List</div>
           <TableContainer
             columns={columns}
-            data={memberdata}
+            data={memberdata!= undefined ? memberdata : []}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}

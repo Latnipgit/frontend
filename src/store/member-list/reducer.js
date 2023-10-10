@@ -8,12 +8,14 @@ const INIT_STATE = {
 
 
   const MemberList = (state = INIT_STATE, action) => {
-            debugger
     switch (action.type) {
-      case GET_MEMBER_DATA:
+      case  GET_MEMBER_DATA:
         return {
           ...state,
           loading: true,
+          memberData: action.payload,
+
+          
         };
       case MEMBER_API_FAIL:
         return {
@@ -22,10 +24,12 @@ const INIT_STATE = {
           memberData: null,
         };
       case MEMBER_API_SUCCESS:
+ console.log("reducer",action)
+
         return {
           ...state,
           loading: false,
-          memberData: action.payload,
+          memberData: action.payload.data,
         };
       
       default:

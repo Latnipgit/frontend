@@ -3,7 +3,7 @@ import { all, fork } from "redux-saga/effects";
 //Admin Registration
 import AdminListSaga from "./EmployeeList/saga";
 //Admin Member list saga
-import MemberListSaga from "./EmployeeList/saga";
+import MemberListSaga from "../../src/store/member-list/saga";
 
 //public
 import AccountSaga from "./auth/register/saga";

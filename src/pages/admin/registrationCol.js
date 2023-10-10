@@ -20,6 +20,13 @@ const CheckBox = (cell) => {
 
 const UserId = (cell) => {
     return (
+        <Link to="#" className="text-body fw-bold">{cell.value ?"EMP-" +cell.value.slice(-5) : ''}</Link>
+    );
+};
+
+
+const SrNo = (cell) => {
+    return (
         <Link to="#" className="text-body fw-bold">{cell.value ? cell.value : ''}</Link>
     );
 };
@@ -65,6 +72,7 @@ export {
     CheckBox,
     UserId,
     UserName,
+    SrNo,
     Date,
     EmailAddress,
     Status,

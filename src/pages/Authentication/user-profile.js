@@ -11,6 +11,7 @@ import {
   Input,
   FormFeedback,
   Form,
+  CardHeader,
 } from "reactstrap";
 
 // Formik Validation
@@ -37,6 +38,7 @@ const UserProfile = () => {
 
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
+  const [isEdit, setIsEdit] = useState();
   const [idx, setidx] = useState(1);
   const [AdminRole, setadminRole] = useState("");
 
@@ -44,23 +46,36 @@ const UserProfile = () => {
     error: state.Profile.error,
     success: state.Profile.success,
   }));
-
+console.log("EMAIL", email)
   useEffect(() => {
-    if (localStorage.getItem("authUser")) {
+    console.log("Profile", JSON.parse(localStorage.getItem("Profile")))
+if(localStorage.getItem("Profile") == undefined){
+  if (localStorage.getItem("authUser")) {
          
-      const obj = JSON.parse(localStorage.getItem("authUser"));
-     if (
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        setname(obj.name);
-        setemail(obj.userName);
-        setidx(obj.id);
-        setadminRole(obj.adminRole)
-      }
-      setTimeout(() => {
-        dispatch(resetProfileFlag());
-      }, 3000);
+    const obj = JSON.parse(localStorage.getItem("authUser"));
+   if (
+      process.env.REACT_APP_DEFAULTAUTH === "jwt"
+    ) {
+      setname(obj.name);
+      setemail(obj.userName);
+      setidx(obj.id);
+      setadminRole(obj.adminRole)
     }
+    setTimeout(() => {
+      dispatch(resetProfileFlag());
+    }, 3000);
+  }
+ 
+}
+else{
+  const profile = JSON.parse(localStorage.getItem("Profile"))
+  console.log("profile ++", profile.name)
+  setname(profile.name);
+  setemail(profile.userName);
+  // setidx(obj.id);
+  setadminRole(profile.adminRole)
+}
+  
   }, [dispatch, success]);
 
   const validation = useFormik({
@@ -79,13 +94,32 @@ const UserProfile = () => {
     }
   });
 
+  const handleChange =()=>{
 
+    
+   
+
+     isEdit != undefined && isEdit != false ? setIsEdit(false): setIsEdit(true)
+
+     return isEdit
+  }
+  console.log("ISEDIT", isEdit)
+
+  const handleSubmit =()=>{
+const payload ={
+  name: name,
+  email: email,
+  adminRole: AdminRole,
+  idx: idx
+}
+console.log("PAyload", payload)
+  }
   return (
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
           {/* Render Breadcrumb */}
-          <Breadcrumb title="Bafana" breadcrumbItem="Profile" />
+          {/* <Breadcrumb title="Bafana" breadcrumbItem="Profile" /> */}
 
           <Row>
             <Col lg="12">
@@ -93,71 +127,172 @@ const UserProfile = () => {
               {success ? <Alert color="success">{success}</Alert> : null}
 
               <Card>
+              <CardHeader className=" align-self-left d-flex " style={{ background:'#FFFFFF'}}>
+              <Breadcrumb title="Bafana" breadcrumbItem="Profile" />
+
+                          
+                        
+                           </CardHeader>
                 <CardBody>
-                  <div className="d-flex">
-                    <div className="ms-3">
+                  <div>
+                    <div className="ms-3 d-flex">
+                      <div>
                       <img
                         src={avatar}
                         alt=""
-                        className="avatar-md rounded-circle img-thumbnail"
+                        className="avatar-lg img-thumbnail"
                       />
+                               {/* <button  className=" btn btn-info ml-auto b-1 ml-3 pl-3 pt-2" onClick={()=>handleChange()} style={{ background:'', border:'none',height:'auto', width:'auto', justifyContent:'center'}}>
+  Change image
+  </button> */}
+                        </div> 
+                        <div>
+                        <p className="mb-1 ml-3 pl-3 pt-2" style={{ fontSize:'16px'}}>{name}</p>
+                        <p className="mb-1 ml-3 pl-3 pt-2"  style={{ fontSize:'16px'}}> {AdminRole}</p>
+               
+                          </div>                     
                     </div>
-                    <div className="flex-grow-1 align-self-center">
-                      <div className="text-muted">
-                        <h5>{name}</h5>
-                        <p className="mb-1 ml-3">Email Address : {email}</p>
-                        <p className="mb-1 ml-3">Id no : #{idx}</p> 
-                        <p className="mb-1 ml-3">Role : {AdminRole}</p>
-                        
-
-                      </div>
-                    </div>
+                
                   </div>
                 </CardBody>
               </Card>
             </Col>
           </Row>
+          <Row>
+            <Col lg={12}>
+             {isEdit == false || isEdit == undefined ? 
+              <Card className="">
+              <CardHeader  style={{ background:'#FFFFFF'}}>
+                <Row >
+                <Col lg={8}>
+                <Breadcrumb title="Bafana" breadcrumbItem="overview" />
 
-          {/* <h4 className="card-title mb-4">Change User Name</h4>
 
-          <Card>
-            <CardBody>
-              <Form
-                className="form-horizontal"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  validation.handleSubmit();
-                  return false;
-                }}
-              >
-                <div className="form-group">
-                  <Label className="form-label">User Name</Label>
-                  <Input
-                    name="username"
-                    // value={name}
-                    className="form-control"
-                    placeholder="Enter User Name"
-                    type="text"
-                    onChange={validation.handleChange}
-                    onBlur={validation.handleBlur}
-                    value={validation.values.username || ""}
-                    invalid={
-                      validation.touched.username && validation.errors.username ? true : false
-                    }
-                  />
-                  {validation.touched.username && validation.errors.username ? (
-                    <FormFeedback type="invalid">{validation.errors.username}</FormFeedback>
-                  ) : null}
-                  <Input name="idx" value={idx} type="hidden" />
-                </div>
-                <div className="text-center mt-4">
-                  <Button type="submit" color="danger">
-                    Update User Name
-                  </Button>
-                </div>
-              </Form>
-            </CardBody>
-          </Card> */}
+                </Col>
+                <Col lg={4} className="d-flex"  style={{ justifyContent:'end'}}>
+                <button  className=" btn btn-info d-flex ml-auto" onClick={()=>handleChange()} style={{ background:'', border:'none',height:'35px', width:'80px', justifyContent:'center'}}>
+  Edit
+</button>
+                </Col>
+
+                </Row>
+          
+                </CardHeader>
+                <CardBody>
+                <div className="flex-grow-1 align-self-center">
+                      <div className="text-muted">
+
+<Row>
+  <Col lg={4}>
+  <p className="mb-1 ml-3"> Full Name :</p>
+  <p className="mb-1 ml-3">Email Address :</p>
+  {/* <p className="mb-1 ml-3">Id no :</p>  */}
+  <p className="mb-1 ml-3">Role :</p>
+
+  </Col>
+  <Col lg={4}>
+  <p className="mb-1 ml-3"> {name}</p>
+  <p className="mb-1 ml-3"> {email}</p>
+  {/* <p className="mb-1 ml-3"> #{idx}</p>  */}
+  <p className="mb-1 ml-3"> {AdminRole}</p>
+
+
+
+  </Col>
+</Row>
+
+
+                     
+                        
+
+                      </div>
+                    </div>
+                </CardBody>
+              </Card>
+              :
+              <Card>
+                
+                   <CardHeader className=" " style={{ background:'#FFFFFF'}}>
+                   <Row >
+                <Col lg={8}>
+                <Breadcrumb title="Bafana" breadcrumbItem="Profile Edit" />
+
+
+                </Col>
+                <Col lg={4} className="d-flex"  style={{ justifyContent:'end'}}>
+                <button  className=" btn btn-info d-flex ml-auto" onClick={()=>handleChange()} style={{ background:'', border:'none',height:'35px', width:'80px', justifyContent:'center'}}>
+  close
+</button>
+                </Col>
+
+                </Row>
+          
+                </CardHeader>
+<CardBody>
+<Row>
+  
+ <Col lg={2}>
+
+
+</Col>
+<Col lg={8} className="d-flex mx-auto">
+<form onSubmit={()=>handleSubmit()}>
+<label>
+<span style={{ marginRight:"64px"}}>
+Name:
+</span>
+       
+        <input className="p-1" type="text" value={name} disabled style={{ width: '300px'}}/>
+      </label>
+      <br/>
+
+      <label>
+      <span style={{ marginRight:"64px"}}>
+      Email:      </span>
+       
+        <input disabled className="p-1" type="text" value={email} style={{ width: '300px'}} />
+
+      </label>
+      {/* <br/>
+      <label>
+        <span  style={{ marginRight:"30px"}}>
+        ID number :
+        </span>
+        <input  className="p-1" type="text" value={idx} style={{ width: '300px'}}
+       />
+        
+      </label> */}
+      <br/>
+
+      <label>
+        <span style={{ marginRight:"75px"}}>
+        Role
+          </span>        
+        <input className="p-1" type="text" value={AdminRole} style={{ width: '300px'}} onChange={()=>{
+          setadminRole(event.target.value)
+        }}
+       />
+        
+      </label>
+      <br/>
+      <button  className=" btn btn-info " type="submit" value="Submit" style={{ background:'', border:'none', justifyContent:'end'}}>
+  submit
+</button>
+      {/* <input type="submit" value="Submit" className="btn-btn-info bg-info border-none text-light" /> */}
+    </form>
+
+</Col>
+<Col lg={2}>
+
+</Col>
+</Row>
+</CardBody>
+              </Card>
+}
+            </Col>
+          </Row>
+
+     
         </Container>
       </div>
     </React.Fragment>

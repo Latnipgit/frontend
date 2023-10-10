@@ -4,8 +4,9 @@ import { AdminApiSuccess, AdminApiFail,adminSignupUserSuccessful, adminSignupFai
 import {getAllAdminData,registerAdminData} from "../../helpers/fakebackend_helper";
 function* getAllAdminData2() {
     try {
-      debugger
+      
       var response = yield call(getAllAdminData);
+      // console.log("RESPONSE ADMIN DATA", response)
       yield put(AdminApiSuccess(GET_ADMIN_DATA, response));
     } catch (error) {
         yield put(AdminApiFail(GET_ADMIN_DATA, error));

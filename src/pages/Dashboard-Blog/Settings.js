@@ -1,164 +1,214 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import {
   Card,
   CardBody,
+  CardHeader,
   Col,
   UncontrolledDropdown,
   DropdownMenu,
   DropdownToggle,
   Row,
   DropdownItem,
+
 } from "reactstrap"
+import Breadcrumb from "../../components/Common/Breadcrumb";
 
 import avatar from "../../assets/images/users/avatar-1.jpg"
 
 const Settings = props => {
+  const [currentPass, setCurrentPass] = useState('');
+  const [newPass, setNewPass] = useState('');
+  const [ConfirmNewPass, setConfirmNewPass] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit=()=>{
+if(ConfirmNewPass == newPass){
+const payload={
+  "currentpassword":currentPass,
+  "newpassword":newPass
+}
+}
+else{
+  setError("New Pass Should be Same")
+}
+  }
   return (
-    <React.Fragment>
-      <Col xl={4}>
-        <Card>
-          <CardBody>
-            <div className="d-flex">
-              <div className="me-3">
-                <img
-                  src={avatar}
-                  alt=""
-                  className="avatar-sm rounded-circle img-thumbnail"
-                />
-              </div>
-              <div className="flex-grow-1">
-                <div className="d-flex">
-                  <div className="flex-grow-1">
-                    <div className="text-muted">
-                      <h5 className="mb-1">Henry wells</h5>
-                      <p className="mb-0">UI / UX Designer</p>
-                    </div>
-                  </div>
+    // <React.Fragment>
+    //   <Col xl={4}>
+        
+    //     {/* <Card>
+    //       <CardBody>
+    //         <div className="d-flex flex-wrap align-items-start">
+    //           <h5 className="card-title mb-3 me-2">Subscribes</h5>
 
-                  <UncontrolledDropdown
-                    className="ms-2"
-                  >
-                    <DropdownToggle
-                      className="btn btn-light btn-sm"
-                      color="#eff2f7"
-                      type="button"
-                    >
-                      <i className="bx bxs-cog align-middle me-1"></i> Setting
-                    </DropdownToggle>
-                    <DropdownMenu className="dropdown-menu-end">
-                      <Link className="dropdown-item" to="#">
-                        Action
-                      </Link>
-                      <Link className="dropdown-item" to="#">
-                        Another action
-                      </Link>
-                      <Link className="dropdown-item" to="#">
-                        Something else
-                      </Link>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </div>
+    //           <UncontrolledDropdown className="ms-auto">
+    //             <DropdownToggle tag="a" className="text-muted font-size-16" role="button">
+    //               <i className="mdi mdi-dots-horizontal"></i>
+    //             </DropdownToggle>
 
-                <hr />
+    //             <DropdownMenu className="dropdown-menu-end">
+    //               <DropdownItem className="dropdown-item" href="#">Action</DropdownItem>
+    //               <DropdownItem className="dropdown-item" href="#">Another action</DropdownItem>
+    //               <DropdownItem className="dropdown-item" href="#">Something else here</DropdownItem>
+    //               <div className="dropdown-divider"></div>
+    //               <DropdownItem className="dropdown-item" href="#">Separated link</DropdownItem>
+    //             </DropdownMenu>
+    //           </UncontrolledDropdown>
+    //         </div>
 
-                <Row>
-                  <Col xl={4}>
-                    <div>
-                      <p className="text-muted text-truncate mb-2">
-                        Total Post
-                      </p>
-                      <h5 className="mb-0">32</h5>
-                    </div>
-                  </Col>
-                  <div className="col-4">
-                    <div>
-                      <p className="text-muted text-truncate mb-2">
-                        Subscribes
-                      </p>
-                      <h5 className="mb-0">10k</h5>
-                    </div>
-                  </div>
-                </Row>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
+    //         <div className="d-flex flex-wrap">
+    //           <div>
+    //             <p className="text-muted mb-1">Total Subscribe</p>
+    //             <h4 className="mb-3">10,512</h4>
+    //             <p className="text-success mb-0"><span>0.6 % <i className="mdi mdi-arrow-top-right ms-1"></i></span></p>
+    //           </div>
+    //           <div className="ms-auto align-self-end">
+    //             <i className="bx bx-group display-4 text-light"></i>
+    //           </div>
+    //         </div>
+    //       </CardBody>
+    //     </Card>
 
-        <Card>
-          <CardBody>
-            <div className="d-flex flex-wrap align-items-start">
-              <h5 className="card-title mb-3 me-2">Subscribes</h5>
+    //     <Card>
+    //       <CardBody className="p-4">
+    //         <div className="text-center">
+    //           <div className="avatar-md mx-auto mb-4">
+    //             <div className="avatar-title bg-light rounded-circle text-primary h1">
+    //               <i className="mdi mdi-email-open"></i>
+    //             </div>
+    //           </div>
 
-              <UncontrolledDropdown className="ms-auto">
-                <DropdownToggle tag="a" className="text-muted font-size-16" role="button">
-                  <i className="mdi mdi-dots-horizontal"></i>
-                </DropdownToggle>
+    //           <Row className="justify-content-center">
+    //             <Col xl={10}>
+    //               <h4 className="text-primary">Subscribe !</h4>
+    //               <p className="text-muted font-size-14 mb-4">
+    //                 Subscribe our newletter and get notification to stay update.
+    //               </p>
 
-                <DropdownMenu className="dropdown-menu-end">
-                  <DropdownItem className="dropdown-item" href="#">Action</DropdownItem>
-                  <DropdownItem className="dropdown-item" href="#">Another action</DropdownItem>
-                  <DropdownItem className="dropdown-item" href="#">Something else here</DropdownItem>
-                  <div className="dropdown-divider"></div>
-                  <DropdownItem className="dropdown-item" href="#">Separated link</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </div>
+    //               <div className="input-group bg-light rounded">
+    //                 <input
+    //                   type="email"
+    //                   className="form-control bg-transparent border-0"
+    //                   placeholder="Enter Email address"
+    //                   aria-label="Recipient's username"
+    //                   aria-describedby="button-addon2"
+    //                 />
+    //                 <div className="input-group-append">
+    //                   <button
+    //                     className="btn btn-primary rounded"
+    //                     type="button"
+    //                     id="button-addon2"
+    //                   >
+    //                     <i className="bx bxs-paper-plane"></i>
+    //                   </button>
+    //                 </div>
+    //               </div>
+    //             </Col>
+    //           </Row>
+    //         </div>
+    //       </CardBody>
+    //     </Card> */}
+    //   </Col>
+    // </React.Fragment>
+  <div className="" style={{ marginTop:'150px'}}>
+    <Row>
+      <Col md={1}></Col>
+      <Col md={10}>
+      <Row>
+            <Col lg="12">
+       
 
-            <div className="d-flex flex-wrap">
-              <div>
-                <p className="text-muted mb-1">Total Subscribe</p>
-                <h4 className="mb-3">10,512</h4>
-                <p className="text-success mb-0"><span>0.6 % <i className="mdi mdi-arrow-top-right ms-1"></i></span></p>
-              </div>
-              <div className="ms-auto align-self-end">
-                <i className="bx bx-group display-4 text-light"></i>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
+            <Card className="p-3" style={{ width:'60rem'}}>
+                
+                <CardHeader className=" " style={{ background:'#FFFFFF'}}>
+                <Row >
+             <Col lg={12} className="text-center d-flex" style={{ textAlign:'center', justifyContent:'center'}}>
+             <Breadcrumb title="Bafana" breadcrumbItem="Reset Password" className =" mx-auto text-center" />
 
-        <Card>
-          <CardBody className="p-4">
-            <div className="text-center">
-              <div className="avatar-md mx-auto mb-4">
-                <div className="avatar-title bg-light rounded-circle text-primary h1">
-                  <i className="mdi mdi-email-open"></i>
-                </div>
-              </div>
 
-              <Row className="justify-content-center">
-                <Col xl={10}>
-                  <h4 className="text-primary">Subscribe !</h4>
-                  <p className="text-muted font-size-14 mb-4">
-                    Subscribe our newletter and get notification to stay update.
-                  </p>
+             </Col>
+             {/* <Col lg={4} className="d-flex"  style={{ justifyContent:'end'}}>
+           
+             </Col> */}
 
-                  <div className="input-group bg-light rounded">
-                    <input
-                      type="email"
-                      className="form-control bg-transparent border-0"
-                      placeholder="Enter Email address"
-                      aria-label="Recipient's username"
-                      aria-describedby="button-addon2"
-                    />
-                    <div className="input-group-append">
-                      <button
-                        className="btn btn-primary rounded"
-                        type="button"
-                        id="button-addon2"
-                      >
-                        <i className="bx bxs-paper-plane"></i>
-                      </button>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </CardBody>
-        </Card>
+             </Row>
+       
+             </CardHeader>
+<CardBody>
+  {/* <Row className=" pt-3 pb-5 mx-auto text-center">
+    <h5>
+      Reset Password
+    </h5>
+  </Row> */}
+<Row>
+
+<Col lg={2}>
+
+
+</Col>
+<Col lg={8} className="d-flex mx-auto">
+<form onSubmit={()=>handleSubmit()}>
+<label>
+<span style={{ marginRight:"64px"}}>
+Current Password:
+</span>
+    
+     <input className="p-1" type="text"   style={{ width: '300px',  border:'1px solid #b2b4b8'}}
+     onChange={(event)=>{
+setCurrentPass(event.target.value)
+     }}
+     />
+   </label>
+   <br/>
+
+   <label>
+   <span style={{ marginRight:"79px"}}>
+   New Password :      </span>
+    
+     <input  className="p-1" type="text" style={{ width: '300px', border:'1px solid #b2b4b8'}} 
+      onChange={(event)=>{
+        setNewPass(event.target.value)
+             }}
+     />,
+
+   </label>
+   <br/>
+   <label>
+     <span  style={{ marginRight:"28px"}}>
+   Confirm New Password :
+     </span>
+     <input  className="p-1" type="text"  style={{ width: '300px', border:'1px solid #b2b4b8'}} 
+      onChange={(event)=>{
+        setConfirmNewPass(event.target.value)
+             }}
+    />
+     
+   </label>
+
+   <br/>
+   <br/>
+   <button  className=" btn btn-info " type="submit" value="Submit" style={{ background:'', border:'none', justifyContent:'end'}}>
+submit
+</button>
+   {/* <input type="submit" value="Submit" className="btn-btn-info bg-info border-none text-light" /> */}
+ </form>
+
+</Col>
+<Col lg={2}>
+
+</Col>
+</Row>
+</CardBody>
+           </Card>
+            </Col>
+          </Row>
       </Col>
-    </React.Fragment>
+      <Col md={1}></Col>
+
+    </Row>
+    </div>
+
   )
 }
 

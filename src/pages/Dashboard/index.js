@@ -74,7 +74,7 @@ const Dashboard = props => {
   ];
   const isPopupOpen = JSON.parse(localStorage.getItem("IspopupOpen"));
   useEffect(() => {
-      
+      localStorage.removeItem("Profile")
   if (isPopupOpen) {
       setTimeout(() => {
        
