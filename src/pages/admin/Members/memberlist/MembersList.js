@@ -45,12 +45,13 @@ const MembersList = props => {
       if(isChange == false){
         dispatch(ongetMemberData());
         setisChange(true)
-      
+
         if(memberData!=undefined && memberData!=null){
           setMemberData(memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[]);
         }
       } 
     }, [memberdata]);
+
     console.log("MEMBERDATA hs", memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[])
   const columns = useMemo(
     () => [

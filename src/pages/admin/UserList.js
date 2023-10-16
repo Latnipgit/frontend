@@ -61,8 +61,6 @@ const UserList = props => {
   
   const dispatch = useDispatch();
 
-
-
     useEffect(() => {
         dispatch(ongetAdminData());
         if(adminData!=undefined && adminData!=null && adminData.data != undefined){
@@ -71,6 +69,8 @@ const UserList = props => {
         }
           
     }, [adminData]);
+    console.log("CHECKDATA", adminData, admindata)
+
   const handleEdit =(project)=>{
     console.log("HARshit handle edit", project)
 localStorage.setItem("Profile",JSON.stringify(project))
@@ -203,7 +203,7 @@ console.log("admindata",adminData)
 
           <TableContainer
             columns={columns}
-            data={admindata}
+            data={adminData != undefined && adminData.data != undefined ? adminData.data.data.response:[]}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}

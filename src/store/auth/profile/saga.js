@@ -14,7 +14,7 @@ import {
 const fireBaseBackend = getFirebaseBackend()
 
 function* editProfile({ payload: { user } }) {
-  debugger
+  // debugger
   try {
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
       const response = yield call(

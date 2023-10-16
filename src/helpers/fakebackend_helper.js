@@ -24,7 +24,7 @@ const isUserAuthenticated = () => {
 
 // Register Method
 const postFakeRegister = data => {
-  debugger
+  // debugger
   return axios
     .post(url.POST_FAKE_REGISTER, data)
     .then(response => {
