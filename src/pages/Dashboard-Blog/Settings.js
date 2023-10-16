@@ -13,26 +13,36 @@ import {
 
 } from "reactstrap"
 import Breadcrumb from "../../components/Common/Breadcrumb";
+import { changePasswordUsingOldPass } from "../../store/actions";
+import { useSelector, useDispatch } from "react-redux";
 
-import avatar from "../../assets/images/users/avatar-1.jpg"
+// import avatar from "../../assets/images/users/avatar-1.jpg"
 
 const Settings = props => {
   const [currentPass, setCurrentPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [ConfirmNewPass, setConfirmNewPass] = useState('');
-  const [error, setError] = useState('');
+
+  const dispatch = useDispatch();
+
 
   const handleSubmit=()=>{
-if(ConfirmNewPass == newPass){
+// if(ConfirmNewPass == newPass){
+  
 const payload={
-  "currentpassword":currentPass,
-  "newpassword":newPass
+  "oldPassword":currentPass,
+  "password":newPass
 }
-}
-else{
-  setError("New Pass Should be Same")
-}
+dispatch(changePasswordUsingOldPass(payload));
+// }
+// else{
+  // setError("New Pass Should be Same")
+// }
   }
+  const { error, success } = useSelector(state => ({
+    error: state.Profile.error,
+    success: state.Profile.success,
+  }));
   return (
     // <React.Fragment>
     //   <Col xl={4}>
@@ -147,14 +157,14 @@ else{
 
 
 </Col>
-<Col lg={8} className="d-flex mx-auto">
+<Col lg={8} className="x-auto">
 <form onSubmit={()=>handleSubmit()}>
 <label>
 <span style={{ marginRight:"64px"}}>
 Current Password:
 </span>
     
-     <input className="p-1" type="text"   style={{ width: '300px',  border:'1px solid #b2b4b8'}}
+     <input className="p-1" type="password"   style={{ width: '300px',  border:'1px solid #b2b4b8'}}
      onChange={(event)=>{
 setCurrentPass(event.target.value)
      }}
@@ -166,7 +176,7 @@ setCurrentPass(event.target.value)
    <span style={{ marginRight:"79px"}}>
    New Password :      </span>
     
-     <input  className="p-1" type="text" style={{ width: '300px', border:'1px solid #b2b4b8'}} 
+     <input  className="p-1" type="password" style={{ width: '300px', border:'1px solid #b2b4b8'}} 
       onChange={(event)=>{
         setNewPass(event.target.value)
              }}
@@ -178,7 +188,7 @@ setCurrentPass(event.target.value)
      <span  style={{ marginRight:"28px"}}>
    Confirm New Password :
      </span>
-     <input  className="p-1" type="text"  style={{ width: '300px', border:'1px solid #b2b4b8'}} 
+     <input  className="p-1" type="password"  style={{ width: '300px', border:'1px solid #b2b4b8'}} 
       onChange={(event)=>{
         setConfirmNewPass(event.target.value)
              }}
@@ -187,13 +197,14 @@ setCurrentPass(event.target.value)
    </label>
 
    <br/>
-   <br/>
-   <button  className=" btn btn-info " type="submit" value="Submit" style={{ background:'', border:'none', justifyContent:'end'}}>
-submit
-</button>
+
    {/* <input type="submit" value="Submit" className="btn-btn-info bg-info border-none text-light" /> */}
  </form>
-
+ <br/>
+   <button  className=" btn btn-info " type="submit" value="Submit" style={{ background:'', border:'none', justifyContent:'end'}}
+   onClick={()=>handleSubmit()}>
+submit
+</button>
 </Col>
 <Col lg={2}>
 

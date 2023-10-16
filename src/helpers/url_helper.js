@@ -1,4 +1,4 @@
-//REGISTER
+    //REGISTER
 export const POST_FAKE_REGISTER = "/post-fake-register";
 
 //LOGIN
@@ -9,6 +9,9 @@ export const POST_FAKE_JWT_PASSWORD_FORGET = "/api/admin/forgetPassword";
 export const FORGET_PASSWORD_WITH_TOKEN = "/api/admin/password-reset";
 export const SOCIAL_LOGIN = "/social-login";
 
+
+// CHANGE PASSWORD THROUGH OLD PASSWORD
+export const CHANGE_PASSWORD_WITH_OLD_PASSWORD ="/api/admin/changePasswordUsingOldPass"
 //PROFILE
 export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile";
 export const POST_EDIT_PROFILE = "/post-fake-profile";

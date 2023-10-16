@@ -1,16 +1,23 @@
 import { ADMIN_API_SUCCESS, ADMIN_API_FAIL, GET_ADMIN_DATA,
-SIGNUP_ADMIN_API_FAIL, SIGNUP_ADMIN_API_SUCCESS,SIGNUP_ADMIN_DATA } from "./actionsTypes";
+SIGNUP_ADMIN_API_FAIL, SIGNUP_ADMIN_API_SUCCESS,SIGNUP_ADMIN_DATA,
+CHANGE_PASSWORD_WITH_OLD_PASSWORD,
+CHANGE_PASSWORD_WITH_OLD_PASSWORD_SUCCESS,
+CHANGE_PASSWORD_WITH_OLD_PASSWORD_FAIL
+} from "./actionsTypes";
 
 const INIT_STATE = {
   adminData: null,
   loading: false,
   registrationError:false,
-  user:null
+  changepasswordError: false,
+
+  user:null,
+  data: null
 };
 
 
   const AdminList = (state = INIT_STATE, action) => {
-            
+          console.log("ACTIONS REDUCER", action) 
     switch (action.type) {
       case GET_ADMIN_DATA:
         return {
@@ -48,6 +55,27 @@ const INIT_STATE = {
           user: null,
           loading: false,
           registrationError: action.payload,
+        };
+        case CHANGE_PASSWORD_WITH_OLD_PASSWORD:
+          debugger
+        return {
+          ...state,
+          loading: true,
+          changepasswordError: null,
+        };
+      case CHANGE_PASSWORD_WITH_OLD_PASSWORD_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          data: action.payload,
+          changepasswordError: null,
+        };
+      case CHANGE_PASSWORD_WITH_OLD_PASSWORD_FAIL:
+        return {
+          ...state,
+          data: null,
+          loading: false,
+          changepasswordError: action.payload,
         };
       default:
         return state; 

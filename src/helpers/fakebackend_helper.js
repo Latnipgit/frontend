@@ -8,6 +8,8 @@ export const getAllAdminData = () => get(url.GET_ADMIN_DATA);
 export const getAllMemberData = () => get(url.GET_MEMBER_DATA); 
 //Admin Signup 
 export const registerAdminData = () => post(url.SIGNUP_ADMIN_DATA,data); 
+// change password
+export const changepassswordDataAPI=()=>post(url.CHANGE_PASSWORD_WITH_OLD_PASSWORD,data)
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {
   const user = localStorage.getItem("user");
@@ -22,6 +24,7 @@ const isUserAuthenticated = () => {
 
 // Register Method
 const postFakeRegister = data => {
+  debugger
   return axios
     .post(url.POST_FAKE_REGISTER, data)
     .then(response => {

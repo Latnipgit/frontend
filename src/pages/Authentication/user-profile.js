@@ -39,6 +39,7 @@ const UserProfile = () => {
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
   const [isEdit, setIsEdit] = useState();
+  const [image, setImage] = useState();
   const [idx, setidx] = useState(1);
   const [AdminRole, setadminRole] = useState("");
 
@@ -46,9 +47,8 @@ const UserProfile = () => {
     error: state.Profile.error,
     success: state.Profile.success,
   }));
-console.log("EMAIL", email)
-  useEffect(() => {
-    console.log("Profile", JSON.parse(localStorage.getItem("Profile")))
+ useEffect(() => {
+    setImage(avatar)
 if(localStorage.getItem("Profile") == undefined){
   if (localStorage.getItem("authUser")) {
          
@@ -61,9 +61,9 @@ if(localStorage.getItem("Profile") == undefined){
       setidx(obj.id);
       setadminRole(obj.adminRole)
     }
-    setTimeout(() => {
-      dispatch(resetProfileFlag());
-    }, 3000);
+  //   setTimeout(() => {
+  //     dispatch(resetProfileFlag());
+  //   }, 3000);
   }
  
 }
@@ -78,42 +78,38 @@ else{
   
   }, [dispatch, success]);
 
-  const validation = useFormik({
-    // enableReinitialize : use this flag when initial values needs to be changed
-    enableReinitialize: true,
+  // const validation = useFormik({
+  //   // enableReinitialize : use this flag when initial values needs to be changed
+  //   enableReinitialize: true,
 
-    initialValues: {
-      username: name || '',
-      idx: idx || '',
-    },
-    validationSchema: Yup.object({
-      username: Yup.string().required("Please Enter Your UserName"),
-    }),
-    onSubmit: (values) => {
-      dispatch(editProfile(values));
-    }
-  });
-
+  //   initialValues: {
+  //     username: name || '',
+  //     idx: idx || '',
+  //   },
+  //   validationSchema: Yup.object({
+  //     username: Yup.string().required("Please Enter Your UserName"),
+  //   }),
+  //   onSubmit: (values) => {
+  //     dispatch(editProfile(values));
+  //   }
+  // });
   const handleChange =()=>{
-
-    
-   
-
-     isEdit != undefined && isEdit != false ? setIsEdit(false): setIsEdit(true)
-
+    isEdit != undefined && isEdit != false ? setIsEdit(false): setIsEdit(true)
      return isEdit
   }
-  console.log("ISEDIT", isEdit)
 
-  const handleSubmit =()=>{
+
+  const handlesubmit =()=>{
 const payload ={
   name: name,
-  email: email,
-  adminRole: AdminRole,
-  idx: idx
+  // email: email,
+  // adminRole: AdminRole,
+  idx: idx,
 }
+dispatch(editProfile(payload));
 console.log("PAyload", payload)
   }
+  
   return (
     <React.Fragment>
       <div className="page-content">
@@ -142,9 +138,7 @@ console.log("PAyload", payload)
                         alt=""
                         className="avatar-lg img-thumbnail"
                       />
-                               {/* <button  className=" btn btn-info ml-auto b-1 ml-3 pl-3 pt-2" onClick={()=>handleChange()} style={{ background:'', border:'none',height:'auto', width:'auto', justifyContent:'center'}}>
-  Change image
-  </button> */}
+               
                         </div> 
                         <div>
                         <p className="mb-1 ml-3 pl-3 pt-2" style={{ fontSize:'16px'}}>{name}</p>
@@ -235,8 +229,13 @@ console.log("PAyload", payload)
 
 
 </Col>
-<Col lg={8} className="d-flex mx-auto">
-<form onSubmit={()=>handleSubmit()}>
+<Col lg={8} className=" mx-auto">
+         <br/>
+                               {/* <button  className=" btn btn-info ml-auto b-1 ml-3 p-2" onClick={()=>handlePhotoChange()} style={{ background:'', border:'none',height:'auto', width:'auto', justifyContent:'center', fontSize:"10px"}}>
+  Change image
+  </button> */}
+<form >
+
 <label>
 <span style={{ marginRight:"64px"}}>
 Name:
@@ -275,12 +274,26 @@ Name:
         
       </label>
       <br/>
-      <button  className=" btn btn-info " type="submit" value="Submit" style={{ background:'', border:'none', justifyContent:'end'}}>
+
+{/* <label>
+  <span style={{ marginRight:"75px"}}>
+  Profile Photo
+    </span>        
+ 
+    <input type="file" accept="image/x-png,image/gif,image/jpeg" onSelect={ (item)=>{
+  
+      setImage(item.target.value)
+    }}/>
+  
+</label> */}
+
+   
+   
+    </form>
+    <br/>
+    <button  className=" btn btn-info " style={{ background:'', border:'none', justifyContent:'end'}} onClick={()=>handlesubmit()}>
   submit
 </button>
-      {/* <input type="submit" value="Submit" className="btn-btn-info bg-info border-none text-light" /> */}
-    </form>
-
 </Col>
 <Col lg={2}>
 

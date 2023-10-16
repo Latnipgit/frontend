@@ -9,7 +9,7 @@ import profileImg from "../../assets/images/profile-img.png"
 
 const WelcomeComp = props =>{
   function capitalizeWords(str) {
-    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+    return str != undefined ? str.replace(/\b\w/g, (match) => match.toUpperCase()):'';
   }
   const [username, setusername] = useState("");
   const [rol, setrole] = useState("");
