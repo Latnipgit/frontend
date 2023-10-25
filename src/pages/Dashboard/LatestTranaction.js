@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
-import PropTypes from "prop-types";
-import withRouter from "components/Common/withRouter";
-import { isEmpty } from "lodash";
+import React, { useEffect, useState, useMemo } from "react"
+import PropTypes from "prop-types"
+import withRouter from "components/Common/withRouter"
+import { isEmpty } from "lodash"
 import {
   Container,
   Row,
@@ -13,16 +13,25 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,Dropdown, DropdownToggle, DropdownMenu, DropdownItem ,
+  ModalFooter,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
   Table,
-} from "reactstrap";
+} from "reactstrap"
 // import { OverlayTrigger, Tooltip, Modal } from 'react-bootstrap';
-import { getOrders as onGetOrders } from "store/actions";
+import { getOrders as onGetOrders } from "store/actions"
 
-import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal";
-import InvoiceModal from "./InvoicePopupModal";
-import ConfirmModal from "./ConfirmRefertoSeio";
-import { latestTransaction } from "../../common/data/dashboard";
+import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal"
+import InvoiceModal from "./InvoicePopupModal"
+import ConfirmModal from "./ConfirmRefertoSeio"
+import { latestTransaction } from "../../common/data/dashboard"
+
+import { useSelector, useDispatch } from "react-redux"
+import { fetchLatestTransStart } from "store/LatestTransaction/latestTrans.action"
+import { fetchApprovedTransStart } from "store/ApprovedTransactions/approvedTrans.action"
+import { fetchDisputedTransStart } from "store/DisputedTransactions/disputedTrans.action"
 
 import {
   OrderId,
@@ -31,41 +40,51 @@ import {
   Total,
   PaymentStatus,
   PaymentMethod,
-  Status
-} from "./LatestTranactionCol";
+  Status,
+} from "./LatestTranactionCol"
 
-import TableContainer from "../../components/Common/TableContainer";
+import TableContainer from "../../components/Common/TableContainer"
 
 const LatestTranaction = props => {
-  const [showReferModal, setShowReferModal] = useState(false);
-  const [showApproveModal, setShowApproveModal] = useState(false);
-  const [showInProcessModal, setShowInProcessModal] = useState(false);
-  const [modal1, setModal1] = useState(false);
-  const handleReferClick = () => {setShowReferModal(true)};
+  const [showReferModal, setShowReferModal] = useState(false)
+  const [showApproveModal, setShowApproveModal] = useState(false)
+  const [showInProcessModal, setShowInProcessModal] = useState(false)
+  const [modal1, setModal1] = useState(false)
+  const handleReferClick = () => {
+    setShowReferModal(true)
+  }
   const handleConfirmRefer = () => {
     if (selectedLevel) {
       // Handle refer logic here
-      console.log("Referring to senior with level:", selectedLevel);
-      setSelectedLevel(''); // Reset the selected level
-      setShowReferModal(false);
+      console.log("Referring to senior with level:", selectedLevel)
+      setSelectedLevel("") // Reset the selected level
+      setShowReferModal(false)
     }
-  };
+  }
   const handleCancelRefer = () => {
-    setSelectedLevel(''); // Reset the selected level
-    setShowReferModal(false);
-  };
-  
-  const toggleViewModal = () => setModal1(!modal1);
-  const handleApproveClick = () => {setShowApproveModal(true)};
-  const handleInProcessClick = () => {setShowInProcessModal(true)};
-  const handleConfirmApprove = () => {setShowApproveModal(false)};
-  const handleConfirmInProcess = () => {setShowInProcessModal(false)};
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState('');
+    setSelectedLevel("") // Reset the selected level
+    setShowReferModal(false)
+  }
+
+  const toggleViewModal = () => setModal1(!modal1)
+  const handleApproveClick = () => {
+    setShowApproveModal(true)
+  }
+  const handleInProcessClick = () => {
+    setShowInProcessModal(true)
+  }
+  const handleConfirmApprove = () => {
+    setShowApproveModal(false)
+  }
+  const handleConfirmInProcess = () => {
+    setShowInProcessModal(false)
+  }
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [selectedLevel, setSelectedLevel] = useState("")
   const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-  const isReferDisabled = selectedLevel === '';
+    setDropdownOpen(!dropdownOpen)
+  }
+  const isReferDisabled = selectedLevel === ""
   const columns = useMemo(
     () => [
       {
@@ -73,7 +92,7 @@ const LatestTranaction = props => {
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />;
+          return <input type="checkbox" className="form-check-input" />
         },
       },
       {
@@ -82,7 +101,7 @@ const LatestTranaction = props => {
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <OrderId {...cellProps} />;
+          return <OrderId {...cellProps} />
         },
       },
       {
@@ -91,7 +110,7 @@ const LatestTranaction = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <BillingName {...cellProps} />;
+          return <BillingName {...cellProps} />
         },
       },
       {
@@ -99,7 +118,7 @@ const LatestTranaction = props => {
         accessor: "paymentMethod",
         disableFilters: true,
         Cell: cellProps => {
-          return <PaymentMethod {...cellProps} />;
+          return <PaymentMethod {...cellProps} />
         },
       },
       {
@@ -108,7 +127,7 @@ const LatestTranaction = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Total {...cellProps} />;
+          return <Total {...cellProps} />
         },
       },
       {
@@ -117,17 +136,17 @@ const LatestTranaction = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <DueSince {...cellProps} />;
+          return <DueSince {...cellProps} />
         },
       },
-      
+
       {
         Header: "Payment Status",
         accessor: "paymentStatus",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <PaymentStatus {...cellProps} />;
+          return <PaymentStatus {...cellProps} />
         },
       },
       {
@@ -136,10 +155,10 @@ const LatestTranaction = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Status {...cellProps} />;
+          return <Status {...cellProps} />
         },
       },
-    
+
       {
         Header: "View Details",
         disableFilters: true,
@@ -154,10 +173,10 @@ const LatestTranaction = props => {
             >
               View Details
             </Button>
-          );
+          )
         },
       },
-     
+
       // {
       //   Header: "Action",
       //   disableFilters: true,
@@ -171,26 +190,43 @@ const LatestTranaction = props => {
       //       <div className="d-flex flex-column align-items-center me-3" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
       //         <i className="mdi mdi-progress-clock font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
       //       </div>
-        
+
       //           <div className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }}>
       //               <i className="mdi mdi-account-supervisor font-size-18 text-warning mb-1" onClick={handleReferClick} />
       //           </div>
       //     </div>
-          
+
       //     );
       //   },
       // },
     ],
     []
-  );
+  )
 
+  const dispatch = useDispatch()
+
+  const { getLatestTrans } = useSelector(state => ({
+    getLatestTrans:
+      state.latestTransReducer != undefined &&
+      state.latestTransReducer.length != 0
+        ? state.latestTransReducer
+        : [],
+  }))
+
+  useEffect(() => {
+    dispatch(fetchLatestTransStart())
+    dispatch(fetchApprovedTransStart())
+    dispatch(fetchDisputedTransStart())
+  }, [])
 
   return (
     <React.Fragment>
       <InvoiceModal isOpen={modal1} toggle={toggleViewModal} />
       {/* <ConfirmModal isOpen={isModalOpen} toggle={toggleModal} /> */}
       <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>
-        <ModalHeader toggle={() => setShowReferModal(false)}>Confirm Asclation</ModalHeader>
+        <ModalHeader toggle={() => setShowReferModal(false)}>
+          Confirm Asclation
+        </ModalHeader>
         <ModalBody>
           {/* <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
             <DropdownToggle caret>
@@ -203,11 +239,22 @@ const LatestTranaction = props => {
               <DropdownItem onClick={() => setSelectedLevel('L3')}>L3</DropdownItem>
             </DropdownMenu>
           </Dropdown> */}
-          <p>Asclation: Please select the level you want to refer this transaction to.</p>
+          <p>
+            Asclation: Please select the level you want to refer this
+            transaction to.
+          </p>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={handleCancelRefer}>Cancel</Button>
-          <Button color="danger" onClick={handleConfirmRefer} disabled={isReferDisabled}>Refer</Button>
+          <Button color="secondary" onClick={handleCancelRefer}>
+            Cancel
+          </Button>
+          <Button
+            color="danger"
+            onClick={handleConfirmRefer}
+            disabled={isReferDisabled}
+          >
+            Refer
+          </Button>
         </ModalFooter>
       </Modal>
 
@@ -223,33 +270,50 @@ const LatestTranaction = props => {
           />
         </CardBody>
       </Card>
-<Modal isOpen={showApproveModal} toggle={() => setShowApproveModal(false)}>
-<ModalHeader toggle={() => setShowApproveModal(false)}>Confirm Approval</ModalHeader>
-<ModalBody>
-    Are you sure you want to approve this bill?
-</ModalBody>
-<ModalFooter>
-    <Button color="secondary" onClick={() => setShowApproveModal(false)}>Cancel</Button>
-    <Button color="success" onClick={handleConfirmApprove}>Approve</Button>
-</ModalFooter>
-</Modal>
-<Modal isOpen={showInProcessModal} toggle={() => setShowInProcessModal(false)}>
-<ModalHeader toggle={() => setShowInProcessModal(false)}>Confirm In Process</ModalHeader>
-<ModalBody>
-Are you sure you want to mark this as in process?
-</ModalBody>
-<ModalFooter>
-<Button color="secondary" onClick={() => setShowInProcessModal(false)}>Cancel</Button>
-<Button color="info" onClick={handleConfirmInProcess}>In Process</Button>
-</ModalFooter>
-</Modal>
-  </React.Fragment>
-  );
-};
+      <Modal
+        isOpen={showApproveModal}
+        toggle={() => setShowApproveModal(false)}
+      >
+        <ModalHeader toggle={() => setShowApproveModal(false)}>
+          Confirm Approval
+        </ModalHeader>
+        <ModalBody>Are you sure you want to approve this bill?</ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setShowApproveModal(false)}>
+            Cancel
+          </Button>
+          <Button color="success" onClick={handleConfirmApprove}>
+            Approve
+          </Button>
+        </ModalFooter>
+      </Modal>
+      <Modal
+        isOpen={showInProcessModal}
+        toggle={() => setShowInProcessModal(false)}
+      >
+        <ModalHeader toggle={() => setShowInProcessModal(false)}>
+          Confirm In Process
+        </ModalHeader>
+        <ModalBody>Are you sure you want to mark this as in process?</ModalBody>
+        <ModalFooter>
+          <Button
+            color="secondary"
+            onClick={() => setShowInProcessModal(false)}
+          >
+            Cancel
+          </Button>
+          <Button color="info" onClick={handleConfirmInProcess}>
+            In Process
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </React.Fragment>
+  )
+}
 
 LatestTranaction.propTypes = {
   orders: PropTypes.array,
   onGetOrders: PropTypes.func,
-};
+}
 
-export default withRouter(LatestTranaction);
+export default withRouter(LatestTranaction)

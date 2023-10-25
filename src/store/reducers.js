@@ -1,63 +1,69 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "redux"
 
 // Front
-import Layout from "./layout/reducer";
+import Layout from "./layout/reducer"
 
 // Authentication
-import Login from "./auth/login/reducer";
-import Account from "./auth/register/reducer";
-import ForgetPassword from "./auth/forgetpwd/reducer";
-import Profile from "./auth/profile/reducer";
+import Login from "./auth/login/reducer"
+import Account from "./auth/register/reducer"
+import ForgetPassword from "./auth/forgetpwd/reducer"
+import Profile from "./auth/profile/reducer"
 
 //Admin Registration
-import AdminList from "./EmployeeList/reducer";
+import AdminList from "./EmployeeList/reducer"
 //Admin Member List
-import MemberList from "./member-list/reducer";
+import MemberList from "./member-list/reducer"
 
 //E-commerce
-import ecommerce from "./e-commerce/reducer";
+import ecommerce from "./e-commerce/reducer"
 
 //Calendar
-import calendar from "./calendar/reducer";
+import calendar from "./calendar/reducer"
 
 //chat
-import chat from "./chat/reducer";
+import chat from "./chat/reducer"
 
 //crypto
-import crypto from "./crypto/reducer";
+import crypto from "./crypto/reducer"
 
 //invoices
-import invoices from "./invoices/reducer";
+import invoices from "./invoices/reducer"
 
 //jobs
-import JobReducer from "./jobs/reducer";
+import JobReducer from "./jobs/reducer"
 
 //projects
-import projects from "./projects/reducer";
+import projects from "./projects/reducer"
 
 //tasks
-import tasks from "./tasks/reducer";
+import tasks from "./tasks/reducer"
 
 //contacts
-import contacts from "./contacts/reducer";
+import contacts from "./contacts/reducer"
 
 //mails
-import mails from "./mails/reducer";
+import mails from "./mails/reducer"
 
-//Dashboard 
-import Dashboard from "./dashboard/reducer";
+//Dashboard
+import Dashboard from "./dashboard/reducer"
 
 //Dasboard saas
-import DashboardSaas from "./dashboard-saas/reducer";
+import DashboardSaas from "./dashboard-saas/reducer"
 
 //Dasboard crypto
-import DashboardCrypto from "./dashboard-crypto/reducer";
+import DashboardCrypto from "./dashboard-crypto/reducer"
 
 //Dasboard blog
-import DashboardBlog from "./dashboard-blog/reducer";
+import DashboardBlog from "./dashboard-blog/reducer"
 
 //Dasboard job
-import DashboardJob from "./dashboard-jobs/reducer";
+import DashboardJob from "./dashboard-jobs/reducer"
+
+import { latestTransReducer } from "./LatestTransaction/latestTrans.reducer"
+
+import { approvedTransReducer } from "./ApprovedTransactions/approvedTrans.reducer"
+
+import { disputedTransReducer } from "./DisputedTransactions/disputedTrans.reducer"
 
 const rootReducer = combineReducers({
   // public
@@ -82,7 +88,10 @@ const rootReducer = combineReducers({
   DashboardSaas,
   DashboardCrypto,
   DashboardBlog,
-  DashboardJob
-});
+  DashboardJob,
+  latestTransReducer,
+  approvedTransReducer,
+  disputedTransReducer,
+})
 
-export default rootReducer;
+export default rootReducer
