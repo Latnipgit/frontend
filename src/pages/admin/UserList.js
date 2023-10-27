@@ -68,7 +68,7 @@ const UserList = props => {
           setAdminData(adminData.data.data.response);
         }
           
-    }, [adminData]);
+    }, []);
     console.log("CHECKDATA", adminData, admindata)
 
   const handleEdit =(project)=>{

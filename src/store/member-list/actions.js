@@ -6,15 +6,16 @@ export const MemberApiSuccess = (actionType, data) => ({
     payload: { actionType, data },
 });
 
+export const getMemberData = () => ({
+    type: GET_MEMBER_DATA
+});
+
 export const MemberApiFail = (actionType, error) => ({
     type: MEMBER_API_FAIL,
     payload: { actionType, error },
 });
 
 // charts data
-export const getMemberData = () => ({
-    type: GET_MEMBER_DATA
-});
 
 
   
