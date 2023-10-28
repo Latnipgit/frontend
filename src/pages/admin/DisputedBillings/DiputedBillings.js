@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
-
+import { useSelector, useDispatch } from "react-redux"
 import {Button,Card,CardBody,} from "reactstrap";
 import { getOrders as onGetOrders } from "store/actions";
 import { Disputeddata } from "../../../common/data/disputedData";
@@ -38,6 +38,7 @@ import {
 
 import TableContainer from "../../../components/Common/TableContainer";
 import DisputedViewModal from "../DisputedBillings/DisputedViewModal";
+import { fetchDisputedTransStart } from "store/DisputedTransactions/disputedTrans.action"
 
 const DiputedBillings = props => {
   const [showReferModal, setShowReferModal] = useState(false);
@@ -141,7 +142,11 @@ const DiputedBillings = props => {
     ],
     []
   );
-
+  const dispatch = useDispatch()
+ // const disputedTransactiondata = useSelector(selectDisputedTansMap)
+  useEffect(() => {
+    dispatch(fetchDisputedTransStart())
+  }, [])
 
   return (
     <React.Fragment>

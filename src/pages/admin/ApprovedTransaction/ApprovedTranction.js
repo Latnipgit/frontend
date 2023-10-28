@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
-
+import { useSelector, useDispatch } from "react-redux"
 import {
   Button,
   Card,
@@ -43,6 +43,9 @@ import {
 import TableContainer from "../../../components/Common/TableContainer";
 import ApprovedTranctionModel from "./ApprovedTranModel";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
+import { fetchApprovedTransStart } from "store/ApprovedTransactions/approvedTrans.action"
+import { selectApprovedTransMap } from "store/ApprovedTransactions/approvedTrans.selecter";
+
 const ApprovedTranction = props => {
   const [showReferModal, setShowReferModal] = useState(false);
   const [showApproveModal, setShowApproveModal] = useState(false);
@@ -174,7 +177,12 @@ const ApprovedTranction = props => {
     ],
     []
   );
-
+  const dispatch = useDispatch()
+ const approvedTransactiondata = useSelector(selectApprovedTransMap)
+ console.log(approvedTransactiondata);
+  useEffect(() => {
+    dispatch(fetchApprovedTransStart())
+  }, [])
 
   return (
     <React.Fragment>
@@ -188,7 +196,7 @@ const ApprovedTranction = props => {
         <div className="mb-4 h4 card-title">Approved Transactions</div>
           <TableContainer
             columns={columns}
-            data={ApprovedTranctionData}
+            data={approvedTransactiondata}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}

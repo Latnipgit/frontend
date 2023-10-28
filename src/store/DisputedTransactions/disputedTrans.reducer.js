@@ -19,7 +19,7 @@ export const disputedTransReducer = (
     case FETCH_DISPUTED_TRANSACTIONS_START:
       return { ...state, loading: true }
     case FETCH_DISPUTED_TRANSACTIONS_SUCCESS:
-      return { ...state, loading: false, latestTrans: payload }
+      return { ...state, loading: false, disputedTrans: payload }
     case FETCH_DISPUTED_TRANSACTIONS_FAILED:
       return { ...state, loading: false, error: payload }
     default:

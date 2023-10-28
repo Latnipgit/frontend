@@ -19,7 +19,7 @@ export const approvedTransReducer = (
     case FETCH_APPROVED_TRANSACTIONS_START:
       return { ...state, loading: true }
     case FETCH_APPROVED_TRANSACTIONS_SUCCESS:
-      return { ...state, loading: false, latestTrans: payload }
+      return { ...state, loading: false, approvedTrans: payload }
     case FETCH_APPROVED_TRANSACTIONS_FAILED:
       return { ...state, loading: false, error: payload }
     default:

@@ -85,6 +85,7 @@
     "redux": "^4.2.0",
     "redux-form": "^8.3.8",
     "redux-saga": "^1.2.2",
+    "reselect": "^4.1.8",
     "simplebar-react": "^2.4.1",
     "swiper": "^8.4.5",
     "toastr": "^2.1.4",

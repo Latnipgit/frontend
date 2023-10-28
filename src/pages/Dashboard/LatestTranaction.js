@@ -30,8 +30,6 @@ import { latestTransaction } from "../../common/data/dashboard"
 
 import { useSelector, useDispatch } from "react-redux"
 import { fetchLatestTransStart } from "store/LatestTransaction/latestTrans.action"
-import { fetchApprovedTransStart } from "store/ApprovedTransactions/approvedTrans.action"
-import { fetchDisputedTransStart } from "store/DisputedTransactions/disputedTrans.action"
 
 import {
   OrderId,
@@ -44,6 +42,8 @@ import {
 } from "./LatestTranactionCol"
 
 import TableContainer from "../../components/Common/TableContainer"
+
+import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 
 const LatestTranaction = props => {
   const [showReferModal, setShowReferModal] = useState(false)
@@ -204,19 +204,9 @@ const LatestTranaction = props => {
   )
 
   const dispatch = useDispatch()
-
-  const { getLatestTrans } = useSelector(state => ({
-    getLatestTrans:
-      state.latestTransReducer != undefined &&
-      state.latestTransReducer.length != 0
-        ? state.latestTransReducer
-        : [],
-  }))
-
+  const latestTransactiondata = useSelector(selectLatestTansMap)
   useEffect(() => {
     dispatch(fetchLatestTransStart())
-    dispatch(fetchApprovedTransStart())
-    dispatch(fetchDisputedTransStart())
   }, [])
 
   return (
@@ -263,7 +253,7 @@ const LatestTranaction = props => {
           <div className="mb-4 h4 card-title">Latest Transaction</div>
           <TableContainer
             columns={columns}
-            data={latestTransaction}
+            data={latestTransactiondata}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}
