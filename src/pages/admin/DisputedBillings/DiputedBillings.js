@@ -39,6 +39,7 @@ import {
 import TableContainer from "../../../components/Common/TableContainer";
 import DisputedViewModal from "../DisputedBillings/DisputedViewModal";
 import { fetchDisputedTransStart } from "store/DisputedTransactions/disputedTrans.action"
+import { selectdisputedTransMap } from "store/DisputedTransactions/disputedTrans.action.selecter";
 
 const DiputedBillings = props => {
   const [showReferModal, setShowReferModal] = useState(false);
@@ -143,7 +144,8 @@ const DiputedBillings = props => {
     []
   );
   const dispatch = useDispatch()
- // const disputedTransactiondata = useSelector(selectDisputedTansMap)
+  const disputedTransactiondata = useSelector(selectdisputedTransMap)
+  console.log(disputedTransactiondata);
   useEffect(() => {
     dispatch(fetchDisputedTransStart())
   }, [])
@@ -161,7 +163,7 @@ const DiputedBillings = props => {
           <div className="mb-4 h4 card-title">Disputed Billing</div>
           <TableContainer
             columns={columns}
-            data={Disputeddata}
+            data={disputedTransactiondata}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}

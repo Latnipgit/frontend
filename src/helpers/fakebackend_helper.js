@@ -20,6 +20,8 @@ export const getAllApprovedTransactions = () =>
 export const getAllDisputedTransactions = () =>
   get(url.GET_ALL_DISPUTED_TRANSACTIONS)
 
+export const getDashboardAdminData = () => post(url.GET_DASHBOARD_ADMIN_DATA)
+
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {
   const user = localStorage.getItem("user")
