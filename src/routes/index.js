@@ -177,6 +177,7 @@ import PagesFaqs from "../pages/Utility/pages-faqs";
 import PagesPricing from "../pages/Utility/pages-pricing";
 import Pages404 from "../pages/Utility/pages-404";
 import Pages500 from "../pages/Utility/pages-500";
+import MemberCard from "../pages/admin/member-card/memberCard";
 
 //Contacts
 import ContactsGrid from "../pages/Contacts/contacts-grid";
@@ -198,6 +199,7 @@ const authProtectedRoutes = [
   { path: "/disputed-billings", component: <DiputedBillings /> },
  { path: "/approved-transaction", component: <ApprovedTranction /> },
  { path: "/company-history", component: <LatestTransactionPage /> },
+ { path: "/subscription", component: <MemberCard /> },
  
 
 
