@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"
+import './member.css'
 import PropTypes from "prop-types"
 import {
     Button,
@@ -14,8 +15,8 @@ import {
 
 } from "reactstrap"
 import "../../admin/Common.scss"
-// import { count } from "console"
-var data = [
+
+const data = [
     {
         "service" :"invoice",
          "value":""
@@ -60,28 +61,31 @@ var data = [
 ]
 
 const CreatePlanModel = props => {
-    const [addCount, setaddCount] = useState(10)
     const [individual, setIndividual] = useState(false)
-    console.log("addCount", addCount)
-
     const { isOpen, toggle } = props
-  
+    const [ dataTable, setDataTable ] = useState(data)
      const dummyRow =[
        { "service":"",
         "value":""}
      ]
-     const handleAddRow =()=>{
-         data.push(...dummyRow)
 
+     const handleAddRow =()=>{
+        console.log("INNN")
+
+        dataTable.push(...dummyRow)
+        // setDataTable(dataTable)
      }
-     const handleRemove= ()=>{
-        data.pop()
+      const handleRemove= (index)=>{
+        console.log("INNN", index)
+       dataTable.splice(index,1)
+    //    setDataTable(dataTable)
      }
-   
-     console.log("data", data,dummyRow)
 useEffect(()=>{
 
-},[data])
+   
+},[dataTable])
+
+console.log("DATATA", dataTable, data)
     
     return (
         <Modal
@@ -92,20 +96,20 @@ useEffect(()=>{
             className="exampleModal"
             tabIndex="-1"
             toggle={toggle}
-            size="lg"
+            size="xl"
         >
             <div className="modal-content">
                 <ModalHeader toggle={toggle}>Create A Plan</ModalHeader>
-                <ModalBody>
+                <ModalBody style={{ padding:'5px 80px'}}>
 
                     <form>
-                        <Row>
-                            <Col md={2} className="p-2">
-                                <Label className="form-label"><b>Plan Name</b></Label>
+                        <Row className="mt-3">
+                            <Col md={2} className="pt-2">
+                                <Label className="form-label"><b className="h5">Plan Name</b></Label>
                             </Col>
                             <Col md={6}>
                                 <Input
-                                    className="form-control"
+                                    className="form-control text-capitalize"
                                     placeholder="Enter Plan Name"
                                     type="text"
 
@@ -114,22 +118,27 @@ useEffect(()=>{
                             <Col md={4}></Col>
                         </Row>
                     </form>
-                    <Row className="mt-5" style={{ padding:'5px 10px'}}>
+                    <Row className="mt-3" style={{ padding:'5px 10px'}}>
                         <table className="table table-bordered">
                             <thead>
                                 <tr>
-                                    {/* <th scope="col">#</th> */}
+                                    <th scope="col">#</th>
                                     <th scope="col">Services</th>
                                     <th scope="col">Values</th>
+                                    <th scope="col">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                               {data.map((item)=>{
+                               {dataTable.map((item, index)=>{
                                 return  <tr key={item}>
-                                <td>
+                                    <td style={{ width:'2%'}}>
+                                        #{index+1}
+                                    </td>
+                                <td style={{ width:'60%'}} className="text-capitalize">
                                     {item.service != ''? item.service:<>
                                     <Input
-                                        className="form-control"
+                                        className="form-control text-capitalize"
                                         placeholder= "Enter Service Name"
                                         type="text"
 
@@ -138,27 +147,29 @@ useEffect(()=>{
                                 </td>
                                 <td>
                                     <Input
-                                        className="form-control"
-                                        placeholder= {item.service != ''? item.service:"Enter values"}
+                                        className="form-control text-capitalize"
+                                        placeholder= "Enter Value"
                                         type="text"
 
                                     />
+                                </td>
+                                <td>
+                                <Button className="btn btn-sm btn-danger" onClick={()=>handleRemove(index)}>
+                                <i className='bx bx-trash'></i> &nbsp;  Remove
+                                    </Button>
                                 </td>
                             </tr>
                                })}
                                
                               
                              <tr>
+                                <td></td>
                                 <td>
                                     <Button className="btn btn-sm btn-info" onClick={()=>handleAddRow()}>
-                                        +Add New Service
+                                    <i className='bx bx-plus'></i> &nbsp;Add New Service
                                     </Button>
                                 </td>
-                                <td>
-                                    <Button className="btn btn-sm btn-info" onClick={()=>handleRemove()}>
-                                       Remove
-                                    </Button>
-                                </td>
+                               
                              </tr>
 
                             </tbody>
@@ -168,21 +179,33 @@ useEffect(()=>{
                         <Col md={12}>
 
                        
-                    <Row className="text-center p-2" style={{ background:'#f0f5f5' }}>
-                    <Col md={3}></Col>
+                    <Row className=" p-2" style={{ background:'#f0f5f5' }}>
 
-                        <Col md={3}><b>Yearly Price</b></Col>
-                        <Col md={3}>4999/-</Col>
-                        <Col md={3}></Col>
+                        <Col md={2} className="pt-2"><b>Yearly Price</b></Col>
+                        <Col md={3}>
+                        <Input
+                                        className="form-control"
+                                        placeholder= "Enter Yearly Price"
+                                        type="number"
+
+                                    />
+                        </Col>
+                        <Col md={7}></Col>
 
                     </Row>
-                    <Row className="text-center p-2" style={{ background:'#f0f5f5'}}>
-                    <Col md={3}></Col>
+                    <Row className=" p-2" style={{ background:'#f0f5f5'}}>
+                  
+                    <Col md={2} className="pt-2"><b>Monthly Price</b></Col>
+                        <Col md={3}>
+                        <Input
+                                        className="form-control"
+                                        placeholder= "Enter Monthly Price"
+                                        type="number"
 
-<Col md={3}><b>Monthly Price</b></Col>
-<Col md={3}>1000/-</Col>
-<Col md={3}></Col>
-                      
+                                    />
+                        </Col>
+                        <Col md={7}></Col>
+
                     </Row>
                     </Col>
                     </Row>
@@ -190,54 +213,48 @@ useEffect(()=>{
 
                  
                     <Row  className="btn-group d-flex">
-                        <Col md={2}></Col>
                         <Col md={4}>
                             <Label>
-                                <Input type="radio" name="allMember" id="allMember" onChange={()=>setIndividual(false)}/>
+                                <Input type="radio" name="allMember" className="border border-dark" id="allMember" onChange={()=>setIndividual(false)}/>
                                 &nbsp;&nbsp;
                                 Plan For All Members
                             </Label>
-                        </Col>
-                        <Col md={4}>
-                        <Label>
-                                <Input type="radio" name="allMember" id="individual" onChange={()=>setIndividual(true)}/>
+                            <br/>
+                            <Label>
+                                <Input type="radio" name="allMember" id="individual" className="border border-dark" onChange={()=>setIndividual(true)}/>
                                 &nbsp;&nbsp;
                                 Plan For Individual Member
                             </Label>
+                        </Col>
+                        <Col md={4} className="pt-3">
+                        {individual == true ?
+               
+
+                       
+                        <Input type="email" placeholder="Enter Email id"/>
+
+                      
+
+         
+                     :""}
 
                         </Col>
-                        <Col md={2}></Col>
+                        <Col md={4}>
+</Col>
 
                     </Row>
                     </div>
-                    {individual == true ?
-                    <Row>
-                    <Col md={4}></Col>
-
-                        <Col md={4}>
-                        <Input type="email" placeholder="Enter Email id"/>
-
-                        </Col>
-                        <Col md={4}></Col>
-
-                    </Row>
-                     :""}
-                    <Row className="mt-3">
-                        <Col md={4}></Col>
-                        <Col md={4} className="text-center">
+                   
+                    <Row className="mt-3 mb-3">
+                        <Col md={4} className="">
                             <Button className="btn btn-info">
-                            Purchase now
+                            Create Plan
                             </Button>
                         </Col>
                         <Col md={4}></Col>
                     </Row>
                    
 
-                    <Row>
-
-                   
-         
-                    </Row>
 
 
 

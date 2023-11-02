@@ -35,7 +35,7 @@ const MemberCard = props => {
     </Col>
     <Col md={2}>
 <Button onClick={toggleAdminModal} className="btn btn-info">
-create a plan
+Create A Plan
 </Button>
     </Col>
 </Row>
