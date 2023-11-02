@@ -43,6 +43,8 @@ import { withTranslation } from "react-i18next";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
+import { selectdashboardAdminDataMap } from "store/DashboardAdminData/dashboardAdminData.selecter";
+import { fetchDashboardAdminDataStart } from "store/DashboardAdminData/dashboardAdminData.action";
 
 const Dashboard = props => {
       
@@ -52,14 +54,20 @@ const Dashboard = props => {
   // const { chartsData } = useSelector(state => ({
   //   chartsData: state.Dashboard.chartsData
   // }));
+  const dispatch = useDispatch()
+  const {totalMemebers , amoundRecovered, amoundDue} = useSelector(selectdashboardAdminDataMap)
+  useEffect(() => {
+
+    dispatch(fetchDashboardAdminDataStart())
+  }, [])
 
   const reports = [
-    { title: "Total Members", iconClass: "bx-group", description: "1,235" },
-    { title: "Amount Due", iconClass: "bx bx-money", description: "₹35,723" },
+    { title: "Total Members", iconClass: "bx-group", description: `${totalMemebers}` },
+    { title: "Amount Due", iconClass: "bx bx-money", description: `${amoundDue}` },
     {
       "title": "Amount Recovered",
       "iconClass": "bx bx-check",
-      "description": "₹7,894,56.00"
+      "description": `${amoundRecovered}`
     },
     {
       "title": "Total Reviews",

@@ -65,6 +65,8 @@ import { approvedTransReducer } from "./ApprovedTransactions/approvedTrans.reduc
 
 import { disputedTransReducer } from "./DisputedTransactions/disputedTrans.reducer"
 
+import { dashboardAdminDataReducer } from "./DashboardAdminData/dashboardAdminData.reducer"
+
 const rootReducer = combineReducers({
   // public
   Layout,
@@ -92,6 +94,7 @@ const rootReducer = combineReducers({
   latestTransReducer,
   approvedTransReducer,
   disputedTransReducer,
+  dashboardAdminDataReducer,
 })
 
 export default rootReducer

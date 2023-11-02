@@ -30,6 +30,7 @@ import dashboardJobSaga from "./dashboard-jobs/saga"
 import { latestTransSaga } from "./LatestTransaction/latestTrans.saga"
 import { approvedTransSaga } from "./ApprovedTransactions/approvedTrans.saga"
 import { disputedTransSaga } from "./DisputedTransactions/disputedTrans.saga"
+import { dashboardAdminDataSaga } from "./DashboardAdminData/dashboardAdminData.saga" 
 
 export default function* rootSaga() {
   yield all([
@@ -60,5 +61,6 @@ export default function* rootSaga() {
     fork(latestTransSaga),
     fork(approvedTransSaga),
     fork(disputedTransSaga),
+    fork(dashboardAdminDataSaga),
   ])
 }

@@ -134,3 +134,5 @@ export const GET_ALL_APPROVED_TRANSACTIONS =
 
 export const GET_ALL_DISPUTED_TRANSACTIONS =
   "api/admin/getAllDisputedTransactions"
+
+export const GET_DASHBOARD_ADMIN_DATA = "api/dashboard/getAdminData"

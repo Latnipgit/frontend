@@ -30,6 +30,7 @@ import { latestTransaction } from "../../common/data/dashboard"
 
 import { useSelector, useDispatch } from "react-redux"
 import { fetchLatestTransStart } from "store/LatestTransaction/latestTrans.action"
+import { fetchDashboardAdminDataStart } from "store/DashboardAdminData/dashboardAdminData.action"
 
 import {
   OrderId,
@@ -204,7 +205,7 @@ const LatestTranaction = props => {
   )
 
   const dispatch = useDispatch()
-  const latestTransactiondata = useSelector(selectLatestTansMap)
+  const latestTransactiondata = useSelector(selectLatestTansMap )
   useEffect(() => {
     dispatch(fetchLatestTransStart())
   }, [])
