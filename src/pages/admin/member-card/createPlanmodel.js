@@ -70,22 +70,21 @@ const CreatePlanModel = props => {
      ]
 
      const handleAddRow =()=>{
-        console.log("INNN")
-
-        dataTable.push(...dummyRow)
-        // setDataTable(dataTable)
+ setDataTable((prevData) => [...prevData, ...dummyRow]); 
      }
-      const handleRemove= (index)=>{
-        console.log("INNN", index)
-       dataTable.splice(index,1)
-    //    setDataTable(dataTable)
-     }
+   
+     const handleRemove = (index) => {
+        setDataTable((prevData) => {
+            const newData = [...prevData];
+            newData.splice(index, 1);
+            return newData;
+        });
+    };
 useEffect(()=>{
-
    
 },[dataTable])
 
-console.log("DATATA", dataTable, data)
+console.log("DATATA", dataTable)
     
     return (
         <Modal
