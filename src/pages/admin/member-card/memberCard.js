@@ -92,11 +92,13 @@ Create A Plan
     <Col md={4}></Col>
     <Col md={4} className="text-center">
     <div className="btn-group" role="group" aria-label="Basic example">
-  <button type="button" className="btn buttonYearly btn-lg"
+  <button type="button" className="btn text-light btn-lg"
   onClick={()=>setPrice("4999/-")}
+  style={{ background : price == "4999/-"?"#542381":"#2a3042"}}
   >Yearly</button>&nbsp;
-  <button type="button" className="btn buttonYearly btn-lg"
+  <button type="button" className="btn text-light  btn-lg"
     onClick={()=>setPrice("1000/-")}
+    style={{ background : price == "1000/-"?"#542381":"#2a3042"}}
 
   >Monthly</button>
 </div>
@@ -110,8 +112,8 @@ Create A Plan
 <Row>
     <Col md={6} className=" div-col text-capitalize">
     <div className=" insideCard">
-    <div className="card-content shadow">
-      <h1 className="card-title">Plan A</h1>
+    <div className="card-content">
+      <h1 className="card-title text-center">Plan A</h1>
   
       <br/>
      
@@ -148,6 +150,44 @@ Create A Plan
     </Col>
 
   
+    <Col md={6} className=" div-col text-capitalize">
+    <div className=" insideCard">
+    <div className="card-content">
+      <h1 className="card-title text-center">Plan B</h1>
+  
+      <br/>
+     
+
+    {data.map((item)=>{
+        return  <Row key={item}>
+        <Col md={8}>
+            <p>{item.service}</p>
+        </Col>
+        <Col md={4} className="text-end">
+        <p>{item.value!= ""? item.value:"1000/-"}</p>
+
+            </Col>
+     </Row>
+    })}
+      <br/>
+
+   <Row className="">
+       
+
+       <span> <b className="price">{price} </b></span>
+ 
+  
+   </Row>
+     <Row className="mt-2 mb-2">
+        <Col md={6}>
+            <Button className="btn btn-info">
+                Purchase Now
+            </Button>
+        </Col>
+     </Row>
+    </div>
+  </div>
+    </Col>
 </Row>
 <br/>
 <br/>

@@ -11,7 +11,8 @@ input[type=number] {
 
 .insideCard{
     border-radius: 10px !important;
-}
+    border: 0.1px solid rgb(219, 216, 216);
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
 .insideCard:hover,
 .insideCard:focus-within {
   transform: scale(1.02);
@@ -36,6 +37,6 @@ input[type=number] {
     font-size: 20px;
 }
 .buttonYearly{
-   background:#2a3042 ; 
-   color: #fafafa;
+   background:#542381 !important; 
+   color: #fafafa !important;
 }
