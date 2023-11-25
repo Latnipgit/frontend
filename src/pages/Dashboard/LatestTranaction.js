@@ -20,9 +20,7 @@ import {
   DropdownItem,
   Table,
 } from "reactstrap"
-// import { OverlayTrigger, Tooltip, Modal } from 'react-bootstrap';
 import { getOrders as onGetOrders } from "store/actions"
-
 import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal"
 import InvoiceModal from "./InvoicePopupModal"
 import ConfirmModal from "./ConfirmRefertoSeio"
@@ -51,6 +49,7 @@ const LatestTranaction = props => {
   const [showApproveModal, setShowApproveModal] = useState(false)
   const [showInProcessModal, setShowInProcessModal] = useState(false)
   const [modal1, setModal1] = useState(false)
+  const [selected, setSelected] = useState('')
   const handleReferClick = () => {
     setShowReferModal(true)
   }
@@ -65,6 +64,7 @@ const LatestTranaction = props => {
   const handleCancelRefer = () => {
     setSelectedLevel("") // Reset the selected level
     setShowReferModal(false)
+    
   }
 
   const toggleViewModal = () => setModal1(!modal1)
@@ -85,6 +85,11 @@ const LatestTranaction = props => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen)
   }
+  const viewModel= (value)=>{
+    console.log("VALUE", value)
+    setModal1(true)
+    setSelected(value.cell.row.original)
+  }
   const isReferDisabled = selectedLevel === ""
   const columns = useMemo(
     () => [
@@ -98,56 +103,88 @@ const LatestTranaction = props => {
       },
       {
         Header: "Reference No.",
-        accessor: "orderId",
+        accessor: "",
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <OrderId {...cellProps} />
+          return (
+            <div className="d-flex">
+             {/* {console.log("HARHSIT", cellProps.cell.row.original.debtor.id)} */}
+           {cellProps.cell.row.original.debtor.id}
+          </div>
+          );
         },
       },
       {
         Header: "Buyer Name",
-        accessor: "billingName",
+        accessor: "",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <BillingName {...cellProps} />
+          return (
+            <div className="d-flex">
+           {cellProps.cell.row.original.debtor.ownerName}
+          </div>
+          );
         },
       },
       {
         Header: "Seller Name",
-        accessor: "paymentMethod",
+        accessor: "",
         disableFilters: true,
         Cell: cellProps => {
-          return <PaymentMethod {...cellProps} />
+          return (
+            <div className="d-flex">
+             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+           {cellProps.cell.row.original.debtor.ownerName}
+          </div>
+          );
         },
       },
       {
         Header: "Amount",
-        accessor: "total",
+        accessor: "",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Total {...cellProps} />
+          return (
+            <div className="d-flex">
+             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+           {cellProps.cell.row.original.paymentHistory.amtPaid}
+          </div>
+          );
         },
       },
-      {
-        Header: "Due Since",
-        accessor: "orderdate",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <DueSince {...cellProps} />
-        },
-      },
-
+      // {
+      //   Header: "Due Since",
+      //   accessor: "",
+      //   disableFilters: true,
+      //   filterable: false,
+      //   Cell: cellProps => {
+      //     return (
+      //       <div className="d-flex">
+      //        {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+      //      {cellProps.cell.row.original.paymentHistory.amtPaid}
+      //      <span className="bg-success text-white">
+      //       <div style={{ padding: '3px' }}>({daysSince} days)</div>
+      //       <div style={{ padding: '3px' }}>{formattedDate}</div>
+      //   </span>
+      //     </div>
+      //     );
+      //   },
+      // },
       {
         Header: "Payment Status",
-        accessor: "paymentStatus",
+        accessor: "",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <PaymentStatus {...cellProps} />
+          return (
+            <div className="d-flex">
+             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+           {cellProps.cell.row.original.paymentHistory.status}
+          </div>
+          );
         },
       },
       {
@@ -156,7 +193,12 @@ const LatestTranaction = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Status {...cellProps} />
+          return (
+            <div className="d-flex">
+             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+           {cellProps.cell.row.original.paymentHistory.pendingWith}
+          </div>
+          );
         },
       },
 
@@ -170,7 +212,7 @@ const LatestTranaction = props => {
               type="button"
               color="primary"
               className="btn-sm btn-rounded"
-              onClick={toggleViewModal}
+              onClick={()=>viewModel(cellProps)}
             >
               View Details
             </Button>
@@ -178,41 +220,25 @@ const LatestTranaction = props => {
         },
       },
 
-      // {
-      //   Header: "Action",
-      //   disableFilters: true,
-      //   accessor: "project",
-      //   Cell: cellProps => {
-      //     return (
-      //       <div className="d-flex">
-      //       <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
-      //         <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
-      //       </div>
-      //       <div className="d-flex flex-column align-items-center me-3" onClick={handleInProcessClick} style={{ cursor: 'pointer' }}>
-      //         <i className="mdi mdi-progress-clock font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="In Process" />
-      //       </div>
 
-      //           <div className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }}>
-      //               <i className="mdi mdi-account-supervisor font-size-18 text-warning mb-1" onClick={handleReferClick} />
-      //           </div>
-      //     </div>
-
-      //     );
-      //   },
-      // },
     ],
     []
   )
 
   const dispatch = useDispatch()
   const latestTransactiondata = useSelector(selectLatestTansMap )
+  // const {latestTransactiondata} = useSelector(state=>{
+  //   console.log("latestTransactiondata", state)
+  //   // GetAllInvoice: state.DebtorsReducer.getInvoiceList!= undefined ? state.DebtorsReducer.getInvoiceList.response:[],
+  // })
   useEffect(() => {
     dispatch(fetchLatestTransStart())
   }, [])
+  console.log("latestTransactiondata", latestTransactiondata)
 
   return (
     <React.Fragment>
-      <InvoiceModal isOpen={modal1} toggle={toggleViewModal} />
+      <InvoiceModal isOpen={modal1} toggle={toggleViewModal} selected={selected} />
       {/* <ConfirmModal isOpen={isModalOpen} toggle={toggleModal} /> */}
       <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>
         <ModalHeader toggle={() => setShowReferModal(false)}>
@@ -251,7 +277,7 @@ const LatestTranaction = props => {
 
       <Card>
         <CardBody>
-          <div className="mb-4 h4 card-title">Latest Transaction</div>
+          <div className="mb-4 h4 card-title">Latest Reported Transaction</div>
           <TableContainer
             columns={columns}
             data={latestTransactiondata}

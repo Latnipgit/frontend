@@ -17,6 +17,15 @@ export function* fetchApprovedTransAsync() {
     yield put(fetchApprovedTransFailure(error))
   }
 }
+export function* fetchAllTransactions() {
+  try {
+    const approvedTransArray = yield call(getAllApprovedTransactions)
+    yield put(fetchApprovedTransSuccess(approvedTransArray.data.response))
+  } catch (error) {
+    yield put(fetchApprovedTransFailure(error))
+  }
+}
+
 
 export function* onFetchApprovedTrans() {
   yield takeLatest(FETCH_APPROVED_TRANSACTIONS_START, fetchApprovedTransAsync)

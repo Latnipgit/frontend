@@ -209,6 +209,12 @@ const SidebarContent = props => {
               </Link>
             </li>
             {/* <li>
+              <Link to="/ReportedInvoice" >
+                <i className="bx bx-user-circle"></i>
+                {props.t("Reported Defaulter")}
+              </Link>
+            </li> */}
+            {/* <li>
               <Link to="/#" className="has-arrow ">
                 <i className="bx bx-briefcase-alt-2"></i>
                 <span>{props.t("Projects")}</span>

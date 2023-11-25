@@ -8,6 +8,7 @@ import DiputedBillings from "../pages/admin/DisputedBillings/DiputedBillings";
 import ApprovedTranction from "../pages/admin/ApprovedTransaction/ApprovedTranction";
 // Pages Component
 import Chat from "../pages/Chat/Chat";
+import ReportedInvoice from "./../pages/ReportedDefauter/ReportedInvoice"
 
 // File Manager
 import FileManager from "../pages/FileManager/index";
@@ -200,6 +201,7 @@ const authProtectedRoutes = [
  { path: "/approved-transaction", component: <ApprovedTranction /> },
  { path: "/company-history", component: <LatestTransactionPage /> },
  { path: "/subscription", component: <MemberCard /> },
+ { path: "/ReportedInvoice", component: <ReportedInvoice /> },
  
 
 

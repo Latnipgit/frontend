@@ -10,12 +10,14 @@ export const selectLatestTans = createSelector(
   export const selectLatestTansMap = createSelector(
     [selectLatestTans],
     (latestTans) =>{
-        return latestTans.map((latestTans) => {
-            const { Invoice :{billDate : orderdate, id : orderId}, debtor:{ownerName : billingName}, paymentHistory:{amtPaid: total, status: paymentStatus, pendingWith: Status,} } = latestTans;
-            const methodIcon = "fab fa-cc-paypal";
-            const paymentMethod = "Akshay";
-            return {orderId, billingName, orderdate, total, paymentStatus, methodIcon, Status, paymentMethod};
-          })
+      console.log("latestTanslatestTans", latestTans)
+      return latestTans
+        // return latestTans.map((latestTans) => {
+        //     const { Invoice :{billDate : orderdate, id : orderId}, debtor:{ownerName : billingName}, paymentHistory:{amtPaid: total, status: paymentStatus, pendingWith: Status,} } = latestTans;
+        //     const methodIcon = "fab fa-cc-paypal";
+        //     const paymentMethod = "Akshay";
+        //     return {orderId, billingName, orderdate, total, paymentStatus, methodIcon, Status, paymentMethod};
+        //   })
     }
 
   );

@@ -15,10 +15,12 @@ import {
     Row, Col
 } from "reactstrap"
 import { Link } from 'react-router-dom';
-
+import moment from 'moment'
 
 const InvoiceModal = props => {
-    const { isOpen, toggle } = props
+    const { isOpen, toggle, selected } = props
+    console.log("InvoiceModal", selected
+    )
     const [attachments, setAttachments] = useState([
         { name: 'document.pdf', type: 'application/pdf' },
         { name: 'image.jpg', type: 'image/jpeg' },
@@ -96,15 +98,15 @@ const InvoiceModal = props => {
                                 <CardBody className="buyer-card-body">
                                 <div className="container">
                                         <div className="row">
-                                            <div className="col-md-6">
-                                                <h4>
-                                                    Reference No. : <span className="text-primary">#123456</span>
-                                                </h4>
+                                            <div className="col-md-8">
+                                                <h5>
+                                                    Reference No. : <span className="text-primary">{selected!= ""? selected.debtor.id:''}</span>
+                                                </h5>
                                             </div>
-                                            <div className="col-md-6">
-                                                <h4 className="text-right">
-                                                    Date: <span className="text-primary">04-Sep-2023</span>
-                                                </h4>
+                                            <div className="col-md-4">
+                                                <h5 className="text-right">
+                                                    Date: <span className="text-primary">{selected!= ""? moment(selected.debtor.createdAt).format("DD-MM-YYYY"):''}</span>
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>
@@ -118,16 +120,16 @@ const InvoiceModal = props => {
                                 <CardBody className="buyer-card-body">
 
                                     <p className="mb-2">
-                                        Billing Name: <span className="text-primary">Ramakant Saraswat</span>
+                                        Billing Name: <span className="text-primary">{selected!= ""? selected.debtor.ownerName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Company name : <span className="text-primary">Latnip IT Solution</span>
+                                        Company name : <span className="text-primary">{selected!= ""? selected.debtor.companyName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        GST Number : <span className="text-primary">LKJHGFHGDHGFB</span>
+                                        GST Number : <span className="text-primary">{selected!= ""? selected.debtor.gstin:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Contact Number : <span className="text-primary">(+91)-9876543210</span>
+                                        Contact Number : <span className="text-primary">{selected!= ""? selected.debtor.ownerMobile:''}</span>
                                     </p>
 
                                 </CardBody>
@@ -140,16 +142,16 @@ const InvoiceModal = props => {
 
 
                                     <p className="mb-2">
-                                        Billing Name: <span className="text-primary">Ramakant Saraswat</span>
+                                        Billing Name: <span className="text-primary">{selected!= ""? selected.debtor.ownerName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Company name : <span className="text-primary">Latnip IT Solution</span>
+                                        Company name : <span className="text-primary">{selected!= ""? selected.debtor.companyName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        GST Number : <span className="text-primary">LKJHGFHGDHGFB</span>
+                                        GST Number : <span className="text-primary">{selected!= ""? selected.debtor.gstin:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Contact Number : <span className="text-primary">(+91)-9876543210</span>
+                                        Contact Number : <span className="text-primary">{selected!= ""? selected.debtor.ownerMobile:''}</span>
                                     </p>
                                 </CardBody>
                             </Card>
@@ -171,21 +173,34 @@ const InvoiceModal = props => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Wireless Headphone (Black)</td>
-                                            <td>2</td>
-                                            <td>$225</td>
-                                            <td>$450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Hoodie (Blue)</td>
-                                            <td>1</td>
-                                            <td>$145</td>
-                                            <td>$145</td>
-                                        </tr>
-                                        {/* Add more rows as needed */}
+                                    {selected!= ""? selected.Invoice.items.length != 0 ? selected.Invoice.items.map((item)=>{
+                                            return <tr key={item}>
+                                                 <td>1</td>
+                                                 <td>Wireless Headphone (Black)</td>
+                                                 <td>2</td>
+                                                 <td>$225</td>
+                                                 <td>$450</td>
+                                             </tr>
+                                    }):
+                                   <>
+                                    <tr>
+                                                 <td>1</td>
+                                                 <td>Wireless Headphone (Black)</td>
+                                                 <td>2</td>
+                                                 <td>$225</td>
+                                                 <td>$450</td>
+                                             </tr>
+                                              <tr>
+                                              <td>2</td>
+                                              <td>Wireless Headphone (Black)</td>
+                                              <td>2</td>
+                                              <td>$225</td>
+                                              <td>$450</td>
+                                          </tr>
+                                   </>
+                                             :''
+                                    }  
+                                      
                                     </tbody>
                                     <tfoot>
                                         <tr>
