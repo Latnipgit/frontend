@@ -25,7 +25,7 @@ import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersMo
 import InvoiceModal from "./InvoicePopupModal"
 import ConfirmModal from "./ConfirmRefertoSeio"
 import { latestTransaction } from "../../common/data/dashboard"
-
+import * as moment from "moment";
 import { useSelector, useDispatch } from "react-redux"
 import { fetchLatestTransStart } from "store/LatestTransaction/latestTrans.action"
 import { fetchDashboardAdminDataStart } from "store/DashboardAdminData/dashboardAdminData.action"
@@ -91,6 +91,10 @@ const LatestTranaction = props => {
     setSelected(value.cell.row.original)
   }
   const isReferDisabled = selectedLevel === ""
+  var CurrentDate = moment().format('DD-MM-YYYY');
+CurrentDate = moment([CurrentDate])
+console.log("current okokok", CurrentDate)
+
   const columns = useMemo(
     () => [
       {
@@ -110,7 +114,8 @@ const LatestTranaction = props => {
           return (
             <div className="d-flex">
              {/* {console.log("HARHSIT", cellProps.cell.row.original.debtor.id)} */}
-           {cellProps.cell.row.original.debtor.id}
+           
+           {cellProps.cell.row.original.debtor != null ?"BAF"+"-" +  cellProps.cell.row.original.debtor.creditorCompanyId.slice(-6).toUpperCase():''}
           </div>
           );
         },
@@ -135,8 +140,8 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-           {cellProps.cell.row.original.debtor.ownerName}
+             {console.log("HARHSIT", cellProps.cell.row.original)}
+           {cellProps.cell.row.original.debtor.companyName}
           </div>
           );
         },
@@ -155,24 +160,46 @@ const LatestTranaction = props => {
           );
         },
       },
-      // {
-      //   Header: "Due Since",
-      //   accessor: "",
-      //   disableFilters: true,
-      //   filterable: false,
-      //   Cell: cellProps => {
-      //     return (
-      //       <div className="d-flex">
-      //        {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-      //      {cellProps.cell.row.original.paymentHistory.amtPaid}
-      //      <span className="bg-success text-white">
-      //       <div style={{ padding: '3px' }}>({daysSince} days)</div>
-      //       <div style={{ padding: '3px' }}>{formattedDate}</div>
-      //   </span>
-      //     </div>
-      //     );
-      //   },
-      // },
+      {
+        Header: "Due Since",
+        accessor: "",
+        
+        disableFilters: true,
+        filterable: false,
+        // Cell: cellProps => {
+        //   const CreatedDate = moment([cellProps.cell.row.original.debtor.createdAt]).format("DD-MM-YYYY")
+        //   return (
+        //     <div className=" bg-success text-white text-center" style={{ width:"100px"}}>
+        //     <p style={{  margin:'0px'}}>{CurrentDate.diff(CreatedDate, 'days')}</p>
+
+        //     <p style={{  margin:'0px'}}> {moment(cellProps.cell.row.original
+        //       .debtor.createdAt).format("DD-MM-YYYY")}</p>
+       
+        //   </div>
+        //   );
+        // },
+        Cell: cellProps => {
+          console.log("cellprops", cellProps.cell.row.original.Invoice.dueDate != undefined ? cellProps.cell.row.original.Invoice.dueDate:'')
+          const a = moment(cellProps.cell.row.original.Invoice.dueDate);
+          const b =moment()
+          const c = moment(a).diff(b)
+          const d = moment.duration(c)
+          console.log("ABABAB",d.days())
+          return (
+  
+            <div className="" style={{ padding:"5px 5px"}}>
+              <div className=" text-center bg-success p-1 rounded text-light">
+                <div className="text-capitalize">
+                  {
+                    d.days()
+  
+                  } Days </div>
+                <div className="text-capitalize" >{moment(cellProps.cell.row.original.debtor.createdAt).format("MM-DD-YY")}</div>
+              </div>
+            </div>
+            )}
+      },
+    
       {
         Header: "Payment Status",
         accessor: "",
