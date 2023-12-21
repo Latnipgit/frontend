@@ -128,7 +128,7 @@ console.log("current okokok", CurrentDate)
         Cell: cellProps => {
           return (
             <div className="d-flex">
-           {cellProps.cell.row.original.debtor.ownerName}
+           {cellProps.cell.row.original.debtor == null ? '' : cellProps.cell.row.original.debtor.ownerName}
           </div>
           );
         },
@@ -140,8 +140,7 @@ console.log("current okokok", CurrentDate)
         Cell: cellProps => {
           return (
             <div className="d-flex">
-             {console.log("HARHSIT", cellProps.cell.row.original)}
-           {cellProps.cell.row.original.debtor.companyName}
+           {cellProps.cell.row.original.debtor == null ? '' : cellProps.cell.row.original.debtor.companyName}
           </div>
           );
         },
@@ -194,7 +193,7 @@ console.log("current okokok", CurrentDate)
                     d.days()
   
                   } Days </div>
-                <div className="text-capitalize" >{moment(cellProps.cell.row.original.debtor.createdAt).format("MM-DD-YY")}</div>
+                <div className="text-capitalize" >{moment(cellProps.cell.row.original.debtor == null ? '' :  cellProps.cell.row.original.debtor.createdAt).format("MM-DD-YY")}</div>
               </div>
             </div>
             )}
