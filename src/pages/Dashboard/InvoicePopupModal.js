@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment'
 
 const InvoiceModal = props => {
+    debugger
     const { isOpen, toggle, selected } = props
     console.log("InvoiceModal", selected
     )
@@ -96,21 +97,21 @@ const InvoiceModal = props => {
                         <Col md="12">
                             <Card className="mb-1">
                                 <CardBody className="buyer-card-body">
-                                <div className="container">
+                                    <div className="container">
                                         <div className="row">
                                             <div className="col-md-8">
                                                 <h5>
-                                                    Reference No. : <span className="text-primary">{selected!= ""? selected.debtor.id:''}</span>
+                                                    Reference No. : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor._id : ''}</span>
                                                 </h5>
                                             </div>
                                             <div className="col-md-4">
                                                 <h5 className="text-right">
-                                                    Date: <span className="text-primary">{selected!= ""? moment(selected.debtor.createdAt).format("DD-MM-YYYY"):''}</span>
+                                                    Date: <span className="text-primary">{selected.defaulterEntry != undefined ? moment(selected.defaulterEntry.debtor.createdAt).format("DD-MM-YYYY") : ''}</span>
                                                 </h5>
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                 </CardBody>
                             </Card>
                         </Col>
@@ -120,16 +121,16 @@ const InvoiceModal = props => {
                                 <CardBody className="buyer-card-body">
 
                                     <p className="mb-2">
-                                        Billing Name: <span className="text-primary">{selected!= ""? selected.debtor.ownerName:''}</span>
+                                        Billing Name: <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.firstname : ''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Company name : <span className="text-primary">{selected!= ""? selected.debtor.companyName:''}</span>
+                                        Company name : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.companyName : ''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        GST Number : <span className="text-primary">{selected!= ""? selected.debtor.gstin:''}</span>
+                                        GST Number : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.gstin : ''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Contact Number : <span className="text-primary">{selected!= ""? selected.debtor.ownerMobile:''}</span>
+                                        Contact Number : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.customerMobile : ''}</span>
                                     </p>
 
                                 </CardBody>
@@ -142,16 +143,16 @@ const InvoiceModal = props => {
 
 
                                     <p className="mb-2">
-                                        Billing Name: <span className="text-primary">{selected!= ""? selected.debtor.ownerName:''}</span>
+                                        Billing Name: <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.firstname : ''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Company name : <span className="text-primary">{selected!= ""? selected.debtor.companyName:''}</span>
+                                        Company name : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.companyName : ''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        GST Number : <span className="text-primary">{selected!= ""? selected.debtor.gstin:''}</span>
+                                        GST Number : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.gstin : ''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Contact Number : <span className="text-primary">{selected!= ""? selected.debtor.ownerMobile:''}</span>
+                                        Contact Number : <span className="text-primary">{selected.defaulterEntry != undefined ? selected.defaulterEntry.debtor.customerMobile : ''}</span>
                                     </p>
                                 </CardBody>
                             </Card>
@@ -173,34 +174,34 @@ const InvoiceModal = props => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {selected!= ""? selected.Invoice.items.length != 0 ? selected.Invoice.items.map((item)=>{
+                                        {selected.defaulterEntry != undefined ? selected.defaulterEntry.invoices != 0 ? selected.defaulterEntry.invoices.map((item) => {
                                             return <tr key={item}>
-                                                 <td>1</td>
-                                                 <td>Wireless Headphone (Black)</td>
-                                                 <td>2</td>
-                                                 <td>$225</td>
-                                                 <td>$450</td>
-                                             </tr>
-                                    }):
-                                   <>
-                                    <tr>
-                                                 <td>1</td>
-                                                 <td>Wireless Headphone (Black)</td>
-                                                 <td>2</td>
-                                                 <td>$225</td>
-                                                 <td>$450</td>
-                                             </tr>
-                                              <tr>
-                                              <td>2</td>
-                                              <td>Wireless Headphone (Black)</td>
-                                              <td>2</td>
-                                              <td>$225</td>
-                                              <td>$450</td>
-                                          </tr>
-                                   </>
-                                             :''
-                                    }  
-                                      
+                                                <td>1</td>
+                                                <td>Wireless Headphone (Black)</td>
+                                                <td>2</td>
+                                                <td>$225</td>
+                                                <td>$450</td>
+                                            </tr>
+                                        }) :
+                                            <>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Wireless Headphone (Black)</td>
+                                                    <td>2</td>
+                                                    <td>$225</td>
+                                                    <td>$450</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Wireless Headphone (Black)</td>
+                                                    <td>2</td>
+                                                    <td>$225</td>
+                                                    <td>$450</td>
+                                                </tr>
+                                            </>
+                                            : ''
+                                        }
+
                                     </tbody>
                                     <tfoot>
                                         <tr>
