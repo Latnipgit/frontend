@@ -106,7 +106,7 @@ const FeedbackQuestionModel = props => {
             "value": ""
         }
     ]
-
+   
     const handleAddRow = () => {
         setDataTable((prevData) => [...prevData, ...dummyRow]);
     }
@@ -297,7 +297,19 @@ const QuestionSelecter = () => {
     const handlefinancialdifficult = (selected) => {
         setSelectQType(selected)
     }
+    const [multiValues, setMultiValues] = useState('');
 
+    const handleInputChange = (e) => {
+      setMultiValues(e.target.value);
+    };
+  
+    const handleSubmit = () => {
+      // Split the values using the comma as the delimiter
+      const valuesArray = multiValues.split(',');
+  
+      // Process the values as needed
+      console.log("valuesArray",valuesArray,multiValues);
+    };
     return (
         <>
             <td>
@@ -308,6 +320,7 @@ const QuestionSelecter = () => {
                     styles={colourStyles}
                     placeholder="Select Opation"
                     onChange={(selected) => handlefinancialdifficult(selected.value)}
+                    
                 />
             </td>
             <td>
@@ -315,6 +328,7 @@ const QuestionSelecter = () => {
                     className="form-control text-capitalize"
                     placeholder="Enter Value"
                     type="text"
+                    
                 />
 
                 ) : selectQType === "TEXT-AREA" ? (<textarea
@@ -400,11 +414,19 @@ const QuestionSelecter = () => {
                         </Col>
 
                     </div>
-                ) : selectQType === "DROP-DOWN" ? (<Input
+                ) : selectQType === "DROP-DOWN" ? (<>
+                <Input
                     className="form-control text-capitalize"
-                    placeholder="Enter Drop down Value"
+                    // placeholder="Enter Drop down Value"
                     type="text"
-                />) : selectQType === "" ? (<Input
+
+                    // value={multiValues}
+                    onChange={(e)=>handleInputChange(e)}
+                    placeholder="e.g., value1, value2, value3"
+                />
+                <Button className="btn btn-sm btn-info mt-1 " onClick={()=>handleSubmit()}>Submit</Button>
+                </>
+                ) : selectQType === "" ? (<Input
                     className="form-control text-capitalize"
                     placeholder="Enter Value"
                     type="text"
