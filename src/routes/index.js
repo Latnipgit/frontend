@@ -79,6 +79,7 @@ import TwostepVerification2 from "../pages/AuthenticationInner/auth-two-step-ver
 
 // Dashboard
 import Dashboard from "../pages/Dashboard/index";
+import LatestTranactionViewDetails from "../pages/Dashboard/LatesttransactionViewDetails";
 import DashboardSaas from "../pages/Dashboard-saas/index";
 import DashboardCrypto from "../pages/Dashboard-crypto/index";
 import Blog from "../pages/Dashboard-Blog/index";
@@ -240,6 +241,7 @@ const authProtectedRoutes = [
   { path: "/ecommerce-checkout", component: <EcommerceCheckout /> },
   { path: "/ecommerce-shops", component: <EcommerceShops /> },
   { path: "/ecommerce-add-product", component: <EcommerceAddProduct /> },
+  { path: "/LatestTranaction-View-Details", component: <LatestTranactionViewDetails /> },
 
   //Email
   { path: "/email-inbox", component: <EmailInbox /> },
@@ -356,7 +358,7 @@ const authProtectedRoutes = [
   {
     path: "/",
     exact: true,
-    component: < Navigate to="/dashboard" />,
+    component: < Navigate to="/login" />,
   },
 ];
 
