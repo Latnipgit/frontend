@@ -17,7 +17,7 @@ import FileManager from "../pages/FileManager/index";
 import UserProfile from "../pages/Authentication/user-profile";
 
 // setting page for reset password
- import Settings from "pages/Dashboard-Blog/Settings";
+import Settings from "pages/Dashboard-Blog/Settings";
 
 // Pages Calendar
 import Calendar from "../pages/Calendar/index";
@@ -180,6 +180,7 @@ import PagesPricing from "../pages/Utility/pages-pricing";
 import Pages404 from "../pages/Utility/pages-404";
 import Pages500 from "../pages/Utility/pages-500";
 import MemberCard from "../pages/admin/member-card/memberCard";
+import FeedbackQuestionModel from "../pages/admin/FeedbackQuestion/FeedbackQuestion"
 
 //Contacts
 import ContactsGrid from "../pages/Contacts/contacts-grid";
@@ -199,11 +200,12 @@ const authProtectedRoutes = [
   { path: "/members-list", component: <MembersList /> },
   { path: "/registered-company", component: <RegisteredCompanyList /> },
   { path: "/disputed-billings", component: <DiputedBillings /> },
- { path: "/approved-transaction", component: <ApprovedTranction /> },
- { path: "/company-history", component: <LatestTransactionPage /> },
- { path: "/subscription", component: <MemberCard /> },
- { path: "/ReportedInvoice", component: <ReportedInvoice /> },
- 
+  { path: "/approved-transaction", component: <ApprovedTranction /> },
+  { path: "/company-history", component: <LatestTransactionPage /> },
+  { path: "/subscription", component: <MemberCard /> },
+  { path: "/feedbackQuestion", component: <FeedbackQuestionModel /> },
+  { path: "/ReportedInvoice", component: <ReportedInvoice /> },
+
 
 
 
