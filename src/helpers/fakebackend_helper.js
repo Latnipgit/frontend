@@ -174,6 +174,9 @@ export const getOrders = () => get(url.GET_ORDERS)
 // add order
 export const addNewOrder = order => post(url.ADD_NEW_ORDER, order)
 
+// add feedback question
+export const addQuestionApi = order => post(url.ADD_FEEDBACK_QUESTION, order)
+
 // update order
 export const updateOrder = order => put(url.UPDATE_ORDER, order)
 

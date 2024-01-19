@@ -66,6 +66,7 @@ import { approvedTransReducer } from "./ApprovedTransactions/approvedTrans.reduc
 import { disputedTransReducer } from "./DisputedTransactions/disputedTrans.reducer"
 
 import { dashboardAdminDataReducer } from "./DashboardAdminData/dashboardAdminData.reducer"
+import { AddFeedbackQuestionReducer } from "./addFeedbackQuestion/addFeedbackQuestion.reducer"
 
 const rootReducer = combineReducers({
   // public
@@ -95,6 +96,7 @@ const rootReducer = combineReducers({
   approvedTransReducer,
   disputedTransReducer,
   dashboardAdminDataReducer,
+  AddFeedbackQuestionReducer,
 })
 
 export default rootReducer
