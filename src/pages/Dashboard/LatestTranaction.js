@@ -41,7 +41,7 @@ import {
 } from "./LatestTranactionCol"
 
 import TableContainer from "../../components/Common/TableContainer"
-
+import {Link, useNavigate} from 'react-router-dom';
 import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 
 const LatestTranaction = props => {
@@ -64,7 +64,7 @@ const LatestTranaction = props => {
   const handleCancelRefer = () => {
     setSelectedLevel("") // Reset the selected level
     setShowReferModal(false)
-
+    
   }
 
   const toggleViewModal = () => setModal1(!modal1)
@@ -85,26 +85,33 @@ const LatestTranaction = props => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen)
   }
-  const viewModel = (value) => {
+  // const history = useHistory();
+  const navigate = useNavigate();
+  const viewModel= (value)=>{
     console.log("VALUE", value)
-    setModal1(true)
+    // setModal1(true)
+    // history.push({
+    //   pathname: '/LatestTranaction-View-Details',
+    //   state: { selected: value.cell.row.original }
+    // });
+    navigate('/LatestTranaction-View-Details',{state:{selected:value.cell.row.original}});
     setSelected(value.cell.row.original)
   }
   const isReferDisabled = selectedLevel === ""
   var CurrentDate = moment().format('DD-MM-YYYY');
-  CurrentDate = moment([CurrentDate])
-  console.log("current okokok", CurrentDate)
+CurrentDate = moment([CurrentDate])
+console.log("current okokok", CurrentDate)
 
   const columns = useMemo(
     () => [
-      {
-        Header: "#",
-        filterable: false,
-        disableFilters: true,
-        Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />
-        },
-      },
+      // {
+      //   Header: "#",
+      //   filterable: false,
+      //   disableFilters: true,
+      //   Cell: cellProps => {
+      //     return <input type="checkbox" className="form-check-input" />
+      //   },
+      // },
       {
         Header: "Reference No.",
         accessor: "",
@@ -113,10 +120,10 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {/* {console.log("HARHSIT", cellProps.cell.row.original.debtor.id)} */}
-
-              {cellProps.cell.row.original.defaulterEntry != undefined ? "BAF" + "-" + cellProps.cell.row.original.defaulterEntry.debtor.creditorCompanyId.slice(-6).toUpperCase() : ''}
-            </div>
+             {/* {console.log("HARHSIT", cellProps.cell.row.original.debtor.id)} */}
+           
+           {cellProps.cell.row.original.debtor != null ?"BAF"+"-" +  cellProps.cell.row.original.debtor.creditorCompanyId.slice(-6).toUpperCase():''}
+          </div>
           );
         },
       },
@@ -128,8 +135,9 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.debtor.firstname : ''}
-            </div>
+              {console.log("companyNamecompanyName",cellProps.cell.row.original)}
+           {cellProps.cell.row.original.defaulterEntry == undefined? '' : cellProps.cell.row.original.defaulterEntry.debtor.companyName}
+          </div>
           );
         },
       },
@@ -140,8 +148,8 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.debtor.companyName : ''}
-            </div>
+           {cellProps.cell.row.original.debtor == null ? '' : cellProps.cell.row.original.debtor.companyName}
+          </div>
           );
         },
       },
@@ -153,16 +161,16 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-              {cellProps.cell.row.original.amtPaid}
-            </div>
+             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+           {cellProps.cell.row.original != undefined ? cellProps.cell.row.original.amtPaid:''}
+          </div>
           );
         },
       },
       {
         Header: "Due Since",
         accessor: "",
-
+        
         disableFilters: true,
         filterable: false,
         // Cell: cellProps => {
@@ -173,33 +181,32 @@ const LatestTranaction = props => {
 
         //     <p style={{  margin:'0px'}}> {moment(cellProps.cell.row.original
         //       .debtor.createdAt).format("DD-MM-YYYY")}</p>
-
+       
         //   </div>
         //   );
         // },
         Cell: cellProps => {
-          /*           console.log("cellprops", cellProps.cell.row.original.Invoice.dueDate != undefined ? cellProps.cell.row.original.Invoice.dueDate:'') */
-          const a = moment(cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.invoices[0].dueDate : '');
-          const b = moment()
-          const c = moment(a).diff(b)
+          // console.log("cellprops", cellProps.cell.row.original.Invoice.dueDate != undefined ? cellProps.cell.row.original.Invoice.dueDate:'')
+          const a = moment(cellProps.cell.row.original.defaulterEntry != null ? cellProps.cell.row.original.defaulterEntry.createdAt:'');
+          const b =moment()
+          const c = moment(b).diff(a)
           const d = moment.duration(c)
-          console.log("ABABAB", d.days())
+          console.log("ABABAB",d.days())
           return (
-
-            <div className="" style={{ padding: "5px 5px" }}>
+  
+            <div className="" style={{ padding:"5px 5px"}}>
               <div className=" text-center bg-success p-1 rounded text-light">
                 <div className="text-capitalize">
                   {
                     d.days()
-
+  
                   } Days </div>
-                <div className="text-capitalize" >{moment(cellProps.cell.row.original.defaulterEntry == undefined ? '' : cellProps.cell.row.original.defaulterEntry.debtor.createdAt).format("MM-DD-YY")}</div>
+                <div className="text-capitalize" >{moment(cellProps.cell.row.original.defaulterEntry == null ? '' :  cellProps.cell.row.original.defaulterEntry.createdAt).format("MM-DD-YY")}</div>
               </div>
             </div>
-          )
-        }
+            )}
       },
-
+    
       {
         Header: "Payment Status",
         accessor: "",
@@ -208,9 +215,9 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-              {cellProps.cell.row.original.status}
-            </div>
+             {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
+           { cellProps.cell.row.original.defaulterEntry != undefined ?cellProps.cell.row.original.defaulterEntry.status:""}
+          </div>
           );
         },
       },
@@ -222,9 +229,9 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-              {cellProps.cell.row.original.pendingWith}
-            </div>
+             {console.log("HARHSIT", cellProps.cell.row.original)}
+           { cellProps.cell.row.original != undefined ? cellProps.cell.row.original.status:"'"}
+          </div>
           );
         },
       },
@@ -239,7 +246,7 @@ const LatestTranaction = props => {
               type="button"
               color="primary"
               className="btn-sm btn-rounded"
-              onClick={() => viewModel(cellProps)}
+              onClick={()=>viewModel(cellProps)}
             >
               View Details
             </Button>
@@ -253,7 +260,7 @@ const LatestTranaction = props => {
   )
 
   const dispatch = useDispatch()
-  const latestTransactiondata = useSelector(selectLatestTansMap)
+  const latestTransactiondata = useSelector(selectLatestTansMap )
   // const {latestTransactiondata} = useSelector(state=>{
   //   console.log("latestTransactiondata", state)
   //   // GetAllInvoice: state.DebtorsReducer.getInvoiceList!= undefined ? state.DebtorsReducer.getInvoiceList.response:[],
