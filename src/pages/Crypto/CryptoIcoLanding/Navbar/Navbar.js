@@ -56,7 +56,7 @@ const Navbar_Page = props => {
               />
             )}
           </Link>
-
+{/* 
           <NavbarToggler
             className="p-0"
             onClick={() => {
@@ -64,7 +64,7 @@ const Navbar_Page = props => {
             }}
           >
             <i className="fa fa-fw fa-bars" />
-          </NavbarToggler>
+          </NavbarToggler> */}
 
           <Collapse id="topnav-menu-content" isOpen={isOpenMenu} navbar>
             <ScrollspyNav

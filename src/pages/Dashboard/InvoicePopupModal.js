@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment'
 
 const InvoiceModal = props => {
-    debugger
+    
     const { isOpen, toggle, selected } = props
     console.log("InvoiceModal", selected
     )

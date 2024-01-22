@@ -21,7 +21,7 @@ axiosApi.interceptors.response.use(
 
 
 export async function get(url, config = {}) {
-  // debugger
+  // 
 const token = JSON.parse(localStorage.getItem("authUser")).token; 
   const headers = {
     ...config.headers,
@@ -41,7 +41,7 @@ const token = JSON.parse(localStorage.getItem("authUser")).token;
 }
 
 export async function post(url, data, config = {}) {
-  // debugger
+  // 
     if(url!='/api/admin/login' && url!='/api/admin/password-reset'){
       const token = JSON.parse(localStorage.getItem("authUser")).token;
       const headers = {

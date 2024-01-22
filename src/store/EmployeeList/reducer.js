@@ -57,7 +57,7 @@ const INIT_STATE = {
           registrationError: action.payload,
         };
         case CHANGE_PASSWORD_WITH_OLD_PASSWORD:
-          // debugger
+          // 
         return {
           ...state,
           loading: true,

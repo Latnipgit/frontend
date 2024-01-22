@@ -133,8 +133,8 @@ const FeedbackQuestionModel = props => {
                         <br />
                         <br />
                         <br />
-                        <ModalHeader toggle={toggle}>Add Question</ModalHeader>
-                        <ModalBody style={{ padding: '5px 80px' }}>
+                        <ModalHeader toggle={toggle} className="ml-3">Add Feedback Question</ModalHeader>
+                        <ModalBody style={{ padding: '5px 20px' }}>
 
                             {/*                             <form>
                                 <Row className="mt-3">
@@ -170,7 +170,7 @@ const FeedbackQuestionModel = props => {
                                                 <td style={{ width: '2%' }}>
                                                     #{index + 1}
                                                 </td>
-                                                <td style={{ width: '50%' }} className="text-capitalize">
+                                                <td style={{ width: '40%' }} className="text-capitalize">
                                                     {item.service != '' ? item.service : <>
                                                         <Input
                                                             className="form-control text-capitalize"
@@ -194,7 +194,7 @@ const FeedbackQuestionModel = props => {
                                             <td></td>
                                             <td>
                                                 <Button className="btn btn-sm btn-info" onClick={() => handleAddRow()}>
-                                                    <i className='bx bx-plus'></i> &nbsp;Add New Service
+                                                    <i className='bx bx-plus'></i> &nbsp;Add New Question
                                                 </Button>
                                             </td>
 
@@ -203,7 +203,7 @@ const FeedbackQuestionModel = props => {
                                     </tbody>
                                 </table>
                             </Row>
-                            <Row style={{ padding: '5px 10px' }} >
+                            {/* <Row style={{ padding: '5px 10px' }} >
                                 <Col md={12}>
 
 
@@ -280,7 +280,7 @@ const FeedbackQuestionModel = props => {
                                     </Button>
                                 </Col>
                                 <Col md={4}></Col>
-                            </Row>
+                            </Row> */}
                         </ModalBody>
                     </div>
                 </CardBody>
@@ -331,8 +331,9 @@ const QuestionSelecter = () => {
                     
                 />
 
-                ) : selectQType === "TEXT-AREA" ? (<textarea
-                    rows={5}
+                ) : selectQType === "TEXT-AREA" ?
+                 (<textarea
+                    rows={2}
                     className={`form-control custom-content`}
                     placeholder="Enter Value"
                 /*           onChange={(e) => handlefinancialdifficult({

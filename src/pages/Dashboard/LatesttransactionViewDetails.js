@@ -12,7 +12,7 @@ import {
     ModalFooter,
     ModalHeader, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
     Table,
-    Row, Col
+    Row, Col, CardHeader
 } from "reactstrap"
 import { Link } from 'react-router-dom';
 import moment from 'moment'
@@ -406,21 +406,15 @@ console.log("selectedselected",selected)
                     </Row>
                   
                   
-                 
-                    <Row className="mt-4">
+                 <Card>
+                    <CardBody>
+                        
+                    <Row className="">
                         <Col md="4" className="mt-3" ><h3>Action</h3></Col>
                         <Col md="4" className="mt-3" >
                             <div className="col-sm-auto">
                                 <label className="visually-hidden" htmlFor="autoSizingSelect">Preference</label>
-                                {/* <select defaultValue="0" className="form-select" >
-                                    <option value="0">Select from here...</option>
-                                    <option value="Approved" onChange={(value)=>handleSelection(value)}>Approved</option>
-                                    <option value="Disputed" onChange={(value)=>handleSelection(value)}>Disputed</option>
-                                    <option value="Esclate" onChange={(value)=>handleSelection(value)}>Esclate To Next Level</option>
-                                    <option value="RequestToAddiyional " onChange={(value)=>handleSelection(value)}>Request For Additional Document</option>
-                                    <option value="RequestForCA"onChange={(value)=>handleSelection(value)}>Request For CA Certificate</option>
-                                  
-                                </select> */}
+                            
 
 <Select
       options={options}
@@ -441,52 +435,46 @@ console.log("selectedselected",selected)
                         </Col>
 
                     </Row>
-                    {console.log("selected.value",selectedOption)}
+                    </CardBody>
+                 </Card>
+
                {selectedOption != null && selectedOption.value == "Requesttoadditionaldocumnet"?  
                 <div className="mb-5">
 
-                  <Row>
-                    <h5 className="mt-4">Request A Document</h5> 
-                    <h6>
-                    <Label> 
-    <Input type="checkbox" style={checkboxStyle}
-     checked={isChecked1}
-     onChange={() => handleCheckboxChange(1)}
-    
-    />&nbsp; Seller 
-</Label> &nbsp; &nbsp; &nbsp; &nbsp;
-<Label> 
-    <Input type="checkbox" style={checkboxStyle}
-     checked={isChecked2}
-     onChange={() => handleCheckboxChange(2)}
-    />&nbsp; Buyer 
-</Label>
+            <Row className="mt-4">
+                <Col md={6}>
+                <Card className="shadow-sm">
+                    <CardHeader className="bg-white">
+                    <h5 className="">Request From Seller</h5> 
 
-                    </h6>
-
-                        <Col md={12}>
-<Label> 
+                    </CardHeader>
+                <CardBody>
+                <Row>
+                    <h5 className="">Request A Document</h5> 
+                  
+<Col md={6}><Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; CA Certificate 
-</Label> &nbsp; &nbsp; &nbsp; &nbsp;
+</Label></Col>
+<Col md={6}>
 <Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Purchase Order Document 
 </Label>
-&nbsp; &nbsp; &nbsp; &nbsp;
-<Label> 
+</Col>
+<Col md={6}><Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Transportation Document 
-</Label> &nbsp; &nbsp; &nbsp; &nbsp;
-<Label> 
+</Label> </Col>
+<Col md={6}><Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Payment Record Document 
-</Label>
-
-                        </Col>
+</Label></Col>
+                  
                     </Row>
+
                     <Row className="mt-3">
                         {/* <Col md={3}></Col> */}
                         <Col md={6} className="text-left">
                         <Label>
                             Enter Additional Required Information <br/> <br/>
-    <Input type="textarea" placeholder="Requried Documents From Seller/Buyer..." style={{ width:"380px", height:"100px"}}/>
+    <Input type="textarea" placeholder="Requried Documents From Seller..." style={{ width:"430px", height:"80px"}}/>
 </Label>
 
                         </Col>
@@ -494,11 +482,64 @@ console.log("selectedselected",selected)
                     </Row>
                     <Row>
                         {/* <Col md={5}></Col> */}
-                        <Col md={2}>
+                        <Col md={4}>
                             <Button className="btn btn-info">Request Document</Button>
                         </Col>
                         <Col md={5}></Col>
                     </Row>
+                </CardBody>
+              </Card>
+                </Col>
+
+                <Col md={6}>
+                <Card className="shadow-sm">
+                    <CardHeader className="bg-white">
+                    <h5 className="">Request From Buyer</h5> 
+
+                    </CardHeader>
+                <CardBody>
+                <Row>
+                    <h5 className="">Request A Document</h5> 
+                  
+<Col md={6}><Label> 
+    <Input type="checkbox" style={checkboxStyle}/>&nbsp; CA Certificate 
+</Label></Col>
+<Col md={6}>
+<Label> 
+    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Purchase Order Document 
+</Label>
+</Col>
+<Col md={6}><Label> 
+    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Transportation Document 
+</Label> </Col>
+<Col md={6}><Label> 
+    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Payment Record Document 
+</Label></Col>
+                  
+                    </Row>
+
+                    <Row className="mt-3">
+                        {/* <Col md={3}></Col> */}
+                        <Col md={6} className="text-left">
+                        <Label>
+                            Enter Additional Required Information <br/> <br/>
+    <Input type="textarea" placeholder="Requried Documents From Buyer..." style={{ width:"430px", height:"80px"}}/>
+</Label>
+
+                        </Col>
+                        <Col md={3}></Col>
+                    </Row>
+                    <Row>
+                        {/* <Col md={5}></Col> */}
+                        <Col md={4}>
+                            <Button className="btn btn-info">Request Document</Button>
+                        </Col>
+                        <Col md={5}></Col>
+                    </Row>
+                </CardBody>
+              </Card>
+                </Col>
+            </Row>
                   </div>
                   :
                   
