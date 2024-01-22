@@ -7,7 +7,10 @@ import { createAction } from "store/utils/reducer/reducer.utils"
 
 
 
-export const addFeedbackQuestionStart = (data) => createAction(ADD_FEEDBACK_QUESTION_START, data)
+export const addFeedbackQuestionStart = (data) => {
+  debugger
+  return createAction(ADD_FEEDBACK_QUESTION_START, data)
+}
 
 export const addFeedbackQuestionSuccess = (data) => createAction(ADD_FEEDBACK_QUESTION_SUCCESS, data)
 

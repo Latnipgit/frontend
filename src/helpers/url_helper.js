@@ -137,4 +137,4 @@ export const GET_ALL_DISPUTED_TRANSACTIONS =
 
 export const GET_DASHBOARD_ADMIN_DATA = "api/dashboard/getAdminData"
 
-export const ADD_FEEDBACK_QUESTION = "api/dashboard/getAdminData"
+export const ADD_FEEDBACK_QUESTION = "/api/questions/addQuestion"

@@ -22,12 +22,12 @@ axiosApi.interceptors.response.use(
 
 export async function get(url, config = {}) {
   // debugger
-const token = JSON.parse(localStorage.getItem("authUser")).token; 
+  const token = JSON.parse(localStorage.getItem("authUser")).token;
   const headers = {
     ...config.headers,
     'x-access-token': token,
-  };  
- 
+  };
+
   return await axiosApi
     .get(url, { ...config, headers })
     .then((response) => response)
@@ -42,15 +42,15 @@ const token = JSON.parse(localStorage.getItem("authUser")).token;
 
 export async function post(url, data, config = {}) {
   // debugger
-    if(url!='/api/admin/login' && url!='/api/admin/password-reset'){
-      const token = JSON.parse(localStorage.getItem("authUser")).token;
-      const headers = {
-        ...config.headers,
-        'x-access-token': token,
-      };  
-      return axiosApi
-      .post(url, { ...data }, { ...config,headers })
-      .then((response) =>response).catch((error) => {
+  if (url != '/api/admin/login' && url != '/api/admin/password-reset') {
+    const token = JSON.parse(localStorage.getItem("authUser")).token;
+    const headers = {
+      ...config.headers,
+      'x-access-token': token,
+    };
+    return axiosApi
+      .post(url, { ...data }, { ...config, headers })
+      .then((response) => response).catch((error) => {
         if (error.response) {
           console.log("Server responded with an error:", error.response.status);
         } else if (error.request) {
@@ -58,27 +58,27 @@ export async function post(url, data, config = {}) {
         }
       });
 
-    }else{
-      return axiosApi
+  } else {
+    return axiosApi
       .post(url, { ...data }, { ...config })
-      .then((response) =>response).catch((error) => {
+      .then((response) => response).catch((error) => {
         if (error.response) {
           console.log("Server responded with an error:", error.response.status);
         } else if (error.request) {
           console.log("No response received from the server:", error.request);
         }
       });
-    }
-  
   }
-    
+
+}
+
 
 
 export async function put(url, data, config = {}) {
   return axiosApi
     .put(url, { ...data }, { ...config })
     .then((response) => {
-       
+
       response.data
     })
     .catch((error) => {
@@ -94,6 +94,25 @@ export async function del(url, config = {}) {
   return await axiosApi
     .delete(url, { ...config })
     .then((response) => response.data)
+    .catch((error) => {
+      if (error.response) {
+        console.log("Server responded with an error:", error.response.status);
+      } else if (error.request) {
+        console.log("No response received from the server:", error.request);
+      }
+    });
+}
+
+export async function addEmployeeAPImethod(url, data, config = {}) {
+  console.log("urururur", url, data)
+  const token = localStorage.getItem("tokenemployeeRegister")
+  const headers = {
+    ...config.headers,
+    'x-access-token': token != null ? token : '',
+  };
+  return axiosApi
+    .post(url, { ...data }, { ...config, headers })
+    .then((response) => response)
     .catch((error) => {
       if (error.response) {
         console.log("Server responded with an error:", error.response.status);
