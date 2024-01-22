@@ -24,7 +24,6 @@ export async function get(url, config = {}) {
   // 
 const token = JSON.parse(localStorage.getItem("authUser")).token; 
   // debugger
-  const token = JSON.parse(localStorage.getItem("authUser")).token;
   const headers = {
     ...config.headers,
     'x-access-token': token,
