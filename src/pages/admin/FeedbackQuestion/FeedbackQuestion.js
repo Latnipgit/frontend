@@ -22,6 +22,13 @@ import {
 } from "reactstrap"
 import "../../admin/Common.scss"
 import Select from "react-select"
+
+import { addFeedbackQuestionStart } from "store/addFeedbackQuestion/addFeedbackQuestion.action";
+import { getFeebBackQuestionList } from "store/feedbackquestionList/feedbackquestionList.actions";
+import { getFeebBackQuestionListSelector } from "store/feedbackquestionList/feedbackquestionList.selecter";
+
+
+
 const data = [
     {
         "service": "invoice",
@@ -82,21 +89,16 @@ const colourStyles = {
 }
 
 const FeedbackQuestionModel = props => {
-    const [modal1, setModal1] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const [price, setPrice] = useState('4999/-');
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-
     const [individual, setIndividual] = useState(false)
-    const { isOpen, toggle } = props
     const [dataTable, setDataTable] = useState(data)
-
-    const toggleAdminModal = () => { setIsModalOpen(!isModalOpen); };
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    const getFeebBackQuestion = useSelector(getFeebBackQuestionListSelector)
 
+    console.log('getFeebBackQuestion', getFeebBackQuestion);
+
+    useEffect(() => {
+        dispatch(getFeebBackQuestionList())
     }, []);
 
 
@@ -106,7 +108,7 @@ const FeedbackQuestionModel = props => {
             "value": ""
         }
     ]
-   
+
     const handleAddRow = () => {
         setDataTable((prevData) => [...prevData, ...dummyRow]);
     }
@@ -125,7 +127,6 @@ const FeedbackQuestionModel = props => {
     console.log("DATATA", dataTable)
     return (
         <React.Fragment className="text-capitalize">
-            <CreatePlanModel isOpen={isModalOpen} toggle={toggleAdminModal} />
 
             <Card className="mt-5">
                 <CardBody>
@@ -133,6 +134,8 @@ const FeedbackQuestionModel = props => {
                         <br />
                         <br />
                         <br />
+                        <ModalHeader>Add Question</ModalHeader>
+                        <ModalBody style={{ padding: '5px 80px' }}>
                         <ModalHeader toggle={toggle} className="ml-3">Add Feedback Question</ModalHeader>
                         <ModalBody style={{ padding: '5px 20px' }}>
 
@@ -170,17 +173,7 @@ const FeedbackQuestionModel = props => {
                                                 <td style={{ width: '2%' }}>
                                                     #{index + 1}
                                                 </td>
-                                                <td style={{ width: '40%' }} className="text-capitalize">
-                                                    {item.service != '' ? item.service : <>
-                                                        <Input
-                                                            className="form-control text-capitalize"
-                                                            placeholder="Enter Service Name"
-                                                            type="text"
-
-                                                        />
-                                                    </>}
-                                                </td>
-                                                <QuestionSelecter />
+                                                <QuestionSelecter item={item} index={index} dispatch={dispatch} addFeedbackQuestionStart={addFeedbackQuestionStart} />
                                                 <td>
                                                     <Button className="btn btn-sm btn-danger" onClick={() => handleRemove(index)}>
                                                         <i className='bx bx-trash'></i> &nbsp;  Remove
@@ -188,8 +181,6 @@ const FeedbackQuestionModel = props => {
                                                 </td>
                                             </tr>
                                         })}
-
-
                                         <tr>
                                             <td></td>
                                             <td>
@@ -197,16 +188,12 @@ const FeedbackQuestionModel = props => {
                                                     <i className='bx bx-plus'></i> &nbsp;Add New Question
                                                 </Button>
                                             </td>
-
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </Row>
                             {/* <Row style={{ padding: '5px 10px' }} >
                                 <Col md={12}>
-
-
                                     <Row className=" p-2" style={{ background: '#f0f5f5' }}>
 
                                         <Col md={2} className="pt-2"><b>Yearly Price</b></Col>
@@ -215,31 +202,24 @@ const FeedbackQuestionModel = props => {
                                                 className="form-control"
                                                 placeholder="Enter Yearly Price"
                                                 type="number"
-
                                             />
                                         </Col>
                                         <Col md={7}></Col>
-
                                     </Row>
                                     <Row className=" p-2" style={{ background: '#f0f5f5' }}>
-
                                         <Col md={2} className="pt-2"><b>Monthly Price</b></Col>
                                         <Col md={3}>
                                             <Input
                                                 className="form-control"
                                                 placeholder="Enter Monthly Price"
                                                 type="number"
-
                                             />
                                         </Col>
                                         <Col md={7}></Col>
-
                                     </Row>
                                 </Col>
                             </Row>
                             <div className="radio p-3">
-
-
                                 <Row className="btn-group d-flex">
                                     <Col md={4}>
                                         <Label>
@@ -256,23 +236,13 @@ const FeedbackQuestionModel = props => {
                                     </Col>
                                     <Col md={4} className="pt-3">
                                         {individual == true ?
-
-
-
                                             <Input type="email" placeholder="Enter Email id" />
-
-
-
-
                                             : ""}
-
                                     </Col>
                                     <Col md={4}>
                                     </Col>
-
                                 </Row>
                             </div>
-
                             <Row className="mt-3 mb-3">
                                 <Col md={4} className="">
                                     <Button className="btn btn-info">
@@ -290,28 +260,68 @@ const FeedbackQuestionModel = props => {
 };
 
 
-const QuestionSelecter = () => {
+const QuestionText = ({ setTextVAlue, questionText }) => {
+    return (
+        <Input
+            className="form-control text-capitalize"
+            placeholder="Enter Question"
+            type="text"
+            value={questionText}
+            onChange={(e) => setTextVAlue(e.target.value,)}
+        />
+    )
+}
+
+
+const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
     const [selectQType, setSelectQType] = useState("")
     const [Integrity, setIntegrity] = useState(0)
+    const [addFeedQues, setAddFeedQues] = useState({
+        "questionDesc": "",
+        "questionType": "",
+        "values": ""
+    })
+    const [questionText, setquestionText] = useState('')
+    const setTextVAlue = (value) => {
+        setquestionText(value)
+        setAddFeedQues({ ...addFeedQues, questionDesc: value })
+
+    }
 
     const handlefinancialdifficult = (selected) => {
-        setSelectQType(selected)
+        setDescription(selected)
+        setSelectQType(selected.value)
     }
-    const [multiValues, setMultiValues] = useState('');
 
-    const handleInputChange = (e) => {
-      setMultiValues(e.target.value);
-    };
-  
+    const setDescription = (value) => {
+        if (value.questionType === "selectType") {
+            setAddFeedQues({ ...addFeedQues, questionType: value.value })
+        }
+
+        if (value.questionType === "value") {
+            if (selectQType === "DROP-DOWN") {
+                const valuesArray = value.value.split(',');
+                setAddFeedQues({ ...addFeedQues, values: valuesArray })
+            } else {
+                setAddFeedQues({ ...addFeedQues, values: value.value })
+            }
+        }
+
+        if (selectQType === "RATING") {
+            setAddFeedQues({ ...addFeedQues, values: "" })
+        }
+    }
+
     const handleSubmit = () => {
-      // Split the values using the comma as the delimiter
-      const valuesArray = multiValues.split(',');
-  
-      // Process the values as needed
-      console.log("valuesArray",valuesArray,multiValues);
+        dispatch(addFeedbackQuestionStart(addFeedQues))
     };
     return (
         <>
+            <td style={{ width: '50%' }} className="text-capitalize">
+                {item.service != '' ? item.service : <>
+                    <QuestionText setTextVAlue={setTextVAlue} questionText={questionText} />
+                </>}
+            </td>
             <td>
                 <Select
                     id="primaryContact"
@@ -319,8 +329,10 @@ const QuestionSelecter = () => {
                     options={opationList}
                     styles={colourStyles}
                     placeholder="Select Opation"
-                    onChange={(selected) => handlefinancialdifficult(selected.value)}
-                    
+                    onChange={(selected) => handlefinancialdifficult({
+                        "questionType": "selectType",
+                        "value": selected.value
+                    })}
                 />
             </td>
             <td>
@@ -328,7 +340,12 @@ const QuestionSelecter = () => {
                     className="form-control text-capitalize"
                     placeholder="Enter Value"
                     type="text"
-                    
+                    value={addFeedQues.values}
+                    onChange={(e) => setDescription({
+                        "questionType": "value",
+                        "value": e.target.value,
+                    })}
+
                 />
 
                 ) : selectQType === "TEXT-AREA" ?
@@ -336,11 +353,11 @@ const QuestionSelecter = () => {
                     rows={2}
                     className={`form-control custom-content`}
                     placeholder="Enter Value"
-                /*           onChange={(e) => handlefinancialdifficult({
-                              "questionDesc": "Enter Value",
-                              "questionType": "Enter Value",
-                              "values": e.target.value
-                          })} */
+                    value={addFeedQues.values}
+                    onChange={(e) => setDescription({
+                        "questionType": "value",
+                        "value": e.target.value,
+                    })}
                 />) : selectQType === "RATING" ? (
                     <div className="mb-1">
                         <Col md={6}>
@@ -415,25 +432,36 @@ const QuestionSelecter = () => {
                         </Col>
 
                     </div>
-                ) : selectQType === "DROP-DOWN" ? (<>
-                <Input
-                    className="form-control text-capitalize"
-                    // placeholder="Enter Drop down Value"
-                    type="text"
-
-                    // value={multiValues}
-                    onChange={(e)=>handleInputChange(e)}
-                    placeholder="e.g., value1, value2, value3"
-                />
-                <Button className="btn btn-sm btn-info mt-1 " onClick={()=>handleSubmit()}>Submit</Button>
-                </>
+                ) : selectQType === "DROP-DOWN" ? (
+                    <Input
+                        className="form-control text-capitalize"
+                        placeholder="e.g., value1, value2, value3"
+                        type="text"
+                        value={addFeedQues.values}
+                        onChange={(e) => setDescription({
+                            "questionType": "value",
+                            "value": e.target.value,
+                        })}
+                    />
                 ) : selectQType === "" ? (<Input
                     className="form-control text-capitalize"
                     placeholder="Enter Value"
                     type="text"
+                    value={addFeedQues.values}
+                    onChange={(e) => setDescription({
+                        "questionType": "value",
+                        "value": e.target.value,
+                    })}
                 />) : ""
                 }
+                <>
+                    <Button className="btn btn-sm btn-info mt-1 " onClick={() => handleSubmit()}>Submit</Button>
+                </>
             </td>
+
+
+
+
 
         </>
     )

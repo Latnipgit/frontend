@@ -399,22 +399,28 @@ console.log("selectedselected",selected)
 
 
 
+
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
+
+
+
+            <Row className="mt-4">
+                <Col md="4" className="mt-3" ><h3>Action</h3></Col>
+                <Col md="4" className="mt-3" >
+                    <div className="col-sm-auto">
+                        <label className="visually-hidden" htmlFor="autoSizingSelect">Preference</label>
+                        {/* <select defaultValue="0" className="form-select" >
+                                    <option value="0">Select from here...</option>
+                                    <option value="Approved" onChange={(value)=>handleSelection(value)}>Approved</option>
+                                    <option value="Disputed" onChange={(value)=>handleSelection(value)}>Disputed</option>
+                                    <option value="Esclate" onChange={(value)=>handleSelection(value)}>Esclate To Next Level</option>
+                                    <option value="RequestToAddiyional " onChange={(value)=>handleSelection(value)}>Request For Additional Document</option>
+                                    <option value="RequestForCA"onChange={(value)=>handleSelection(value)}>Request For CA Certificate</option>
                                   
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                  
-                  
-                 <Card>
-                    <CardBody>
-                        
-                    <Row className="">
-                        <Col md="4" className="mt-3" ><h3>Action</h3></Col>
-                        <Col md="4" className="mt-3" >
-                            <div className="col-sm-auto">
-                                <label className="visually-hidden" htmlFor="autoSizingSelect">Preference</label>
-                            
+                                </select> */}
 
 <Select
       options={options}
@@ -435,9 +441,7 @@ console.log("selectedselected",selected)
                         </Col>
 
                     </Row>
-                    </CardBody>
-                 </Card>
-
+                    {console.log("selected.value",selectedOption)}
                {selectedOption != null && selectedOption.value == "Requesttoadditionaldocumnet"?  
                 <div className="mb-5">
 
@@ -445,7 +449,7 @@ console.log("selectedselected",selected)
                 <Col md={6}>
                 <Card className="shadow-sm">
                     <CardHeader className="bg-white">
-                    <h5 className="">Request From Seller</h5> 
+                    <h5 className="">Seller</h5> 
 
                     </CardHeader>
                 <CardBody>
@@ -474,7 +478,7 @@ console.log("selectedselected",selected)
                         <Col md={6} className="text-left">
                         <Label>
                             Enter Additional Required Information <br/> <br/>
-    <Input type="textarea" placeholder="Requried Documents From Seller..." style={{ width:"430px", height:"80px"}}/>
+    <Input type="textarea" placeholder="Requried Documents From Seller..." style={{ width:"380px", height:"80px"}}/>
 </Label>
 
                         </Col>
@@ -494,7 +498,7 @@ console.log("selectedselected",selected)
                 <Col md={6}>
                 <Card className="shadow-sm">
                     <CardHeader className="bg-white">
-                    <h5 className="">Request From Buyer</h5> 
+                    <h5 className="">Buyer</h5> 
 
                     </CardHeader>
                 <CardBody>
@@ -523,7 +527,7 @@ console.log("selectedselected",selected)
                         <Col md={6} className="text-left">
                         <Label>
                             Enter Additional Required Information <br/> <br/>
-    <Input type="textarea" placeholder="Requried Documents From Buyer..." style={{ width:"430px", height:"80px"}}/>
+    <Input type="textarea" placeholder="Requried Documents From Seller/Buyer..." style={{ width:"380px", height:"80px"}}/>
 </Label>
 
                         </Col>

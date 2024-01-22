@@ -1,5 +1,5 @@
 import axios from "axios"
-import { del, get, post, put } from "./api_helper"
+import { del, get, post, put, addEmployeeAPImethod } from "./api_helper"
 import * as url from "./url_helper"
 
 //Get all Admin
@@ -175,7 +175,10 @@ export const getOrders = () => get(url.GET_ORDERS)
 export const addNewOrder = order => post(url.ADD_NEW_ORDER, order)
 
 // add feedback question
-export const addQuestionApi = order => post(url.ADD_FEEDBACK_QUESTION, order)
+export const addQuestionApi = order => addEmployeeAPImethod(url.ADD_FEEDBACK_QUESTION, order)
+
+// feedback quesiotn fatch
+export const getFeebBackQuestionListAPI = () => get("/api/questions/getAllQuestions")
 
 // update order
 export const updateOrder = order => put(url.UPDATE_ORDER, order)
