@@ -21,8 +21,9 @@ axiosApi.interceptors.response.use(
 
 
 export async function get(url, config = {}) {
+  // 
+const token = JSON.parse(localStorage.getItem("authUser")).token; 
   // debugger
-  const token = JSON.parse(localStorage.getItem("authUser")).token;
   const headers = {
     ...config.headers,
     'x-access-token': token,
@@ -41,16 +42,16 @@ export async function get(url, config = {}) {
 }
 
 export async function post(url, data, config = {}) {
-  // debugger
-  if (url != '/api/admin/login' && url != '/api/admin/password-reset') {
-    const token = JSON.parse(localStorage.getItem("authUser")).token;
-    const headers = {
-      ...config.headers,
-      'x-access-token': token,
-    };
-    return axiosApi
-      .post(url, { ...data }, { ...config, headers })
-      .then((response) => response).catch((error) => {
+  // 
+    if(url!='/api/admin/login' && url!='/api/admin/password-reset'){
+      const token = JSON.parse(localStorage.getItem("authUser")).token;
+      const headers = {
+        ...config.headers,
+        'x-access-token': token,
+      };  
+      return axiosApi
+      .post(url, { ...data }, { ...config,headers })
+      .then((response) =>response).catch((error) => {
         if (error.response) {
           console.log("Server responded with an error:", error.response.status);
         } else if (error.request) {

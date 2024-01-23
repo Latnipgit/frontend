@@ -88,7 +88,7 @@ const Header = props => {
               </Link>
             </div>
 
-            <button
+            {/* <button
               type="button"
               className="btn btn-sm px-3 font-size-16 d-lg-none header-item"
               data-toggle="collapse"
@@ -98,7 +98,7 @@ const Header = props => {
               data-target="#topnav-menu-content"
             >
               <i className="fa fa-fw fa-bars" />
-            </button>
+            </button> */}
 
             <form className="app-search d-none d-lg-block">
               <div className="position-relative">

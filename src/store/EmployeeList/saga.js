@@ -16,7 +16,7 @@ function* getAllAdminData2() {
 function* signupAdminData(action) {
           
     try {
-      // debugger
+      // 
       const response = yield call(registerAdminData, action.payload.user); 
       yield put(adminSignupUserSuccessful(SIGNUP_ADMIN_DATA, response));
     } catch (error) {
@@ -47,7 +47,7 @@ function ApiCall(data){
 }
 // CHANGE PASSWORD SAGA METHODS 
 function* changePasswordSaga(action) {
-  // debugger  
+  //   
   try {
     console.log("response",response)
     

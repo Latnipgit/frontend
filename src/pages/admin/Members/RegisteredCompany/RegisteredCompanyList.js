@@ -10,6 +10,8 @@ import {
 } from "reactstrap";
 import { getOrders as onGetOrders } from "store/actions";
 import { RegisteredCompanyData } from "../../../../common/data/registeredcompanyData";
+import { getMemberData as ongetMemberData} from "../../../../store/actions";
+import { useDispatch ,useSelector } from "react-redux";
 import {
     Badge,
     Col,
@@ -46,9 +48,16 @@ const RegisteredCompanyList = props => {
 
 
   const [modal1, setModal1] = useState(false);
+  const [memberdata, setMemberData] = useState(undefined);
 
   const toggleViewModal = () => setModal1(!modal1);
+  const {memberData}  = useSelector(state => 
+    ({
+      memberData:  state.MemberList.memberData
 
+    })
+    // console.log("MEMBERDATA selectore", state.MemberList.memberData!= null ? state.MemberList.memberData:'jai shree ram'    )
+    );
   const columns = useMemo(
     () => [
       {
@@ -157,7 +166,13 @@ const RegisteredCompanyList = props => {
     []
   );
 
+  const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(ongetMemberData());
+          setMemberData(memberData != undefined && memberData != null ? memberData.data.response:[])      
+    }, []);
+console.log("memberDatamemberData",memberData, memberdata)
   return (
     <React.Fragment>
       <RegCompanyViewModal isOpen={modal1} toggle={toggleViewModal} />

@@ -134,8 +134,8 @@ const FeedbackQuestionModel = props => {
                         <br />
                         <br />
                         <br />
-                        <ModalHeader>Add Question</ModalHeader>
-                        <ModalBody style={{ padding: '5px 80px' }}>
+                        <ModalHeader toggle={toggle} className="ml-3">Add Feedback Question</ModalHeader>
+                        <ModalBody style={{ padding: '5px 20px' }}>
 
                             {/*                             <form>
                                 <Row className="mt-3">
@@ -183,14 +183,14 @@ const FeedbackQuestionModel = props => {
                                             <td></td>
                                             <td>
                                                 <Button className="btn btn-sm btn-info" onClick={() => handleAddRow()}>
-                                                    <i className='bx bx-plus'></i> &nbsp;Add New Service
+                                                    <i className='bx bx-plus'></i> &nbsp;Add New Question
                                                 </Button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </Row>
-                            <Row style={{ padding: '5px 10px' }} >
+                            {/* <Row style={{ padding: '5px 10px' }} >
                                 <Col md={12}>
                                     <Row className=" p-2" style={{ background: '#f0f5f5' }}>
 
@@ -248,7 +248,7 @@ const FeedbackQuestionModel = props => {
                                     </Button>
                                 </Col>
                                 <Col md={4}></Col>
-                            </Row>
+                            </Row> */}
                         </ModalBody>
                     </div>
                 </CardBody>
@@ -346,8 +346,9 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
 
                 />
 
-                ) : selectQType === "TEXT-AREA" ? (<textarea
-                    rows={5}
+                ) : selectQType === "TEXT-AREA" ?
+                 (<textarea
+                    rows={2}
                     className={`form-control custom-content`}
                     placeholder="Enter Value"
                     value={addFeedQues.values}
