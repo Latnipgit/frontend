@@ -12,7 +12,6 @@ import {
     Label,
     Input,
 } from "reactstrap";
-import CreatePlanModel from "./createPlanmodel";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from 'react-moment';
 import './FeedbackQuestion.css'
@@ -90,10 +89,10 @@ const colourStyles = {
 
 const FeedbackQuestionModel = props => {
     const [individual, setIndividual] = useState(false)
-    const [dataTable, setDataTable] = useState(data)
     const dispatch = useDispatch();
 
     const getFeebBackQuestion = useSelector(getFeebBackQuestionListSelector)
+    const [dataTable, setDataTable] = useState(getFeebBackQuestion)
 
     console.log('getFeebBackQuestion', getFeebBackQuestion);
 
@@ -104,7 +103,8 @@ const FeedbackQuestionModel = props => {
 
     const dummyRow = [
         {
-            "service": "",
+            "questionDesc": "",
+            "questionType": "",
             "value": ""
         }
     ]
@@ -316,7 +316,7 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
     return (
         <>
             <td style={{ width: '50%' }} className="text-capitalize">
-                {item.service != '' ? item.service : <>
+                {item.questionDesc != '' ? item.questionDesc : <>
                     <QuestionText setTextVAlue={setTextVAlue} questionText={questionText} />
                 </>}
             </td>
