@@ -23,54 +23,8 @@ import "../../admin/Common.scss"
 import Select from "react-select"
 
 import { addFeedbackQuestionStart } from "store/addFeedbackQuestion/addFeedbackQuestion.action";
-import { getFeebBackQuestionList } from "store/feedbackquestionList/feedbackquestionList.actions";
+import { getFeebBackQuestionList, feedbackquestionDel } from "store/feedbackquestionList/feedbackquestionList.actions";
 import { getFeebBackQuestionListSelector } from "store/feedbackquestionList/feedbackquestionList.selecter";
-
-
-
-const data = [
-    {
-        "service": "invoice",
-        "value": ""
-    },
-    {
-        "service": "Defaulter search",
-        "value": ""
-    },
-    {
-        "service": "Defaulter Reporting",
-        "value": ""
-    },
-    {
-        "service": "Multiple Business Registration",
-        "value": ""
-    },
-    {
-        "service": "Verification of default transaction",
-        "value": ""
-    },
-    {
-        "service": "Verification of payment transaction",
-        "value": ""
-    },
-    {
-        "service": "View detailed history of defaulter company transactions",
-        "value": ""
-    },
-    {
-        "service": "Recovery Services - Online Advertising",
-        "value": ""
-    },
-    {
-        "service": "Recovery Services - Legal Service",
-        "value": ""
-    },
-    {
-        "service": "Multiple Employee Logins",
-        "value": ""
-    },
-
-]
 
 const opationList = [
     { label: "TEXT", value: "TEXT" },
@@ -84,7 +38,6 @@ const colourStyles = {
         ...styles,
         background: '#FFFFFF'
     })
-
 }
 
 const FeedbackQuestionModel = props => {
@@ -113,12 +66,15 @@ const FeedbackQuestionModel = props => {
         setDataTable((prevData) => [...prevData, ...dummyRow]);
     }
 
-    const handleRemove = (index) => {
+    const handleRemove = (index, item) => {
         setDataTable((prevData) => {
             const newData = [...prevData];
             newData.splice(index, 1);
             return newData;
         });
+        dispatch(feedbackquestionDel({
+            "questionId": item.id
+        }))
     };
     useEffect(() => {
 
@@ -173,7 +129,7 @@ const FeedbackQuestionModel = props => {
                                                 </td>
                                                 <QuestionSelecter item={item} index={index} dispatch={dispatch} addFeedbackQuestionStart={addFeedbackQuestionStart} />
                                                 <td>
-                                                    <Button className="btn btn-sm btn-danger" onClick={() => handleRemove(index)}>
+                                                    <Button className="btn btn-sm btn-danger" onClick={() => handleRemove(index, item)}>
                                                         <i className='bx bx-trash'></i> &nbsp;  Remove
                                                     </Button>
                                                 </td>
