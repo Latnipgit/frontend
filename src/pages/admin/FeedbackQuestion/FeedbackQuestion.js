@@ -134,7 +134,7 @@ const FeedbackQuestionModel = props => {
                         <br />
                         <br />
                         <br />
-                        <ModalHeader toggle={toggle} className="ml-3">Add Feedback Question</ModalHeader>
+                        <ModalHeader className="ml-3">Add Feedback Question</ModalHeader>
                         <ModalBody style={{ padding: '5px 20px' }}>
 
                             {/*                             <form>
@@ -347,114 +347,115 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
                 />
 
                 ) : selectQType === "TEXT-AREA" ?
-                 (<textarea
-                    rows={2}
-                    className={`form-control custom-content`}
-                    placeholder="Enter Value"
-                    value={addFeedQues.values}
-                    onChange={(e) => setDescription({
-                        "questionType": "value",
-                        "value": e.target.value,
-                    })}
-                />) : selectQType === "RATING" ? (
-                    <div className="mb-1">
-                        <Col md={6}>
-                            <span>
-                                <i className='bx bxs-star'
-                                    //   onClick={()=>{
-                                    //     setIntegrity(1)
-                                    //  }} 
-                                    onClick={(selected) => {
-                                        /*                           handlefinancialdifficult({
-                                                                      "questionDesc": "RATING",
-                                                                      "questionType": "RATING",
-                                                                      "values": 1
-                                                                  }) */
-                                        setIntegrity(1)
-                                    }
-                                    }
-                                    style={{ color: Integrity != 0 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
-                                ></i></span>
-                            <span>
-                                <i className='bx bxs-star'
-                                    onClick={(selected) => {
-                                        /*                                     handlefinancialdifficult({
-                                                                                "questionDesc": "RATING",
-                                                                                "questionType": "RATING",
-                                                                                "values": 2
-                                                                            }) */
-                                        setIntegrity(2)
-                                    }
-                                    }
-                                    style={{ color: Integrity != 0 && Integrity > 1 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
-                                ></i></span>
-                            <span>
-                                <i className='bx bxs-star'
-                                    onClick={(selected) => {
-                                        /*                                  handlefinancialdifficult({
-                                                                             "questionDesc": "RATING",
-                                                                             "questionType": "RATING",
-                                                                             "values": 3
-                                                                         }) */
-                                        setIntegrity(3)
-                                    }
-                                    }
-                                    style={{ color: Integrity != 0 && Integrity > 2 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
-                                ></i></span>
-                            <span>
-                                <i className='bx bxs-star'
-                                    onClick={(selected) => {
-                                        /*                                     handlefinancialdifficult({
-                                                                                "questionDesc": "RATING",
-                                                                                "questionType": "RATING",
-                                                                                "values": 4
-                                                                            }) */
-                                        setIntegrity(4)
-                                    }
-                                    }
-                                    style={{ color: Integrity != 0 && Integrity > 3 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
-                                ></i></span>
-                            <span>
-                                <i className='bx bxs-star'
-                                    onClick={(selected) => {
-                                        /*                                     handlefinancialdifficult({
-                                                                                "questionDesc": "RATING",
-                                                                                "questionType": "RATING",
-                                                                                "values": 5
-                                                                            }) */
-                                        setIntegrity(5)
-                                    }
-                                    }
-                                    style={{ color: Integrity != 0 && Integrity > 4 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
-                                ></i></span>
-                        </Col>
+                    (<textarea
+                        rows={2}
+                        className={`form-control custom-content`}
+                        placeholder="Enter Value"
+                        value={addFeedQues.values}
+                        onChange={(e) => setDescription({
+                            "questionType": "value",
+                            "value": e.target.value,
+                        })}
+                    />) : selectQType === "RATING" ? (
+                        <div className="mb-1">
+                            <Col md={6}>
+                                <span>
+                                    <i className='bx bxs-star'
+                                        //   onClick={()=>{
+                                        //     setIntegrity(1)
+                                        //  }} 
+                                        onClick={(selected) => {
+                                            /*                           handlefinancialdifficult({
+                                                                          "questionDesc": "RATING",
+                                                                          "questionType": "RATING",
+                                                                          "values": 1
+                                                                      }) */
+                                            setIntegrity(1)
+                                        }
+                                        }
+                                        style={{ color: Integrity != 0 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
+                                    ></i></span>
+                                <span>
+                                    <i className='bx bxs-star'
+                                        onClick={(selected) => {
+                                            /*                                     handlefinancialdifficult({
+                                                                                    "questionDesc": "RATING",
+                                                                                    "questionType": "RATING",
+                                                                                    "values": 2
+                                                                                }) */
+                                            setIntegrity(2)
+                                        }
+                                        }
+                                        style={{ color: Integrity != 0 && Integrity > 1 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
+                                    ></i></span>
+                                <span>
+                                    <i className='bx bxs-star'
+                                        onClick={(selected) => {
+                                            /*                                  handlefinancialdifficult({
+                                                                                 "questionDesc": "RATING",
+                                                                                 "questionType": "RATING",
+                                                                                 "values": 3
+                                                                             }) */
+                                            setIntegrity(3)
+                                        }
+                                        }
+                                        style={{ color: Integrity != 0 && Integrity > 2 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
+                                    ></i></span>
+                                <span>
+                                    <i className='bx bxs-star'
+                                        onClick={(selected) => {
+                                            /*                                     handlefinancialdifficult({
+                                                                                    "questionDesc": "RATING",
+                                                                                    "questionType": "RATING",
+                                                                                    "values": 4
+                                                                                }) */
+                                            setIntegrity(4)
+                                        }
+                                        }
+                                        style={{ color: Integrity != 0 && Integrity > 3 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
+                                    ></i></span>
+                                <span>
+                                    <i className='bx bxs-star'
+                                        onClick={(selected) => {
+                                            /*                                     handlefinancialdifficult({
+                                                                                    "questionDesc": "RATING",
+                                                                                    "questionType": "RATING",
+                                                                                    "values": 5
+                                                                                }) */
+                                            setIntegrity(5)
+                                        }
+                                        }
+                                        style={{ color: Integrity != 0 && Integrity > 4 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
+                                    ></i></span>
+                            </Col>
 
-                    </div>
-                ) : selectQType === "DROP-DOWN" ? (
-                    <Input
+                        </div>
+                    ) : selectQType === "DROP-DOWN" ? (
+                        <>
+                            <Input
+                                className="form-control text-capitalize"
+                                placeholder="e.g., value1, value2, value3"
+                                type="text"
+                                value={addFeedQues.values}
+                                onChange={(e) => setDescription({
+                                    "questionType": "value",
+                                    "value": e.target.value,
+                                })}
+                            />
+                            <Button className="btn btn-sm btn-info mt-1 " onClick={() => handleSubmit()}>Submit</Button>
+                        </>
+                    ) : selectQType === "" ? (<Input
                         className="form-control text-capitalize"
-                        placeholder="e.g., value1, value2, value3"
+                        placeholder="Enter Value"
                         type="text"
                         value={addFeedQues.values}
                         onChange={(e) => setDescription({
                             "questionType": "value",
                             "value": e.target.value,
                         })}
-                    />
-                ) : selectQType === "" ? (<Input
-                    className="form-control text-capitalize"
-                    placeholder="Enter Value"
-                    type="text"
-                    value={addFeedQues.values}
-                    onChange={(e) => setDescription({
-                        "questionType": "value",
-                        "value": e.target.value,
-                    })}
-                />) : ""
+                    />) : ""
                 }
-                <>
-                    <Button className="btn btn-sm btn-info mt-1 " onClick={() => handleSubmit()}>Submit</Button>
-                </>
+
             </td>
 
 
