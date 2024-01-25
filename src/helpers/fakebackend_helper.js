@@ -177,6 +177,9 @@ export const addNewOrder = order => post(url.ADD_NEW_ORDER, order)
 // add feedback question
 export const addQuestionApi = order => addEmployeeAPImethod(url.ADD_FEEDBACK_QUESTION, order)
 
+// add feedback question del
+export const feedBackquestionDelet = data => addEmployeeAPImethod(url.DEL_FEEDBACK_QUESTION, data)
+
 // feedback quesiotn fatch
 export const getFeebBackQuestionListAPI = () => get("/api/questions/getAllQuestions")
 
