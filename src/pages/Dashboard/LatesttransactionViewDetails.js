@@ -508,21 +508,21 @@ console.log("selectedselected",selected)
 <Col md={6}><Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; CA Certificate 
 </Label></Col>
-<Col md={6}>
-<Label> 
+{/* <Col md={6}>
+{/* <Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Purchase Order Document 
-</Label>
-</Col>
+</Label> */}
+{/* </Col>
 <Col md={6}><Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Transportation Document 
-</Label> </Col>
+</Label> </Col> */} 
 <Col md={6}><Label> 
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Payment Record Document 
 </Label></Col>
                   
                     </Row>
 
-                    <Row className="mt-3">
+                    <Row className="mt-5">
                         {/* <Col md={3}></Col> */}
                         <Col md={6} className="text-left">
                         <Label>

@@ -134,7 +134,7 @@ const FeedbackQuestionModel = props => {
                         <br />
                         <br />
                         <br />
-                        <ModalHeader toggle={toggle} className="ml-3">Add Feedback Question</ModalHeader>
+                        <ModalHeader  className="ml-3">Add Feedback Question</ModalHeader>
                         <ModalBody style={{ padding: '5px 20px' }}>
 
                             {/*                             <form>
