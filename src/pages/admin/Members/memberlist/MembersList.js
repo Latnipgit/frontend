@@ -2,10 +2,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
-import {Button,Card,CardBody,} from "reactstrap";
+import { Button, Card, CardBody, } from "reactstrap";
 import { MemberData } from "../../../../common/data/members";
-import { getMemberData as ongetMemberData} from "../../../../store/actions";
-import { useDispatch ,useSelector } from "react-redux";
+import { getMemberData as ongetMemberData } from "../../../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
 // import _ from 'underscore'
 import Moment from 'react-moment';
 // import 'moment-timezone';
@@ -16,6 +16,8 @@ import {
   EmailID,
   Status,
   PhoneNumber,
+  State,
+  City,
   JoinedOn,
 } from "./membersListCol.js";
 
@@ -33,23 +35,23 @@ const MembersList = props => {
 
 
 
-  const {memberData}  = useSelector(state => 
-    ({
-      memberData:  state.MemberList.memberData
+  const { memberData } = useSelector(state =>
+  ({
+    memberData: state.MemberList.memberData
 
-    })
+  })
     // console.log("MEMBERDATA selectore", state.MemberList.memberData!= null ? state.MemberList.memberData:'jai shree ram'    )
-    );
-    
+  );
+
   console.log("MEMEMEME", memberData)
   const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(ongetMemberData());
-          setMemberData(memberData != undefined && memberData != null ?memberData.data.response:[])      
-    }, []);
+  useEffect(() => {
+    dispatch(ongetMemberData());
+    setMemberData(memberData != undefined && memberData != null ? memberData.data.response : [])
+  }, []);
 
-    // console.log("MEMBERDATA hs", memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[])
+  // console.log("MEMBERDATA hs", memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[])
   const columns = useMemo(
     () => [
       {
@@ -106,6 +108,24 @@ const MembersList = props => {
         },
       },
       {
+        Header: "State",
+        accessor: "state",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <State {...cellProps} />;
+        },
+      },
+      {
+        Header: "City",
+        accessor: "city",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <City {...cellProps} />;
+        },
+      },
+      {
         Header: "Joined On",
         accessor: "createdAt",
         disableFilters: true,
@@ -113,7 +133,7 @@ const MembersList = props => {
         Cell: cellProps => {
           return <span>
             {/* {console.log("SPAN", cellProps.row.original.createdAt)} */}
-              <Moment date={cellProps.row.original.createdAt} format="DD/MM/YYYY" />
+            <Moment date={cellProps.row.original.createdAt} format="DD/MM/YYYY" />
           </span>
           // <JoinedOn {...cellProps} />;
         },
@@ -127,7 +147,7 @@ const MembersList = props => {
           return <Status {...cellProps} />;
         },
       },
-      
+
       {
         Header: "Action",
         disableFilters: true,
@@ -138,14 +158,14 @@ const MembersList = props => {
               <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
                 <i className="mdi mdi-eye font-size-16 text-primary me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
               </div>
-            <div className="d-flex flex-column align-items-center me-3"  style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
+              <div className="d-flex flex-column align-items-center me-3" style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
+              </div>
+              <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-pause font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend" />
+              </div>
+
             </div>
-            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-pause font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend" />
-            </div>
-           
-          </div>
           );
         },
       },
@@ -153,17 +173,17 @@ const MembersList = props => {
     []
   );
 
-console.log("memberdatamemberdata", memberdata)
+  console.log("memberdatamemberdata", memberdata)
   return (
     <React.Fragment>
       <MembersViewModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
-        <div className="mb-4 h4 card-title mt-lg-1">Member List</div>
+          <div className="mb-4 h4 card-title mt-lg-1">Member List</div>
           <div className="mb-4 h4 card-title mt-lg-5">Member List</div>
           <TableContainer
             columns={columns}
-            data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
+            data={memberdata != undefined && memberdata != [] ? memberdata : []}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}

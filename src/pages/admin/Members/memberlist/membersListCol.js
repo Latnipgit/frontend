@@ -21,9 +21,9 @@ const dateFormat = (date, format) => {
 };
 const toLowerCase1 = str => {
     return (
-      str === "" || str === undefined ? "" : str.toLowerCase()
+        str === "" || str === undefined ? "" : str.toLowerCase()
     );
-  };
+};
 
 const CheckBox = (cell) => {
     return cell.value ? cell.value : '';
@@ -49,27 +49,36 @@ const EmailID = (cell) => {
 const CompanyName = (cell) => {
     return cell.value ? cell.value : '';
 };
+
+const State = (cell) => {
+    return cell.value ? cell.value : '';
+};
+
+const City = (cell) => {
+    return cell.value ? cell.value : '';
+};
+
 const Status = (cell) => {
     return (
         <Badge
-          className={"font-size-11 badge-soft-" + 
-          (cell.value === "Active" ? "success" : "danger")}          
+            className={"font-size-11 badge-soft-" +
+                (cell.value === "Active" ? "success" : "danger")}
         >
-          {cell.value}
+            {cell.value}
         </Badge>
     )
 };
 const PaymentMethod = (cell) => {
     return (
         <span>
-        <i
-        className={
-          (cell.value === "Paypal" ? "fab fa-cc-paypal me-1" : "" || 
-          cell.value === "COD" ? "fab fas fa-money-bill-alt me-1" : "" ||
-          cell.value === "Mastercard" ? "fab fa-cc-mastercard me-1" : "" ||
-          cell.value === "Visa" ? "fab fa-cc-visa me-1" : ""
-          )}
-          />{" "}
+            <i
+                className={
+                    (cell.value === "Paypal" ? "fab fa-cc-paypal me-1" : "" ||
+                        cell.value === "COD" ? "fab fas fa-money-bill-alt me-1" : "" ||
+                            cell.value === "Mastercard" ? "fab fa-cc-mastercard me-1" : "" ||
+                                cell.value === "Visa" ? "fab fa-cc-visa me-1" : ""
+                    )}
+            />{" "}
             {cell.value}
         </span>
     )
@@ -77,12 +86,14 @@ const PaymentMethod = (cell) => {
 export {
     CheckBox,
     SrNo,
-    
+
     EmailID,
     Status,
     CustomerName,
     CompanyName,
     JoinedOn,
     PhoneNumber,
-    PaymentMethod
+    PaymentMethod,
+    State,
+    City
 };
