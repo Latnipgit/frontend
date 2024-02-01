@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import UserList from "../pages/admin/UserList";
 
 import MembersList from "../pages/admin/Members/memberlist/MembersList";
+import MemberFilteredData from "../pages/admin/Members/memberFilteredData";
 import RegisteredCompanyList from "../pages/admin/Members/RegisteredCompany/RegisteredCompanyList";
 import DiputedBillings from "../pages/admin/DisputedBillings/DiputedBillings";
 import ApprovedTranction from "../pages/admin/ApprovedTransaction/ApprovedTranction";
@@ -198,6 +199,8 @@ const authProtectedRoutes = [
   //Registration user
   { path: "/registration", component: <UserList /> },
   { path: "/members-list", component: <MembersList /> },
+  { path: "/memberFilteredData", component: <MemberFilteredData /> },
+
   { path: "/registered-company", component: <RegisteredCompanyList /> },
   { path: "/disputed-billings", component: <DiputedBillings /> },
   { path: "/approved-transaction", component: <ApprovedTranction /> },
@@ -370,6 +373,7 @@ const publicRoutes = [
   { path: "/forgot-password", component: <ForgetPwd /> },
   { path: "/password-reset/:userID/:token", component: <ForgetPwdLink /> },
   { path: "/register", component: <Register /> },
+
 
   { path: "/pages-maintenance", component: <PagesMaintenance /> },
   { path: "/pages-comingsoon", component: <PagesComingsoon /> },

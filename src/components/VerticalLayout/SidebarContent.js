@@ -171,6 +171,13 @@ const SidebarContent = props => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/memberFilteredData">
+                    <i className="bx bx-user-pin"></i>
+                    {/* <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span> */}
+                    {props.t("Filtered Data")}
+                  </Link>
+                </li>
+                <li>
 
                   <Link to="/registered-company">
                     <i className="bx bx-check-double"></i>

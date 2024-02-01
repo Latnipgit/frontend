@@ -80,11 +80,29 @@ const CreatePlanModel = props => {
             return newData;
         });
     };
+    const [ name, setName ] = useState()
+    const [ monthlyAmt, setmonthlyAmt ] = useState()
+    const [ yearlyAmt, setyearlyAmt ] = useState()
+    const [ monthlyDiscount, setmonthlyDiscount ] = useState()
+    const [ yearlyDiscount, setyearlyDiscount ] = useState()
+
 useEffect(()=>{
    
 },[dataTable])
 
 console.log("DATATA", dataTable)
+
+const submitCreatePlan =()=>{
+    const payload ={
+        "subscriptionPkgName": name,
+        "monthlyAmt": monthlyAmt,
+        "yearlyAmt": yearlyAmt,
+        "monthlyDiscount":monthlyDiscount,
+        "yearlylyDiscount": yearlyDiscount,
+        "subscriptionFor": dataTable
+    }
+}
+
     
     return (
         <Modal
@@ -111,6 +129,7 @@ console.log("DATATA", dataTable)
                                     className="form-control text-capitalize"
                                     placeholder="Enter Plan Name"
                                     type="text"
+                                    onChange={()=>setName(e.target.value)}
 
                                 />
                             </Col>
@@ -185,7 +204,9 @@ console.log("DATATA", dataTable)
                         <Input
                                         className="form-control"
                                         placeholder= "Enter Yearly Price"
-                                        type="number"
+                                        type="number"     
+                                                                       onChange={()=>setyearlyAmt(e.target.value)}
+
 
                                     />
                         </Col>
@@ -200,6 +221,8 @@ console.log("DATATA", dataTable)
                                         className="form-control"
                                         placeholder= "Enter Monthly Price"
                                         type="number"
+                                        onChange={()=>setmonthlyAmt(e.target.value)}
+
 
                                     />
                         </Col>
