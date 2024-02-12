@@ -19,6 +19,8 @@ import moment from 'moment'
 import Select from 'react-select';
 import { toast ,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { approveRejectLatestTrans } from "store/LatestTransaction/latestTrans.action"
+import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 
 import { useLocation } from 'react-router-dom';
 
@@ -141,7 +143,7 @@ const selected = location.state.selected
     const isReferDisabled = selectedLevel === '';
     const existingReviews = [
         { rating: 3.5, comment: "I have been using this product for a while now, and I am incredibly impressed with its features and performance. From the moment I started using it, I could tell that the team behind this product is dedicated to delivering top-notch quality.!" },
-        // { rating: 3, comment: "Average quality." },
+        { rating: 3, comment: "Average quality." },
         // ... other review objects
     ];
 
@@ -183,7 +185,9 @@ const selected = location.state.selected
     }
   };
 
-
+const viewDocuments=(value)=>{
+    console.log("valuee",value)
+}
 console.log("selectedselected",selected)
   return (
     <div className="mt-5 p-5">
@@ -195,12 +199,12 @@ console.log("selectedselected",selected)
                                         <div className="row">
                                             <div className="col-md-8">
                                                 <h5>
-                                                    Reference No. : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.id:'BAF-236525'}</span>
+                                                    Reference No. : <span className="text-primary">{selected!= "" && selected.defaulterEntry != undefined? "BAF"+"-" + selected.defaulterEntry.debtor._id.slice(-6).toUpperCase():''}</span>
                                                 </h5>
                                             </div>
                                             <div className="col-md-4">
                                                 <h5 className="text-right">
-                                                    Date: <span className="text-primary">{selected!= "" && selected.debtor != undefined? moment(selected.debtor.createdAt).format("DD-MM-YYYY"):'10-02-2020'}</span>
+                                                    Date: <span className="text-primary">{selected!= "" && selected.defaulterEntry != undefined? moment(selected.defaulterEntry.debtor.createdAt).format("DD-MM-YYYY"):''}</span>
                                                 </h5>
                                             </div>
                                         </div>
@@ -215,22 +219,22 @@ console.log("selectedselected",selected)
                                 <CardBody className="buyer-card-body">
 
                                     <p className="mb-2">
-                                        Seller Name: <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerName:'Rohan'}</span>
+                                        Seller Name: <span className="text-primary">{selected!= "" && selected.defaulterEntry != undefined? <>{selected.defaulterEntry.debtor.firstname } {selected.defaulterEntry.debtor.lastname} </> :''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Company name : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.companyName:'TATA'}</span>
+                                        Company name : <span className="text-primary">{selected!= "" && selected.defaulterEntry.debtor != undefined? selected.defaulterEntry.debtor.companyName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        GST Number : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.gstin:'OPIO5652YY'}</span>
+                                        GST Number : <span className="text-primary">{selected!= "" && selected.defaulterEntry.debtor != undefined? selected.defaulterEntry.debtor.gstin:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Contact Number : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerMobile:'89896589'}</span>
+                                        Contact Number : <span className="text-primary">{selected!= "" && selected.defaulterEntry.debtor != undefined? selected.defaulterEntry.debtor.customerMobile:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        City : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerMobile:'Jaipur'}</span>
+                                        City : <span className="text-primary">{selected!= "" && selected.defaulterEntry.debtor != undefined? selected.defaulterEntry.debtor.city:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        State : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerMobile:'Rajasthan'}</span>
+                                        State : <span className="text-primary">{selected!= "" && selected.defaulterEntry.debtor != undefined? selected.defaulterEntry.debtor.state:''}</span>
                                     </p>
 
                                 </CardBody>
@@ -243,22 +247,22 @@ console.log("selectedselected",selected)
 
 
                                     <p className="mb-2">
-                                        Buyer Name: <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerName:'Harshit sharma'}</span>
+                                        Buyer Name: <span className="text-primary">{selected!= "" && selected.defaulterEntry.creditor != undefined? selected.defaulterEntry.creditor.companyName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Company name : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.companyName:'Latnip It'}</span>
+                                        Company name : <span className="text-primary">{selected!= "" && selected.defaulterEntry.creditor != undefined? selected.defaulterEntry.creditor.companyName:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        GST Number : <span className="text-primary">{selected!= ""&& selected.debtor != undefined? selected.debtor.gstin:'JDYDN5655II'}</span>
+                                        GST Number : <span className="text-primary">{selected!= ""&&  selected.defaulterEntry.creditor != undefined? selected.defaulterEntry.creditor.gstin:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        Contact Number : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerMobile:'9928047388'}</span>
+                                        Contact Number : <span className="text-primary">{selected!= "" &&  selected.defaulterEntry.creditor != undefined? selected.defaulterEntry.creditor.ownerMobile:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        City : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerMobile:'Jaipur'}</span>
+                                        City : <span className="text-primary">{selected!= "" && selected.defaulterEntry.creditor != undefined? selected.defaulterEntry.creditor.city:''}</span>
                                     </p>
                                     <p className="mb-2">
-                                        State : <span className="text-primary">{selected!= "" && selected.debtor != undefined? selected.debtor.ownerMobile:'Rajasthan'}</span>
+                                        State : <span className="text-primary">{selected!= "" &&selected.defaulterEntry.creditor != undefined? selected.defaulterEntry.creditor.state:''}</span>
                                     </p>
                                     
                                 </CardBody>
@@ -274,13 +278,38 @@ console.log("selectedselected",selected)
                             <h4>Seller Attachments</h4>
                             <Card className="mb-3 shadow">
                                 <CardBody className="buyer-card-body">
-                                <Row>
-    <Col md={4}><b>Invoice # : BAF-98658  </b></Col>
-    <Col md={4}><b>Date : 12-05-2020  </b></Col>
-    <Col md={4}><b>Amount : 50,000  </b></Col>
+                              
+<Row>
+<Table className="table align-middle table-nowrap">
+            <thead>
+                <tr>
+                <th>Invoice# </th>
+
+                    <th>Date</th>
+                    <th>Amount</th>
+                                        <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {selected.defaulterEntry.invoices.map((item)=>{
+                return   <tr key={item} >
+                <td>{item.invoiceNumber}</td>
+
+                    <td>{moment(item.dueDate).format("DD-MM-YYYY")}</td>
+                    <td>{item.subTotal}</td>
+                    <td><Button className="btn btn-sm btn-info" onClick={()=>{viewDocuments(item)}}> View Document</Button></td>
+                </tr>
+            })}
+          
+                
+
+                {/* Add more rows as needed */}
+            </tbody>
+        </Table>
 </Row>
                     
-<Row className="mt-4">
+{/* <Row className="mt-4">
                         {attachments.map((file, index) => (
                             <Col md="4" key={index}>
                                 <Card className="mb-3 shadow-xl">
@@ -299,12 +328,12 @@ console.log("selectedselected",selected)
                                 </Card>
                             </Col>
                         ))}
-                    </Row>
+                    </Row> */}
 
                     <Row>
                   <h4 className="mt-4">Seller Rating</h4>
                     <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center mt-4">
-                        {existingReviews.map((review, index) => (
+                        {selected.defaulterEntry.debtor.ratings.map((review, index) => (
                             <div className="review" key={index}>
                                 <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
                                     {renderStarRating(review.rating)}
@@ -319,7 +348,7 @@ console.log("selectedselected",selected)
                                     <div className="row">
                                         <div className="col">
                                             <p className="text-justify">
-                                                {review.comment}
+                                                {review.questionId} {review.response}
                                             </p>
                                         </div>
                                     </div>
@@ -336,28 +365,8 @@ console.log("selectedselected",selected)
                             <h4>Buyer Attachments</h4>
                             <Card className="mb-3 shadow">
                                 <CardBody className="seller-card-body">
-                                <Row className="mt-4">
-                        {sellerattachments.map((file, index) => (
-                            <Col md="4" key={index}>
-                                <Card className="mb-3">
-                                    <CardBody className="attachment-card-body" style={{ background: 'rgba(0, 0, 0, 0.05)', height:"100px" }}>
-                                        <div className="attachment-icon">
-                                            {file.type === 'application/pdf' ? (
-                                                <i className="far fa-file-pdf fa-2x text-danger"></i>
-                                            ) : (
-                                                <i className="far fa-file-image fa-2x text-primary"></i>
-                                            )}
-                                        </div>
-                                        <div className="attachment-info">
-                                            <span>{file.name}</span>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>
+                      
                     <div className="d-flex justify-content-between mt-2">
-                        <h4 className="mt-2">Buyer Payment History</h4>
                         {/* <div className="mr-auto mt-2">
                             <Link to="/company-history" className="btn btn-primary">View Buyer history</Link>
                         </div> */}
@@ -392,6 +401,26 @@ console.log("selectedselected",selected)
             </tbody>
         </Table>
     </div>
+    <Row className="mt-4">
+                        {sellerattachments.map((file, index) => (
+                            <Col md="6" key={index}>
+                                <Card className="mb-3">
+                                    <CardBody className="attachment-card-body" style={{ background: 'rgba(0, 0, 0, 0.05)', height:"80px" }}>
+                                        <div className="attachment-icon">
+                                            {file.type === 'application/pdf' ? (
+                                                <i className="far fa-file-pdf fa-2x text-danger"></i>
+                                            ) : (
+                                                <i className="far fa-file-image fa-2x text-primary"></i>
+                                            )}
+                                        </div>
+                                        <div className="attachment-info">
+                                            <span>{file.name}</span>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row> 
 </CardBody>
 </Card>
 <h4 className="mt-2">Buyer Notes</h4>

@@ -120,9 +120,9 @@ console.log("current okokok", CurrentDate)
         Cell: cellProps => {
           return (
             <div className="d-flex">
-             {/* {console.log("HARHSIT", cellProps.cell.row.original.debtor.id)} */}
+             {console.log("HARHSIT", cellProps.cell.row.original.debtor)}
            
-           {cellProps.cell.row.original.debtor != null ?"BAF"+"-" +  cellProps.cell.row.original.debtor.creditorCompanyId.slice(-6).toUpperCase():''}
+           {cellProps.cell.row.original.defaulterEntry != undefined  ?"BAF"+"-" +  cellProps.cell.row.original.defaulterEntry.debtor._id.slice(-6).toUpperCase():''}
           </div>
           );
         },
@@ -148,7 +148,7 @@ console.log("current okokok", CurrentDate)
         Cell: cellProps => {
           return (
             <div className="d-flex">
-           {cellProps.cell.row.original.debtor == null ? '' : cellProps.cell.row.original.debtor.companyName}
+           {cellProps.cell.row.original.defaulterEntry == undefined  ? '' : cellProps.cell.row.original.defaulterEntry.creditor.companyName}
           </div>
           );
         },
@@ -265,6 +265,7 @@ console.log("current okokok", CurrentDate)
   //   console.log("latestTransactiondata", state)
   //   // GetAllInvoice: state.DebtorsReducer.getInvoiceList!= undefined ? state.DebtorsReducer.getInvoiceList.response:[],
   // })
+  const revlatestTransactiondata = latestTransactiondata.reverse()
   useEffect(() => {
     dispatch(fetchLatestTransStart())
   }, [])

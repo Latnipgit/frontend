@@ -13,6 +13,7 @@ export const changepassswordDataAPI = () =>
   post(url.CHANGE_PASSWORD_WITH_OLD_PASSWORD, data)
 // genrateAllTransation
 export const genrateAllTransation = () => post(url.GET_LATEST_TRANSATION)
+export const approveRejectLatestTranApiMethod = (data) => post("/api/admin/approveOrRejectPayment",data)
 // getAllApprovedTransactions
 export const getAllApprovedTransactions = () =>
   get(url.GET_ALL_APPROVED_TRANSACTIONS)
