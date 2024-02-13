@@ -10,12 +10,16 @@ import {
   SUBSCRIBE_PACKAGE_SUCCESS,
   GET_SUBSCRIBE_PACKAGE,
   GET_SUBSCRIBE_PACKAGE_FAIL,
-  GET_SUBSCRIBE_PACKAGE_SUCCESS
+  GET_SUBSCRIBE_PACKAGE_SUCCESS,
+  ESCLATET_TRANSACTION,
+  ESCLATET_TRANSACTION_FAIL,
+  ESCLATET_TRANSACTION_SUCCESS
 } from "./latestTrans.type"
 
 export const LATEST_TRANS_INITIAL_STATE = {
   latestTrans: [],
   approveRejectLatestTrans:[],
+  esclatedTransaction:[],
   getSubscribePackage:[],
   subscribePckg:[],
   loading: false,
@@ -53,6 +57,12 @@ export const latestTransReducer = (
             return { ...state, loading: false, error: payload }
           case GET_SUBSCRIBE_PACKAGE_SUCCESS:
             return { ...state, loading: false, getSubscribePackage: payload }
+            case ESCLATET_TRANSACTION:
+              return { ...state, loading: true }
+            case ESCLATET_TRANSACTION_FAIL:
+              return { ...state, loading: false, error: payload }
+            case ESCLATET_TRANSACTION_SUCCESS:
+              return { ...state, loading: false, esclatedTransaction: payload }
     default:
       return state
   }

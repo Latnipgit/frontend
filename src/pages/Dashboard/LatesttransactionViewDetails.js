@@ -19,10 +19,12 @@ import moment from 'moment'
 import Select from 'react-select';
 import { toast ,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { approveRejectLatestTrans } from "store/LatestTransaction/latestTrans.action"
+import { approveRejectLatestTrans ,esclateTransaction} from "store/LatestTransaction/latestTrans.action"
 import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
+import { useSelector, useDispatch } from "react-redux"
 
 import { useLocation } from 'react-router-dom';
+import { select } from "redux-saga/effects";
 
 function LatesttransactionViewDetails (props){
     const location = useLocation();
@@ -161,14 +163,34 @@ const selected = location.state.selected
     
     // console.log("EsclateEsclate",selected)
   };
+  console.log("selectedselected",selected)
+  const dispatch = useDispatch()
+
   const handleActionSelect =()=>{
     if(selectedOption.value=="Approved"){
+
+        const payload = {
+    "approve": true,
+    "paymentId": selected.defaulterEntry._id,
+    "amtPaid": selected.defaulterEntry.totalAmount
+}
+        dispatch(approveRejectLatestTrans(payload))
         toast.success("Transaction Approved")
     }
     if(selectedOption.value=="Disputed"){
+        const payload = {
+            "approve": false,
+            "paymentId": selected.defaulterEntry._id,
+            "amtPaid": selected.defaulterEntry.totalAmount
+        }
+                dispatch(approveRejectLatestTrans(payload))
         toast.success("Transaction Disputed")
     }
     if(selectedOption.value=="Esclate"){
+        const payload ={
+            "paymentId": selected.defaulterEntry._id
+        }
+        dispatch(esclateTransaction(payload))
         toast.success("Transaction Esclate to Next Level")
     }
   }

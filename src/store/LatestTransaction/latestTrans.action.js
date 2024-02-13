@@ -10,7 +10,10 @@ import {
   SUBSCRIBE_PACKAGE,
   GET_SUBSCRIBE_PACKAGE_FAIL,
   GET_SUBSCRIBE_PACKAGE_SUCCESS,
-  GET_SUBSCRIBE_PACKAGE
+  GET_SUBSCRIBE_PACKAGE,
+  ESCLATET_TRANSACTION,
+  ESCLATET_TRANSACTION_FAIL,
+  ESCLATET_TRANSACTION_SUCCESS
 
 } from "./latestTrans.type"
 import { createAction } from "reducer/reducer.utils"
@@ -25,8 +28,8 @@ export const fetchLatestTransSuccess = latestTransArray => {
 export const fetchLatestTransFailure = error =>
   createAction(FETCH_LATEST_TRANS_FAILED, error)
 
-  export const approveRejectLatestTrans = () =>
-  createAction(APPROVE_REJECT_LATEST_TRANSACTION)
+  export const approveRejectLatestTrans = (data) =>
+  createAction(APPROVE_REJECT_LATEST_TRANSACTION,data)
 
 export const approveRejectLatestTransSuccess = latestTransArray => {
   return createAction(APPROVE_REJECT_LATEST_TRANSACTION_SUCCESS, latestTransArray)
@@ -53,3 +56,14 @@ export const subscribeToPackageFailure = error =>
 
 export const getSubscriptionPckgFail = error => {
   createAction(SUBSCRIBE_PACKAGE_FAIL, error)}
+
+
+
+  export const esclateTransaction = (data) =>
+  createAction(ESCLATET_TRANSACTION, data)
+
+  export const esclateTransactionSuccess = (latestTransArray) =>
+  createAction(ESCLATET_TRANSACTION_SUCCESS,latestTransArray)
+
+export const esclateTransactionFail = error => {
+  createAction(ESCLATET_TRANSACTION_FAIL, error)}
