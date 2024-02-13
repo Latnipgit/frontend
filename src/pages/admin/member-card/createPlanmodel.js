@@ -12,10 +12,15 @@ import {
     Input,
     Row,
     Col,
+    CardBody,
+    Card
 
 } from "reactstrap"
 import "../../admin/Common.scss"
+import { useDispatch ,useSelector } from "react-redux";
 
+import { subscribeToPackage } from "store/LatestTransaction/latestTrans.action"
+import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 const data = [
     {
         "service" :"invoice",
@@ -62,8 +67,11 @@ const data = [
 
 const CreatePlanModel = props => {
     const [individual, setIndividual] = useState(false)
+    const [isPaid, setisPaid] = useState(false)
     const { isOpen, toggle } = props
     const [ dataTable, setDataTable ] = useState(data)
+    const dispatch = useDispatch();
+
      const dummyRow =[
        { "service":"",
         "value":""}
@@ -80,29 +88,61 @@ const CreatePlanModel = props => {
             return newData;
         });
     };
-    const [ name, setName ] = useState()
-    const [ monthlyAmt, setmonthlyAmt ] = useState()
-    const [ yearlyAmt, setyearlyAmt ] = useState()
-    const [ monthlyDiscount, setmonthlyDiscount ] = useState()
-    const [ yearlyDiscount, setyearlyDiscount ] = useState()
+    const [ name, setName ] = useState('');
+
+    const [ monthlyAmt, setmonthlyAmt ] = useState('');
+    const [ yearlyAmt, setYearlyAmt ] = useState('')
+    const [ monthlyDiscount, setmonthlyDiscount ] = useState('')
+    const [ yearlyDiscount, setyearlyDiscount ] = useState('')
 
 useEffect(()=>{
    
-},[dataTable])
+},[])
 
-console.log("DATATA", dataTable)
+console.log("DATATA", yearlyAmt,monthlyAmt)
 
 const submitCreatePlan =()=>{
-    const payload ={
-        "subscriptionPkgName": name,
-        "monthlyAmt": monthlyAmt,
-        "yearlyAmt": yearlyAmt,
-        "monthlyDiscount":monthlyDiscount,
-        "yearlylyDiscount": yearlyDiscount,
-        "subscriptionFor": dataTable
+    if(isPaid == true){
+        const payload ={
+            "subscriptionPkgName": name,
+            "monthlyAmt": monthlyAmt,
+            "yearlyAmt": yearlyAmt,
+            "monthlyDiscount": "0",
+            "yearlylyDiscount": "0",
+            "services": [
+                {
+                    "apiName": "Call",
+                    "monthlyQuotaLimit": 5,
+                    "yearlyQuotaLimit": 0
+                }
+            ]
+        }
+        dispatch(subscribeToPackage(payload))
     }
+    else{
+        const payload ={
+            "subscriptionPkgName": name,
+            "monthlyAmt": monthlyAmt,
+            "yearlyAmt": yearlyAmt,
+            "monthlyDiscount": "0",
+            "yearlylyDiscount": "0",
+            "services": []
+            
+        }
+        dispatch(subscribeToPackage(payload))
+
+    }
+   
+toggle()
+
 }
 
+    const serviceNameChange =(value, index)=>{
+
+    }
+    const serviceValue =(value, index)=>{
+
+    }
     
     return (
         <Modal
@@ -129,14 +169,14 @@ const submitCreatePlan =()=>{
                                     className="form-control text-capitalize"
                                     placeholder="Enter Plan Name"
                                     type="text"
-                                    onChange={()=>setName(e.target.value)}
+                                    onChange={(e)=>setName(e.target.value)}
 
                                 />
                             </Col>
                             <Col md={4}></Col>
                         </Row>
                     </form>
-                    <Row className="mt-3" style={{ padding:'5px 10px'}}>
+                    {/* <Row className="mt-3" style={{ padding:'5px 10px'}}>
                         <table className="table table-bordered">
                             <thead>
                                 <tr>
@@ -192,6 +232,32 @@ const submitCreatePlan =()=>{
 
                             </tbody>
                         </table>
+                    </Row> */}
+                    <Row className="mt-3">
+                        <Col md={6}>
+                            <Card className="shadow-sm">
+                                <CardBody>
+                                    <h5>                                 <Input type="radio" name="allMemberss" className="border border-dark" id="allMember" onChange={()=>setisPaid(false)}/>
+                                &nbsp;Free Services</h5>
+                                    <br/>
+                                    <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Complaints</p>
+                                    <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Verification by our team</p>
+                                    <p> <i className='bx bx-x text-danger'></i> &nbsp;Calling Feature</p>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md={6}>
+                            <Card className="shadow-sm">
+                                <CardBody>
+                                    <h5> <Input type="radio" name="allMemberss" className="border border-dark" id="allMemberss" onChange={()=>setisPaid(true)}/>
+                                    &nbsp; Paid Services</h5>
+                                    <br/>
+                                    <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Complaints</p>
+                                    <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Verification by our team</p>
+                                    <p> <i className='bx bx-check text-success'></i> &nbsp;5 Calls Per day</p>
+                                </CardBody>
+                            </Card>
+                        </Col>
                     </Row>
                     <Row style={{ padding:'5px 10px'}} >
                         <Col md={12}>
@@ -205,7 +271,7 @@ const submitCreatePlan =()=>{
                                         className="form-control"
                                         placeholder= "Enter Yearly Price"
                                         type="number"     
-                                                                       onChange={()=>setyearlyAmt(e.target.value)}
+                                                                       onChange={(e)=>setYearlyAmt(e.target.value)}
 
 
                                     />
@@ -221,7 +287,7 @@ const submitCreatePlan =()=>{
                                         className="form-control"
                                         placeholder= "Enter Monthly Price"
                                         type="number"
-                                        onChange={()=>setmonthlyAmt(e.target.value)}
+                                        onChange={(e)=>setmonthlyAmt(e.target.value)}
 
 
                                     />
@@ -269,7 +335,7 @@ const submitCreatePlan =()=>{
                    
                     <Row className="mt-3 mb-3">
                         <Col md={4} className="">
-                            <Button className="btn btn-info">
+                            <Button className="btn btn-info" onClick={()=>submitCreatePlan()}>
                             Create Plan
                             </Button>
                         </Col>

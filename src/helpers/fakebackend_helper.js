@@ -4,6 +4,7 @@ import * as url from "./url_helper"
 
 //Get all Admin
 export const getAllAdminData = () => get(url.GET_ADMIN_DATA)
+export const getSubscribtionpckgListAPI = () => get("/api/admin/getAllSubscriptionPkg")
 //Get all member data
 export const getAllMemberData = () => get(url.GET_MEMBER_DATA)
 //Admin Signup
@@ -14,6 +15,7 @@ export const changepassswordDataAPI = () =>
 // genrateAllTransation
 export const genrateAllTransation = () => post(url.GET_LATEST_TRANSATION)
 export const approveRejectLatestTranApiMethod = (data) => post("/api/admin/approveOrRejectPayment",data)
+export const subscribePckgAPI = (data) => post("/api/admin/addSubscriptionPkg",data)
 // getAllApprovedTransactions
 export const getAllApprovedTransactions = () =>
   get(url.GET_ALL_APPROVED_TRANSACTIONS)

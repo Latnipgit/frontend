@@ -5,6 +5,8 @@ import { isEmpty } from "lodash";
 import {Button,Card,CardBody,Row,Col, CardHeader} from "reactstrap";
 import CreatePlanModel from "./createPlanmodel";
 import { useDispatch ,useSelector } from "react-redux";
+import { getSubscriptionPckg } from "store/LatestTransaction/latestTrans.action"
+import { getSubscriptionListReducer } from "store/LatestTransaction/latestTans.selecter"
 
 import Moment from 'react-moment';
 const data = [
@@ -63,7 +65,10 @@ const MemberCard = props => {
   const toggleAdminModal = () => {setIsModalOpen(!isModalOpen);};
   const dispatch = useDispatch();
 
+  const getSubscriptionList = useSelector(getSubscriptionListReducer)
+console.log("getSubscriptionListgetSubscriptionList",getSubscriptionList)
     useEffect(() => {
+        dispatch(getSubscriptionPckg())
 
     }, []);
 
@@ -88,7 +93,7 @@ Create A Plan
 </Row>
 
 <br/>
-<Row >
+{/* <Row >
     <Col md={4}></Col>
     <Col md={4} className="text-center">
     <div className="btn-group" role="group" aria-label="Basic example">
@@ -188,6 +193,24 @@ Create A Plan
     </div>
   </div>
     </Col>
+</Row> */}
+<Row>
+   {getSubscriptionList != undefined ? getSubscriptionList.map((item)=>{
+    return <Col md={4} key={item}>
+    <Card className="shadow-lg">
+        <CardBody>
+           
+           
+
+<h5><strong>Plan Name : {item.subscriptionPkgName}</strong></h5>
+<h5><strong>Monthly Amount : {item.monthlyAmt}</strong></h5>
+<h5><strong>Yearly Amount : {item.yearlyAmt}</strong></h5>
+<h5><strong style={{color: item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0? "#00b300":"#ff6600" }}>{item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0? "Paid":"Free"}</strong></h5>
+
+        </CardBody>
+    </Card>
+</Col>
+   }):""} 
 </Row>
 <br/>
 <br/>

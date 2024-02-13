@@ -26,4 +26,8 @@ export const selectLatestTans = createSelector(
     (categoriesSlice) => categoriesSlice.loading
   );
 
+  export const getSubscriptionListReducer = createSelector(
+    [selectLatestTansReducer],
+    (TansecationSlice) => TansecationSlice.getSubscribePackage
+  );
   

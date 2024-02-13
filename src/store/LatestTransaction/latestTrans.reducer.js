@@ -4,12 +4,20 @@ import {
   FETCH_LATEST_TRANS_FAILED,
   APPROVE_REJECT_LATEST_TRANSACTION,
   APPROVE_REJECT_LATEST_TRANSACTION_FAIL,
-  APPROVE_REJECT_LATEST_TRANSACTION_SUCCESS
+  APPROVE_REJECT_LATEST_TRANSACTION_SUCCESS,
+  SUBSCRIBE_PACKAGE,
+  SUBSCRIBE_PACKAGE_FAIL,
+  SUBSCRIBE_PACKAGE_SUCCESS,
+  GET_SUBSCRIBE_PACKAGE,
+  GET_SUBSCRIBE_PACKAGE_FAIL,
+  GET_SUBSCRIBE_PACKAGE_SUCCESS
 } from "./latestTrans.type"
 
 export const LATEST_TRANS_INITIAL_STATE = {
   latestTrans: [],
   approveRejectLatestTrans:[],
+  getSubscribePackage:[],
+  subscribePckg:[],
   loading: false,
   error: null,
 }
@@ -32,6 +40,19 @@ export const latestTransReducer = (
         return { ...state, loading: false, approveRejectLatestTrans: payload }
       case APPROVE_REJECT_LATEST_TRANSACTION_FAIL:
         return { ...state, loading: false, error: payload }
+        case SUBSCRIBE_PACKAGE:
+          return { ...state, loading: true }
+        case SUBSCRIBE_PACKAGE_FAIL:
+          return { ...state, loading: false, error: payload }
+        case SUBSCRIBE_PACKAGE_SUCCESS:
+          return { ...state, loading: false, subscribePckg: payload }
+
+          case GET_SUBSCRIBE_PACKAGE:
+            return { ...state, loading: true }
+          case GET_SUBSCRIBE_PACKAGE_FAIL:
+            return { ...state, loading: false, error: payload }
+          case GET_SUBSCRIBE_PACKAGE_SUCCESS:
+            return { ...state, loading: false, getSubscribePackage: payload }
     default:
       return state
   }
