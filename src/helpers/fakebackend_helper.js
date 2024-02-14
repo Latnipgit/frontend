@@ -17,6 +17,7 @@ export const genrateAllTransation = () => post(url.GET_LATEST_TRANSATION)
 export const approveRejectLatestTranApiMethod = (data) => post("/api/admin/approveOrRejectPayment",data)
 export const esclatedTransactionAPI = (data) => post("/api/admin/escalateRequest",data)
 export const subscribePckgAPI = (data) => post("/api/admin/addSubscriptionPkg",data)
+export const requestForAdditionalDocAPII = (data) => post("/api/admin/askForSupportingDocument",data)
 // getAllApprovedTransactions
 export const getAllApprovedTransactions = () =>
   get(url.GET_ALL_APPROVED_TRANSACTIONS)

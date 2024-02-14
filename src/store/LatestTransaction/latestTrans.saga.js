@@ -14,12 +14,15 @@ import {
   getSubscriptionPckgSuccess,
   esclateTransaction,
   esclateTransactionFail,
-  esclateTransactionSuccess
+  esclateTransactionSuccess,
+  requestForAdditionalDoc,
+  requestForAdditionalDocFail,
+  requestForAdditionalDocSuccess
 } from "./latestTrans.action"
 
-import { FETCH_LATEST_TRANS_START ,APPROVE_REJECT_LATEST_TRANSACTION, SUBSCRIBE_PACKAGE,  GET_SUBSCRIBE_PACKAGE,ESCLATET_TRANSACTION} from "./latestTrans.type"
+import { FETCH_LATEST_TRANS_START ,APPROVE_REJECT_LATEST_TRANSACTION, SUBSCRIBE_PACKAGE,  GET_SUBSCRIBE_PACKAGE,ESCLATET_TRANSACTION,REQ_FOR_ADDITIONAL_DOC} from "./latestTrans.type"
 
-import { genrateAllTransation ,approveRejectLatestTranApiMethod,subscribePckgAPI,getSubscribtionpckgListAPI,esclatedTransactionAPI} from "../../helpers/fakebackend_helper"
+import { genrateAllTransation ,approveRejectLatestTranApiMethod,subscribePckgAPI,getSubscribtionpckgListAPI,esclatedTransactionAPI,requestForAdditionalDocAPII} from "../../helpers/fakebackend_helper"
 
 export function* fetchLatestTransAsync() {
   try {
@@ -67,7 +70,16 @@ export function* getSubscriptionListSaga() {
     yield put(getSubscriptionPckgFail(error))
   }
 }
-
+export function* requestedForAdditionalDocSaga(data) {
+  
+  try {
+    const latestTransArray = yield call(requestForAdditionalDocAPII,data.payload)
+    console.log("latestTransArray",latestTransArray)
+    yield put(requestForAdditionalDocSuccess(latestTransArray.data.response))
+  } catch (error) {
+    yield put(requestForAdditionalDocFail(error))
+  }
+}
 
 export function* onFetchLatestTrans() {
   yield takeLatest(FETCH_LATEST_TRANS_START, fetchLatestTransAsync)
@@ -75,6 +87,7 @@ export function* onFetchLatestTrans() {
   yield takeLatest(SUBSCRIBE_PACKAGE, subscribeTopckgSaga)
   yield takeLatest(GET_SUBSCRIBE_PACKAGE, getSubscriptionListSaga)
   yield takeLatest(ESCLATET_TRANSACTION, esclateTransactionSaga)
+  yield takeLatest(REQ_FOR_ADDITIONAL_DOC, requestedForAdditionalDocSaga)
 }
 
 export function* latestTransSaga() {

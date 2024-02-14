@@ -19,7 +19,7 @@ import moment from 'moment'
 import Select from 'react-select';
 import { toast ,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { approveRejectLatestTrans ,esclateTransaction} from "store/LatestTransaction/latestTrans.action"
+import { approveRejectLatestTrans ,esclateTransaction,requestForAdditionalDoc} from "store/LatestTransaction/latestTrans.action"
 import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -134,6 +134,11 @@ const selected = location.state.selected
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState(null);
+    const [notesSeller, setnotesSeller] = useState('');
+    const [notesBuyer, setnotesBuyer] = useState('');
+
+const [itemsSeller, setItemsSeller] = useState([]);
+const [itemsBuyer, setItemsBuyer] = useState([]);
 
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
     const toggleModal = () => setModalOpen(!modalOpen);
@@ -163,10 +168,36 @@ const selected = location.state.selected
     
     // console.log("EsclateEsclate",selected)
   };
-  console.log("selectedselected",selected)
+
+  const handleCheckboxChanges = (e) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      // Add item to the array
+      setItemsSeller(prevItems => [...prevItems, value]);
+    } else {
+      // Remove item from the array
+      setItemsSeller(prevItems => prevItems.filter(item => item !== value));
+    }
+  };
+
+  
+  const handleCheckboxChangeBuyer = (e) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      // Add item to the array
+      setItemsBuyer(prevItems => [...prevItems, value]);
+    } else {
+      // Remove item from the array
+      setItemsBuyer(prevItems => prevItems.filter(item => item !== value));
+    }
+  };
   const dispatch = useDispatch()
 
   const handleActionSelect =()=>{
+    console.log("selectedselected",selectedOption)
+
     if(selectedOption.value=="Approved"){
 
         const payload = {
@@ -193,6 +224,22 @@ const selected = location.state.selected
         dispatch(esclateTransaction(payload))
         toast.success("Transaction Esclate to Next Level")
     }
+    if(selectedOption.value == "Requesttoadditionaldocumnet" ){
+       
+    }
+  }
+  const handleRequestedDoc= ()=>{
+    const payload ={
+        "paymentId": selected.defaulterEntry._id,
+        "documentsRequiredFromCreditor":itemsSeller,
+        "documentsRequiredFromDebtor":itemsBuyer,
+        "isDocumentsRequiredByCreditor": itemsSeller.length != 0 ? "true":"false",
+        "adminRemarksForDebtor": notesBuyer,
+        "adminRemarksForCreditor": notesSeller
+    }
+    console.log("payloadpayload",payload)
+
+    dispatch(requestForAdditionalDoc(payload))
   }
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
@@ -210,7 +257,8 @@ const selected = location.state.selected
 const viewDocuments=(value)=>{
     console.log("valuee",value)
 }
-console.log("selectedselected",selected)
+console.log("selectedselected ll",itemsSeller)
+
   return (
     <div className="mt-5 p-5">
                 <Row>
@@ -331,26 +379,7 @@ console.log("selectedselected",selected)
         </Table>
 </Row>
                     
-{/* <Row className="mt-4">
-                        {attachments.map((file, index) => (
-                            <Col md="4" key={index}>
-                                <Card className="mb-3 shadow-xl">
-                                    <CardBody className="attachment-card-body" style={{ background: 'rgba(0, 0, 0, 0.05)' , height:"100px"}}>
-                                        <div className="attachment-icon">
-                                            {file.type === 'application/pdf' ? (
-                                                <i className="far fa-file-pdf fa-2x text-danger"></i>
-                                            ) : (
-                                                <i className="far fa-file-image fa-2x text-primary"></i>
-                                            )}
-                                        </div>
-                                        <div className="attachment-info">
-                                            <span>{file.name}</span>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row> */}
+
 
                     <Row>
                   <h4 className="mt-4">Seller Rating</h4>
@@ -463,15 +492,7 @@ console.log("selectedselected",selected)
                 <Col md="4" className="mt-3" >
                     <div className="col-sm-auto">
                         <label className="visually-hidden" htmlFor="autoSizingSelect">Preference</label>
-                        {/* <select defaultValue="0" className="form-select" >
-                                    <option value="0">Select from here...</option>
-                                    <option value="Approved" onChange={(value)=>handleSelection(value)}>Approved</option>
-                                    <option value="Disputed" onChange={(value)=>handleSelection(value)}>Disputed</option>
-                                    <option value="Esclate" onChange={(value)=>handleSelection(value)}>Esclate To Next Level</option>
-                                    <option value="RequestToAddiyional " onChange={(value)=>handleSelection(value)}>Request For Additional Document</option>
-                                    <option value="RequestForCA"onChange={(value)=>handleSelection(value)}>Request For CA Certificate</option>
-                                  
-                                </select> */}
+                
 
 <Select
       options={options}
@@ -508,18 +529,35 @@ console.log("selectedselected",selected)
                     <h5 className="">Request A Document</h5> 
                   
 <Col md={6}><Label> 
-    <Input type="checkbox" style={checkboxStyle}/>&nbsp; CA Certificate 
+    <Input type="checkbox" style={checkboxStyle} 
+       value="cacertificate"
+       onChange={handleCheckboxChanges}
+       checked={itemsSeller.includes("cacertificate")}
+    />&nbsp; CA Certificate 
 </Label></Col>
 <Col md={6}>
 <Label> 
-    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Purchase Order Document 
+    <Input type="checkbox" style={checkboxStyle}
+           value="purchaseOrderDocument"
+           onChange={handleCheckboxChanges}
+           checked={itemsSeller.includes("purchaseOrderDocument")}
+    
+    />&nbsp; Purchase Order Document 
 </Label>
 </Col>
 <Col md={6}><Label> 
-    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Transportation Document 
+    <Input type="checkbox" style={checkboxStyle}
+       value="transportationDocument"
+       onChange={handleCheckboxChanges}
+       checked={itemsSeller.includes("transportationDocument")}
+    />&nbsp; Transportation Document 
 </Label> </Col>
 <Col md={6}><Label> 
-    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Payment Record Document 
+    <Input type="checkbox" style={checkboxStyle}
+      value="PaymentSeller"
+      onChange={handleCheckboxChanges}
+      checked={itemsSeller.includes("PaymentSeller")}
+    />&nbsp; Payment Record Document 
 </Label></Col>
                   
                     </Row>
@@ -529,19 +567,16 @@ console.log("selectedselected",selected)
                         <Col md={6} className="text-left">
                         <Label>
                             Enter Additional Required Information <br/> <br/>
-    <Input type="textarea" placeholder="Requried Documents From Seller..." style={{ width:"380px", height:"80px"}}/>
+    <Input type="textarea" placeholder="Requried Documents From Seller..." style={{ width:"380px", height:"80px"}}
+    
+    onChange={(e)=>setnotesSeller(e.target.value)}
+    />
 </Label>
 
                         </Col>
                         <Col md={3}></Col>
                     </Row>
-                    <Row>
-                        {/* <Col md={5}></Col> */}
-                        <Col md={4}>
-                            <Button className="btn btn-info">Request Document</Button>
-                        </Col>
-                        <Col md={5}></Col>
-                    </Row>
+                  
                 </CardBody>
               </Card>
                 </Col>
@@ -557,7 +592,11 @@ console.log("selectedselected",selected)
                     <h5 className="">Request A Document</h5> 
                   
 <Col md={6}><Label> 
-    <Input type="checkbox" style={checkboxStyle}/>&nbsp; CA Certificate 
+    <Input type="checkbox" style={checkboxStyle}
+      value="cacertificate"
+      onChange={handleCheckboxChangeBuyer}
+      checked={itemsBuyer.includes("cacertificate")}
+    />&nbsp; CA Certificate 
 </Label></Col>
 {/* <Col md={6}>
 {/* <Label> 
@@ -568,7 +607,12 @@ console.log("selectedselected",selected)
     <Input type="checkbox" style={checkboxStyle}/>&nbsp; Transportation Document 
 </Label> </Col> */} 
 <Col md={6}><Label> 
-    <Input type="checkbox" style={checkboxStyle}/>&nbsp; Payment Record Document 
+    <Input type="checkbox" style={checkboxStyle}
+  value="PaymentRecord"
+  onChange={handleCheckboxChangeBuyer}
+  checked={itemsBuyer.includes("PaymentRecord")}
+
+    />&nbsp; Payment Record Document 
 </Label></Col>
                   
                     </Row>
@@ -578,23 +622,27 @@ console.log("selectedselected",selected)
                         <Col md={6} className="text-left">
                         <Label>
                             Enter Additional Required Information <br/> <br/>
-    <Input type="textarea" placeholder="Requried Documents From Seller/Buyer..." style={{ width:"380px", height:"80px"}}/>
+    <Input type="textarea" placeholder="Requried Documents From Seller/Buyer..." style={{ width:"380px", height:"80px"}}
+    onChange={(e)=>setnotesBuyer(e.target.value)}
+    />
 </Label>
 
                         </Col>
                         <Col md={3}></Col>
                     </Row>
-                    <Row>
-                        {/* <Col md={5}></Col> */}
-                        <Col md={4}>
-                            <Button className="btn btn-info">Request Document</Button>
-                        </Col>
-                        <Col md={5}></Col>
-                    </Row>
+                  
+                   
                 </CardBody>
               </Card>
                 </Col>
             </Row>
+            <Row>
+                        {/* <Col md={5}></Col> */}
+                        <Col md={4}>
+                            <Button className="btn btn-info" onClick={()=>handleRequestedDoc()}>Request Document</Button>
+                        </Col>
+                        <Col md={5}></Col>
+                    </Row>
                   </div>
                   :
                   

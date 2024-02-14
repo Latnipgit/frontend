@@ -13,7 +13,10 @@ import {
   GET_SUBSCRIBE_PACKAGE,
   ESCLATET_TRANSACTION,
   ESCLATET_TRANSACTION_FAIL,
-  ESCLATET_TRANSACTION_SUCCESS
+  ESCLATET_TRANSACTION_SUCCESS,
+  REQ_FOR_ADDITIONAL_DOC_SUCCESS,
+  REQ_FOR_ADDITIONAL_DOC_FAIL,
+  REQ_FOR_ADDITIONAL_DOC
 
 } from "./latestTrans.type"
 import { createAction } from "reducer/reducer.utils"
@@ -56,6 +59,15 @@ export const subscribeToPackageFailure = error =>
 
 export const getSubscriptionPckgFail = error => {
   createAction(SUBSCRIBE_PACKAGE_FAIL, error)}
+
+  export const requestForAdditionalDoc = (data) =>
+  createAction(REQ_FOR_ADDITIONAL_DOC,data)
+
+  export const requestForAdditionalDocSuccess = (latestTransArray) =>
+  createAction(REQ_FOR_ADDITIONAL_DOC_SUCCESS,latestTransArray)
+
+export const requestForAdditionalDocFail = error => {
+  createAction(REQ_FOR_ADDITIONAL_DOC_FAIL, error)}
 
 
 

@@ -13,12 +13,16 @@ import {
   GET_SUBSCRIBE_PACKAGE_SUCCESS,
   ESCLATET_TRANSACTION,
   ESCLATET_TRANSACTION_FAIL,
-  ESCLATET_TRANSACTION_SUCCESS
+  ESCLATET_TRANSACTION_SUCCESS,
+  REQ_FOR_ADDITIONAL_DOC,
+  REQ_FOR_ADDITIONAL_DOC_SUCCESS,
+  REQ_FOR_ADDITIONAL_DOC_FAIL
 } from "./latestTrans.type"
 
 export const LATEST_TRANS_INITIAL_STATE = {
   latestTrans: [],
   approveRejectLatestTrans:[],
+  requestedDoc:[],
   esclatedTransaction:[],
   getSubscribePackage:[],
   subscribePckg:[],
@@ -63,6 +67,13 @@ export const latestTransReducer = (
               return { ...state, loading: false, error: payload }
             case ESCLATET_TRANSACTION_SUCCESS:
               return { ...state, loading: false, esclatedTransaction: payload }
+
+              case REQ_FOR_ADDITIONAL_DOC:
+                return { ...state, loading: true }
+              case REQ_FOR_ADDITIONAL_DOC_FAIL:
+                return { ...state, loading: false, error: payload }
+              case REQ_FOR_ADDITIONAL_DOC_SUCCESS:
+                return { ...state, loading: false, requestedDoc: payload }
     default:
       return state
   }
