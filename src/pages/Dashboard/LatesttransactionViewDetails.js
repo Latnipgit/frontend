@@ -202,8 +202,8 @@ const [itemsBuyer, setItemsBuyer] = useState([]);
 
         const payload = {
     "approve": true,
-    "paymentId": selected.defaulterEntry._id,
-    "amtPaid": selected.defaulterEntry.totalAmount
+    "paymentId": selected.id,
+    "amtPaid": selected.amtPaid
 }
         dispatch(approveRejectLatestTrans(payload))
         toast.success("Transaction Approved")
@@ -211,15 +211,15 @@ const [itemsBuyer, setItemsBuyer] = useState([]);
     if(selectedOption.value=="Disputed"){
         const payload = {
             "approve": false,
-            "paymentId": selected.defaulterEntry._id,
-            "amtPaid": selected.defaulterEntry.totalAmount
+            "paymentId": selected.id,
+            "amtPaid": selected.amtPaid
         }
                 dispatch(approveRejectLatestTrans(payload))
         toast.success("Transaction Disputed")
     }
     if(selectedOption.value=="Esclate"){
         const payload ={
-            "paymentId": selected.defaulterEntry._id
+            "paymentId": selected.id
         }
         dispatch(esclateTransaction(payload))
         toast.success("Transaction Esclate to Next Level")
@@ -230,7 +230,7 @@ const [itemsBuyer, setItemsBuyer] = useState([]);
   }
   const handleRequestedDoc= ()=>{
     const payload ={
-        "paymentId": selected.defaulterEntry._id,
+        "paymentId": selected.id,
         "documentsRequiredFromCreditor":itemsSeller,
         "documentsRequiredFromDebtor":itemsBuyer,
         "isDocumentsRequiredByCreditor": itemsSeller.length != 0 ? "true":"false",
