@@ -198,21 +198,21 @@ const MemberFilteredData = props => {
       
   
         {
-          Header: "Customer Name",
-          accessor: "name",
+          Header: "State Name",
+          accessor: "value",
           disableFilters: true,
           filterable: false,
           Cell: cellProps => {
-            return <CustomerName {...cellProps} />;
+            return <span>{cellProps.cell.row.original.value}</span>;
           },
         },
         {
-          Header: "Company Name",
-          accessor: "userName",
+          Header: "Reported member",
+          accessor: "lael",
           disableFilters: true,
           filterable: false,
           Cell: cellProps => {
-            return <CompanyName {...cellProps} />;
+            return <>2</>;
           },
         },
      
@@ -226,10 +226,7 @@ const MemberFilteredData = props => {
             return (
               <div className="d-flex">
                
-              <div className="d-flex flex-column align-items-center me-3"  style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
-              </div>
-           
+              <Button className="btn btn-sm btn-info">view Details</Button>
              
             </div>
             );
@@ -329,11 +326,12 @@ console.log("memberdatamemberdata", salutationState)
 
 </div> */}
  <TableContainer
-            columns={columns}
-            data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
+            columns={columnsState}
+            // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
+            data={ salutationState }
             isGlobalFilter={true}
             isAddOptions={false}
-            customPageSize={20}
+            customPageSize={10}
           />
 
 <table>

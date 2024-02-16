@@ -43,6 +43,7 @@ import {
 
 import TableContainer from "../../../../components/Common/TableContainer";
 import RegCompanyViewModal from "./RegCompanyViewModal";
+import { Country, State, City }  from 'country-state-city';
 
 const RegisteredCompanyList = props => {
 
@@ -56,7 +57,6 @@ const RegisteredCompanyList = props => {
       memberData:  state.MemberList.memberData
 
     })
-    // console.log("MEMBERDATA selectore", state.MemberList.memberData!= null ? state.MemberList.memberData:'jai shree ram'    )
     );
   const columns = useMemo(
     () => [
@@ -113,55 +113,7 @@ const RegisteredCompanyList = props => {
           return <Status {...cellProps} />;
         },
       },
-    //   {
-    //     Header: "Payment Method",
-    //     accessor: "paymentMethod",
-    //     disableFilters: true,
-    //     Cell: cellProps => {
-    //       return <PaymentMethod {...cellProps} />;
-    //     },
-    //   },
-      // {
-      //   Header: "Action",
-      //   disableFilters: true,
-      //   accessor: "view",
-      //   Cell: cellProps => {
-      //     return (
-      //       <UncontrolledDropdown>
-      //                         <DropdownToggle
-      //                           href="#"
-      //                           className="card-drop"
-      //                           tag="a"
-      //                         >
-      //                           <i className="mdi mdi-dots-horizontal font-size-18" />
-      //                         </DropdownToggle>
-      //                         <DropdownMenu className="dropdown-menu-end">
-      //                         <DropdownItem
-      //                             href="#"
-      //                             onClick={toggleViewModal}
-      //                           >
-      //                             <i className="mdi mdi-eye font-size-16 text-primary me-1" />{" "}
-      //                             View
-      //                           </DropdownItem>
-      //                           <DropdownItem
-      //                             href="#"
-      //                             onClick={() => handleProjectClick(project)}
-      //                           >
-      //                             <i className="mdi mdi-pencil font-size-16 text-success me-1" />{" "}
-      //                             Edit
-      //                           </DropdownItem>
-      //                           <DropdownItem
-      //                             href="#"
-      //                             onClick={() => onClickDelete(project)}
-      //                           >
-      //                             <i className="mdi mdi-trash-can font-size-16 text-danger me-1" />{" "}
-      //                             Delete
-      //                           </DropdownItem>
-      //                         </DropdownMenu>
-      //                       </UncontrolledDropdown>
-      //     );
-      //   },
-      // },
+   
     ],
     []
   );
@@ -173,6 +125,8 @@ const RegisteredCompanyList = props => {
           setMemberData(memberData != undefined && memberData != null ? memberData.data.response:[])      
     }, []);
 console.log("memberDatamemberData",memberData, memberdata)
+console.log("CONSOSOSOS",Country.getAllCountries())
+console.log("CONSOSOSOS state",State.getAllStates())
   return (
     <React.Fragment>
       <RegCompanyViewModal isOpen={modal1} toggle={toggleViewModal} />
