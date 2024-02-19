@@ -49,10 +49,10 @@ const UserProfile = () => {
   }));
  useEffect(() => {
     setImage(avatar)
-if(localStorage.getItem("Profile") == undefined){
-  if (localStorage.getItem("authUser")) {
+if(sessionStorage.getItem("Profile") == undefined){
+  if (sessionStorage.getItem("authUser")) {
          
-    const obj = JSON.parse(localStorage.getItem("authUser"));
+    const obj = JSON.parse(sessionStorage.getItem("authUser"));
    if (
       process.env.REACT_APP_DEFAULTAUTH === "jwt"
     ) {
@@ -68,7 +68,7 @@ if(localStorage.getItem("Profile") == undefined){
  
 }
 else{
-  const profile = JSON.parse(localStorage.getItem("Profile"))
+  const profile = JSON.parse(sessionStorage.getItem("Profile"))
   console.log("profile ++", profile.name)
   setname(profile.name);
   setemail(profile.userName);

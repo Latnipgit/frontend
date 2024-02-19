@@ -80,15 +80,15 @@ const Dashboard = props => {
     //   description: "1,447",
     // },
   ];
-  // const isPopupOpen = JSON.parse(localStorage.getItem("IspopupOpen"));
+  // const isPopupOpen = JSON.parse(sessionStorage.getItem("IspopupOpen"));
   const isPopupOpen = false
   useEffect(() => {
-      localStorage.removeItem("Profile")
+      sessionStorage.removeItem("Profile")
   if (isPopupOpen) {
       setTimeout(() => {
        
         setSubscribemodal(false);
-        localStorage.setItem("IspopupOpen", JSON.stringify(false));
+        sessionStorage.setItem("IspopupOpen", JSON.stringify(false));
       }, 500);  
     }
   }, []);

@@ -73,7 +73,7 @@ const UserList = props => {
 
   const handleEdit =(project)=>{
     console.log("HARshit handle edit", project)
-localStorage.setItem("Profile",JSON.stringify(project))
+sessionStorage.setItem("Profile",JSON.stringify(project))
 // window.location = "/profile";
 // history.push("/profile");
 

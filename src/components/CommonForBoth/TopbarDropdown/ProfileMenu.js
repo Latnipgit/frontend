@@ -29,11 +29,11 @@ const ProfileMenu = props => {
   //   return str.replace(/\b\w/g, (match) => match.toUpperCase());
   // }
   useEffect(() => {
-    if (localStorage.getItem("authUser")) {
+    if (sessionStorage.getItem("authUser")) {
       if (process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
              
-        const obj = JSON.parse(localStorage.getItem("authUser"));
+        const obj = JSON.parse(sessionStorage.getItem("authUser"));
         setusername(capitalizeWords(obj.name));
       }
     }

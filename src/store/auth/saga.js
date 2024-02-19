@@ -16,9 +16,9 @@ import { success } from "toastr";
 const fireBaseBackend = getFirebaseBackend();
 
 function* loginUser({ payload: { user, history } }) {
+
   try {
     if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-       
       const response = yield call(postJwtLogin, {
         userName: user.email,
         password: user.password,
@@ -26,8 +26,10 @@ function* loginUser({ payload: { user, history } }) {
       if(response!=undefined && response!=null){
               
         if(response.data.success){
-          localStorage.setItem("authUser", JSON.stringify(response.data.response));
-          localStorage.setItem("IspopupOpen", JSON.stringify(true));
+          sessionStorage.setItem("authUser", JSON.stringify(response.data.response));
+          sessionStorage.setItem("IspopupOpen", JSON.stringify(true));
+          sessionStorage.setItem("tokenemployeeRegister",response.data.response.token)
+          sessionStorage.setItem("refreshToken",response.data.response.refreshToken)
           yield put(loginSuccess(response.data.response));
           history('/dashboard');
         }else{
@@ -44,7 +46,7 @@ function* loginUser({ payload: { user, history } }) {
 
 // function* logoutUser({ payload: { history } }) {
 //   try {
-//     localStorage.removeItem("authUser");
+//     sessionStorage.removeItem("authUser");
 
 //     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
 //       const response = yield call(fireBaseBackend.logout);
@@ -59,7 +61,7 @@ function* loginUser({ payload: { user, history } }) {
 
 function* logoutUser({ payload: { history } }) {
   try {
-    localStorage.removeItem("authUser");
+    sessionStorage.removeItem("authUser");
 
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
       const response = yield call(fireBaseBackend.logout);
@@ -81,11 +83,11 @@ function* socialLogin({ payload: { data, history, type } }) {
         data,
         type,
       );
-      localStorage.setItem("authUser", JSON.stringify(response));
+      sessionStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
     } else {
       const response = yield call(postSocialLogin, data);
-      localStorage.setItem("authUser", JSON.stringify(response));
+      sessionStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
     }
     history("/dashboard");

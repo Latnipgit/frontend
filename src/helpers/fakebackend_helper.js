@@ -1,5 +1,5 @@
 import axios from "axios"
-import { del, get, post, put, addEmployeeAPImethod } from "./api_helper"
+import { del, get, post, put, addEmployeeAPImethod ,loginPostMethod} from "./api_helper"
 import * as url from "./url_helper"
 
 //Get all Admin
@@ -29,7 +29,7 @@ export const getDashboardAdminData = () => post(url.GET_DASHBOARD_ADMIN_DATA)
 
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {
-  const user = localStorage.getItem("user")
+  const user = sessionStorage.getItem("user")
   if (user) return JSON.parse(user)
   return null
 }
@@ -114,7 +114,7 @@ const postJwtRegister = (url, data) => {
 }
 
 // Login Method
-const postJwtLogin = data => post(url.POST_FAKE_JWT_LOGIN, data)
+const postJwtLogin = data => loginPostMethod(url.POST_FAKE_JWT_LOGIN, data)
 
 // postForgetPwd
 const postJwtForgetPwd = data => post(url.POST_FAKE_JWT_PASSWORD_FORGET, data)
