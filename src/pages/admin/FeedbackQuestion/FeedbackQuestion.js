@@ -92,23 +92,6 @@ const FeedbackQuestionModel = props => {
                         <br />
                         <ModalHeader className="ml-3">Add Feedback Question</ModalHeader>
                         <ModalBody style={{ padding: '5px 20px' }}>
-
-                            {/*                             <form>
-                                <Row className="mt-3">
-                                    <Col md={2} className="pt-2">
-                                        <Label className="form-label"><b className="h5">Plan Name</b></Label>
-                                    </Col>
-                                    <Col md={6}>
-                                        <Input
-                                            className="form-control text-capitalize"
-                                            placeholder="Enter Plan Name"
-                                            type="text"
-
-                                        />
-                                    </Col>
-                                    <Col md={4}></Col>
-                                </Row>
-                            </form> */}
                             <Row className="mt-3" style={{ padding: '5px 10px' }}>
                                 <table className="table table-bordered">
                                     <thead>
@@ -146,65 +129,6 @@ const FeedbackQuestionModel = props => {
                                     </tbody>
                                 </table>
                             </Row>
-                            {/* <Row style={{ padding: '5px 10px' }} >
-                                <Col md={12}>
-                                    <Row className=" p-2" style={{ background: '#f0f5f5' }}>
-
-                                        <Col md={2} className="pt-2"><b>Yearly Price</b></Col>
-                                        <Col md={3}>
-                                            <Input
-                                                className="form-control"
-                                                placeholder="Enter Yearly Price"
-                                                type="number"
-                                            />
-                                        </Col>
-                                        <Col md={7}></Col>
-                                    </Row>
-                                    <Row className=" p-2" style={{ background: '#f0f5f5' }}>
-                                        <Col md={2} className="pt-2"><b>Monthly Price</b></Col>
-                                        <Col md={3}>
-                                            <Input
-                                                className="form-control"
-                                                placeholder="Enter Monthly Price"
-                                                type="number"
-                                            />
-                                        </Col>
-                                        <Col md={7}></Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                            <div className="radio p-3">
-                                <Row className="btn-group d-flex">
-                                    <Col md={4}>
-                                        <Label>
-                                            <Input type="radio" name="allMember" className="border border-dark" id="allMember" onChange={() => setIndividual(false)} />
-                                            &nbsp;&nbsp;
-                                            Plan For All Members
-                                        </Label>
-                                        <br />
-                                        <Label>
-                                            <Input type="radio" name="allMember" id="individual" className="border border-dark" onChange={() => setIndividual(true)} />
-                                            &nbsp;&nbsp;
-                                            Plan For Individual Member
-                                        </Label>
-                                    </Col>
-                                    <Col md={4} className="pt-3">
-                                        {individual == true ?
-                                            <Input type="email" placeholder="Enter Email id" />
-                                            : ""}
-                                    </Col>
-                                    <Col md={4}>
-                                    </Col>
-                                </Row>
-                            </div>
-                            <Row className="mt-3 mb-3">
-                                <Col md={4} className="">
-                                    <Button className="btn btn-info">
-                                        Create Plan
-                                    </Button>
-                                </Col>
-                                <Col md={4}></Col>
-                            </Row> */}
                         </ModalBody>
                     </div>
                 </CardBody>

@@ -55,6 +55,19 @@ const getLayout = (layoutType) => {
   return Layout;
 };
 
+
+function clearStorage() {
+
+  let session = sessionStorage.getItem('register');
+
+  if (session == null) {
+    sessionStorage.clear();
+    window.location.href = "/login"
+  }
+  sessionStorage.setItem('register', 1);
+}
+window.addEventListener('load', clearStorage);
+
 const App = () => {
 
   const { layoutType } = useSelector((state) => ({
