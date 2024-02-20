@@ -33,6 +33,7 @@ import { disputedTransSaga } from "./DisputedTransactions/disputedTrans.saga"
 import { dashboardAdminDataSaga } from "./DashboardAdminData/dashboardAdminData.saga"
 import { AddQuestionFeedbackQuestionSaga } from "./addFeedbackQuestion/addFeedbackQuestion.saga"
 import FeedbackQuestionListSaga from "./feedbackquestionList/feedbackquestionList.saga"
+import { CompanyDetailsSaga } from "./CompanyDetails/CompanyDetails.saga"
 
 export default function* rootSaga() {
   yield all([
@@ -66,5 +67,6 @@ export default function* rootSaga() {
     fork(dashboardAdminDataSaga),
     fork(AddQuestionFeedbackQuestionSaga),
     fork(FeedbackQuestionListSaga),
+    fork(CompanyDetailsSaga),
   ])
 }
