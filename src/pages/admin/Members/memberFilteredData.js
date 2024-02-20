@@ -38,9 +38,25 @@ const MemberFilteredData = props => {
   const [DataforTable, setDataForTable] = useState([])
   const [salutationCity, setSalutationCity] = useState([])
 
+  const [companyStateData, setCompanyStateData] = useState([])
+
   const selectComapnyState = useSelector(selectComapnyStateMap)
 
   console.log("selectComapnyState", selectComapnyState);
+
+  useEffect(() => {
+    if (stateData && selectComapnyState) {
+      const companyStateList = stateData.map((values, index) => {
+        for (let i = 0; i < selectComapnyState.length; i++) {
+          if (values.name == selectComapnyState[i]._id) {
+            return { state: values.name, statecount: selectComapnyState[i].totalCompanies }
+          }
+        }
+        return { state: values.name, statecount: 0 }
+      })
+      setCompanyStateData(companyStateList)
+    }
+  }, [selectComapnyState])
 
   useEffect(() => {
     setStateData(State.getStatesOfCountry(country?.isoCode));
@@ -61,14 +77,16 @@ const MemberFilteredData = props => {
 
   }, [selectedState]);
 
-  useEffect(() => {
-    if (stateData) {
-      const stateDatalist = stateData.map((value, index) => {
-        return { label: value.name, value: value.name }
-      })
-      setsalutationState(stateDatalist)
-    }
-  }, [stateData]);
+
+
+  /*   useEffect(() => {
+      if (stateData) {
+        const stateDatalist = stateData.map((value, index) => {
+          return { label: value.name, value: value.name }
+        })
+        setsalutationState(stateDatalist)
+      }
+    }, [stateData]); */
 
   useEffect(() => {
     if (stateData) {
@@ -209,7 +227,7 @@ const MemberFilteredData = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <span>{cellProps.cell.row.original.value}</span>;
+          return <span>{cellProps.cell.row.original.state}</span>;
         },
       },
       {
@@ -218,7 +236,7 @@ const MemberFilteredData = props => {
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <>2</>;
+          return <span>{cellProps.cell.row.original.statecount}</span>;
         },
       },
 
@@ -334,7 +352,7 @@ const MemberFilteredData = props => {
           <TableContainer
             columns={columnsState}
             // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
-            data={salutationState}
+            data={companyStateData.reverse()}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={10}
