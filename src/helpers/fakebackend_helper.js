@@ -30,6 +30,10 @@ export const getDashboardAdminData = () => post(url.GET_DASHBOARD_ADMIN_DATA)
 //ComapnyDatails Company State and City
 export const getCompanyStateAPI = () => get("/api/admin/getCompanyCountStateWise")
 
+export const getCompanyCityAPI = (data) => post("/api/admin/getCompanyCountCityWiseForState", data)
+
+export const getCompanyStateCityAPI = (data) => post("/api/admin/getDisputedTransactionsStateCityWise", data)
+
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {
   const user = sessionStorage.getItem("user")

@@ -31,7 +31,7 @@ const MemberFilteredData = props => {
   const [cityData, setCityData] = useState();
   let countryData = Country.getAllCountries();
   const [country, setCountry] = useState(countryData[100]);
-  const [selectedState, setSelectedState] = useState(null);
+  const [selectedState, setSelectedState] = useState("");
   const [stateData, setStateData] = useState();
   const [selectedCity, setSelectedCity] = useState("")
   const [salutationState, setsalutationState] = useState([])
@@ -260,9 +260,6 @@ const MemberFilteredData = props => {
     []
   );
 
-
-
-  console.log("memberdatamemberdata", salutationState)
   return (
     <React.Fragment>
       <Card className=" mt-3">
