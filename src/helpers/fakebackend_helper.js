@@ -145,6 +145,7 @@ export const getProductDetail = id =>
 
 // get Events
 export const getEvents = () => get(url.GET_EVENTS)
+export const getAllCompanyListAPi = () => get("/api/admin/getAllCompanies")
 
 // add Events
 export const addNewEvent = event => post(url.ADD_NEW_EVENT, event)

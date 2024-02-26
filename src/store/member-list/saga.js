@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all, fork, takeLatest } from "redux-saga/effects";
-import { GET_MEMBER_DATA} from "./actionsTypes";
-import { MemberApiSuccess, MemberApiFail} from "./actions";
-import {getAllMemberData} from "../../helpers/fakebackend_helper";
+import { GET_MEMBER_DATA,GET_ALL_COMPANY_LIST} from "./actionsTypes";
+import { MemberApiSuccess, MemberApiFail,getcompanyListSuccess,getcompanyListFail} from "./actions";
+import {getAllMemberData,getAllCompanyListAPi} from "../../helpers/fakebackend_helper";
 function* getAllMemberData2() {
     try {
       var response = yield call(getAllMemberData);
@@ -11,8 +11,19 @@ function* getAllMemberData2() {
     }
 }
 
+function* getAllCompanyListSaga() {
+    try {
+      var response = yield call(getAllCompanyListAPi);
+      console.log("responseresponseresponse",response)
+      yield put(getcompanyListSuccess(response.data.response));
+    } catch (error) {
+        yield put(getcompanyListFail(error));
+    }
+}
+
 export function* watchGetMemberData() {
     yield takeEvery(GET_MEMBER_DATA, getAllMemberData2);
+    yield takeEvery(GET_ALL_COMPANY_LIST, getAllCompanyListSaga);
 }
 
 function* MemberListSaga() {
