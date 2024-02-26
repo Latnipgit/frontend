@@ -1,5 +1,5 @@
 import axios from "axios"
-import { del, get, post, put, addEmployeeAPImethod ,loginPostMethod} from "./api_helper"
+import { del, get, post, put, addEmployeeAPImethod, loginPostMethod } from "./api_helper"
 import * as url from "./url_helper"
 
 //Get all Admin
@@ -14,10 +14,10 @@ export const changepassswordDataAPI = () =>
   post(url.CHANGE_PASSWORD_WITH_OLD_PASSWORD, data)
 // genrateAllTransation
 export const genrateAllTransation = () => post(url.GET_LATEST_TRANSATION)
-export const approveRejectLatestTranApiMethod = (data) => post("/api/admin/approveOrRejectPayment",data)
-export const esclatedTransactionAPI = (data) => post("/api/admin/escalateRequest",data)
-export const subscribePckgAPI = (data) => post("/api/admin/addSubscriptionPkg",data)
-export const requestForAdditionalDocAPII = (data) => post("/api/admin/askForSupportingDocument",data)
+export const approveRejectLatestTranApiMethod = (data) => post("/api/admin/approveOrRejectPayment", data)
+export const esclatedTransactionAPI = (data) => post("/api/admin/escalateRequest", data)
+export const subscribePckgAPI = (data) => post("/api/admin/addSubscriptionPkg", data)
+export const requestForAdditionalDocAPII = (data) => post("/api/admin/askForSupportingDocument", data)
 // getAllApprovedTransactions
 export const getAllApprovedTransactions = () =>
   get(url.GET_ALL_APPROVED_TRANSACTIONS)
@@ -26,6 +26,13 @@ export const getAllDisputedTransactions = () =>
   get(url.GET_ALL_DISPUTED_TRANSACTIONS)
 
 export const getDashboardAdminData = () => post(url.GET_DASHBOARD_ADMIN_DATA)
+
+//ComapnyDatails Company State and City
+export const getCompanyStateAPI = () => get("/api/admin/getCompanyCountStateWise")
+
+export const getCompanyCityAPI = (data) => post("/api/admin/getCompanyCountCityWiseForState", data)
+
+export const getCompanyStateCityAPI = (data) => post("/api/admin/getDisputedTransactionsStateCityWise", data)
 
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {

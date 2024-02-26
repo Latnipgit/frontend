@@ -68,6 +68,7 @@ import { disputedTransReducer } from "./DisputedTransactions/disputedTrans.reduc
 import { dashboardAdminDataReducer } from "./DashboardAdminData/dashboardAdminData.reducer"
 import { AddFeedbackQuestionReducer } from "./addFeedbackQuestion/addFeedbackQuestion.reducer"
 import { FeedbackQuestionListReducer } from "./feedbackquestionList/feedbackquestionList.reducer"
+import { CompanyDetailsReducer } from "./CompanyDetails/CompanyDetails.reducer"
 
 const rootReducer = combineReducers({
   // public
@@ -99,6 +100,7 @@ const rootReducer = combineReducers({
   dashboardAdminDataReducer,
   AddFeedbackQuestionReducer,
   FeedbackQuestionListReducer,
+  CompanyDetailsReducer,
 })
 
 export default rootReducer
