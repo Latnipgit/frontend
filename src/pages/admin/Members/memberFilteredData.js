@@ -20,14 +20,13 @@ import { City, Country, State } from "country-state-city";
 import index from "pages/Dashboard-Blog";
 
 import { fetchCompanyStateStart } from "store/CompanyDetails/CompanyDetails.action";
-import { selectComapnyStateMap } from "store/CompanyDetails/CompanyDetails.selecter";
+import { selectComapnyStateMap, selectComapnyCityOpen, selectComapnyStateCityOpen } from "store/CompanyDetails/CompanyDetails.selecter";
 
 
 import DatamapsIndia from 'react-datamaps-india'
 import Select from 'react-select';
 const MemberFilteredData = props => {
   const dispatch = useDispatch();
-  const [memberdata, setMemberData] = useState(undefined);
   const [cityData, setCityData] = useState();
   let countryData = Country.getAllCountries();
   const [country, setCountry] = useState(countryData[100]);
@@ -35,12 +34,14 @@ const MemberFilteredData = props => {
   const [stateData, setStateData] = useState();
   const [selectedCity, setSelectedCity] = useState("")
   const [salutationState, setsalutationState] = useState([])
-  const [DataforTable, setDataForTable] = useState([])
+
   const [salutationCity, setSalutationCity] = useState([])
 
   const [companyStateData, setCompanyStateData] = useState([])
 
   const selectComapnyState = useSelector(selectComapnyStateMap)
+  const isComapnyCityOpen = useSelector(selectComapnyCityOpen)
+  const isComapnyStateCityOpen = useSelector(selectComapnyStateCityOpen)
 
   console.log("selectComapnyState", selectComapnyState);
 
@@ -115,19 +116,11 @@ const MemberFilteredData = props => {
     console.log("Id", event.target.id);
     console.log("Name", event.target.getAttribute("name"));
   }
-  const { memberData } = useSelector(state =>
-  ({
-    memberData: state.MemberList.memberData
-
-  })
-  );
-
-
 
   useEffect(() => {
     dispatch(ongetMemberData());
     dispatch(fetchCompanyStateStart())
-    setMemberData(memberData != undefined && memberData != null ? memberData.data.response : [])
+
   }, []);
 
   const columns = useMemo(
@@ -216,7 +209,6 @@ const MemberFilteredData = props => {
     []
   );
 
-
   const columnsState = useMemo(
     () => [
 
@@ -266,7 +258,7 @@ const MemberFilteredData = props => {
         <CardBody className=" mt-3">
           <div className="mb-4 h5 mt-5 card-title ">Report Member</div>
 
-          <Row className="mt-5">
+          {/*         <Row className="mt-5">
             <Col>
               <h5>Search by state</h5>
             </Col>
@@ -302,50 +294,8 @@ const MemberFilteredData = props => {
               </div>
             </Col>
             <Col></Col>
-          </Row>
-          {/* <p>{stateName}</p>
-      <p>{stateCode}</p>
-<div style={{height:"120vh"}}>
+          </Row> */}
 
-<DatamapsIndia 
-      regionData={{ Maharashtra: {
-        value: 10,
-        count:20
-      },
-      Rajasthan: {
-        value: 20,
-        count:60
-
-      }, Punjab: {
-        value: 5,
-        count:10
-
-      },
-      Bihar: {
-        value: 15,
-        count:30
-
-      }
-    }}
-
-      hoverComponent={({ value }) => {
-        return <span>{value.name} {value.count!= undefined ? value.count + "Members":'0 Members'}</span>
-      
-      }}
-
-      mapLayout={{
-        legendTitle: 'Legend Title',
-        startColor: '#FFDAB9',
-        endColor: '#FF6347',
-        hoverTitle: 'Count',
-        noDataColor: '#FAFAFA',
-        borderColor: '#8D8D8D',
-        hoverBorderColor: '#8D8D8D',
-        hoverColor: 'green',
-      }}W
-    />
-
-</div> */}
           <TableContainer
             columns={columnsState}
             // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
