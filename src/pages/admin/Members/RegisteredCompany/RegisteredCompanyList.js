@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import { getOrders as onGetOrders } from "store/actions";
 import { RegisteredCompanyData } from "../../../../common/data/registeredcompanyData";
-import { getMemberData as ongetMemberData} from "../../../../store/actions";
+import { getcompanyList as ongetcompanyList} from "../../../../store/actions";
 import { useDispatch ,useSelector } from "react-redux";
 import {
     Badge,
@@ -49,37 +49,30 @@ const RegisteredCompanyList = props => {
 
 
   const [modal1, setModal1] = useState(false);
-  const [memberdata, setMemberData] = useState(undefined);
 
   const toggleViewModal = () => setModal1(!modal1);
   const {memberData}  = useSelector(state => 
     ({
-      memberData:  state.MemberList.memberData
+      memberData:  state.MemberList.getAllCompanies
 
     })
     );
   const columns = useMemo(
     () => [
-      {
-        Header: "#",
-        filterable: false,
-        disableFilters: true,
-        Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />;
-        },
-      },
-      {
-        Header: "Sr No",
-        accessor: "SrNo",
-        filterable: false,
-        disableFilters: true,
-        Cell: cellProps => {
-          return <SrNo {...cellProps} />;
-        },
-      },
+    
+     
       {
         Header: "Company Name",
-        accessor: "CompanyName",
+        accessor: "companyName",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <CompanyName {...cellProps} />;
+        },
+      },
+      {
+        Header: "Mobile No",
+        accessor: "customerMobile",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -88,7 +81,7 @@ const RegisteredCompanyList = props => {
       },
       {
         Header: "GST Number",
-        accessor: "GstNo",
+        accessor: "gstin",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -97,7 +90,7 @@ const RegisteredCompanyList = props => {
       },
       {
         Header: "PanCard Number",
-        accessor: "Pancard",
+        accessor: "companyPan",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
@@ -105,12 +98,24 @@ const RegisteredCompanyList = props => {
         },
       },
       {
-        Header: "Status",
+        Header: " Due Amount",
+        accessor: "totalAmount",
+        disableFilters: true,
+        filterable: false,
+        Cell: cellProps => {
+          return <CompanyName {...cellProps} />;
+        },
+      },
+      {
+        Header: "Address",
         accessor: "Status",
         disableFilters: true,
         filterable: false,
         Cell: cellProps => {
-          return <Status {...cellProps} />;
+          return <div>
+            {console.log("cellPropscellPropscellProps",cellProps.cell.row.original)}
+            {cellProps.cell.row.original.city}, {cellProps.cell.row.original.state} 
+          </div>;
         },
       },
    
@@ -121,12 +126,10 @@ const RegisteredCompanyList = props => {
   const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(ongetMemberData());
-          setMemberData(memberData != undefined && memberData != null ? memberData.data.response:[])      
+        dispatch(ongetcompanyList());
     }, []);
-console.log("memberDatamemberData",memberData, memberdata)
-console.log("CONSOSOSOS",Country.getAllCountries())
-console.log("CONSOSOSOS state",State.getAllStates())
+console.log("memberDatamemberData",memberData)
+
   return (
     <React.Fragment>
       <RegCompanyViewModal isOpen={modal1} toggle={toggleViewModal} />
@@ -140,7 +143,7 @@ console.log("CONSOSOSOS state",State.getAllStates())
           <div className="mb-4 h4 card-title">Company List</div>
           <TableContainer
             columns={columns}
-            data={RegisteredCompanyData}
+            data={memberData!= undefined ? memberData :[]}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}
