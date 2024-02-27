@@ -43,7 +43,7 @@ const MembersList = props => {
     // console.log("MEMBERDATA selectore", state.MemberList.memberData!= null ? state.MemberList.memberData:'jai shree ram'    )
   );
 
-  console.log("MEMEMEME", memberData)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -173,7 +173,7 @@ const MembersList = props => {
     []
   );
 
-  console.log("memberdatamemberdata", memberdata)
+
   return (
     <React.Fragment>
       <MembersViewModal isOpen={modal1} toggle={toggleViewModal} />

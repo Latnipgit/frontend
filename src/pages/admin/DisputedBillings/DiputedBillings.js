@@ -3,37 +3,37 @@ import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
 import { useSelector, useDispatch } from "react-redux"
-import {Button,Card,CardBody,} from "reactstrap";
+import { Button, Card, CardBody, } from "reactstrap";
 import { getOrders as onGetOrders } from "store/actions";
 import { Disputeddata } from "../../../common/data/disputedData";
 import {
-    Badge,
-    Col,
-    Container,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    Table,
-    UncontrolledDropdown,
-    UncontrolledTooltip,
-    ModalFooter,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    Input,
-    FormFeedback,
-    Label,
-  } from "reactstrap";
+  Badge,
+  Col,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  Table,
+  UncontrolledDropdown,
+  UncontrolledTooltip,
+  ModalFooter,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  Input,
+  FormFeedback,
+  Label,
+} from "reactstrap";
 import {
   CheckBox,
-    SrNo,
-    Debtor,
-    Creditor,
-    DueAmount,
-    InvoiceNo,
-    Status
+  SrNo,
+  Debtor,
+  Creditor,
+  DueAmount,
+  InvoiceNo,
+  Status
 } from "./disputedCol";
 
 import TableContainer from "../../../components/Common/TableContainer";
@@ -108,7 +108,7 @@ const DiputedBillings = props => {
         filterable: false,
         Cell: cellProps => {
           return (
-          <InvoiceNo {...cellProps} />
+            <InvoiceNo {...cellProps} />
           );
         },
       },
@@ -121,7 +121,7 @@ const DiputedBillings = props => {
           return <Status {...cellProps} />;
         },
       },
-    
+
       {
         Header: "Action",
         disableFilters: true,
@@ -129,7 +129,7 @@ const DiputedBillings = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              
+
               <div className="d-flex flex-column align-items-center me-3" onClick={handleApproveClick} style={{ cursor: 'pointer' }}>
                 <i className="mdi mdi-check-circle font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
               </div>
@@ -145,7 +145,6 @@ const DiputedBillings = props => {
   );
   const dispatch = useDispatch()
   const disputedTransactiondata = useSelector(selectdisputedTransMap)
-  console.log(disputedTransactiondata);
   useEffect(() => {
     dispatch(fetchDisputedTransStart())
   }, [])
@@ -155,9 +154,9 @@ const DiputedBillings = props => {
       <DisputedViewModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
-        <Button type="button" color="primary" className="btn-sm btn-rounded float-left-button" onClick={toggleViewModal}>
-          <i className="mdi mdi-eye font-size-16 text-primary me-1" />
-          View Details
+          <Button type="button" color="primary" className="btn-sm btn-rounded float-left-button" onClick={toggleViewModal}>
+            <i className="mdi mdi-eye font-size-16 text-primary me-1" />
+            View Details
           </Button>
           <div className="mb-4 h4 card-title"></div>
           <div className="mb-4 h4 card-title">Disputed Billing</div>

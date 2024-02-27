@@ -30,6 +30,7 @@ axiosPrivate.interceptors.request.use(
 axiosPrivate.interceptors.response.use(
   (response) => response,
   async (error) => {
+    debugger
     const originalRequest = error.config;
     if (error.response.status === 401) {
       if (!originalRequest._retry) {
@@ -37,8 +38,8 @@ axiosPrivate.interceptors.response.use(
         originalRequest._retry = true;
         try {
           const refreshToken = sessionStorage.getItem('refreshToken');
-          const response = await axiosApi.post('/api/user/refreshToken', {
-            refreshToken,
+          const response = await axiosApi.post('/api/admin/refreshToken', {
+            "refreshToken": refreshToken
           });
           const token = response.data.response.token;
           sessionStorage.setItem('tokenemployeeRegister', token);
@@ -47,12 +48,12 @@ axiosPrivate.interceptors.response.use(
           return axiosPrivate(originalRequest);
         } catch (refreshError) {
           console.error('Error refreshing token:', refreshError);
-          window.location.href = "/login"
-          sessionStorage.clear()
+          /*         window.location.href = "/login"
+                  sessionStorage.clear() */
         }
       } else {
-        window.location.href = "/login"
-        sessionStorage.clear()
+        /*       window.location.href = "/login"
+              sessionStorage.clear() */
       }
     }
     return Promise.reject(error);
@@ -63,7 +64,7 @@ axiosPrivate.interceptors.response.use(
 
 export async function get(url, config = {}) {
   // 
-const token = sessionStorage.getItem("tokenemployeeRegister"); 
+  const token = sessionStorage.getItem("tokenemployeeRegister");
   // debugger
   const headers = {
     ...config.headers,
@@ -84,15 +85,15 @@ const token = sessionStorage.getItem("tokenemployeeRegister");
 
 export async function post(url, data, config = {}) {
   // 
-    if(url!='/api/admin/login' && url!='/api/admin/password-reset'){
-      const token = sessionStorage.getItem("tokenemployeeRegister");
-      const headers = {
-        ...config.headers,
-        'x-access-token': token,
-      };  
-      return axiosPrivate
-      .post(url, { ...data }, { ...config,headers })
-      .then((response) =>response).catch((error) => {
+  if (url != '/api/admin/login' && url != '/api/admin/password-reset') {
+    const token = sessionStorage.getItem("tokenemployeeRegister");
+    const headers = {
+      ...config.headers,
+      'x-access-token': token,
+    };
+    return axiosPrivate
+      .post(url, { ...data }, { ...config, headers })
+      .then((response) => response).catch((error) => {
         if (error.response) {
           console.log("Server responded with an error:", error.response.status);
         } else if (error.request) {
@@ -114,28 +115,47 @@ export async function post(url, data, config = {}) {
 
 }
 
+export async function getWithdata(url, data, config = {}) {
+  // 
+
+  const token = sessionStorage.getItem("tokenemployeeRegister");
+  const headers = {
+    ...config.headers,
+    'x-access-token': token,
+  };
+  return axiosPrivate
+    .get(url, { ...data }, { ...config, headers })
+    .then((response) => response).catch((error) => {
+      if (error.response) {
+        console.log("Server responded with an error:", error.response.status);
+      } else if (error.request) {
+        console.log("No response received from the server:", error.request);
+      }
+    });
+}
+
 
 
 export async function loginPostMethod(url, data, config = {}) {
-  
-    
-    return axiosApi
-      .post(url, { ...data }, { ...config })
-      .then((response) => response).catch((error) => {
-        if (error.response) {
-          console.log("Server responded with an error:", error.response.status);
-        } else if (error.request) {
-          console.log("No response received from the server:", error.request);
-        }
-      });
-  
+
+
+  return axiosApi
+    .post(url, { ...data }, { ...config })
+    .then((response) => response).catch((error) => {
+      if (error.response) {
+        console.log("Server responded with an error:", error.response.status);
+      } else if (error.request) {
+        console.log("No response received from the server:", error.request);
+      }
+    });
+
 
 }
 
 
 
 export async function put(url, data, config = {}) {
-  return  axiosPrivate
+  return axiosPrivate
 
     .put(url, { ...data }, { ...config })
     .then((response) => {

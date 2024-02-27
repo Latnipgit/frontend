@@ -6,7 +6,7 @@ import { Badge } from 'reactstrap';
 const daysSinceReference = (cellValue, referenceDate) => {
     if (cellValue) {
         const currentDate = new Date(cellValue);
-        const timeDifference = referenceDate-currentDate;
+        const timeDifference = referenceDate - currentDate;
         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         return daysDifference;
     }
@@ -41,9 +41,9 @@ const formateDate = (date, format) => {
 };
 const toLowerCase1 = str => {
     return (
-      str === "" || str === undefined ? "" : str.toLowerCase()
+        str === "" || str === undefined ? "" : str.toLowerCase()
     );
-  };
+};
 
 const CheckBox = (cell) => {
     return cell.value ? cell.value : '';
@@ -60,13 +60,13 @@ const BillingName = (cell) => {
 };
 
 const DueSince = (cell) => {
-          
+
     //const startDate = new Date('2019-10-07'); // October 7, 2019
     const today = new Date(); // Current date
-    
+
     const daysSince = daysSinceReference(cell.value, today);
-    console.log(daysSince);
-    
+
+
     let badgeClassName = "font-size-11 badge ";
     if (daysSince > 1 && daysSince < 800) {
         badgeClassName += "bg-success text-white";
@@ -99,27 +99,27 @@ const Total = (cell) => {
 
 const PaymentStatus = (cell) => {
     return (
-       
+
         <Badge
-          className={"font-size-11 badge-soft-" + 
-          (cell.value === "Paid" ? "success" : "danger" && cell.value === "Refund" ? "warning" : "danger")}          
+            className={"font-size-11 badge-soft-" +
+                (cell.value === "Paid" ? "success" : "danger" && cell.value === "Refund" ? "warning" : "danger")}
         >
-          {cell.value}
+            {cell.value}
         </Badge>
     )
 };
 const PaymentMethod = (cell) => {
     return (
         <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '12px' }}>
-        {renderStarRating(cell.value)}
-        <h5
-            className="ml-2 mb-1 mt-2 mx-2"
-            style={{ color: 'goldenrod', fontSize: '14px' }} // Inline CSS
-        >
-            {cell.value}
-        </h5>
-    </div>
-     
+            {renderStarRating(cell.value)}
+            <h5
+                className="ml-2 mb-1 mt-2 mx-2"
+                style={{ color: 'goldenrod', fontSize: '14px' }} // Inline CSS
+            >
+                {cell.value}
+            </h5>
+        </div>
+
     )
 };
 export {

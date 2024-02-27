@@ -1,5 +1,5 @@
 import axios from "axios"
-import { del, get, post, put, addEmployeeAPImethod, loginPostMethod } from "./api_helper"
+import { del, get, post, put, addEmployeeAPImethod, loginPostMethod, getWithdata } from "./api_helper"
 import * as url from "./url_helper"
 
 //Get all Admin
@@ -30,9 +30,9 @@ export const getDashboardAdminData = () => post(url.GET_DASHBOARD_ADMIN_DATA)
 //ComapnyDatails Company State and City
 export const getCompanyStateAPI = () => get("/api/admin/getCompanyCountStateWise")
 
-export const getCompanyCityAPI = (data) => post("/api/admin/getCompanyCountCityWiseForState", data)
+export const getCompanyCityAPI = (data) => getWithdata("/api/admin/getCompanyCountCityWiseForState", data)
 
-export const getCompanyStateCityAPI = (data) => post("/api/admin/getDisputedTransactionsStateCityWise", data)
+export const getCompanyStateCityAPI = (data) => pogetWithdatast("/api/admin/getDisputedTransactionsStateCityWise", data)
 
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {

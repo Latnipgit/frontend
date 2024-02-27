@@ -25,6 +25,7 @@ export function* fetchCompanyStateAsync() {
 
 export function* fetchCompanyCityAsync(payload) {
   try {
+    debugger
     const response = yield call(getCompanyCityAPI, payload.payload)
     yield put(fetchCompanyCitySuccess(response.data.response))
   } catch (error) {
@@ -34,6 +35,7 @@ export function* fetchCompanyCityAsync(payload) {
 
 export function* fetchCompanyStateCityAsync(payload) {
   try {
+    debugger
     const response = yield call(getCompanyStateCityAPI, payload.payload)
     yield put(fetchCompanyStateCitySuccess(response.data.response))
   } catch (error) {

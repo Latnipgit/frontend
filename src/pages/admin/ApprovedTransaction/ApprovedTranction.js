@@ -31,13 +31,13 @@ import {
 } from "reactstrap";
 import {
   CheckBox,
-    OrderId,
-    BillingName,
-    DueSince,
-    Total,
-    PaymentStatus,
-    PaymentMethod,
-    Status
+  OrderId,
+  BillingName,
+  DueSince,
+  Total,
+  PaymentStatus,
+  PaymentMethod,
+  Status
 } from "./ApprovedTransactionCol";
 
 import TableContainer from "../../../components/Common/TableContainer";
@@ -115,7 +115,7 @@ const ApprovedTranction = props => {
           return <DueSince {...cellProps} />;
         },
       },
-      
+
       {
         Header: "Payment Status",
         accessor: "paymentStatus",
@@ -134,7 +134,7 @@ const ApprovedTranction = props => {
           return <Status {...cellProps} />;
         },
       },
-    
+
       {
         Header: "View Details",
         disableFilters: true,
@@ -152,7 +152,7 @@ const ApprovedTranction = props => {
           );
         },
       },
-     
+
       // {
       //   Header: "Action",
       //   disableFilters: true,
@@ -170,7 +170,7 @@ const ApprovedTranction = props => {
       //         <i className="mdi mdi-close-circle font-size-18 text-danger mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline" />
       //       </div>
       //     </div>
-          
+
       //     );
       //   },
       // },
@@ -178,8 +178,7 @@ const ApprovedTranction = props => {
     []
   );
   const dispatch = useDispatch()
- const approvedTransactiondata = useSelector(selectApprovedTransMap)
- console.log(approvedTransactiondata);
+  const approvedTransactiondata = useSelector(selectApprovedTransMap)
   useEffect(() => {
     dispatch(fetchApprovedTransStart())
   }, [])
@@ -193,7 +192,7 @@ const ApprovedTranction = props => {
         <div className="overflow-hidden mt-lg-2">..</div>
         {/* <h4 className="mb-sm-0 font-size-18 mr-4">Approved Transactions</h4> */}
         <CardBody>
-        <div className="mb-4 h4 card-title">Approved Transactions</div>
+          <div className="mb-4 h4 card-title">Approved Transactions</div>
           <TableContainer
             columns={columns}
             data={approvedTransactiondata}

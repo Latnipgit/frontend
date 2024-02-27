@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useParams ,useNavigate   } from 'react-router-dom';
-import React ,{useEffect}from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
 import { Row, Col, Alert, Card, CardBody, Container, FormFeedback, Input, Label, Form } from "reactstrap";
 
 //redux
@@ -22,12 +22,12 @@ import logo from "../../assets/images/logo.svg";
 const ForgetPasswordPageLink = props => {
   //var tokenFromURL=''; 
   const navigate = useNavigate();
-  
-    const url = new URL(window.location.href);
-    var tokenFromURL  = url.pathname.split('/')[2];
-    var tokenFromURL2  = url.pathname.split('/')[3];
-    var FinalURL= tokenFromURL+'/'+tokenFromURL2// Assuming the token is at the third position
-    console.log('Token:', FinalURL );
+
+  const url = new URL(window.location.href);
+  var tokenFromURL = url.pathname.split('/')[2];
+  var tokenFromURL2 = url.pathname.split('/')[3];
+  var FinalURL = tokenFromURL + '/' + tokenFromURL2// Assuming the token is at the third position
+
 
   //meta title
   document.title = "Forget Password | Bafana - Admin & Dashboard ";
@@ -37,7 +37,7 @@ const ForgetPasswordPageLink = props => {
 
     initialValues: {
       password: '',
-      token:FinalURL
+      token: FinalURL
     },
     validationSchema: Yup.object().shape({
       // other fields...
@@ -49,11 +49,11 @@ const ForgetPasswordPageLink = props => {
         .required('Confirm Password is required'),
     }),
     onSubmit: (values) => {
-                    
-        dispatch(userForgetPasswordWithToken(values, props.history));
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000); 
+
+      dispatch(userForgetPasswordWithToken(values, props.history));
+      setTimeout(() => {
+        navigate('/login');
+      }, 3000);
     }
   });
 
@@ -143,7 +143,7 @@ const ForgetPasswordPageLink = props => {
                       </div> */}
                       {/* {forgetSuccessMsg ? (
                         <> */}
-                          {/* <div className="mb-3">
+                      {/* <div className="mb-3">
                             <Label className="form-label">Authentication Token</Label>
                             <Input
                               name="token"
@@ -159,40 +159,40 @@ const ForgetPasswordPageLink = props => {
                               <FormFeedback type="invalid">{validation.errors.token}</FormFeedback>
                             ) : null}
                           </div> */}
-                          <div className="mb-3">
-                            <Label className="form-label">New Password</Label>
-                            <Input
-                              name="password"
-                              className="form-control"
-                              placeholder="Enter new  password"
-                              type="password"
-                              onChange={validation.handleChange}
-                              onBlur={validation.handleBlur}
-                              value={validation.values.password || ""}
-                              invalid={validation.touched.password && validation.errors.password ? true : false}
-                            />
-                            {validation.touched.password && validation.errors.password ? (
-                              <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
-                            ) : null}
-                          </div>
-                          <div className="mb-3">
-  <Label className="form-label">Confirm New Password</Label>
-  <Input
-    name="confirmPassword"
-    className="form-control"
-    placeholder="Confirm new password"
-    type="password"
-    onChange={validation.handleChange}
-    onBlur={validation.handleBlur}
-    value={validation.values.confirmPassword || ""}
-    invalid={validation.touched.confirmPassword && validation.errors.confirmPassword ? true : false}
-  />
-  {validation.touched.confirmPassword && validation.errors.confirmPassword ? (
-    <FormFeedback type="invalid">{validation.errors.confirmPassword}</FormFeedback>
-  ) : null}
-</div>
+                      <div className="mb-3">
+                        <Label className="form-label">New Password</Label>
+                        <Input
+                          name="password"
+                          className="form-control"
+                          placeholder="Enter new  password"
+                          type="password"
+                          onChange={validation.handleChange}
+                          onBlur={validation.handleBlur}
+                          value={validation.values.password || ""}
+                          invalid={validation.touched.password && validation.errors.password ? true : false}
+                        />
+                        {validation.touched.password && validation.errors.password ? (
+                          <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                        ) : null}
+                      </div>
+                      <div className="mb-3">
+                        <Label className="form-label">Confirm New Password</Label>
+                        <Input
+                          name="confirmPassword"
+                          className="form-control"
+                          placeholder="Confirm new password"
+                          type="password"
+                          onChange={validation.handleChange}
+                          onBlur={validation.handleBlur}
+                          value={validation.values.confirmPassword || ""}
+                          invalid={validation.touched.confirmPassword && validation.errors.confirmPassword ? true : false}
+                        />
+                        {validation.touched.confirmPassword && validation.errors.confirmPassword ? (
+                          <FormFeedback type="invalid">{validation.errors.confirmPassword}</FormFeedback>
+                        ) : null}
+                      </div>
 
-                        {/* </>
+                      {/* </>
                       ) : null} */}
 
                       <Row className="mb-3">
