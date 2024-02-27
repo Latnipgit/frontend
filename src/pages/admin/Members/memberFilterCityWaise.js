@@ -43,16 +43,28 @@ export const MemberFilteredCityData = ({ cityData, selectedState, setCityOpen, s
 
     const columnsState = useMemo(
         () => [
-
-
+            {
+                Header: "Sr No",
+                accessor: "SrNo",
+                filterable: false,
+                disableFilters: true,
+                Cell: cellProps => {
+                    return <div
+                        className="company-name-cell"
+                        style={{ cursor: 'pointer' }}
+                    >
+                        {cellProps.data.length - cellProps.cell.row.index}
+                    </div>;
+                },
+            },
             {
                 Header: "State Name",
-                accessor: "value",
+                accessor: "state",
                 disableFilters: true,
                 filterable: false,
-                Cell: cellProps => {
-                    return <span>{cellProps.cell.row.original.state}</span>;
-                },
+                /*   Cell: cellProps => {
+                      return <span>{cellProps.cell.row.original.state}</span>;
+                  }, */
             },
             {
                 Header: "Reported member",

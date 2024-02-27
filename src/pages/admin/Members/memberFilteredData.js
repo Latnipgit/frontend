@@ -119,13 +119,27 @@ const MemberFilteredData = props => {
   const columnsState = useMemo(
     () => [
       {
-        Header: "State Name",
-        accessor: "value",
-        disableFilters: true,
+        Header: "Sr No",
+        accessor: "SrNo",
         filterable: false,
+        disableFilters: true,
         Cell: cellProps => {
-          return <span>{cellProps.cell.row.original.state}</span>;
+          return <div
+            className="company-name-cell"
+            style={{ cursor: 'pointer' }}
+          >
+            {cellProps.data.length - cellProps.cell.row.index}
+          </div>;
         },
+      },
+      {
+        Header: "State Name",
+        accessor: "state",
+        filterable: false,
+        disableFilters: true,
+        /*  Cell: cellProps => {
+           return <span>{cellProps.cell.row.original.state}</span>;
+         }, */
       },
       {
         Header: "Reported member",
@@ -151,6 +165,8 @@ const MemberFilteredData = props => {
     ],
     []
   );
+
+  console.log('companyStateData', companyStateData);
 
   return (
     <React.Fragment>
