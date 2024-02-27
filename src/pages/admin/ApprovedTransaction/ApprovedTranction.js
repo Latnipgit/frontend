@@ -63,12 +63,25 @@ const ApprovedTranction = props => {
 
   const columns = useMemo(
     () => [
+      /*       {
+              Header: "#",
+              filterable: false,
+              disableFilters: true,
+              Cell: cellProps => {
+                return <input type="checkbox" className="form-check-input" />;
+              },
+            }, */
       {
-        Header: "#",
+        Header: "Sr No",
+        accessor: "SrNo",
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />;
+          return <div
+            className="company-name-cell"
+          >
+            {cellProps.data.length - cellProps.cell.row.index}
+          </div>;
         },
       },
       {

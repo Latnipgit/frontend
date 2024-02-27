@@ -681,7 +681,6 @@ export const MemberStateCityData = ({ selectedState, selectedCity }) => {
                 Cell: cellProps => {
                     return <div
                         className="company-name-cell"
-                        style={{ cursor: 'pointer' }}
                     >
                         {cellProps.data.length - cellProps.cell.row.index}
                     </div>;

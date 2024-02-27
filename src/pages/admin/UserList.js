@@ -7,27 +7,27 @@ import AdminRegistrationModal from '../admin/adminList/AddAdminPopup';
 import { getAdminData as ongetAdminData } from "../../store/actions";
 import { Link } from "react-router-dom";
 
-import {Button,Card,CardBody,} from "reactstrap";
+import { Button, Card, CardBody, } from "reactstrap";
 import { UserData } from "../../common/data/registration";
 import {
-    Badge,
-    Col,
-    Container,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    Table,
-    UncontrolledDropdown,
-    UncontrolledTooltip,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    Input,
-    FormFeedback,
-    Label,
-  } from "reactstrap";
+  Badge,
+  Col,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  Table,
+  UncontrolledDropdown,
+  UncontrolledTooltip,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  Input,
+  FormFeedback,
+  Label,
+} from "reactstrap";
 import {
   UserId,
   UserName,
@@ -40,7 +40,7 @@ import {
 
 import TableContainer from "../../components/Common/TableContainer";
 import UserViewModal from "./UserViewModal";
-import { useDispatch ,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import index from "pages/Dashboard-Blog";
 import { useHistory, Routes, Route, useNavigate } from "react-router-dom";
 const UserList = props => {
@@ -50,60 +50,57 @@ const UserList = props => {
   const [admindata, setAdminData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleAdminModal = () => {setIsModalOpen(!isModalOpen);};
+  const toggleAdminModal = () => { setIsModalOpen(!isModalOpen); };
   const navigate = useNavigate();
 
   const { adminData } = useSelector(state => ({
     adminData: state.AdminList.adminData
   }));
 
-  
-  
+
+
   const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(ongetAdminData());
-        if(adminData!=undefined && adminData!=null && adminData.data != undefined){
-                
-          setAdminData(adminData.data.data.response);
-        }
-          
-    }, []);
-    console.log("CHECKDATA", adminData, admindata)
+  useEffect(() => {
+    dispatch(ongetAdminData());
+    if (adminData != undefined && adminData != null && adminData.data != undefined) {
 
-  const handleEdit =(project)=>{
+      setAdminData(adminData.data.data.response);
+    }
+
+  }, []);
+  console.log("CHECKDATA", adminData, admindata)
+
+  const handleEdit = (project) => {
     console.log("HARshit handle edit", project)
-sessionStorage.setItem("Profile",JSON.stringify(project))
-// window.location = "/profile";
-// history.push("/profile");
+    sessionStorage.setItem("Profile", JSON.stringify(project))
+    // window.location = "/profile";
+    // history.push("/profile");
 
 
   }
   const columns = useMemo(
     () => [
       {
-        Header: "#",
+        Header: "Sr No",
+        accessor: "SrNo",
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />;
+          return <div
+            className="company-name-cell"
+          >
+            {cellProps.data.length - cellProps.cell.row.index}
+          </div>;
         },
       },
-      // {
-      //   Header: "Sr.No",
-      //   // accessor: srno,
-    
-      //   Cell: (cellProps) => {
-      //     return cellProps.row.index+1;
-      //   },
-      //   },
-      
+
       {
         Header: "Employee ID",
         accessor: "id",
         filterable: false,
         disableFilters: true,
-      
+
         Cell: cellProps => {
           return <UserId {...cellProps} />;
         },
@@ -161,19 +158,19 @@ sessionStorage.setItem("Profile",JSON.stringify(project))
           const project = cellProps.row.original;
           return (
             <div className="d-flex">
-                 <Link to="/profile"
-      
-      >
-        <div className="d-flex flex-column align-items-center me-3"  style={{ cursor: 'pointer' }} onClick={()=>handleEdit(project)}>
-       
-                    <i 
-                     className="mdi mdi-pencil font-size-18 text-success mb-1"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" />
-            </div>
-            </Link>
+              <Link to="/profile"
 
-            <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
-            <i className="mdi mdi-trash-can font-size-16 text-danger me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" />
-            </div>
+              >
+                <div className="d-flex flex-column align-items-center me-3" style={{ cursor: 'pointer' }} onClick={() => handleEdit(project)}>
+
+                  <i
+                    className="mdi mdi-pencil font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" />
+                </div>
+              </Link>
+
+              <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-trash-can font-size-16 text-danger me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" />
+              </div>
             </div>
           );
         },
@@ -182,28 +179,28 @@ sessionStorage.setItem("Profile",JSON.stringify(project))
     []
   );
 
-console.log("admindata",adminData)
+  console.log("admindata", adminData)
   return (
     <React.Fragment>
-       <div className="mb-4 h4 card-title mt-lg-4">..</div>
-          {/* <div className="mb-4 h4 card-title mt-lg-5"> Employee List</div> */}
+      <div className="mb-4 h4 card-title mt-lg-4">..</div>
+      {/* <div className="mb-4 h4 card-title mt-lg-5"> Employee List</div> */}
       <div className="container">
-      
+
       </div>
       {/* <UserViewModal isOpen={modal1} toggle={toggleViewModal} /> */}
-       <AdminRegistrationModal isOpen={isModalOpen} toggle={toggleAdminModal} />
+      <AdminRegistrationModal isOpen={isModalOpen} toggle={toggleAdminModal} />
       <Card>
-        <CardBody>   
-        <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Add a Employee</h4>
-        <div className="d-flex justify-content-end align-items-center mb-3">
-        <Button type="button" color="primary" className="btn-sm btn-rounded" onClick={toggleAdminModal}>
-         Add A Employee
-        </Button>
-</div>
+        <CardBody>
+          <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Add a Employee</h4>
+          <div className="d-flex justify-content-end align-items-center mb-3">
+            <Button type="button" color="primary" className="btn-sm btn-rounded" onClick={toggleAdminModal}>
+              Add A Employee
+            </Button>
+          </div>
 
           <TableContainer
             columns={columns}
-            data={adminData != undefined && adminData.data != undefined ? adminData.data.data.response:[]}
+            data={adminData != undefined && adminData.data != undefined ? adminData.data.data.response : []}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}
