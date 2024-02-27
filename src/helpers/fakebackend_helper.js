@@ -32,7 +32,7 @@ export const getCompanyStateAPI = () => get("/api/admin/getCompanyCountStateWise
 
 export const getCompanyCityAPI = (data) => getWithdata("/api/admin/getCompanyCountCityWiseForState", data)
 
-export const getCompanyStateCityAPI = (data) => pogetWithdatast("/api/admin/getDisputedTransactionsStateCityWise", data)
+export const getCompanyStateCityAPI = (data) => getWithdata("/api/admin/getDisputedTransactionsStateCityWise", data)
 
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {

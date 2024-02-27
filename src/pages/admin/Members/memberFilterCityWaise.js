@@ -86,25 +86,14 @@ export const MemberFilteredCityData = ({ cityData, selectedState, setCityOpen, s
 
     return (
         <React.Fragment>
-            <Card className=" mt-3">
-                <CardBody className=" mt-3">
-                    <div className="mb-4 h5 mt-5 card-title ">Report Member</div>
-                    <TableContainer
-                        columns={columnsState}
-                        // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
-                        data={companyStateData.reverse()}
-                        isGlobalFilter={true}
-                        isAddOptions={false}
-                        customPageSize={10}
-                    />
-
-                    <table>
-                        <tr>
-                            <th></th>
-                        </tr>
-                    </table>
-                </CardBody>
-            </Card>
+            <TableContainer
+                columns={columnsState}
+                // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
+                data={companyStateData.reverse()}
+                isGlobalFilter={true}
+                isAddOptions={false}
+                customPageSize={10}
+            />
         </React.Fragment>
     );
 };

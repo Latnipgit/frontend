@@ -143,9 +143,7 @@ const MemberFilteredData = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-
               <Button onClick={() => checktable(cellProps.cell.row.original.state)} className="btn btn-sm btn-info">view Details</Button>
-
             </div>
           );
         },
@@ -168,7 +166,7 @@ const MemberFilteredData = props => {
             customPageSize={10}
           />}
 
-          {cityData && <MemberFilteredCityData cityData={cityData} selectedState={selectedState} setallViewOpen={setallViewOpen} setCityOpen={setCityOpen} setSelectedCity={setSelectedCity} cityOpen={cityOpen} allViewOpen={allViewOpen} />}
+          {cityData && cityOpen && <MemberFilteredCityData cityData={cityData} selectedState={selectedState} setallViewOpen={setallViewOpen} setCityOpen={setCityOpen} setSelectedCity={setSelectedCity} cityOpen={cityOpen} allViewOpen={allViewOpen} />}
 
           {allViewOpen && <MemberStateCityData selectedState={selectedState} selectedCity={selectedCity} />}
 

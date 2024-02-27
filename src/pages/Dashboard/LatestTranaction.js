@@ -100,7 +100,7 @@ const LatestTranaction = props => {
   const isReferDisabled = selectedLevel === ""
   var CurrentDate = moment().format('DD-MM-YYYY');
   CurrentDate = moment([CurrentDate])
-  console.log("current okokok", CurrentDate)
+
 
   const columns = useMemo(
     () => [
@@ -120,7 +120,7 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {console.log("HARHSIT", cellProps.cell.row.original.debtor)}
+
 
               {cellProps.cell.row.original.defaulterEntry != undefined ? "BAF" + "-" + cellProps.cell.row.original.defaulterEntry.debtor._id.slice(-6).toUpperCase() : ''}
             </div>
@@ -135,7 +135,6 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {console.log("companyNamecompanyName", cellProps.cell.row.original)}
               {cellProps.cell.row.original.defaulterEntry == undefined ? '' : cellProps.cell.row.original.defaulterEntry.debtor.companyName}
             </div>
           );
@@ -191,7 +190,7 @@ const LatestTranaction = props => {
           const b = moment()
           const c = moment(b).diff(a)
           const d = moment.duration(c)
-          console.log("ABABAB", d.days())
+
           return (
 
             <div className="" style={{ padding: "5px 5px" }}>
@@ -230,7 +229,6 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {console.log("HARHSIT", cellProps.cell.row.original)}
               {cellProps.cell.row.original != undefined ? cellProps.cell.row.original.status : "'"}
             </div>
           );
@@ -270,7 +268,7 @@ const LatestTranaction = props => {
   useEffect(() => {
     dispatch(fetchLatestTransStart())
   }, [])
-  console.log("latestTransactiondata", latestTransactiondata)
+
 
   return (
     <React.Fragment>

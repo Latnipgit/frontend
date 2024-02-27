@@ -19,8 +19,7 @@ import moment from 'moment'
 
 const InvoiceModal = props => {
     const { isOpen, toggle, selected } = props
-    console.log("InvoiceModal", selected
-    )
+
     const [attachments, setAttachments] = useState([
         { name: 'document.pdf', type: 'application/pdf' },
         { name: 'image.jpg', type: 'image/jpeg' },
