@@ -56,7 +56,7 @@ const MemberFilteredData = props => {
     if (stateData && selectComapnyState) {
       const companyStateList = stateData.map((values, index) => {
         for (let i = 0; i < selectComapnyState.length; i++) {
-          if (values.name == selectComapnyState[i]._id) {
+          if (values.name == selectComapnyState[i].state) {
             return { state: values.name, statecount: selectComapnyState[i].totalCompanies }
           }
         }
@@ -157,7 +157,8 @@ const MemberFilteredData = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              <Button onClick={() => checktable(cellProps.cell.row.original.state)} className="btn btn-sm btn-info">view Details</Button>
+              {cellProps.cell.row.original.statecount == 0 ? <Button disabled className="btn btn-sm btn-info">view Details</Button> : <Button onClick={() => checktable(cellProps.cell.row.original.state)} className="btn btn-sm btn-info">view Details</Button>}
+
             </div>
           );
         },
@@ -172,7 +173,7 @@ const MemberFilteredData = props => {
     <React.Fragment>
       <Card className=" mt-3">
         <CardBody className=" mt-3">
-          <div className="mb-4 h5 mt-5 card-title ">Report Member</div>
+          <div className="mb-4 h5 mt-5 card-title ">State Member List</div>
           {!stateOpen && <TableContainer
             columns={columnsState}
             // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}

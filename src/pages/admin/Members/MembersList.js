@@ -2,27 +2,27 @@ import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import withRouter from "components/Common/withRouter";
 import { isEmpty } from "lodash";
-import {Button,Card,CardBody,} from "reactstrap";
+import { Button, Card, CardBody, } from "reactstrap";
 import { MemberData } from "../../../../common/data/members";
 import {
-    Badge,
-    Col,
-    Container,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    Table,
-    UncontrolledDropdown,
-    UncontrolledTooltip,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    Input,
-    FormFeedback,
-    Label,
-  } from "reactstrap";
+  Badge,
+  Col,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  Table,
+  UncontrolledDropdown,
+  UncontrolledTooltip,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  Input,
+  FormFeedback,
+  Label,
+} from "reactstrap";
 import {
   SrNo,
   CustomerName,
@@ -117,7 +117,7 @@ const MembersList = props => {
           return <Status {...cellProps} />;
         },
       },
-      
+
       {
         Header: "Action",
         disableFilters: true,
@@ -128,14 +128,14 @@ const MembersList = props => {
               <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
                 <i className="mdi mdi-eye font-size-16 text-primary me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
               </div>
-            <div className="d-flex flex-column align-items-center me-3"  style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
+              <div className="d-flex flex-column align-items-center me-3" style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
+              </div>
+              <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
+                <i className="mdi mdi-pause font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend" />
+              </div>
+
             </div>
-            <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
-              <i className="mdi mdi-pause font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend" />
-            </div>
-           
-          </div>
           );
         },
       },
@@ -149,7 +149,7 @@ const MembersList = props => {
       <MembersViewModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
-        <div className="mb-4 h4 card-title mt-lg-1">Member List</div>
+          <div className="mb-4 h4 card-title mt-lg-1">Member List</div>
           <div className="mb-4 h4 card-title mt-lg-5">Member List</div>
           <TableContainer
             columns={columns}
