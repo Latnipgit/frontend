@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { Button, Card, CardBody, Row, Col } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import TableContainer from "../../../components/Common/TableContainer";
-import { fetchCompanyStateCityStart } from "store/CompanyDetails/CompanyDetails.action";
+import { fetchCompanyStateCityStart, IsCompanyCityOpen, IsCompanyStateCityOpen } from "store/CompanyDetails/CompanyDetails.action";
 import { selectComapnyStateCity } from "store/CompanyDetails/CompanyDetails.selecter";
 
 
@@ -748,18 +748,33 @@ export const MemberStateCityData = ({ selectedState, selectedCity }) => {
         []
     );
 
-
+    function backMainModule() {
+        dispatch(IsCompanyCityOpen(true))
+        dispatch(IsCompanyStateCityOpen(false))
+    }
 
     return (
         <React.Fragment>
-            {selectComapnyStateCityData && <TableContainer
-                columns={columns}
-                // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
-                data={dummyData.reverse()}
-                isGlobalFilter={true}
-                isAddOptions={false}
-                customPageSize={10}
-            />}
+            <Card className=" mt-3">
+                <CardBody className=" mt-3">
+                    <div className="mb-4 h5 mt-5 card-title ">{selectedCity.state}: Member List</div>
+                    <Button style={{ float: 'right' }} className="'btn bg-primary p-2 backtoDashButton" onClick={() => backMainModule()}>Back to City table</Button>
+                    {selectComapnyStateCityData && <TableContainer
+                        columns={columns}
+                        // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
+                        data={dummyData.reverse()}
+                        isGlobalFilter={true}
+                        isAddOptions={false}
+                        customPageSize={10}
+                    />}
+
+                    <table>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </table>
+                </CardBody>
+            </Card>
         </React.Fragment>
     );
 };

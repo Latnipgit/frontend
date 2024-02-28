@@ -9,8 +9,9 @@ import TableContainer from "../../../components/Common/TableContainer";
 import { City, Country, State } from "country-state-city";
 import index from "pages/Dashboard-Blog";
 
-import { fetchCompanyStateStart, fetchCompanyCityStart } from "store/CompanyDetails/CompanyDetails.action";
+import { fetchCompanyStateStart, fetchCompanyCityStart, IsCompanyCityOpen, IsCompanyStateCityOpen } from "store/CompanyDetails/CompanyDetails.action";
 import { selectComapnyStateMap, selectComapnyCityOpen, selectComapnyStateCityOpen } from "store/CompanyDetails/CompanyDetails.selecter";
+
 
 import { MemberFilteredCityData } from "./memberFilterCityWaise";
 import { MemberStateCityData } from "./stateandcityModule";
@@ -21,6 +22,7 @@ import Select from 'react-select';
 import { use } from "i18next";
 import { flatMap } from "lodash";
 const MemberFilteredData = props => {
+  debugger
   const dispatch = useDispatch();
   const [cityData, setCityData] = useState();
   let countryData = Country.getAllCountries();
@@ -35,22 +37,23 @@ const MemberFilteredData = props => {
   const [companyStateData, setCompanyStateData] = useState([])
 
   const selectComapnyState = useSelector(selectComapnyStateMap)
-  const isComapnyCityOpen = useSelector(selectComapnyCityOpen)
-  const isComapnyStateCityOpen = useSelector(selectComapnyStateCityOpen)
+  const isCityOpen = useSelector(selectComapnyCityOpen)
+  const isStateCityOpen = useSelector(selectComapnyStateCityOpen)
 
   const [stateOpen, setStateOpen] = useState(false)
   const [cityOpen, setCityOpen] = useState(false)
   const [allViewOpen, setallViewOpen] = useState(false)
 
-
-
-
-
   function checktable(state) {
     setSelectedState(state)
-    setStateOpen(!stateOpen)
-    setCityOpen(!cityOpen)
+    setStateOpen(true)
+    dispatch(IsCompanyCityOpen(true))
   }
+
+  useEffect(() => {
+    dispatch(IsCompanyCityOpen(false))
+    dispatch(IsCompanyStateCityOpen(false))
+  }, [])
 
   useEffect(() => {
     if (stateData && selectComapnyState) {
@@ -64,6 +67,7 @@ const MemberFilteredData = props => {
       })
       setCompanyStateData(companyStateList)
     }
+
   }, [selectComapnyState])
 
   useEffect(() => {
@@ -104,8 +108,6 @@ const MemberFilteredData = props => {
       setSalutationCity(stateDatalist)
     }
   }, [cityData]);
-
-
 
 
   useEffect(() => {
@@ -166,26 +168,21 @@ const MemberFilteredData = props => {
     []
   );
 
-  console.log('companyStateData', companyStateData);
+
 
   return (
     <React.Fragment>
-      <Card className=" mt-3">
+      {!stateOpen && <Card className=" mt-3">
         <CardBody className=" mt-3">
           <div className="mb-4 h5 mt-5 card-title ">State Member List</div>
-          {!stateOpen && <TableContainer
+          <TableContainer
             columns={columnsState}
             // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
             data={companyStateData.reverse()}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={10}
-          />}
-
-          {cityData && cityOpen && <MemberFilteredCityData cityData={cityData} selectedState={selectedState} setallViewOpen={setallViewOpen} setCityOpen={setCityOpen} setSelectedCity={setSelectedCity} cityOpen={cityOpen} allViewOpen={allViewOpen} />}
-
-          {allViewOpen && <MemberStateCityData selectedState={selectedState} selectedCity={selectedCity} />}
-
+          />
           <table>
             <tr>
               <th></th>
@@ -193,6 +190,11 @@ const MemberFilteredData = props => {
           </table>
         </CardBody>
       </Card>
+      }
+
+      {cityData && isCityOpen && <MemberFilteredCityData cityData={cityData} selectedState={selectedState} setSelectedCity={setSelectedCity} setStateOpen={setStateOpen} />}
+
+      {isStateCityOpen && <MemberStateCityData selectedState={selectedState} selectedCity={selectedCity} />}
     </React.Fragment>
   );
 };

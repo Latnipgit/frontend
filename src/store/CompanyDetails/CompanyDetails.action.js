@@ -29,7 +29,7 @@ export const fetchCompanyCitySuccess = CompanyCityArray => createAction(FETCH_CO
 
 export const fetchCompanyCityFailure = error => createAction(FETCH_COMPANY_CITY_FAILED, error)
 
-export const IsCompanyCityOpem = (boolean) => createAction(IS_COMPANY_CITY_OPEN, boolean)
+export const IsCompanyCityOpen = (boolean) => createAction(IS_COMPANY_CITY_OPEN, boolean)
 
 //State and City
 
@@ -39,4 +39,4 @@ export const fetchCompanyStateCitySuccess = CompanyStateCityArray => createActio
 
 export const fetchCompanyStateCityFailure = error => createAction(FETCH_COMPANY_STATE_CITY_FAILED, error)
 
-export const IsCompanyStateCityOpem = (boolean) => createAction(IS_COMPANY_STATE_CITY_OPEN, boolean)
+export const IsCompanyStateCityOpen = (boolean) => createAction(IS_COMPANY_STATE_CITY_OPEN, boolean)

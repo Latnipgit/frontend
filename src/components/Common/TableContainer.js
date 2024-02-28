@@ -105,7 +105,6 @@ const TableContainer = ({ columns,
       usePagination
     );
 
-  console.log('setGlobalFilter', setGlobalFilter);
 
   const generateSortingIndicator = column => {
     return column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : "";
