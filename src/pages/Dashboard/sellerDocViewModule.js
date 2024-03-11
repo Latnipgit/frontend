@@ -17,9 +17,6 @@ import {
   Row, Col
 } from "reactstrap"
 
-import fileImg2 from '../../assets/images/pdf.png'
-import fileImg1 from '../../assets/images/png-file-.png'
-
 export const numberFormat = (value) =>
   new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -28,6 +25,7 @@ export const numberFormat = (value) =>
 
 export const SellerDocViewModule = props => {
   const { isOpen, toggle, item } = props
+  console.log(item);
 
   return (
     <Modal
@@ -41,7 +39,7 @@ export const SellerDocViewModule = props => {
       toggle={toggle}
     >
       <div className="modal-content">
-        <ModalHeader toggle={toggle}>Documents Files</ModalHeader>
+        <ModalHeader toggle={toggle}>Documents List</ModalHeader>
 
         <ModalBody>
 
