@@ -47,7 +47,7 @@ const FeedbackQuestionModel = props => {
     const getFeebBackQuestion = useSelector(getFeebBackQuestionListSelector)
     const [dataTable, setDataTable] = useState(getFeebBackQuestion)
 
-    console.log('getFeebBackQuestion', getFeebBackQuestion);
+
 
     useEffect(() => {
         dispatch(getFeebBackQuestionList())
@@ -80,7 +80,7 @@ const FeedbackQuestionModel = props => {
 
     }, [dataTable])
 
-    console.log("DATATA", dataTable)
+
     return (
         <React.Fragment className="text-capitalize">
 

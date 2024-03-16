@@ -43,7 +43,7 @@ const MembersList = props => {
     // console.log("MEMBERDATA selectore", state.MemberList.memberData!= null ? state.MemberList.memberData:'jai shree ram'    )
   );
 
-  console.log("MEMEMEME", memberData)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,23 +54,27 @@ const MembersList = props => {
   // console.log("MEMBERDATA hs", memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[])
   const columns = useMemo(
     () => [
+      /*    {
+           Header: "#",
+           filterable: false,
+           disableFilters: true,
+           Cell: cellProps => {
+             return <input type="checkbox" className="form-check-input" />;
+           },
+         }, */
       {
-        Header: "#",
+        Header: "Sr No",
+        accessor: "SrNo",
         filterable: false,
         disableFilters: true,
         Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />;
+          return <div
+            className="company-name-cell"
+          >
+            {cellProps.data.length - cellProps.cell.row.index}
+          </div>;
         },
       },
-      // {
-      //   Header: "Sr No",
-      //   accessor: "SrNo",
-      //   filterable: false,
-      //   disableFilters: true,
-      //   Cell: cellProps => {
-      //     return   <SrNo {...cellProps} />; 
-      //   },
-      // },
       {
         Header: "Customer Name",
         accessor: "name",
@@ -173,7 +177,7 @@ const MembersList = props => {
     []
   );
 
-  console.log("memberdatamemberdata", memberdata)
+
   return (
     <React.Fragment>
       <MembersViewModal isOpen={modal1} toggle={toggleViewModal} />

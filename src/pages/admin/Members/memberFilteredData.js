@@ -4,30 +4,26 @@ import withRouter from "components/Common/withRouter";
 import { Button, Card, CardBody, Row, Col } from "reactstrap";
 import { getMemberData as ongetMemberData } from "../../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-// import _ from 'underscore'
-import Moment from 'react-moment';
-import {
-  SrNo,
-  CustomerName,
-  CompanyName,
-  EmailID,
-  Status,
-  PhoneNumber,
-  JoinedOn,
-} from "./memberlist/membersListCol.js";
+
 import TableContainer from "../../../components/Common/TableContainer";
 import { City, Country, State } from "country-state-city";
 import index from "pages/Dashboard-Blog";
 
-import { fetchCompanyStateStart } from "store/CompanyDetails/CompanyDetails.action";
-import { selectComapnyStateMap } from "store/CompanyDetails/CompanyDetails.selecter";
+import { fetchCompanyStateStart, fetchCompanyCityStart, IsCompanyCityOpen, IsCompanyStateCityOpen } from "store/CompanyDetails/CompanyDetails.action";
+import { selectComapnyStateMap, selectComapnyCityOpen, selectComapnyStateCityOpen } from "store/CompanyDetails/CompanyDetails.selecter";
+
+
+import { MemberFilteredCityData } from "./memberFilterCityWaise";
+import { MemberStateCityData } from "./stateandcityModule";
 
 
 import DatamapsIndia from 'react-datamaps-india'
 import Select from 'react-select';
+import { use } from "i18next";
+import { flatMap } from "lodash";
 const MemberFilteredData = props => {
+  debugger
   const dispatch = useDispatch();
-  const [memberdata, setMemberData] = useState(undefined);
   const [cityData, setCityData] = useState();
   let countryData = Country.getAllCountries();
   const [country, setCountry] = useState(countryData[100]);
@@ -35,20 +31,35 @@ const MemberFilteredData = props => {
   const [stateData, setStateData] = useState();
   const [selectedCity, setSelectedCity] = useState("")
   const [salutationState, setsalutationState] = useState([])
-  const [DataforTable, setDataForTable] = useState([])
+
   const [salutationCity, setSalutationCity] = useState([])
 
   const [companyStateData, setCompanyStateData] = useState([])
 
   const selectComapnyState = useSelector(selectComapnyStateMap)
+  const isCityOpen = useSelector(selectComapnyCityOpen)
+  const isStateCityOpen = useSelector(selectComapnyStateCityOpen)
 
-  console.log("selectComapnyState", selectComapnyState);
+  const [stateOpen, setStateOpen] = useState(false)
+  const [cityOpen, setCityOpen] = useState(false)
+  const [allViewOpen, setallViewOpen] = useState(false)
+
+  function checktable(state) {
+    setSelectedState(state)
+    setStateOpen(true)
+    dispatch(IsCompanyCityOpen(true))
+  }
+
+  useEffect(() => {
+    dispatch(IsCompanyCityOpen(false))
+    dispatch(IsCompanyStateCityOpen(false))
+  }, [])
 
   useEffect(() => {
     if (stateData && selectComapnyState) {
       const companyStateList = stateData.map((values, index) => {
         for (let i = 0; i < selectComapnyState.length; i++) {
-          if (values.name == selectComapnyState[i]._id) {
+          if (values.name == selectComapnyState[i].state) {
             return { state: values.name, statecount: selectComapnyState[i].totalCompanies }
           }
         }
@@ -56,6 +67,7 @@ const MemberFilteredData = props => {
       })
       setCompanyStateData(companyStateList)
     }
+
   }, [selectComapnyState])
 
   useEffect(() => {
@@ -71,22 +83,12 @@ const MemberFilteredData = props => {
 
   useEffect(() => {
     if (stateData) {
-      const selectState = stateData.filter((state) => state.name == selectedState.value)
+      const selectState = stateData.filter((state) => state.name == selectedState)
       setCityData(City.getCitiesOfState(country?.isoCode, selectState[0]?.isoCode));
     }
 
   }, [selectedState]);
 
-
-
-  /*   useEffect(() => {
-      if (stateData) {
-        const stateDatalist = stateData.map((value, index) => {
-          return { label: value.name, value: value.name }
-        })
-        setsalutationState(stateDatalist)
-      }
-    }, [stateData]); */
 
   useEffect(() => {
     if (stateData) {
@@ -108,127 +110,37 @@ const MemberFilteredData = props => {
   }, [cityData]);
 
 
-  function onLocationClick(event) {
-    setStateCode(event.target.id);
-    setStateName(event.target.getAttribute("name"));
-    // console.log(event.target);
-    console.log("Id", event.target.id);
-    console.log("Name", event.target.getAttribute("name"));
-  }
-  const { memberData } = useSelector(state =>
-  ({
-    memberData: state.MemberList.memberData
-
-  })
-  );
-
-
-
   useEffect(() => {
     dispatch(ongetMemberData());
     dispatch(fetchCompanyStateStart())
-    setMemberData(memberData != undefined && memberData != null ? memberData.data.response : [])
+
   }, []);
 
-  const columns = useMemo(
-    () => [
-
-
-      {
-        Header: "Customer Name",
-        accessor: "name",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <CustomerName {...cellProps} />;
-        },
-      },
-      {
-        Header: "Company Name",
-        accessor: "userName",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <CompanyName {...cellProps} />;
-        },
-      },
-      {
-        Header: "Email Address",
-        accessor: "emailId",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <EmailID {...cellProps} />;
-        },
-      },
-      {
-        Header: "Phone Number",
-        accessor: "phoneNumber",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <PhoneNumber {...cellProps} />;
-        },
-      },
-      {
-        Header: "Joined On",
-        accessor: "createdAt",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <span>
-            {/* {console.log("SPAN", cellProps.row.original.createdAt)} */}
-            <Moment date={cellProps.row.original.createdAt} format="DD/MM/YYYY" />
-          </span>
-          // <JoinedOn {...cellProps} />;
-        },
-      },
-      {
-        Header: "Status",
-        accessor: "Status",
-        disableFilters: true,
-        filterable: false,
-        Cell: cellProps => {
-          return <Status {...cellProps} />;
-        },
-      },
-
-      {
-        Header: "Action",
-        disableFilters: true,
-        accessor: "view",
-        Cell: cellProps => {
-          return (
-            <div className="d-flex">
-
-              <div className="d-flex flex-column align-items-center me-3" style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-play font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Activate" />
-              </div>
-              <div className="d-flex flex-column align-items-center me-3" onClick={() => handleProjectClick(project)} style={{ cursor: 'pointer' }}>
-                <i className="mdi mdi-pause font-size-18 text-success mb-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend" />
-              </div>
-
-            </div>
-          );
-        },
-      },
-    ],
-    []
-  );
 
 
   const columnsState = useMemo(
     () => [
-
-
+      {
+        Header: "Sr No",
+        accessor: "SrNo",
+        filterable: false,
+        disableFilters: true,
+        Cell: cellProps => {
+          return <div
+            className="company-name-cell"
+          >
+            {cellProps.data.length - cellProps.cell.row.index}
+          </div>;
+        },
+      },
       {
         Header: "State Name",
-        accessor: "value",
-        disableFilters: true,
+        accessor: "state",
         filterable: false,
-        Cell: cellProps => {
-          return <span>{cellProps.cell.row.original.state}</span>;
-        },
+        disableFilters: true,
+        /*  Cell: cellProps => {
+           return <span>{cellProps.cell.row.original.state}</span>;
+         }, */
       },
       {
         Header: "Reported member",
@@ -239,9 +151,6 @@ const MemberFilteredData = props => {
           return <span>{cellProps.cell.row.original.statecount}</span>;
         },
       },
-
-
-
       {
         Header: "Action",
         disableFilters: true,
@@ -249,8 +158,7 @@ const MemberFilteredData = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-
-              <Button className="btn btn-sm btn-info">view Details</Button>
+              {cellProps.cell.row.original.statecount == 0 ? <Button disabled className="btn btn-sm btn-info">view Details</Button> : <Button onClick={() => checktable(cellProps.cell.row.original.state)} className="btn btn-sm btn-info">view Details</Button>}
 
             </div>
           );
@@ -260,92 +168,13 @@ const MemberFilteredData = props => {
     []
   );
 
+
+
   return (
     <React.Fragment>
-      <Card className=" mt-3">
+      {!stateOpen && <Card className=" mt-3">
         <CardBody className=" mt-3">
-          <div className="mb-4 h5 mt-5 card-title ">Report Member</div>
-
-          <Row className="mt-5">
-            <Col>
-              <h5>Search by state</h5>
-            </Col>
-
-            <Col>
-              <div className="mb-3">
-                <label className="form-label">State*</label>
-                <Select
-                  id="primaryContact"
-                  className="custom-content"
-                  options={salutationState}
-                  styles={colourStyles}
-                  value={selectedState}
-                  onChange={selected => setSelectedState(selected)}
-                  placeholder="Select State"
-                />
-
-              </div>
-            </Col>
-            <Col>
-              <div className="mb-3">
-                <label className="form-label">City*</label>
-                <Select
-                  id="primaryContact"
-                  className="custom-content"
-                  options={salutationCity}
-                  styles={colourStyles}
-                  value={selectedCity}
-                  onChange={selected => setSelectedCity(selected)}
-                  placeholder="Select City"
-                />
-
-              </div>
-            </Col>
-            <Col></Col>
-          </Row>
-          {/* <p>{stateName}</p>
-      <p>{stateCode}</p>
-<div style={{height:"120vh"}}>
-
-<DatamapsIndia 
-      regionData={{ Maharashtra: {
-        value: 10,
-        count:20
-      },
-      Rajasthan: {
-        value: 20,
-        count:60
-
-      }, Punjab: {
-        value: 5,
-        count:10
-
-      },
-      Bihar: {
-        value: 15,
-        count:30
-
-      }
-    }}
-
-      hoverComponent={({ value }) => {
-        return <span>{value.name} {value.count!= undefined ? value.count + "Members":'0 Members'}</span>
-      
-      }}
-
-      mapLayout={{
-        legendTitle: 'Legend Title',
-        startColor: '#FFDAB9',
-        endColor: '#FF6347',
-        hoverTitle: 'Count',
-        noDataColor: '#FAFAFA',
-        borderColor: '#8D8D8D',
-        hoverBorderColor: '#8D8D8D',
-        hoverColor: 'green',
-      }}W
-    />
-
-</div> */}
+          <div className="mb-4 h5 mt-5 card-title ">State Member List</div>
           <TableContainer
             columns={columnsState}
             // data={memberdata!= undefined && memberdata != [] ? memberdata:[]}
@@ -354,7 +183,6 @@ const MemberFilteredData = props => {
             isAddOptions={false}
             customPageSize={10}
           />
-
           <table>
             <tr>
               <th></th>
@@ -362,6 +190,11 @@ const MemberFilteredData = props => {
           </table>
         </CardBody>
       </Card>
+      }
+
+      {cityData && isCityOpen && <MemberFilteredCityData cityData={cityData} selectedState={selectedState} setSelectedCity={setSelectedCity} setStateOpen={setStateOpen} />}
+
+      {isStateCityOpen && <MemberStateCityData selectedState={selectedState} selectedCity={selectedCity} />}
     </React.Fragment>
   );
 };

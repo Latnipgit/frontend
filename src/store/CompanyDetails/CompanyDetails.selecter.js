@@ -24,6 +24,17 @@ export const selectComapnyStateCity = createSelector(
   (disputedTrans) => disputedTrans.companyStateCityDatails
 );
 
+
+export const selectComapnyCityOpen = createSelector(
+  [selectCompanyDetailsReducer],
+  (disputedTrans) => disputedTrans.isCityModuleOpen
+);
+
+export const selectComapnyStateCityOpen = createSelector(
+  [selectCompanyDetailsReducer],
+  (disputedTrans) => disputedTrans.isStateWaiseCityModuleOpen
+);
+
 export const selectDoardAdminDataLoading = createSelector(
   [selectCompanyDetailsReducer],
   (disputedTrans) => disputedTrans.loading

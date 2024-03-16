@@ -28,7 +28,6 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
     validationSchema,
     onSubmit: (values) => {
       dispatch(Onadminregister(values));
-      console.log("Registering admin:", values);
       toggle();
     },
   });

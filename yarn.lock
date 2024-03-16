@@ -10912,6 +10912,11 @@
     "prop-types" "^15.6.1"
     "react-is" "^16.4.2"
 
+"redux-persist@^6.0.0":
+  "integrity" "sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ=="
+  "resolved" "https://registry.npmjs.org/redux-persist/-/redux-persist-6.0.0.tgz"
+  "version" "6.0.0"
+
 "redux-saga@^1.2.2":
   "integrity" "sha512-6xAHWgOqRP75MFuLq88waKK9/+6dCdMQjii2TohDMARVHeQ6HZrZoJ9HZ3dLqMWCZ9kj4iuS6CDsujgnovn11A=="
   "resolved" "https://registry.npmjs.org/redux-saga/-/redux-saga-1.2.2.tgz"

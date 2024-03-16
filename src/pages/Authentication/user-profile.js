@@ -47,35 +47,35 @@ const UserProfile = () => {
     error: state.Profile.error,
     success: state.Profile.success,
   }));
- useEffect(() => {
+  useEffect(() => {
     setImage(avatar)
-if(sessionStorage.getItem("Profile") == undefined){
-  if (sessionStorage.getItem("authUser")) {
-         
-    const obj = JSON.parse(sessionStorage.getItem("authUser"));
-   if (
-      process.env.REACT_APP_DEFAULTAUTH === "jwt"
-    ) {
-      setname(obj.name);
-      setemail(obj.userName);
-      setidx(obj.id);
-      setadminRole(obj.adminRole)
+    if (sessionStorage.getItem("Profile") == undefined) {
+      if (sessionStorage.getItem("authUser")) {
+
+        const obj = JSON.parse(sessionStorage.getItem("authUser"));
+        if (
+          process.env.REACT_APP_DEFAULTAUTH === "jwt"
+        ) {
+          setname(obj.name);
+          setemail(obj.userName);
+          setidx(obj.id);
+          setadminRole(obj.adminRole)
+        }
+        //   setTimeout(() => {
+        //     dispatch(resetProfileFlag());
+        //   }, 3000);
+      }
+
     }
-  //   setTimeout(() => {
-  //     dispatch(resetProfileFlag());
-  //   }, 3000);
-  }
- 
-}
-else{
-  const profile = JSON.parse(sessionStorage.getItem("Profile"))
-  console.log("profile ++", profile.name)
-  setname(profile.name);
-  setemail(profile.userName);
-  // setidx(obj.id);
-  setadminRole(profile.adminRole)
-}
-  
+    else {
+      const profile = JSON.parse(sessionStorage.getItem("Profile"))
+
+      setname(profile.name);
+      setemail(profile.userName);
+      // setidx(obj.id);
+      setadminRole(profile.adminRole)
+    }
+
   }, [dispatch, success]);
 
   // const validation = useFormik({
@@ -93,23 +93,22 @@ else{
   //     dispatch(editProfile(values));
   //   }
   // });
-  const handleChange =()=>{
-    isEdit != undefined && isEdit != false ? setIsEdit(false): setIsEdit(true)
-     return isEdit
+  const handleChange = () => {
+    isEdit != undefined && isEdit != false ? setIsEdit(false) : setIsEdit(true)
+    return isEdit
   }
 
 
-  const handlesubmit =()=>{
-const payload ={
-  name: name,
-  // email: email,
-  // adminRole: AdminRole,
-  idx: idx,
-}
-dispatch(editProfile(payload));
-console.log("PAyload", payload)
+  const handlesubmit = () => {
+    const payload = {
+      name: name,
+      // email: email,
+      // adminRole: AdminRole,
+      idx: idx,
+    }
+    dispatch(editProfile(payload));
   }
-  
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -123,30 +122,30 @@ console.log("PAyload", payload)
               {success ? <Alert color="success">{success}</Alert> : null}
 
               <Card>
-              <CardHeader className=" align-self-left d-flex " style={{ background:'#FFFFFF'}}>
-              <Breadcrumb title="Bafana" breadcrumbItem="Profile" />
+                <CardHeader className=" align-self-left d-flex " style={{ background: '#FFFFFF' }}>
+                  <Breadcrumb title="Bafana" breadcrumbItem="Profile" />
 
-                          
-                        
-                           </CardHeader>
+
+
+                </CardHeader>
                 <CardBody>
                   <div>
                     <div className="ms-3 d-flex">
                       <div>
-                      <img
-                        src={avatar}
-                        alt=""
-                        className="avatar-lg img-thumbnail"
-                      />
-               
-                        </div> 
-                        <div>
-                        <p className="mb-1 ml-3 pl-3 pt-2" style={{ fontSize:'16px'}}>{name}</p>
-                        <p className="mb-1 ml-3 pl-3 pt-2"  style={{ fontSize:'16px'}}> {AdminRole}</p>
-               
-                          </div>                     
+                        <img
+                          src={avatar}
+                          alt=""
+                          className="avatar-lg img-thumbnail"
+                        />
+
+                      </div>
+                      <div>
+                        <p className="mb-1 ml-3 pl-3 pt-2" style={{ fontSize: '16px' }}>{name}</p>
+                        <p className="mb-1 ml-3 pl-3 pt-2" style={{ fontSize: '16px' }}> {AdminRole}</p>
+
+                      </div>
                     </div>
-                
+
                   </div>
                 </CardBody>
               </Card>
@@ -154,105 +153,105 @@ console.log("PAyload", payload)
           </Row>
           <Row>
             <Col lg={12}>
-             {isEdit == false || isEdit == undefined ? 
-              <Card className="">
-              <CardHeader  style={{ background:'#FFFFFF'}}>
-                <Row >
-                <Col lg={8}>
-                <Breadcrumb title="Bafana" breadcrumbItem="overview" />
+              {isEdit == false || isEdit == undefined ?
+                <Card className="">
+                  <CardHeader style={{ background: '#FFFFFF' }}>
+                    <Row >
+                      <Col lg={8}>
+                        <Breadcrumb title="Bafana" breadcrumbItem="overview" />
 
 
-                </Col>
-                <Col lg={4} className="d-flex"  style={{ justifyContent:'end'}}>
-                <button  className=" btn btn-info d-flex ml-auto" onClick={()=>handleChange()} style={{ background:'', border:'none',height:'35px', width:'80px', justifyContent:'center'}}>
-  Edit
-</button>
-                </Col>
+                      </Col>
+                      <Col lg={4} className="d-flex" style={{ justifyContent: 'end' }}>
+                        <button className=" btn btn-info d-flex ml-auto" onClick={() => handleChange()} style={{ background: '', border: 'none', height: '35px', width: '80px', justifyContent: 'center' }}>
+                          Edit
+                        </button>
+                      </Col>
 
-                </Row>
-          
-                </CardHeader>
-                <CardBody>
-                <div className="flex-grow-1 align-self-center">
+                    </Row>
+
+                  </CardHeader>
+                  <CardBody>
+                    <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
 
-<Row>
-  <Col lg={4}>
-  <p className="mb-1 ml-3"> Full Name :</p>
-  <p className="mb-1 ml-3">Email Address :</p>
-  {/* <p className="mb-1 ml-3">Id no :</p>  */}
-  <p className="mb-1 ml-3">Role :</p>
+                        <Row>
+                          <Col lg={4}>
+                            <p className="mb-1 ml-3"> Full Name :</p>
+                            <p className="mb-1 ml-3">Email Address :</p>
+                            {/* <p className="mb-1 ml-3">Id no :</p>  */}
+                            <p className="mb-1 ml-3">Role :</p>
 
-  </Col>
-  <Col lg={4}>
-  <p className="mb-1 ml-3"> {name}</p>
-  <p className="mb-1 ml-3"> {email}</p>
-  {/* <p className="mb-1 ml-3"> #{idx}</p>  */}
-  <p className="mb-1 ml-3"> {AdminRole}</p>
-
-
-
-  </Col>
-</Row>
+                          </Col>
+                          <Col lg={4}>
+                            <p className="mb-1 ml-3"> {name}</p>
+                            <p className="mb-1 ml-3"> {email}</p>
+                            {/* <p className="mb-1 ml-3"> #{idx}</p>  */}
+                            <p className="mb-1 ml-3"> {AdminRole}</p>
 
 
-                     
-                        
+
+                          </Col>
+                        </Row>
+
+
+
+
 
                       </div>
                     </div>
-                </CardBody>
-              </Card>
-              :
-              <Card>
-                
-                   <CardHeader className=" " style={{ background:'#FFFFFF'}}>
-                   <Row >
-                <Col lg={8}>
-                <Breadcrumb title="Bafana" breadcrumbItem="Profile Edit" />
+                  </CardBody>
+                </Card>
+                :
+                <Card>
+
+                  <CardHeader className=" " style={{ background: '#FFFFFF' }}>
+                    <Row >
+                      <Col lg={8}>
+                        <Breadcrumb title="Bafana" breadcrumbItem="Profile Edit" />
 
 
-                </Col>
-                <Col lg={4} className="d-flex"  style={{ justifyContent:'end'}}>
-                <button  className=" btn btn-info d-flex ml-auto" onClick={()=>handleChange()} style={{ background:'', border:'none',height:'35px', width:'80px', justifyContent:'center'}}>
-  close
-</button>
-                </Col>
+                      </Col>
+                      <Col lg={4} className="d-flex" style={{ justifyContent: 'end' }}>
+                        <button className=" btn btn-info d-flex ml-auto" onClick={() => handleChange()} style={{ background: '', border: 'none', height: '35px', width: '80px', justifyContent: 'center' }}>
+                          close
+                        </button>
+                      </Col>
 
-                </Row>
-          
-                </CardHeader>
-<CardBody>
-<Row>
-  
- <Col lg={2}>
+                    </Row>
+
+                  </CardHeader>
+                  <CardBody>
+                    <Row>
+
+                      <Col lg={2}>
 
 
-</Col>
-<Col lg={8} className=" mx-auto">
-         <br/>
-                               {/* <button  className=" btn btn-info ml-auto b-1 ml-3 p-2" onClick={()=>handlePhotoChange()} style={{ background:'', border:'none',height:'auto', width:'auto', justifyContent:'center', fontSize:"10px"}}>
+                      </Col>
+                      <Col lg={8} className=" mx-auto">
+                        <br />
+                        {/* <button  className=" btn btn-info ml-auto b-1 ml-3 p-2" onClick={()=>handlePhotoChange()} style={{ background:'', border:'none',height:'auto', width:'auto', justifyContent:'center', fontSize:"10px"}}>
   Change image
   </button> */}
-<form >
+                        <form >
 
-<label>
-<span style={{ marginRight:"64px"}}>
-Name:
-</span>
-       
-        <input className="p-1" type="text" value={name} disabled style={{ width: '300px'}}/>
-      </label>
-      <br/>
+                          <label>
+                            <span style={{ marginRight: "64px" }}>
+                              Name:
+                            </span>
 
-      <label>
-      <span style={{ marginRight:"64px"}}>
-      Email:      </span>
-       
-        <input disabled className="p-1" type="text" value={email} style={{ width: '300px'}} />
+                            <input className="p-1" type="text" value={name} disabled style={{ width: '300px' }} />
+                          </label>
+                          <br />
 
-      </label>
-      {/* <br/>
+                          <label>
+                            <span style={{ marginRight: "64px" }}>
+                              Email:      </span>
+
+                            <input disabled className="p-1" type="text" value={email} style={{ width: '300px' }} />
+
+                          </label>
+                          {/* <br/>
       <label>
         <span  style={{ marginRight:"30px"}}>
         ID number :
@@ -261,21 +260,21 @@ Name:
        />
         
       </label> */}
-      <br/>
+                          <br />
 
-      <label>
-        <span style={{ marginRight:"75px"}}>
-        Role
-          </span>        
-        <input className="p-1" type="text" value={AdminRole} style={{ width: '300px'}} onChange={()=>{
-          setadminRole(event.target.value)
-        }}
-       />
-        
-      </label>
-      <br/>
+                          <label>
+                            <span style={{ marginRight: "75px" }}>
+                              Role
+                            </span>
+                            <input className="p-1" type="text" value={AdminRole} style={{ width: '300px' }} onChange={() => {
+                              setadminRole(event.target.value)
+                            }}
+                            />
 
-{/* <label>
+                          </label>
+                          <br />
+
+                          {/* <label>
   <span style={{ marginRight:"75px"}}>
   Profile Photo
     </span>        
@@ -287,25 +286,25 @@ Name:
   
 </label> */}
 
-   
-   
-    </form>
-    <br/>
-    <button  className=" btn btn-info " style={{ background:'', border:'none', justifyContent:'end'}} onClick={()=>handlesubmit()}>
-  submit
-</button>
-</Col>
-<Col lg={2}>
 
-</Col>
-</Row>
-</CardBody>
-              </Card>
-}
+
+                        </form>
+                        <br />
+                        <button className=" btn btn-info " style={{ background: '', border: 'none', justifyContent: 'end' }} onClick={() => handlesubmit()}>
+                          submit
+                        </button>
+                      </Col>
+                      <Col lg={2}>
+
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+              }
             </Col>
           </Row>
 
-     
+
         </Container>
       </div>
     </React.Fragment>

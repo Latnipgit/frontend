@@ -17,50 +17,50 @@ import {
 
 } from "reactstrap"
 import "../../admin/Common.scss"
-import { useDispatch ,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { subscribeToPackage } from "store/LatestTransaction/latestTrans.action"
 import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 const data = [
     {
-        "service" :"invoice",
-         "value":""
+        "service": "invoice",
+        "value": ""
     },
     {
-        "service" :"Defaulter search" ,
-         "value":""
+        "service": "Defaulter search",
+        "value": ""
     },
     {
-        "service" :"Defaulter Reporting",
-         "value":""
+        "service": "Defaulter Reporting",
+        "value": ""
     },
     {
-        "service" :"Multiple Business Registration",
-         "value":""
+        "service": "Multiple Business Registration",
+        "value": ""
     },
     {
-        "service" :"Verification of default transaction",
-         "value":""
+        "service": "Verification of default transaction",
+        "value": ""
     },
     {
-        "service" :"Verification of payment transaction",
-         "value":""
+        "service": "Verification of payment transaction",
+        "value": ""
     },
     {
-        "service" :"View detailed history of defaulter company transactions",
-         "value":""
+        "service": "View detailed history of defaulter company transactions",
+        "value": ""
     },
     {
-        "service" :"Recovery Services - Online Advertising",
-         "value":""
+        "service": "Recovery Services - Online Advertising",
+        "value": ""
     },
     {
-        "service" :"Recovery Services - Legal Service",
-         "value":""
+        "service": "Recovery Services - Legal Service",
+        "value": ""
     },
     {
-        "service" :"Multiple Employee Logins",
-         "value":""
+        "service": "Multiple Employee Logins",
+        "value": ""
     },
 
 ]
@@ -69,81 +69,83 @@ const CreatePlanModel = props => {
     const [individual, setIndividual] = useState(false)
     const [isPaid, setisPaid] = useState(false)
     const { isOpen, toggle } = props
-    const [ dataTable, setDataTable ] = useState(data)
+    const [dataTable, setDataTable] = useState(data)
     const dispatch = useDispatch();
 
-     const dummyRow =[
-       { "service":"",
-        "value":""}
-     ]
+    const dummyRow = [
+        {
+            "service": "",
+            "value": ""
+        }
+    ]
 
-     const handleAddRow =()=>{
- setDataTable((prevData) => [...prevData, ...dummyRow]); 
-     }
-   
-     const handleRemove = (index) => {
+    const handleAddRow = () => {
+        setDataTable((prevData) => [...prevData, ...dummyRow]);
+    }
+
+    const handleRemove = (index) => {
         setDataTable((prevData) => {
             const newData = [...prevData];
             newData.splice(index, 1);
             return newData;
-        });
+        });
     };
-    const [ name, setName ] = useState('');
+    const [name, setName] = useState('');
 
-    const [ monthlyAmt, setmonthlyAmt ] = useState('');
-    const [ yearlyAmt, setYearlyAmt ] = useState('')
-    const [ monthlyDiscount, setmonthlyDiscount ] = useState('')
-    const [ yearlyDiscount, setyearlyDiscount ] = useState('')
+    const [monthlyAmt, setmonthlyAmt] = useState('');
+    const [yearlyAmt, setYearlyAmt] = useState('')
+    const [monthlyDiscount, setmonthlyDiscount] = useState('')
+    const [yearlyDiscount, setyearlyDiscount] = useState('')
 
-useEffect(()=>{
-   
-},[])
+    useEffect(() => {
 
-console.log("DATATA", yearlyAmt,monthlyAmt)
+    }, [])
 
-const submitCreatePlan =()=>{
-    if(isPaid == true){
-        const payload ={
-            "subscriptionPkgName": name,
-            "monthlyAmt": monthlyAmt,
-            "yearlyAmt": yearlyAmt,
-            "monthlyDiscount": "0",
-            "yearlylyDiscount": "0",
-            "services": [
-                {
-                    "apiName": "Call",
-                    "monthlyQuotaLimit": 5,
-                    "yearlyQuotaLimit": 0
-                }
-            ]
+
+
+    const submitCreatePlan = () => {
+        if (isPaid == true) {
+            const payload = {
+                "subscriptionPkgName": name,
+                "monthlyAmt": monthlyAmt,
+                "yearlyAmt": yearlyAmt,
+                "monthlyDiscount": "0",
+                "yearlylyDiscount": "0",
+                "services": [
+                    {
+                        "apiName": "Call",
+                        "monthlyQuotaLimit": 5,
+                        "yearlyQuotaLimit": 0
+                    }
+                ]
+            }
+            dispatch(subscribeToPackage(payload))
         }
-        dispatch(subscribeToPackage(payload))
-    }
-    else{
-        const payload ={
-            "subscriptionPkgName": name,
-            "monthlyAmt": monthlyAmt,
-            "yearlyAmt": yearlyAmt,
-            "monthlyDiscount": "0",
-            "yearlylyDiscount": "0",
-            "services": []
-            
+        else {
+            const payload = {
+                "subscriptionPkgName": name,
+                "monthlyAmt": monthlyAmt,
+                "yearlyAmt": yearlyAmt,
+                "monthlyDiscount": "0",
+                "yearlylyDiscount": "0",
+                "services": []
+
+            }
+            dispatch(subscribeToPackage(payload))
+
         }
-        dispatch(subscribeToPackage(payload))
+
+        toggle()
 
     }
-   
-toggle()
 
-}
-
-    const serviceNameChange =(value, index)=>{
+    const serviceNameChange = (value, index) => {
 
     }
-    const serviceValue =(value, index)=>{
+    const serviceValue = (value, index) => {
 
     }
-    
+
     return (
         <Modal
             isOpen={isOpen}
@@ -157,7 +159,7 @@ toggle()
         >
             <div className="modal-content">
                 <ModalHeader toggle={toggle}>Create A Plan</ModalHeader>
-                <ModalBody style={{ padding:'5px 80px'}}>
+                <ModalBody style={{ padding: '5px 80px' }}>
 
                     <form>
                         <Row className="mt-3">
@@ -169,7 +171,7 @@ toggle()
                                     className="form-control text-capitalize"
                                     placeholder="Enter Plan Name"
                                     type="text"
-                                    onChange={(e)=>setName(e.target.value)}
+                                    onChange={(e) => setName(e.target.value)}
 
                                 />
                             </Col>
@@ -237,9 +239,9 @@ toggle()
                         <Col md={6}>
                             <Card className="shadow-sm">
                                 <CardBody>
-                                    <h5>                                 <Input type="radio" name="allMemberss" className="border border-dark" id="allMember" onChange={()=>setisPaid(false)}/>
-                                &nbsp;Free Services</h5>
-                                    <br/>
+                                    <h5>                                 <Input type="radio" name="allMemberss" className="border border-dark" id="allMember" onChange={() => setisPaid(false)} />
+                                        &nbsp;Free Services</h5>
+                                    <br />
                                     <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Complaints</p>
                                     <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Verification by our team</p>
                                     <p> <i className='bx bx-x text-danger'></i> &nbsp;Calling Feature</p>
@@ -249,9 +251,9 @@ toggle()
                         <Col md={6}>
                             <Card className="shadow-sm">
                                 <CardBody>
-                                    <h5> <Input type="radio" name="allMemberss" className="border border-dark" id="allMemberss" onChange={()=>setisPaid(true)}/>
-                                    &nbsp; Paid Services</h5>
-                                    <br/>
+                                    <h5> <Input type="radio" name="allMemberss" className="border border-dark" id="allMemberss" onChange={() => setisPaid(true)} />
+                                        &nbsp; Paid Services</h5>
+                                    <br />
                                     <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Complaints</p>
                                     <p> <i className='bx bx-check text-success'></i> &nbsp;Unlimited Verification by our team</p>
                                     <p> <i className='bx bx-check text-success'></i> &nbsp;5 Calls Per day</p>
@@ -259,89 +261,89 @@ toggle()
                             </Card>
                         </Col>
                     </Row>
-                    <Row style={{ padding:'5px 10px'}} >
+                    <Row style={{ padding: '5px 10px' }} >
                         <Col md={12}>
 
-                       
-                    <Row className=" p-2" style={{ background:'#f0f5f5' }}>
 
-                        <Col md={2} className="pt-2"><b>Yearly Price</b></Col>
-                        <Col md={3}>
-                        <Input
+                            <Row className=" p-2" style={{ background: '#f0f5f5' }}>
+
+                                <Col md={2} className="pt-2"><b>Yearly Price</b></Col>
+                                <Col md={3}>
+                                    <Input
                                         className="form-control"
-                                        placeholder= "Enter Yearly Price"
-                                        type="number"     
-                                                                       onChange={(e)=>setYearlyAmt(e.target.value)}
-
-
-                                    />
-                        </Col>
-                        <Col md={7}></Col>
-
-                    </Row>
-                    <Row className=" p-2" style={{ background:'#f0f5f5'}}>
-                  
-                    <Col md={2} className="pt-2"><b>Monthly Price</b></Col>
-                        <Col md={3}>
-                        <Input
-                                        className="form-control"
-                                        placeholder= "Enter Monthly Price"
+                                        placeholder="Enter Yearly Price"
                                         type="number"
-                                        onChange={(e)=>setmonthlyAmt(e.target.value)}
+                                        onChange={(e) => setYearlyAmt(e.target.value)}
 
 
                                     />
+                                </Col>
+                                <Col md={7}></Col>
+
+                            </Row>
+                            <Row className=" p-2" style={{ background: '#f0f5f5' }}>
+
+                                <Col md={2} className="pt-2"><b>Monthly Price</b></Col>
+                                <Col md={3}>
+                                    <Input
+                                        className="form-control"
+                                        placeholder="Enter Monthly Price"
+                                        type="number"
+                                        onChange={(e) => setmonthlyAmt(e.target.value)}
+
+
+                                    />
+                                </Col>
+                                <Col md={7}></Col>
+
+                            </Row>
                         </Col>
-                        <Col md={7}></Col>
-
                     </Row>
-                    </Col>
-                    </Row>
-                    <div className="radio p-3"> 
+                    <div className="radio p-3">
 
-                 
-                    <Row  className="btn-group d-flex">
-                        <Col md={4}>
-                            <Label>
-                                <Input type="radio" name="allMember" className="border border-dark" id="allMember" onChange={()=>setIndividual(false)}/>
-                                &nbsp;&nbsp;
-                                Plan For All Members
-                            </Label>
-                            <br/>
-                            <Label>
-                                <Input type="radio" name="allMember" id="individual" className="border border-dark" onChange={()=>setIndividual(true)}/>
-                                &nbsp;&nbsp;
-                                Plan For Individual Member
-                            </Label>
-                        </Col>
-                        <Col md={4} className="pt-3">
-                        {individual == true ?
-               
 
-                       
-                        <Input type="email" placeholder="Enter Email id"/>
+                        <Row className="btn-group d-flex">
+                            <Col md={4}>
+                                <Label>
+                                    <Input type="radio" name="allMember" className="border border-dark" id="allMember" onChange={() => setIndividual(false)} />
+                                    &nbsp;&nbsp;
+                                    Plan For All Members
+                                </Label>
+                                <br />
+                                <Label>
+                                    <Input type="radio" name="allMember" id="individual" className="border border-dark" onChange={() => setIndividual(true)} />
+                                    &nbsp;&nbsp;
+                                    Plan For Individual Member
+                                </Label>
+                            </Col>
+                            <Col md={4} className="pt-3">
+                                {individual == true ?
 
-                      
 
-         
-                     :""}
 
-                        </Col>
-                        <Col md={4}>
-</Col>
+                                    <Input type="email" placeholder="Enter Email id" />
 
-                    </Row>
+
+
+
+                                    : ""}
+
+                            </Col>
+                            <Col md={4}>
+                            </Col>
+
+                        </Row>
                     </div>
-                   
+
                     <Row className="mt-3 mb-3">
                         <Col md={4} className="">
-                            <Button className="btn btn-info" onClick={()=>submitCreatePlan()}>
-                            Create Plan
+                            <Button className="btn btn-info" onClick={() => submitCreatePlan()}>
+                                Create Plan
                             </Button>
                         </Col>
                         <Col md={4}></Col>
                     </Row>
-                   
+
 
 
 

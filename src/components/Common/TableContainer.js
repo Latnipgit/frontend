@@ -29,32 +29,31 @@ function GlobalFilter({
   return (
 
     <div className="search-box me-2">
-    <div className="position-relative">
-      <label htmlFor="search-bar-0" className="search-label">
-        <span id="search-bar-0-label" className="sr-only">
-          Search this table
-        </span>
-        <input
-          onChange={e => {
-            setValue(e.target.value);
-            onChange(e.target.value);
-          }}
-          id="search-bar-0"
-          type="text"
-          className="form-control"
-          placeholder={`Search Here...`}
-          value={value || ""}
-        />
-      </label>
-      <i className="bx bx-search-alt search-icon"></i>
+      <div className="position-relative">
+        <label htmlFor="search-bar-0" className="search-label">
+          <span id="search-bar-0-label" className="sr-only">
+            Search this table
+          </span>
+          <input
+            onChange={e => {
+              setValue(e.target.value);
+              onChange(e.target.value);
+            }}
+            id="search-bar-0"
+            type="text"
+            className="form-control"
+            placeholder={`Search Here...`}
+            value={value || ""}
+          />
+        </label>
+        <i className="bx bx-search-alt search-icon"></i>
+      </div>
     </div>
-  </div>
-  
+
   );
 }
 
-const TableContainer = ({
-  columns,
+const TableContainer = ({ columns,
   data,
   isGlobalFilter,
   isJobListGlobalFilter,
@@ -66,9 +65,7 @@ const TableContainer = ({
   isAddCustList,
   customPageSize,
   className,
-  customPageSizeOptions,
-
-}) => {
+  customPageSizeOptions, }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -86,28 +83,28 @@ const TableContainer = ({
     state,
     preGlobalFilteredRows,
     setGlobalFilter,
-    state: { pageIndex, pageSize },
-  } = useTable(
-    {
-      columns,
-      data,
-      defaultColumn: { Filter: DefaultColumnFilter },
-      initialState: {
-        pageIndex: 0,
-        pageSize: customPageSize,
-        sortBy: [
-          {
-            desc: true,
-          },
-        ],
+    state: { pageIndex, pageSize }, } = useTable(
+      {
+        columns,
+        data,
+        defaultColumn: { Filter: DefaultColumnFilter },
+        initialState: {
+          pageIndex: 0,
+          pageSize: customPageSize,
+          sortBy: [
+            {
+              desc: true,
+            },
+          ],
+        },
       },
-    },
-    useGlobalFilter,
-    useFilters,
-    useSortBy,
-    useExpanded,
-    usePagination
-  );
+      useGlobalFilter,
+      useFilters,
+      useSortBy,
+      useExpanded,
+      usePagination
+    );
+
 
   const generateSortingIndicator = column => {
     return column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : "";
@@ -137,18 +134,18 @@ const TableContainer = ({
             ))}
           </select>
         </Col>
-        
+
         <Col md={6} className="d-flex align-items-center">
-        {isGlobalFilter && (
-        <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={state.globalFilter}
-        setGlobalFilter={setGlobalFilter}
-        isJobListGlobalFilter={isJobListGlobalFilter}
-        />
-        )}
-         <style>
-  </style>
+          {isGlobalFilter && (
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+              isJobListGlobalFilter={isJobListGlobalFilter}
+            />
+          )}
+          <style>
+          </style>
         </Col>
         {/* {isAddOptions && (
           <Col sm="7">
