@@ -161,10 +161,21 @@ function LatesttransactionViewDetails(props) {
     const [selectedOption, setSelectedOption] = useState(null);
     // const [selectedOption, setSelectedOption] = useState(null);
     const options = [
-        { value: 'Approved', label: 'Approved' },
-        { value: 'Disputed', label: 'Disputed' },
-        { value: 'Esclate', label: 'Esclate to Next Level' },
-        { value: 'Requesttoadditionaldocumnet', label: 'Request to additional document' },
+        { value: 'Approved', label: 'APPROVED' },
+        { value: 'Disputed', label: 'DISPUTED' },
+        { value: 'Esclate', label: 'ESCLATE TO NEXT LEVEL' },
+        { value: 'Requesttoadditionaldocumnet', label: 'REQUEST To ADDITIONAL DOCUMENT' },
+        { value: 'BuyerMayBeaDefaulter', label: 'BUYER MAY BE A DEFAULTER' },
+        { value: 'fraudulentComplaintSeller', label: 'FRAUDULENT COMPLAINT LODGED BY SELLER' },
+        { value: 'documentUnderVerification', label: 'DOCUMENT UNDER VERIFICATION' },
+        { value: 'Complaintsfiledwithoutevidence', label: 'COMPLAINTS FILED WITHOUT SUFFICIENT EVIDENCE' },
+        { value: 'Approved', label: 'PENDING INVESTIGATION' },
+        { value: 'Approved', label: 'AWAITING ADDITIONAL DOCUMENTS' },
+        { value: 'Approved', label: 'ESCLATED COMPLAINT' },
+        { value: 'Approved', label: 'FULLY RESOLVED - PAYMENT RECIEVED' },
+        { value: 'Approved', label: 'PARTIALLY RESOLVED - PARTIAL PAYMENT RECEIVED' },
+        { value: 'Approved', label: 'PAYMENT PENDING - AGREEMENT REACHED' },
+
         // { value: 'RequesttoCA', label: 'Request to CA Certificate' },
     ];
     const handleChange = (selected) => {
