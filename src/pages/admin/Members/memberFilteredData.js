@@ -22,7 +22,7 @@ import Select from 'react-select';
 import { use } from "i18next";
 import { flatMap } from "lodash";
 const MemberFilteredData = props => {
-  debugger
+  
   const dispatch = useDispatch();
   const [cityData, setCityData] = useState();
   let countryData = Country.getAllCountries();

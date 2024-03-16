@@ -30,11 +30,11 @@ axiosPrivate.interceptors.request.use(
 axiosPrivate.interceptors.response.use(
   (response) => response,
   async (error) => {
-    debugger
+    
     const originalRequest = error.config;
     if (error.response.status === 401) {
       if (!originalRequest._retry) {
-        // debugger
+        // 
         originalRequest._retry = true;
         try {
           const refreshToken = sessionStorage.getItem('refreshToken');
@@ -65,7 +65,7 @@ axiosPrivate.interceptors.response.use(
 export async function get(url, config = {}) {
   // 
   const token = sessionStorage.getItem("tokenemployeeRegister");
-  // debugger
+  // 
   const headers = {
     ...config.headers,
     'x-access-token': token,
