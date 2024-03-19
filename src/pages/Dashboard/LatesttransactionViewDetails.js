@@ -465,6 +465,7 @@ function LatesttransactionViewDetails(props) {
 
                                     <CardBody>
                                         <div className="table-responsive">
+                                            <strong> Payment History</strong>
                                             <Table className="table align-middle table-nowrap">
                                                 <thead>
                                                     <tr>
@@ -489,6 +490,8 @@ function LatesttransactionViewDetails(props) {
                                             </Table>
                                         </div>
                                         <Row className="mt-4">
+                                        <strong> Attachments</strong>
+
                                             {selected.pHArray.map((file, index) => (
                                                 <Col md="6" key={index}>
 
@@ -496,7 +499,7 @@ function LatesttransactionViewDetails(props) {
                                                         {console.log("HARSHIT CONSOLE", file)}
                                                         <CardBody className="attachment-card-body" style={{ background: 'rgba(0, 0, 0, 0.05)', height: "80px" }}>
                                                             <div className="attachment-icon">
-                                                                    <a href={ file.supportingDocuments.url} rel='noreferrer' target='_blank'>
+                                                                    <a href={ file.supportingDocuments != undefined ?file.supportingDocuments.url:""} rel='noreferrer' target='_blank'>
                                                                     {/* <i className='bx bxs-file mt-2 fileSizing'></i> */}
                                                                     <i className="far fa-file-pdf fa-2x text-danger"></i>
                                                 
@@ -505,7 +508,7 @@ function LatesttransactionViewDetails(props) {
                                                            
                                                             </div>
                                                             <div className="attachment-info">
-                                                                <span>{file.supportingDocuments.name}</span>
+                                                                <span>{  file.supportingDocuments != undefined ?file.supportingDocuments.name:"" }</span>
                                                             </div>
                                                         </CardBody>
                                                     </Card>
@@ -514,7 +517,9 @@ function LatesttransactionViewDetails(props) {
                                         </Row>
                                     </CardBody>
                                 </Card>
-                                <h4 className="mt-2">Buyer Notes</h4>
+                                {/* <h4 className="mt-2">Buyer Notes</h4> */}
+                                <strong> Buyer Notes</strong>
+
                                 {/* <p>I have been using this product for a while now, and I am incredibly impressed with its features and performance.</p>
                                  */}
                                {selected.pHArray.map((file, index) => (   <p key={index}>{file.debtorRemarks}</p>))}
