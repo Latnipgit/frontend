@@ -161,10 +161,21 @@ function LatesttransactionViewDetails(props) {
     const [selectedOption, setSelectedOption] = useState(null);
     // const [selectedOption, setSelectedOption] = useState(null);
     const options = [
-        { value: 'Approved', label: 'Approved' },
-        { value: 'Disputed', label: 'Disputed' },
-        { value: 'Esclate', label: 'Esclate to Next Level' },
-        { value: 'Requesttoadditionaldocumnet', label: 'Request to additional document' },
+        { value: 'Approved', label: 'APPROVED' },
+        { value: 'Disputed', label: 'DISPUTED' },
+        { value: 'Esclate', label: 'ESCLATE TO NEXT LEVEL' },
+        { value: 'Requesttoadditionaldocumnet', label: 'REQUEST To ADDITIONAL DOCUMENT' },
+        { value: 'BuyerMayBeaDefaulter', label: 'BUYER MAY BE A DEFAULTER' },
+        { value: 'fraudulentComplaintSeller', label: 'FRAUDULENT COMPLAINT LODGED BY SELLER' },
+        { value: 'documentUnderVerification', label: 'DOCUMENT UNDER VERIFICATION' },
+        { value: 'Complaintsfiledwithoutevidence', label: 'COMPLAINTS FILED WITHOUT SUFFICIENT EVIDENCE' },
+        { value: 'Approved', label: 'PENDING INVESTIGATION' },
+        { value: 'Approved', label: 'AWAITING ADDITIONAL DOCUMENTS' },
+        { value: 'Approved', label: 'ESCLATED COMPLAINT' },
+        { value: 'Approved', label: 'FULLY RESOLVED - PAYMENT RECIEVED' },
+        { value: 'Approved', label: 'PARTIALLY RESOLVED - PARTIAL PAYMENT RECEIVED' },
+        { value: 'Approved', label: 'PAYMENT PENDING - AGREEMENT REACHED' },
+
         // { value: 'RequesttoCA', label: 'Request to CA Certificate' },
     ];
     const handleChange = (selected) => {
@@ -391,11 +402,12 @@ function LatesttransactionViewDetails(props) {
 
 
                                 <Row>
+                                    {console.log("HARSHIT shar",selected.defaulterEntry.debtor)}
                                     <h4 className="mt-4">Seller Rating</h4>
                                     <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center mt-4">
                                         {selected.defaulterEntry.debtor.ratings.map((review, index) => (
                                             <div className="review" key={index}>
-                                                <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
+                                               {review.rating != undefined ?<>  <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
                                                     {renderStarRating(review.rating)}
                                                     <h5
                                                         className="ml-2 mb-1 mt-2 mx-2"
@@ -403,20 +415,38 @@ function LatesttransactionViewDetails(props) {
                                                     >
                                                         {review.rating}
                                                     </h5>
-                                                </div>
-                                                <div className="container">
-                                                    <div className="row">
-                                                        <div className="col">
-                                                            <p className="text-justify">
-                                                                {review.questionId} {review.response}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                </div>   </> :""}     </div>
                                         ))}
+                                   
+
+
+    
+                                             
+                                       
                                     </div>
                                 </Row>
+
+                                
+                                <Row>
+                                    <div className="   mt-1">
+                                        <h4 className="mt-4">Feedback Question</h4>
+
+                                    {selected.defaulterEntry.debtor.ratings.map((review, index) => (
+                                            <div className="" key={index}>
+                                               <div className="container">
+                                                    <div className="row">
+                                                        <div className="col">
+                                                        {review.rating == undefined ?  <p className="m-0">
+                                                                {review.questionId}  &nbsp;: &nbsp;&nbsp;&nbsp; {review.response}
+                                                            </p>:""}
+                                                        </div>
+                                                    </div>
+                                                </div>    </div>
+                                        ))}
+                                           
+                                    </div>
+                                </Row>
+
 
                             </CardBody>
                         </Card>
