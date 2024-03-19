@@ -563,9 +563,9 @@ function LatesttransactionViewDetails(props) {
                                             </Label> </Col>
                                             <Col md={6}><Label>
                                                 <Input type="checkbox" style={checkboxStyle}
-                                                    value="PaymentSeller"
+                                                    value="challanDocument"
                                                     onChange={handleCheckboxChanges}
-                                                    checked={itemsSeller.includes("PaymentSeller")}
+                                                    checked={itemsSeller.includes("challanDocument")}
                                                 />&nbsp; Payment Record Document
                                             </Label></Col>
 
