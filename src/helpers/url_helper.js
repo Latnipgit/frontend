@@ -127,7 +127,7 @@ export const ON_ADD_REPLY = "/comments-product-add-reply"
 
 export const ON_ADD_COMMENT = "/comments-product-add-comment"
 
-export const GET_LATEST_TRANSATION = "/api/admin/getalltransactions"
+export const GET_LATEST_TRANSATION = "/api/admin/getalltransactionsMerged"
 
 export const GET_ALL_APPROVED_TRANSACTIONS =
   "api/admin/getAllApprovedTransactions"

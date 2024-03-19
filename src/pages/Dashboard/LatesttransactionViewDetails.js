@@ -402,7 +402,7 @@ function LatesttransactionViewDetails(props) {
 
 
                                 <Row>
-                                    {console.log("HARSHIT shar",selected.defaulterEntry.debtor)}
+                                    {console.log("HARSHIT shar",selected)}
                                     <h4 className="mt-4">Seller Rating</h4>
                                     <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center mt-4">
                                         {selected.defaulterEntry.debtor.ratings.map((review, index) => (
@@ -475,36 +475,37 @@ function LatesttransactionViewDetails(props) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>2023-08-01</td>
-                                                        {/* <td>Bank Deposit</td> */}
-                                                        <td>50000</td>
-                                                        <td>Bank Transfer</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2023-08-05</td>
-                                                        {/* <td>IGST Payment</td> */}
-                                                        <td>10000</td>
-                                                        <td>Cash</td>
-                                                    </tr>
+                                                {selected.pHArray.map((item)=>{
+                                                    return  <tr key={item}> 
+                                                    <td>{moment(item.createdAt).format("DD-MM-YYYY")}</td>
+                                                    {/* <td>Bank Deposit</td> */}
+                                                    <td>{item.amtPaid}</td>
+                                                    <td>Bank Transfer</td>
+                                                </tr>
+                                                })}   
+                                                  
                                                     {/* Add more rows as needed */}
                                                 </tbody>
                                             </Table>
                                         </div>
                                         <Row className="mt-4">
-                                            {sellerattachments.map((file, index) => (
+                                            {selected.pHArray.map((file, index) => (
                                                 <Col md="6" key={index}>
+
                                                     <Card className="mb-3">
+                                                        {console.log("HARSHIT CONSOLE", file)}
                                                         <CardBody className="attachment-card-body" style={{ background: 'rgba(0, 0, 0, 0.05)', height: "80px" }}>
                                                             <div className="attachment-icon">
-                                                                {file.type === 'application/pdf' ? (
+                                                                    <a href={ file.supportingDocuments.url} rel='noreferrer' target='_blank'>
+                                                                    {/* <i className='bx bxs-file mt-2 fileSizing'></i> */}
                                                                     <i className="far fa-file-pdf fa-2x text-danger"></i>
-                                                                ) : (
-                                                                    <i className="far fa-file-image fa-2x text-primary"></i>
-                                                                )}
+                                                
+                                                
+                                                                  </a>
+                                                           
                                                             </div>
                                                             <div className="attachment-info">
-                                                                <span>{file.name}</span>
+                                                                <span>{file.supportingDocuments.name}</span>
                                                             </div>
                                                         </CardBody>
                                                     </Card>
@@ -514,7 +515,9 @@ function LatesttransactionViewDetails(props) {
                                     </CardBody>
                                 </Card>
                                 <h4 className="mt-2">Buyer Notes</h4>
-                                <p>I have been using this product for a while now, and I am incredibly impressed with its features and performance.</p>
+                                {/* <p>I have been using this product for a while now, and I am incredibly impressed with its features and performance.</p>
+                                 */}
+                               {selected.pHArray.map((file, index) => (   <p key={index}>{file.debtorRemarks}</p>))}
 
 
 
