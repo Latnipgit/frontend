@@ -160,8 +160,8 @@ const LatestTranaction = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-              {cellProps.cell.row.original != undefined ? cellProps.cell.row.original.amtPaid : ''}
+              {console.log("HARHSIT YUYU", cellProps.cell.row.original)}
+              {cellProps.cell.row.original != undefined && cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.totalAmount : ''}
             </div>
           );
         },
@@ -216,7 +216,9 @@ const LatestTranaction = props => {
           return (
             <div className="d-flex">
               {/* {console.log("HARHSIT", cellProps.cell.row.original)} */}
-              {cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.status : ""}
+              {cellProps.cell.row.original != undefined && cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.status : ''}
+
+              {/* {cellProps.cell.row.original.defaulterEntry != undefined ? cellProps.cell.row.original.defaulterEntry.status : ""} */}
             </div>
           );
         },
