@@ -2,7 +2,10 @@ import {ADMIN_API_SUCCESS,ADMIN_API_FAIL,GET_ADMIN_DATA,
 SIGNUP_ADMIN_API_SUCCESS,SIGNUP_ADMIN_API_FAIL,SIGNUP_ADMIN_DATA,
 CHANGE_PASSWORD_WITH_OLD_PASSWORD,
 CHANGE_PASSWORD_WITH_OLD_PASSWORD_SUCCESS,
-CHANGE_PASSWORD_WITH_OLD_PASSWORD_FAIL
+CHANGE_PASSWORD_WITH_OLD_PASSWORD_FAIL,
+DELETE_ADMIN,
+DELETE_ADMIN_SUCCESS,
+DELETE_ADMIN_FAIL
 } from "./actionsTypes";
 //Get Admin API
 export const AdminApiSuccess = (actionType, data) => ({
@@ -19,7 +22,18 @@ export const AdminApiFail = (actionType, error) => ({
 export const getAdminData = () => ({
     type: GET_ADMIN_DATA
 });
-
+export const deleteAdminAction = (emailid) => ({
+  type: DELETE_ADMIN,
+  payload:{emailid}
+});
+export const deleteAdminActionSuccess = (emailid) => ({
+  type: DELETE_ADMIN_SUCCESS,
+  payload:{emailid}
+});
+export const deleteAdminActionFail = (emailid) => ({
+  type: DELETE_ADMIN_FAIL,
+  payload:{emailid}
+});
 //Admin SignUP
 export const adminregister = user => {
           

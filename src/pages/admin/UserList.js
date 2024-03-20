@@ -5,6 +5,7 @@ import { isEmpty } from "lodash";
 import AdminRegistrationModal from '../admin/adminList/AddAdminPopup';
 //import action
 import { getAdminData as ongetAdminData } from "../../store/actions";
+import { deleteAdminAction as ondeleteAdminAction } from "../../store/actions";
 import { Link } from "react-router-dom";
 
 import { Button, Card, CardBody, } from "reactstrap";
@@ -168,7 +169,7 @@ const UserList = props => {
                 </div>
               </Link>
 
-              <div className="d-flex flex-column align-items-center" onClick={() => onClickDelete(project)} style={{ cursor: 'pointer' }}>
+              <div className="d-flex flex-column align-items-center" onClick={() => deleteAdmin(project)} style={{ cursor: 'pointer' }}>
                 <i className="mdi mdi-trash-can font-size-16 text-danger me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" />
               </div>
             </div>
@@ -178,6 +179,10 @@ const UserList = props => {
     ],
     []
   );
+  const deleteAdmin=(email)=>{
+    console.log("deleteAdmindeleteAdmin",email)
+    dispatch(ondeleteAdminAction(email.emailId))
+  }
 
   console.log("admindata", adminData)
   return (

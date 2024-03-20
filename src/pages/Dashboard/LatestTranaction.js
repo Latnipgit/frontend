@@ -45,6 +45,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 
 const LatestTranaction = props => {
+  console.log("isDisputedModal",props.isDisputedModal)
   const [showReferModal, setShowReferModal] = useState(false)
   const [showApproveModal, setShowApproveModal] = useState(false)
   const [showInProcessModal, setShowInProcessModal] = useState(false)
@@ -313,7 +314,7 @@ const LatestTranaction = props => {
 
       <Card>
         <CardBody>
-          <div className="mb-4 h4 card-title">Latest Reported Transaction</div>
+        {props.isDisputedModal != true ?  <div className="mb-4 h4 card-title">Latest Reported Transaction</div>:""}
           <TableContainer
             columns={columns}
             data={latestTransactiondata}

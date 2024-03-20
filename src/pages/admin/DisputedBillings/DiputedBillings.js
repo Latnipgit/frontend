@@ -40,7 +40,7 @@ import TableContainer from "../../../components/Common/TableContainer";
 import DisputedViewModal from "../DisputedBillings/DisputedViewModal";
 import { fetchDisputedTransStart } from "store/DisputedTransactions/disputedTrans.action"
 import { selectdisputedTransMap } from "store/DisputedTransactions/disputedTrans.action.selecter";
-
+import Dashboard from "pages/Dashboard/LatestTranaction";
 const DiputedBillings = props => {
   const [showReferModal, setShowReferModal] = useState(false);
   const [showApproveModal, setShowApproveModal] = useState(false);
@@ -148,6 +148,7 @@ const DiputedBillings = props => {
   useEffect(() => {
     dispatch(fetchDisputedTransStart())
   }, [])
+  const [isDisputedModal, setisDisputedModal] = useState(true);
 
   return (
     <React.Fragment>
@@ -160,13 +161,17 @@ const DiputedBillings = props => {
           </Button>
           <div className="mb-4 h4 card-title"></div>
           <div className="mb-4 h4 card-title">Disputed Billing</div>
-          <TableContainer
+          {/* <TableContainer
             columns={columns}
             data={disputedTransactiondata}
             isGlobalFilter={true}
             isAddOptions={false}
             customPageSize={20}
-          />
+          /> */}
+
+
+
+          <Dashboard isDisputedModal={isDisputedModal}/>
         </CardBody>
       </Card>
       <Modal isOpen={showReferModal} toggle={() => setShowReferModal(false)}>

@@ -1,8 +1,9 @@
 import { call, put, takeEvery, all, fork } from "redux-saga/effects";
-import { GET_ADMIN_DATA ,SIGNUP_ADMIN_API_FAIL,SIGNUP_ADMIN_DATA, CHANGE_PASSWORD_WITH_OLD_PASSWORD} from "./actionsTypes";
-import { AdminApiSuccess, AdminApiFail,adminSignupUserSuccessful, adminSignupFailed, changePasswordUsingOldPass, changePasswordUsingOldPassSuccessful, changePasswordUsingOldPassfail} from "./actions";
+import { GET_ADMIN_DATA ,SIGNUP_ADMIN_API_FAIL,SIGNUP_ADMIN_DATA, CHANGE_PASSWORD_WITH_OLD_PASSWORD,DELETE_ADMIN} from "./actionsTypes";
+import { AdminApiSuccess, AdminApiFail,adminSignupUserSuccessful, adminSignupFailed, changePasswordUsingOldPass,changePasswordUsingOldPassSuccessful, changePasswordUsingOldPassfail,
+deleteAdminActionFail,deleteAdminActionSuccess} from "./actions";
 import {getAllAdminData,registerAdminData} from "../../helpers/fakebackend_helper";
-import {changepassswordDataAPI} from "../../helpers/fakebackend_helper";
+import {changepassswordDataAPI,deleteAdminAPi} from "../../helpers/fakebackend_helper";
 function* getAllAdminData2() {
     try {
       
@@ -23,11 +24,22 @@ function* signupAdminData(action) {
         yield put(adminSignupFailed(SIGNUP_ADMIN_DATA, error));
     }
   }
+  function* deleteAdminSaga(action) {
+          
+    try {
+      // 
+      const response = yield call(deleteAdminAPi, action.payload); 
+      yield put(deleteAdminActionSuccess(response));
+    } catch (error) {
+        yield put(deleteAdminActionFail( error));
+    }
+  }
 
 export function* watchGetAdminData() {
     yield takeEvery(SIGNUP_ADMIN_DATA, signupAdminData);
     yield takeEvery(GET_ADMIN_DATA, getAllAdminData2);
     yield takeEvery(CHANGE_PASSWORD_WITH_OLD_PASSWORD, changePasswordSaga);
+    yield takeEvery(DELETE_ADMIN, deleteAdminSaga);
 
     
 }
