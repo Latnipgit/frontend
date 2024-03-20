@@ -217,8 +217,14 @@ function LatesttransactionViewDetails(props) {
 
             const payload = {
                 "approve": true,
-                "paymentId": selected.id,
-                "amtPaid": selected.amtPaid
+                "payments":[
+                    {
+                        "paymentId": selected.pHArray[0].id,
+                        "amtPaid": selected.amtPaid
+                    }
+
+                ]
+              
             }
             dispatch(approveRejectLatestTrans(payload))
             toast.success("Transaction Approved")
@@ -226,15 +232,21 @@ function LatesttransactionViewDetails(props) {
         if (selectedOption.value == "Disputed") {
             const payload = {
                 "approve": false,
-                "paymentId": selected.id,
-                "amtPaid": selected.amtPaid
+                "payments":[
+                    {
+                        "paymentId": selected.pHArray[0].id,
+                        "amtPaid": selected.amtPaid
+                    }
+
+                ]
+              
             }
             dispatch(approveRejectLatestTrans(payload))
             toast.success("Transaction Disputed")
         }
         if (selectedOption.value == "Esclate") {
             const payload = {
-                "paymentId": selected.id
+                "paymentId": selected.pHArray[0].id
             }
             dispatch(esclateTransaction(payload))
             toast.success("Transaction Esclate to Next Level")
@@ -244,15 +256,22 @@ function LatesttransactionViewDetails(props) {
         }
     }
     const handleRequestedDoc = () => {
+    
+        
         const payload = {
-            "paymentId": selected.id,
+            "payments":[
+                {
+                "paymentId": selected.pHArray[0].id
+                }
+            ],
+            
             "documentsRequiredFromCreditor": itemsSeller,
             "documentsRequiredFromDebtor": itemsBuyer,
             "isDocumentsRequiredByCreditor": itemsSeller.length != 0 ? "true" : "false",
             "adminRemarksForDebtor": notesBuyer,
             "adminRemarksForCreditor": notesSeller
         }
-        console.log("payloadpayload", payload)
+        console.log("payloadpayload", payload,selected)
 
         dispatch(requestForAdditionalDoc(payload))
     }
