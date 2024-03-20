@@ -481,7 +481,7 @@ function LatesttransactionViewDetails(props) {
                                                     <td>{moment(item.createdAt).format("DD-MM-YYYY")}</td>
                                                     {/* <td>Bank Deposit</td> */}
                                                     <td>{item.amtPaid}</td>
-                                                    <td>Bank Transfer</td>
+                                                    <td>{item.paymentMode}</td>
                                                 </tr>
                                                 })}   
                                                   
