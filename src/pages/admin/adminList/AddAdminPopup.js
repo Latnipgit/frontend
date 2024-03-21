@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from 'yup'; // Import Yup for validation
 import { useFormik } from 'formik'; // Import useFormik for form handling
 import "../../../pages/admin/Common.scss";
-import { adminregister as Onadminregister } from "../../../store/actions";
+import { adminregister as onadminregister } from "../../../store/actions";
 
 const AdminRegistrationModal = ({ isOpen, toggle }) => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(Onadminregister(values));
+      dispatch(onadminregister(values));
       toggle();
     },
   });
@@ -132,7 +132,7 @@ const AdminRegistrationModal = ({ isOpen, toggle }) => {
           <Button type="button" color="secondary" onClick={toggle}>
             Close
           </Button>
-          <Button type="submit" color="primary" onClick={formik.handleSubmit} disabled={!formik.isValid}>
+          <Button type="button" color="primary" onClick={formik.handleSubmit} disabled={!formik.isValid}>
             Register
           </Button>
         </ModalFooter>

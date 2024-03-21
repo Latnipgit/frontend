@@ -85,6 +85,7 @@ export async function get(url, config = {}) {
 
 export async function post(url, data, config = {}) {
   // 
+  debugger
   if (url != '/api/admin/login' && url != '/api/admin/password-reset') {
     const token = sessionStorage.getItem("tokenemployeeRegister");
     const headers = {

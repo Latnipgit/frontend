@@ -8,7 +8,7 @@ export const getSubscribtionpckgListAPI = () => get("/api/admin/getAllSubscripti
 //Get all member data
 export const getAllMemberData = () => get(url.GET_MEMBER_DATA)
 //Admin Signup
-export const registerAdminData = () => post(url.SIGNUP_ADMIN_DATA, data)
+export const registerAdminData = (data) => post(url.SIGNUP_ADMIN_DATA, data)
 // change password
 export const changepassswordDataAPI = () =>
   post(url.CHANGE_PASSWORD_WITH_OLD_PASSWORD, data)
