@@ -33,7 +33,15 @@ function* loginUser({ payload: { user, history } }) {
           yield put(loginSuccess(response.data.response));
           history('/dashboard');
         }else{
+          console.log("RESPONCEMESSG",response.data)
+          if(response.data.passwordChangeNeeded == true){
+            // window.alert(response.data.message);
+sessionStorage.setItem("tokenemployeeRegister",response.data.passwordChangeToken)
+            history('/password-reset/:userID/:token');
+
+          }
           window.alert(response.data.message);
+
         }
         
       }  

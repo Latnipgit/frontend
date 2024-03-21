@@ -15,6 +15,7 @@ function* getAllAdminData2() {
     }
 }
 function* signupAdminData(action) {
+  console.log("signupAdminDatasignupAdminData",action)
           
     try {
       // 
