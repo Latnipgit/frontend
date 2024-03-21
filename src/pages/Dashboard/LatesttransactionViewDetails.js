@@ -211,20 +211,20 @@ function LatesttransactionViewDetails(props) {
     const dispatch = useDispatch()
 
     const handleActionSelect = () => {
-        console.log("selectedselected", selectedOption)
+
 
         if (selectedOption.value == "Approved") {
 
             const payload = {
                 "approve": true,
-                "payments":[
+                "payments": [
                     {
                         "paymentId": selected.pHArray[0].id,
                         "amtPaid": selected.amtPaid
                     }
 
                 ]
-              
+
             }
             dispatch(approveRejectLatestTrans(payload))
             toast.success("Transaction Approved")
@@ -232,14 +232,14 @@ function LatesttransactionViewDetails(props) {
         if (selectedOption.value == "Disputed") {
             const payload = {
                 "approve": false,
-                "payments":[
+                "payments": [
                     {
                         "paymentId": selected.pHArray[0].id,
                         "amtPaid": selected.amtPaid
                     }
 
                 ]
-              
+
             }
             dispatch(approveRejectLatestTrans(payload))
             toast.success("Transaction Disputed")
@@ -256,22 +256,22 @@ function LatesttransactionViewDetails(props) {
         }
     }
     const handleRequestedDoc = () => {
-    
-        
+
+
         const payload = {
-            "payments":[
+            "payments": [
                 {
-                "paymentId": selected.pHArray[0].id
+                    "paymentId": selected.pHArray[0].id
                 }
             ],
-            
+
             "documentsRequiredFromCreditor": itemsSeller,
             "documentsRequiredFromDebtor": itemsBuyer,
             "isDocumentsRequiredByCreditor": itemsSeller.length != 0 ? "true" : "false",
             "adminRemarksForDebtor": notesBuyer,
             "adminRemarksForCreditor": notesSeller
         }
-        console.log("payloadpayload", payload,selected)
+
 
         dispatch(requestForAdditionalDoc(payload))
     }
@@ -294,7 +294,7 @@ function LatesttransactionViewDetails(props) {
     }
 
     const toggleUploiadFiles = () => setSellerDocOpen(!sellerDocOpen)
-    console.log("selectedselected ll", itemsSeller)
+
 
     return (
         <>
@@ -421,12 +421,12 @@ function LatesttransactionViewDetails(props) {
 
 
                                 <Row>
-                                    {console.log("HARSHIT shar",selected)}
+
                                     <h4 className="mt-4">Seller Rating</h4>
                                     <div className="existing-reviews d-flex flex-wrap justify-content-between align-items-center mt-4">
                                         {selected.defaulterEntry.debtor.ratings.map((review, index) => (
                                             <div className="review" key={index}>
-                                               {review.rating != undefined ?<>  <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
+                                                {review.rating != undefined ? <>  <div className="review-rating d-flex align-items-center " style={{ color: 'goldenrod', fontSize: '18px' }}>
                                                     {renderStarRating(review.rating)}
                                                     <h5
                                                         className="ml-2 mb-1 mt-2 mx-2"
@@ -434,35 +434,35 @@ function LatesttransactionViewDetails(props) {
                                                     >
                                                         {review.rating}
                                                     </h5>
-                                                </div>   </> :""}     </div>
+                                                </div>   </> : ""}     </div>
                                         ))}
-                                   
 
 
-    
-                                             
-                                       
+
+
+
+
                                     </div>
                                 </Row>
 
-                                
+
                                 <Row>
                                     <div className="   mt-1">
                                         <h4 className="mt-4">Feedback Question</h4>
 
-                                    {selected.defaulterEntry.debtor.ratings.map((review, index) => (
+                                        {selected.defaulterEntry.debtor.ratings.map((review, index) => (
                                             <div className="" key={index}>
-                                               <div className="container">
+                                                <div className="container">
                                                     <div className="row">
                                                         <div className="col">
-                                                        {review.rating == undefined ?  <p className="m-0">
+                                                            {review.rating == undefined ? <p className="m-0">
                                                                 {review.questionId}  &nbsp;: &nbsp;&nbsp;&nbsp; {review.response}
-                                                            </p>:""}
+                                                            </p> : ""}
                                                         </div>
                                                     </div>
                                                 </div>    </div>
                                         ))}
-                                           
+
                                     </div>
                                 </Row>
 
@@ -495,39 +495,39 @@ function LatesttransactionViewDetails(props) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                {selected.pHArray.map((item)=>{
-                                                    return  <tr key={item}> 
-                                                    <td>{moment(item.createdAt).format("DD-MM-YYYY")}</td>
-                                                    {/* <td>Bank Deposit</td> */}
-                                                    <td>{item.amtPaid}</td>
-                                                    <td>{item.paymentMode}</td>
-                                                </tr>
-                                                })}   
-                                                  
+                                                    {selected.pHArray.map((item) => {
+                                                        return <tr key={item}>
+                                                            <td>{moment(item.createdAt).format("DD-MM-YYYY")}</td>
+                                                            {/* <td>Bank Deposit</td> */}
+                                                            <td>{item.amtPaid}</td>
+                                                            <td>{item.paymentMode}</td>
+                                                        </tr>
+                                                    })}
+
                                                     {/* Add more rows as needed */}
                                                 </tbody>
                                             </Table>
                                         </div>
                                         <Row className="mt-4">
-                                        <strong> Attachments</strong>
+                                            <strong> Attachments</strong>
 
                                             {selected.pHArray.map((file, index) => (
                                                 <Col md="6" key={index}>
 
                                                     <Card className="mb-3">
-                                                        {console.log("HARSHIT CONSOLE", file)}
+
                                                         <CardBody className="attachment-card-body" style={{ background: 'rgba(0, 0, 0, 0.05)', height: "80px" }}>
                                                             <div className="attachment-icon">
-                                                                    <a href={ file.supportingDocuments != undefined ?file.supportingDocuments.url:""} rel='noreferrer' target='_blank'>
+                                                                <a href={file.supportingDocuments != undefined ? file.supportingDocuments.url : ""} rel='noreferrer' target='_blank'>
                                                                     {/* <i className='bx bxs-file mt-2 fileSizing'></i> */}
                                                                     <i className="far fa-file-pdf fa-2x text-danger"></i>
-                                                
-                                                
-                                                                  </a>
-                                                           
+
+
+                                                                </a>
+
                                                             </div>
                                                             <div className="attachment-info">
-                                                                <span>{  file.supportingDocuments != undefined ?file.supportingDocuments.name:"" }</span>
+                                                                <span>{file.supportingDocuments != undefined ? file.supportingDocuments.name : ""}</span>
                                                             </div>
                                                         </CardBody>
                                                     </Card>
@@ -541,7 +541,7 @@ function LatesttransactionViewDetails(props) {
 
                                 {/* <p>I have been using this product for a while now, and I am incredibly impressed with its features and performance.</p>
                                  */}
-                               {selected.pHArray.map((file, index) => (   <p key={index}>{file.debtorRemarks}</p>))}
+                                {selected.pHArray.map((file, index) => (<p key={index}>{file.debtorRemarks}</p>))}
 
 
 
@@ -558,88 +558,88 @@ function LatesttransactionViewDetails(props) {
                     <Col md="6" className="mt-4">
                         <h4>Seller Logs</h4>
                         <Card className="mb-3 shadow">
-                            <CardBody className="buyer-card-body" style={{ height:"300px", overflow:"scroll"}}>
-<Row className="d-flex p-1" style={{ background:"#e6f7ff"}}> 
-<div style={{ fontSize:"15px"}}>
-<i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                            <CardBody className="buyer-card-body" style={{ height: "300px", overflow: "scroll" }}>
+                                <Row className="d-flex p-1" style={{ background: "#e6f7ff" }}>
+                                    <div style={{ fontSize: "15px" }}>
+                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
-</div>
-<div>
-    You Requested For CA Certificate.
-</div>
-<div>
-    13-03-2023
-</div>
-</Row>
+                                    </div>
+                                    <div>
+                                        You Requested For CA Certificate.
+                                    </div>
+                                    <div>
+                                        13-03-2023
+                                    </div>
+                                </Row>
 
-<Row className="d-flex p-1 mt-1" style={{ background:"#ffe6e6"}}> 
-<div style={{ fontSize:"15px"}}>
-<i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                                <Row className="d-flex p-1 mt-1" style={{ background: "#ffe6e6" }}>
+                                    <div style={{ fontSize: "15px" }}>
+                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
-</div>
-<div>
-    You Requested For CA Certificate.
-</div>
-<div>
-    13-03-2023
-</div>
-</Row>
-<Row className="d-flex p-1 mt-1" style={{ background:"#e6f7ff"}}> 
-<div style={{ fontSize:"15px"}}>
-<i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                                    </div>
+                                    <div>
+                                        You Requested For CA Certificate.
+                                    </div>
+                                    <div>
+                                        13-03-2023
+                                    </div>
+                                </Row>
+                                <Row className="d-flex p-1 mt-1" style={{ background: "#e6f7ff" }}>
+                                    <div style={{ fontSize: "15px" }}>
+                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
-</div>
-<div>
-    You Requested For CA Certificate.
-</div>
-<div>
-    13-03-2023
-</div>
-</Row>
+                                    </div>
+                                    <div>
+                                        You Requested For CA Certificate.
+                                    </div>
+                                    <div>
+                                        13-03-2023
+                                    </div>
+                                </Row>
                             </CardBody>
                         </Card>
                     </Col>
                     <Col md="6" className="mt-4">
                         <h4>Buyer Logs</h4>
                         <Card className="mb-3 shadow">
-                            <CardBody className="buyer-card-body" style={{ height:"300px", overflow:"scroll"}}>
-<Row className="d-flex p-1" style={{ background:"#e6f7ff"}}> 
-<div style={{ fontSize:"15px"}}>
-<i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                            <CardBody className="buyer-card-body" style={{ height: "300px", overflow: "scroll" }}>
+                                <Row className="d-flex p-1" style={{ background: "#e6f7ff" }}>
+                                    <div style={{ fontSize: "15px" }}>
+                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
-</div>
-<div>
-    You Requested For CA Certificate.
-</div>
-<div>
-    13-03-2023
-</div>
-</Row>
+                                    </div>
+                                    <div>
+                                        You Requested For CA Certificate.
+                                    </div>
+                                    <div>
+                                        13-03-2023
+                                    </div>
+                                </Row>
 
-<Row className="d-flex p-1 mt-1" style={{ background:"#ffe6e6"}}> 
-<div style={{ fontSize:"15px"}}>
-<i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                                <Row className="d-flex p-1 mt-1" style={{ background: "#ffe6e6" }}>
+                                    <div style={{ fontSize: "15px" }}>
+                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
-</div>
-<div>
-    You Requested For CA Certificate.
-</div>
-<div>
-    13-03-2023
-</div>
-</Row>
-<Row className="d-flex p-1 mt-1" style={{ background:"#e6f7ff"}}> 
-<div style={{ fontSize:"15px"}}>
-<i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                                    </div>
+                                    <div>
+                                        You Requested For CA Certificate.
+                                    </div>
+                                    <div>
+                                        13-03-2023
+                                    </div>
+                                </Row>
+                                <Row className="d-flex p-1 mt-1" style={{ background: "#e6f7ff" }}>
+                                    <div style={{ fontSize: "15px" }}>
+                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
-</div>
-<div>
-    You Requested For CA Certificate.
-</div>
-<div>
-    13-03-2023
-</div>
-</Row>
+                                    </div>
+                                    <div>
+                                        You Requested For CA Certificate.
+                                    </div>
+                                    <div>
+                                        13-03-2023
+                                    </div>
+                                </Row>
                             </CardBody>
                         </Card>
                     </Col>
@@ -671,7 +671,7 @@ function LatesttransactionViewDetails(props) {
                     </Col>
 
                 </Row>
-                {console.log("selected.value", selectedOption)}
+
                 {selectedOption != null && selectedOption.value == "Requesttoadditionaldocumnet" ?
                     <div className="mb-5">
 

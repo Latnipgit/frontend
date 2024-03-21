@@ -25,7 +25,7 @@ export const numberFormat = (value) =>
 
 export const SellerDocViewModule = props => {
   const { isOpen, toggle, item } = props
-  console.log(item);
+
 
   return (
     <Modal

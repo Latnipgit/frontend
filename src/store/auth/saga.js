@@ -23,30 +23,30 @@ function* loginUser({ payload: { user, history } }) {
         userName: user.email,
         password: user.password,
       });
-      if(response!=undefined && response!=null){
-              
-        if(response.data.success){
+      if (response != undefined && response != null) {
+
+        if (response.data.success) {
           sessionStorage.setItem("authUser", JSON.stringify(response.data.response));
           sessionStorage.setItem("IspopupOpen", JSON.stringify(true));
-          sessionStorage.setItem("tokenemployeeRegister",response.data.response.token)
-          sessionStorage.setItem("refreshToken",response.data.response.refreshToken)
+          sessionStorage.setItem("tokenemployeeRegister", response.data.response.token)
+          sessionStorage.setItem("refreshToken", response.data.response.refreshToken)
           yield put(loginSuccess(response.data.response));
           history('/dashboard');
-        }else{
-          console.log("RESPONCEMESSG",response.data)
-          if(response.data.passwordChangeNeeded == true){
+        } else {
+
+          if (response.data.passwordChangeNeeded == true) {
             // window.alert(response.data.message);
-sessionStorage.setItem("tokenemployeeRegister",response.data.passwordChangeToken)
+            sessionStorage.setItem("tokenemployeeRegister", response.data.passwordChangeToken)
             history('/password-reset/:userID/:token');
 
           }
           window.alert(response.data.message);
 
         }
-        
-      }  
+
+      }
     }
-    
+
   } catch (error) {
     yield put(apiError(error));
   }
