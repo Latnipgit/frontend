@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from 'yup'; // Import Yup for validation
 import { useFormik } from 'formik'; // Import useFormik for form handling
 import "../../../pages/admin/Common.scss";
+import { adminregister as Onadminregister } from "../../../store/actions";
 
 const AdminRegistrationModal = ({ isOpen, toggle }) => {
   const dispatch = useDispatch();

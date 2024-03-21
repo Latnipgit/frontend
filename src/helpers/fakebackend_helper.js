@@ -128,9 +128,14 @@ const postJwtLogin = data => loginPostMethod(url.POST_FAKE_JWT_LOGIN, data)
 const postJwtForgetPwd = data => post(url.POST_FAKE_JWT_PASSWORD_FORGET, data)
 //post forget password with token
 const postJwtForgetPwdWithToken = data => {
+  console.log("FORGETPASSWORD",data)
   const urlWithToken = `${url.FORGET_PASSWORD_WITH_TOKEN}/${data.token}`
   const postData = { password: data.password }
-  return post(urlWithToken, postData)
+  const checkData = {
+    "passwordChangeToken": sessionStorage.getItem("tokenemployeeRegister"),
+    "password":  data.password
+}
+  return post(url.FORGET_PASSWORD_WITH_TOKEN,checkData)
 }
 // const postJwtForgetPwdWithToken = data => post(url.FORGET_PASSWORD_WITH_TOKEN, data);
 
