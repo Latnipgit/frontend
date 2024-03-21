@@ -8,10 +8,11 @@ import {
   ModalHeader,
   Table,
 } from "reactstrap"
-
+import moment from "moment";
 
 const MembersViewModal = props => {
-  const { isOpen, toggle } = props
+  const { isOpen, toggle, data } = props
+  console.log("MembersViewModalMembersViewModal",data)
   return (
 <Modal
   isOpen={isOpen}
@@ -26,51 +27,47 @@ const MembersViewModal = props => {
     <ModalHeader toggle={toggle}>Member Details</ModalHeader>
     <ModalBody>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-12">
           <p className="mb-2">
-            <strong>Customer Name:</strong> Neal Matthews
+            <strong>Customer Name:</strong> {data != undefined? data.name:""}
           </p>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <p className="mb-2">
-            <strong>Company Name:</strong> ABC Corp
-          </p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-6">
-          <p className="mb-2">
-            <strong>Email Address:</strong> NealMatthews@gmail.com
-          </p>
-        </div>
-        <div className="col-md-6">
-          <p className="mb-2">
-            <strong>Phone Number:</strong> (+291)-2652652651
+            <strong>Company Name:</strong> { data != undefined? data.userName :''}
           </p>
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-12">
           <p className="mb-2">
-            <strong>Joined On:</strong> 2023-08-28
+            <strong>Email Address:</strong>{ data != undefined? data.emailId:''}
           </p>
         </div>
-        <div className="col-md-6">
+       
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <p className="mb-2">
+            <strong>Joined On:</strong> {data != undefined? moment(data.updateAt).format("DD-MM-YYYY"):""}
+          </p>
+        </div>
+        {/* <div className="col-md-6">
           <p className="mb-2">
             <strong>Status:</strong>{' '}
             <span className={`badge ${"Active" === "Active" ? "bg-success text-white" : "bg-danger text-white"}`} style={{ fontSize: "14px", borderRadius: "8px", padding: "5px 10px" }}>
             Active
 </span>
           </p>
-        </div>
+        </div> */}
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="col-md-6">
           <p className="mb-0">
             <strong>GST Number:</strong> GST123456789
           </p>
         </div>
-      </div>
+      </div> */}
     </ModalBody>
     <ModalFooter>
       <Button type="button" color="secondary" onClick={toggle}>

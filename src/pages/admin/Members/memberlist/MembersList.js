@@ -29,6 +29,7 @@ import index from "pages/Dashboard-Blog";
 const MembersList = props => {
 
   const [memberdata, setMemberData] = useState(undefined);
+  const [selectedData, setselectedData] = useState();
   const [isChange, setisChange] = useState(false);
   const [modal1, setModal1] = useState(false);
   const toggleViewModal = () => setModal1(!modal1);
@@ -51,6 +52,13 @@ const MembersList = props => {
     setMemberData(memberData != undefined && memberData != null ? memberData.data.response : [])
   }, []);
 
+
+  const handleViewDetails= (item)=>{
+    console.log("handleViewDetailshandleViewDetails",item.original)
+    setselectedData(item.original)
+    toggleViewModal()
+
+  }
   // console.log("MEMBERDATA hs", memberData[0] != null && memberData[0] != undefined ?memberData[0].data.response:[])
   const columns = useMemo(
     () => [
@@ -159,7 +167,7 @@ const MembersList = props => {
         Cell: cellProps => {
           return (
             <div className="d-flex">
-              <div className="d-flex flex-column align-items-center me-3" onClick={toggleViewModal} style={{ cursor: 'pointer' }}>
+              <div className="d-flex flex-column align-items-center me-3" onClick={()=>handleViewDetails(cellProps.cell.row)} style={{ cursor: 'pointer' }}>
                 <i className="mdi mdi-eye font-size-16 text-primary me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve" />
               </div>
               <div className="d-flex flex-column align-items-center me-3" style={{ cursor: 'pointer' }}>
@@ -180,7 +188,7 @@ const MembersList = props => {
 
   return (
     <React.Fragment>
-      <MembersViewModal isOpen={modal1} toggle={toggleViewModal} />
+      <MembersViewModal isOpen={modal1} toggle={toggleViewModal}  data ={selectedData}/>
       <Card>
         <CardBody>
           <div className="mb-4 h4 card-title mt-lg-1">Member List</div>
