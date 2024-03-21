@@ -11,14 +11,14 @@ export const MemberFilteredCityData = ({ cityData, selectedState, setSelectedCit
     const [companyStateData, setCompanyStateData] = useState([])
     const selectComapnyCityData = useSelector(selectComapnyCity)
     useEffect(() => {
-        dispatch(fetchCompanyCityStart({ "state": "Maharashtra" }))
+        dispatch(fetchCompanyCityStart({ "state": selectedState }))
     }, []);
 
     useEffect(() => {
         if (selectComapnyCityData) {
             const companyStateList = cityData.map((values, index) => {
                 for (let i = 0; i < selectComapnyCityData.length; i++) {
-                    if (values.name == selectComapnyCityData[i]._id) {
+                    if (values.name == selectComapnyCityData[i].city) {
                         return { state: values.name, statecount: selectComapnyCityData[i].totalCompanies }
                     }
                 }
@@ -79,8 +79,7 @@ export const MemberFilteredCityData = ({ cityData, selectedState, setSelectedCit
                 Cell: cellProps => {
                     return (
                         <div className="d-flex">
-
-                            <Button onClick={() => checkSelectData(cellProps.cell.row.original)} className="btn btn-sm btn-info">view Details</Button>
+                            {cellProps.cell.row.original.statecount == 0 ? <Button disabled className="btn btn-sm btn-info">view Details</Button> : <Button onClick={() => checkSelectData(cellProps.cell.row.original)} className="btn btn-sm btn-info">view Details</Button>}
 
                         </div>
                     );

@@ -30,7 +30,7 @@ axiosPrivate.interceptors.request.use(
 axiosPrivate.interceptors.response.use(
   (response) => response,
   async (error) => {
-    
+
     const originalRequest = error.config;
     if (error.response.status === 401) {
       if (!originalRequest._retry) {
@@ -39,7 +39,7 @@ axiosPrivate.interceptors.response.use(
         try {
           const refreshToken = sessionStorage.getItem('refreshToken');
           const response = await axiosApi.post('/api/admin/refreshToken', {
-            "refreshToken": refreshToken
+            refreshToken,
           });
           const token = response.data.response.token;
           sessionStorage.setItem('tokenemployeeRegister', token);
@@ -48,12 +48,12 @@ axiosPrivate.interceptors.response.use(
           return axiosPrivate(originalRequest);
         } catch (refreshError) {
           console.error('Error refreshing token:', refreshError);
-          /*         window.location.href = "/login"
-                  sessionStorage.clear() */
+          window.location.href = "/login"
+          sessionStorage.clear()
         }
       } else {
-        /*       window.location.href = "/login"
-              sessionStorage.clear() */
+        window.location.href = "/login"
+        sessionStorage.clear()
       }
     }
     return Promise.reject(error);
