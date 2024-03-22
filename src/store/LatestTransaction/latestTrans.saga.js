@@ -17,12 +17,14 @@ import {
   esclateTransactionSuccess,
   requestForAdditionalDoc,
   requestForAdditionalDocFail,
-  requestForAdditionalDocSuccess
+  requestForAdditionalDocSuccess,
+  getAllLogsFail,
+  getAllLogsSuccess
 } from "./latestTrans.action"
 
-import { FETCH_LATEST_TRANS_START, APPROVE_REJECT_LATEST_TRANSACTION, SUBSCRIBE_PACKAGE, GET_SUBSCRIBE_PACKAGE, ESCLATET_TRANSACTION, REQ_FOR_ADDITIONAL_DOC } from "./latestTrans.type"
+import { FETCH_LATEST_TRANS_START, APPROVE_REJECT_LATEST_TRANSACTION, SUBSCRIBE_PACKAGE, GET_SUBSCRIBE_PACKAGE, ESCLATET_TRANSACTION, REQ_FOR_ADDITIONAL_DOC,GET_ALL_PAYMENT_LOGS } from "./latestTrans.type"
 
-import { genrateAllTransation, approveRejectLatestTranApiMethod, subscribePckgAPI, getSubscribtionpckgListAPI, esclatedTransactionAPI, requestForAdditionalDocAPII } from "../../helpers/fakebackend_helper"
+import { genrateAllTransation, approveRejectLatestTranApiMethod, subscribePckgAPI, getSubscribtionpckgListAPI, esclatedTransactionAPI, requestForAdditionalDocAPII ,getAllLogsAPI} from "../../helpers/fakebackend_helper"
 
 export function* fetchLatestTransAsync() {
   try {
@@ -77,6 +79,17 @@ export function* requestedForAdditionalDocSaga(data) {
   }
 }
 
+export function* getAllLogsSaga(data) {
+  console.log("DATATA",data)
+
+  try {
+    const latestTransArray = yield call(getAllLogsAPI, data.payload)
+    yield put(getAllLogsSuccess(latestTransArray.data.response))
+  } catch (error) {
+    yield put(getAllLogsFail(error))
+  }
+}
+
 export function* onFetchLatestTrans() {
   yield takeLatest(FETCH_LATEST_TRANS_START, fetchLatestTransAsync)
   yield takeLatest(APPROVE_REJECT_LATEST_TRANSACTION, approvaRejectLatestTransSaga)
@@ -84,6 +97,7 @@ export function* onFetchLatestTrans() {
   yield takeLatest(GET_SUBSCRIBE_PACKAGE, getSubscriptionListSaga)
   yield takeLatest(ESCLATET_TRANSACTION, esclateTransactionSaga)
   yield takeLatest(REQ_FOR_ADDITIONAL_DOC, requestedForAdditionalDocSaga)
+  yield takeLatest(GET_ALL_PAYMENT_LOGS, getAllLogsSaga)
 }
 
 export function* latestTransSaga() {

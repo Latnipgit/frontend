@@ -59,7 +59,6 @@ const data = [
 const MemberCard = props => {
     const [modal1, setModal1] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [price, setPrice] = useState('4999/-');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleAdminModal = () => { setIsModalOpen(!isModalOpen); };
@@ -93,125 +92,39 @@ const MemberCard = props => {
                     </Row>
 
                     <br />
-                    {/* <Row >
-    <Col md={4}></Col>
-    <Col md={4} className="text-center">
-    <div className="btn-group" role="group" aria-label="Basic example">
-  <button type="button" className="btn text-light btn-lg"
-  onClick={()=>setPrice("4999/-")}
-  style={{ background : price == "4999/-"?"#542381":"#2a3042"}}
-  >Yearly</button>&nbsp;
-  <button type="button" className="btn text-light  btn-lg"
-    onClick={()=>setPrice("1000/-")}
-    style={{ background : price == "1000/-"?"#542381":"#2a3042"}}
 
-  >Monthly</button>
-</div>
-    </Col>
-    <Col md={4}></Col>
-
-</Row>
-<br/>
-<br/>
-
-<Row>
-    <Col md={6} className=" div-col text-capitalize">
-    <div className=" insideCard">
-    <div className="card-content">
-      <h1 className="card-title text-center">Plan A</h1>
-  
-      <br/>
-     
-
-    {data.map((item)=>{
-        return  <Row key={item}>
-        <Col md={8}>
-            <p>{item.service}</p>
-        </Col>
-        <Col md={4} className="text-end">
-        <p>{item.value!= ""? item.value:"1000/-"}</p>
-
-            </Col>
-     </Row>
-    })}
-      <br/>
-
-   <Row className="">
-       
-
-       <span> <b className="price">{price} </b></span>
- 
-  
-   </Row>
-     <Row className="mt-2 mb-2">
-        <Col md={6}>
-            <Button className="btn btn-info">
-                Purchase Now
-            </Button>
-        </Col>
-     </Row>
-    </div>
-  </div>
-    </Col>
-
-  
-    <Col md={6} className=" div-col text-capitalize">
-    <div className=" insideCard">
-    <div className="card-content">
-      <h1 className="card-title text-center">Plan B</h1>
-  
-      <br/>
-     
-
-    {data.map((item)=>{
-        return  <Row key={item}>
-        <Col md={8}>
-            <p>{item.service}</p>
-        </Col>
-        <Col md={4} className="text-end">
-        <p>{item.value!= ""? item.value:"1000/-"}</p>
-
-            </Col>
-     </Row>
-    })}
-      <br/>
-
-   <Row className="">
-       
-
-       <span> <b className="price">{price} </b></span>
- 
-  
-   </Row>
-     <Row className="mt-2 mb-2">
-        <Col md={6}>
-            <Button className="btn btn-info">
-                Purchase Now
-            </Button>
-        </Col>
-     </Row>
-    </div>
-  </div>
-    </Col>
-</Row> */}
-                    <Row>
+                    <Row  className="" style={{padding:"0px 50px 0px 50px"}}>
                         {getSubscriptionList != undefined ? getSubscriptionList.map((item) => {
-                            return <Col md={4} key={item}>
-                                <Card className="shadow-lg">
-                                    <CardBody>
+                            return <Col md={4} key={item} className="">
+                                <Card className="shadow-lg text-center">
+                                  
+                                        <div  style={{background:"#AF90E1"}} className="text-light p-3">
+                                          
+                                            <h5><strong>{item.subscriptionPkgName}</strong></h5>
 
-
-
-                                        <h5><strong>Plan Name : {item.subscriptionPkgName}</strong></h5>
+                                          
+                                        </div>
+                                        <div className="pt-3 pb-3">
                                         <h5><strong>Monthly Amount : {item.monthlyAmt}</strong></h5>
                                         <h5><strong>Yearly Amount : {item.yearlyAmt}</strong></h5>
                                         <h5><strong style={{ color: item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0 ? "#00b300" : "#ff6600" }}>{item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0 ? "Paid" : "Free"}</strong></h5>
 
-                                    </CardBody>
+                                  
+                                        </div>
+
+<div className="mb-3">
+<Button style={{ width:"150px",border:"#AF90E1", background:"#AF90E1"}} className="text-center">  
+                Select Plan
+            </Button>
+</div>
+
+                                       
                                 </Card>
                             </Col>
                         }) : ""}
                     </Row>
+
+
                     <br />
                     <br />
 

@@ -29,3 +29,8 @@ export const getSubscriptionListReducer = createSelector(
   [selectLatestTansReducer],
   (TansecationSlice) => TansecationSlice.getSubscribePackage
 );
+
+export const getlogsSelector = createSelector(
+  [selectLatestTansReducer],
+  (TansecationSlice) => TansecationSlice.getAllLogs
+);

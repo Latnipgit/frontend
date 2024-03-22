@@ -83,9 +83,27 @@ export async function get(url, config = {}) {
     });
 }
 
+export async function postForLOgs(url, data, config = {}) {
+
+const token = sessionStorage.getItem("tokenemployeeRegister");
+const headers = {
+  ...config.headers,
+  'x-access-token': token,
+};
+return axiosPrivate
+  .post(url,data, { ...config, headers })
+  .then((response) => response).catch((error) => {
+    if (error.response) {
+      console.log("Server responded with an error:", error.response.status);
+    } else if (error.request) {
+      console.log("No response received from the server:", error.request);
+    }
+  });
+
+}
 export async function post(url, data, config = {}) {
   // 
-  debugger
+  console.log("POSTAPIMETHOS",url,data)
   if (url != '/api/admin/login' && url != '/api/admin/password-reset') {
     const token = sessionStorage.getItem("tokenemployeeRegister");
     const headers = {
@@ -104,7 +122,7 @@ export async function post(url, data, config = {}) {
 
   } else {
     return axiosApi
-      .post(url, { ...data }, { ...config })
+      .post(url, { ...data },{ ...config })
       .then((response) => response).catch((error) => {
         if (error.response) {
           console.log("Server responded with an error:", error.response.status);

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { del, get, post, put, addEmployeeAPImethod, loginPostMethod, getWithdata } from "./api_helper"
+import { del, get, post, put, addEmployeeAPImethod, loginPostMethod, getWithdata,postForLOgs } from "./api_helper"
 import * as url from "./url_helper"
 
 //Get all Admin
@@ -15,10 +15,11 @@ export const changepassswordDataAPI = () =>
 // genrateAllTransation
 export const genrateAllTransation = () => post(url.GET_LATEST_TRANSATION)
 export const approveRejectLatestTranApiMethod = (data) => post("/api/admin/approveOrRejectPayment", data)
+export const getAllLogsAPI = (data) => postForLOgs("/api/logs/getLogsByPaymentId", data)
 export const deleteAdminAPi = (data) => post("/api/admin/delete", data)
 export const esclatedTransactionAPI = (data) => post("/api/admin/escalateRequest", data)
 export const subscribePckgAPI = (data) => post("/api/admin/addSubscriptionPkg", data)
-export const requestForAdditionalDocAPII = (data) => post("/api/admin/askForSupportingDocument", data)
+export const requestForAdditionalDocAPII = () => get("/api/admin/askForSupportingDocument")
 // getAllApprovedTransactions
 export const getAllApprovedTransactions = () =>
   get(url.GET_ALL_APPROVED_TRANSACTIONS)

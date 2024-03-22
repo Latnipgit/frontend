@@ -16,7 +16,10 @@ import {
   ESCLATET_TRANSACTION_SUCCESS,
   REQ_FOR_ADDITIONAL_DOC,
   REQ_FOR_ADDITIONAL_DOC_SUCCESS,
-  REQ_FOR_ADDITIONAL_DOC_FAIL
+  REQ_FOR_ADDITIONAL_DOC_FAIL,
+  GET_ALL_PAYMENT_LOGS,
+  GET_ALL_PAYMENT_LOGS_FAIL,
+  GET_ALL_PAYMENT_LOGS_SUCCESS
 } from "./latestTrans.type"
 
 export const LATEST_TRANS_INITIAL_STATE = {
@@ -28,6 +31,7 @@ export const LATEST_TRANS_INITIAL_STATE = {
   subscribePckg:[],
   loading: false,
   error: null,
+  getAllLogs:[],
 }
 
 export const latestTransReducer = (
@@ -74,6 +78,13 @@ export const latestTransReducer = (
                 return { ...state, loading: false, error: payload }
               case REQ_FOR_ADDITIONAL_DOC_SUCCESS:
                 return { ...state, loading: false, requestedDoc: payload }
+
+                case GET_ALL_PAYMENT_LOGS:
+                  return { ...state, loading: true }
+                case GET_ALL_PAYMENT_LOGS_FAIL:
+                  return { ...state, loading: false, error: payload }
+                case GET_ALL_PAYMENT_LOGS_SUCCESS:
+                  return { ...state, loading: false, getAllLogs: payload }
     default:
       return state
   }

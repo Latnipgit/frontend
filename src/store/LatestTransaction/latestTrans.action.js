@@ -16,7 +16,10 @@ import {
   ESCLATET_TRANSACTION_SUCCESS,
   REQ_FOR_ADDITIONAL_DOC_SUCCESS,
   REQ_FOR_ADDITIONAL_DOC_FAIL,
-  REQ_FOR_ADDITIONAL_DOC
+  REQ_FOR_ADDITIONAL_DOC,
+  GET_ALL_PAYMENT_LOGS,
+  GET_ALL_PAYMENT_LOGS_FAIL,
+  GET_ALL_PAYMENT_LOGS_SUCCESS
 
 } from "./latestTrans.type"
 import { createAction } from "reducer/reducer.utils"
@@ -79,3 +82,14 @@ export const requestForAdditionalDocFail = error => {
 
 export const esclateTransactionFail = error => {
   createAction(ESCLATET_TRANSACTION_FAIL, error)}
+
+
+  export const getAllLogs = (data) =>
+  createAction(GET_ALL_PAYMENT_LOGS,data)
+
+export const getAllLogsSuccess = latestTransArray => {
+  return createAction(GET_ALL_PAYMENT_LOGS_SUCCESS, latestTransArray)
+}
+
+export const getAllLogsFail = error => {
+  createAction(GET_ALL_PAYMENT_LOGS_FAIL, error)}

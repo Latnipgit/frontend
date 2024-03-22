@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import {
     Button,
@@ -19,12 +19,13 @@ import moment from 'moment'
 import Select from 'react-select';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { approveRejectLatestTrans, esclateTransaction, requestForAdditionalDoc } from "store/LatestTransaction/latestTrans.action"
+import { approveRejectLatestTrans, esclateTransaction, requestForAdditionalDoc ,getAllLogs} from "store/LatestTransaction/latestTrans.action"
 import { selectLatestTansMap } from "store/LatestTransaction/latestTans.selecter"
 import { useSelector, useDispatch } from "react-redux"
 
 import { useLocation } from 'react-router-dom';
 import { select } from "redux-saga/effects";
+import { getlogsSelector } from "store/LatestTransaction/latestTans.selecter"
 
 import { SellerDocViewModule } from "./sellerDocViewModule";
 
@@ -160,6 +161,7 @@ function LatesttransactionViewDetails(props) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     // const [selectedOption, setSelectedOption] = useState(null);
+
     const options = [
         { value: 'Approved', label: 'APPROVED' },
         { value: 'Disputed', label: 'DISPUTED' },
@@ -178,6 +180,7 @@ function LatesttransactionViewDetails(props) {
 
         // { value: 'RequesttoCA', label: 'Request to CA Certificate' },
     ];
+    
     const handleChange = (selected) => {
         setSelectedOption(selected);
 
@@ -292,8 +295,13 @@ function LatesttransactionViewDetails(props) {
         setSellerDocOpen(!sellerDocOpen)
         setSellerDocOpenData(value)
     }
+    const getAllLogss = useSelector(getlogsSelector)
 
+    useEffect(()=>{
+    dispatch(getAllLogs(selected.pHArray[0].id))
+    },[])
     const toggleUploiadFiles = () => setSellerDocOpen(!sellerDocOpen)
+    console.log("getAllLogsgetAllLogs",selected)
 
 
     return (
@@ -560,7 +568,7 @@ function LatesttransactionViewDetails(props) {
                         <Card className="mb-3 shadow">
                             <CardBody className="buyer-card-body" style={{ height: "300px", overflow: "scroll" }}>
                                 <Row className="d-flex p-1" style={{ background: "#e6f7ff" }}>
-                                    <div style={{ fontSize: "15px" }}>
+                                    {/* <div style={{ fontSize: "15px" }}>
                                         <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
 
                                     </div>
@@ -569,7 +577,9 @@ function LatesttransactionViewDetails(props) {
                                     </div>
                                     <div>
                                         13-03-2023
-                                    </div>
+                                    </div> */}
+
+                                  {getAllLogss != null ?   <p></p>:""}
                                 </Row>
 
                                 <Row className="d-flex p-1 mt-1" style={{ background: "#ffe6e6" }}>
@@ -599,50 +609,7 @@ function LatesttransactionViewDetails(props) {
                             </CardBody>
                         </Card>
                     </Col>
-                    <Col md="6" className="mt-4">
-                        <h4>Buyer Logs</h4>
-                        <Card className="mb-3 shadow">
-                            <CardBody className="buyer-card-body" style={{ height: "300px", overflow: "scroll" }}>
-                                <Row className="d-flex p-1" style={{ background: "#e6f7ff" }}>
-                                    <div style={{ fontSize: "15px" }}>
-                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
-
-                                    </div>
-                                    <div>
-                                        You Requested For CA Certificate.
-                                    </div>
-                                    <div>
-                                        13-03-2023
-                                    </div>
-                                </Row>
-
-                                <Row className="d-flex p-1 mt-1" style={{ background: "#ffe6e6" }}>
-                                    <div style={{ fontSize: "15px" }}>
-                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
-
-                                    </div>
-                                    <div>
-                                        You Requested For CA Certificate.
-                                    </div>
-                                    <div>
-                                        13-03-2023
-                                    </div>
-                                </Row>
-                                <Row className="d-flex p-1 mt-1" style={{ background: "#e6f7ff" }}>
-                                    <div style={{ fontSize: "15px" }}>
-                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
-
-                                    </div>
-                                    <div>
-                                        You Requested For CA Certificate.
-                                    </div>
-                                    <div>
-                                        13-03-2023
-                                    </div>
-                                </Row>
-                            </CardBody>
-                        </Card>
-                    </Col>
+                 
                 </Row>
 
                 <Row className="mt-4">
