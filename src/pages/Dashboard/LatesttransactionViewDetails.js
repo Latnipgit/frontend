@@ -563,49 +563,21 @@ function LatesttransactionViewDetails(props) {
 
                 <Row>
 
-                    <Col md="6" className="mt-4">
-                        <h4>Seller Logs</h4>
+                    <Col md="10" className="mt-4">
+                        <h4>Logs</h4>
                         <Card className="mb-3 shadow">
-                            <CardBody className="buyer-card-body" style={{ height: "300px", overflow: "scroll" }}>
-                                <Row className="d-flex p-1" style={{ background: "#e6f7ff" }}>
-                                    {/* <div style={{ fontSize: "15px" }}>
-                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
+                            <CardBody className="buyer-card-body" style={{ height: "300px", overflowY: "scroll" }}>
+                            {getAllLogss != null ?  getAllLogss.logs.map((item)=>{
+                                    return    <Row className="d-flex p-1" style={{ background: "#e6f7ff" }} key={item}>
+                                 
+                                 <p> {item}</p>
+                                  
+                                </Row>}) :
+                                <Row>
+                                <span className="text-center">No Logs Found</span>
 
-                                    </div>
-                                    <div>
-                                        You Requested For CA Certificate.
-                                    </div>
-                                    <div>
-                                        13-03-2023
-                                    </div> */}
+                                </Row>}
 
-                                  {getAllLogss != null ?   <p></p>:""}
-                                </Row>
-
-                                <Row className="d-flex p-1 mt-1" style={{ background: "#ffe6e6" }}>
-                                    <div style={{ fontSize: "15px" }}>
-                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
-
-                                    </div>
-                                    <div>
-                                        You Requested For CA Certificate.
-                                    </div>
-                                    <div>
-                                        13-03-2023
-                                    </div>
-                                </Row>
-                                <Row className="d-flex p-1 mt-1" style={{ background: "#e6f7ff" }}>
-                                    <div style={{ fontSize: "15px" }}>
-                                        <i className='bx bx-user-circle'></i> <strong>Rohan Sharma</strong>
-
-                                    </div>
-                                    <div>
-                                        You Requested For CA Certificate.
-                                    </div>
-                                    <div>
-                                        13-03-2023
-                                    </div>
-                                </Row>
                             </CardBody>
                         </Card>
                     </Col>
