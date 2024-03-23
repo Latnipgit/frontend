@@ -79,9 +79,7 @@ const FeedbackQuestionModel = props => {
     useEffect(() => {
 
     }, [dataTable])
-const handleSubmitForm =()=>{
-    console.log("dataTabledataTable",getFeebBackQuestion)
-}
+
 
     return (
         <React.Fragment className="text-capitalize">
@@ -131,9 +129,7 @@ const handleSubmitForm =()=>{
                                     </tbody>
                                 </table>
                             </Row>
-                            <Row className="mb-4">
-                                <Col md={4}><Button className="btn btn-info" onClick={()=>handleSubmitForm()}>Submit</Button></Col>
-                            </Row>
+                          
                         </ModalBody>
                     </div>
                 </CardBody>
