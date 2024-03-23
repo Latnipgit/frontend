@@ -79,7 +79,9 @@ const FeedbackQuestionModel = props => {
     useEffect(() => {
 
     }, [dataTable])
-
+const handleSubmitForm =()=>{
+    console.log("dataTabledataTable",getFeebBackQuestion)
+}
 
     return (
         <React.Fragment className="text-capitalize">
@@ -128,6 +130,9 @@ const FeedbackQuestionModel = props => {
                                         </tr>
                                     </tbody>
                                 </table>
+                            </Row>
+                            <Row className="mb-4">
+                                <Col md={4}><Button className="btn btn-info" onClick={()=>handleSubmitForm()}>Submit</Button></Col>
                             </Row>
                         </ModalBody>
                     </div>
@@ -214,7 +219,9 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
                 />
             </td>
             <td>
-                {selectQType === "TEXT" ? (<Input
+                {selectQType === "TEXT" ? (
+                <>
+                <Input
                     className="form-control text-capitalize"
                     placeholder="Enter Value"
                     type="text"
@@ -225,9 +232,11 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
                     })}
 
                 />
+                <Button className="btn btn-sm btn-info mt-1 " onClick={() => handleSubmit()}>Submit</Button>
+                </>
 
                 ) : selectQType === "TEXT-AREA" ?
-                    (<textarea
+                    (<><textarea
                         rows={2}
                         className={`form-control custom-content`}
                         placeholder="Enter Value"
@@ -236,7 +245,10 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
                             "questionType": "value",
                             "value": e.target.value,
                         })}
-                    />) : selectQType === "RATING" ? (
+                    />
+                    <Button className="btn btn-sm btn-info mt-1 " onClick={() => handleSubmit()}>Submit</Button>
+                    </>
+                    ) : selectQType === "RATING" ? (
                         <div className="mb-1">
                             <Col md={6}>
                                 <span>
@@ -307,6 +319,8 @@ const QuestionSelecter = ({ item, dispatch, addFeedbackQuestionStart }) => {
                                         }
                                         style={{ color: Integrity != 0 && Integrity > 4 ? '  #ffdb4d' : 'gray', fontSize: '18px' }}
                                     ></i></span>
+                                                                <Button className="btn btn-sm btn-info mt-1 " onClick={() => handleSubmit()}>Submit</Button>
+
                             </Col>
 
                         </div>
