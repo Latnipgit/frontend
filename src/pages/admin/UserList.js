@@ -5,11 +5,11 @@ import { isEmpty } from "lodash";
 import AdminRegistrationModal from '../admin/adminList/AddAdminPopup';
 //import action
 import { getAdminData as ongetAdminData } from "../../store/actions";
-import { deleteAdminAction as ondeleteAdminAction } from "../../store/actions";
 import { Link } from "react-router-dom";
 
 import { Button, Card, CardBody, } from "reactstrap";
 import { UserData } from "../../common/data/registration";
+import DeleteModal from "./deleteModal";
 import {
   Badge,
   Col,
@@ -47,9 +47,12 @@ import { useHistory, Routes, Route, useNavigate } from "react-router-dom";
 const UserList = props => {
 
   const [modal1, setModal1] = useState(false);
+  const [deletedId, setdeletedId] = useState();
   const [showModal, setShowModal] = useState(false);
   const [admindata, setAdminData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setisDeleteModalOpen] = useState(false);
+  const toggleDeleteModal = () => { setisDeleteModalOpen(!isDeleteModalOpen); };
 
   const toggleAdminModal = () => { setIsModalOpen(!isModalOpen); };
   const navigate = useNavigate();
@@ -181,7 +184,8 @@ const UserList = props => {
   );
   const deleteAdmin=(email)=>{
     console.log("deleteAdmindeleteAdmin",email)
-    dispatch(ondeleteAdminAction(email.emailId))
+    setdeletedId(email.emailId)
+    setisDeleteModalOpen(true)
   }
 
   console.log("admindata", adminData)
@@ -194,6 +198,7 @@ const UserList = props => {
       </div>
       {/* <UserViewModal isOpen={modal1} toggle={toggleViewModal} /> */}
       <AdminRegistrationModal isOpen={isModalOpen} toggle={toggleAdminModal} />
+      <DeleteModal isOpen={isDeleteModalOpen} toggle={toggleDeleteModal} deletedId={deletedId}/>
       <Card>
         <CardBody>
           <h4 className="mb-0 mt-sm-0 mb-sm-2 font-size-18 mt-2">Add a Employee</h4>
