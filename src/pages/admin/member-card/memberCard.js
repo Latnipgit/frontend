@@ -112,11 +112,7 @@ const MemberCard = props => {
                                   
                                         </div>
 
-<div className="mb-3">
-<Button style={{ width:"150px",border:"#AF90E1", background:"#AF90E1"}} className="text-center">  
-                Select Plan
-            </Button>
-</div>
+
 
                                        
                                 </Card>
