@@ -105,9 +105,9 @@ const MemberCard = props => {
                                           
                                         </div>
                                         <div className="pt-3 pb-3">
-                                        <h5><strong>Monthly Amount : {item.monthlyAmt}</strong></h5>
-                                        <h5><strong>Yearly Amount : {item.yearlyAmt}</strong></h5>
-                                        <h5><strong style={{ color: item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0 ? "#00b300" : "#ff6600" }}>{item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0 ? "Paid" : "Free"}</strong></h5>
+                                        <h5 className="text-dark"><strong>Monthly Amount : {item.monthlyAmt}</strong></h5>
+                                        <h5 className="text-dark"><strong>Yearly Amount : {item.yearlyAmt}</strong></h5>
+                                        <h5><strong style={{ color: item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0 ? "#00b300" : "#ff6600" }}><span className="text-dark">Status :</span> {item.subscriptionPkgAPIQuota != undefined && item.subscriptionPkgAPIQuota.length != 0 ? "Paid" : "Free"}</strong></h5>
 
                                   
                                         </div>
