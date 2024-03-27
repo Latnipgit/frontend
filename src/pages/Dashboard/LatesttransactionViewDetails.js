@@ -567,7 +567,7 @@ function LatesttransactionViewDetails(props) {
                         <h4>Logs</h4>
                         <Card className="mb-3 shadow">
                             <CardBody className="buyer-card-body" style={{ height: "300px", overflowY: "scroll" }}>
-                            {getAllLogss != null ?  getAllLogss.logs.map((item)=>{
+                            {getAllLogss != null && getAllLogss != undefined && getAllLogss.logs != undefined ?  getAllLogss.logs.map((item)=>{
                                     return    <Row className="d-flex p-1" style={{ background: "#e6f7ff" }} key={item}>
                                  
                                  <p> {item}</p>

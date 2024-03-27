@@ -19,7 +19,7 @@ export const getAllLogsAPI = (data) => postForLOgs("/api/logs/getLogsByPaymentId
 export const deleteAdminAPi = (data) => post("/api/admin/delete", data)
 export const esclatedTransactionAPI = (data) => post("/api/admin/escalateRequest", data)
 export const subscribePckgAPI = (data) => post("/api/admin/addSubscriptionPkg", data)
-export const requestForAdditionalDocAPII = () => get("/api/admin/askForSupportingDocument")
+export const requestForAdditionalDocAPII = (data) => post("/api/admin/askForSupportingDocument",data)
 // getAllApprovedTransactions
 export const getAllApprovedTransactions = () =>
   get(url.GET_ALL_APPROVED_TRANSACTIONS)
